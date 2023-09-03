@@ -7,6 +7,7 @@ import list3 from 'common/assets/list3.jpg'
 
 import useBreakpoints from 'common/hooks/useBreakpoints'
 
+import { ContentWrapper } from 'common/layout/ContentWrapper/ContentWrapper'
 import { Section } from './Section'
 import { Image, ServicesWrapper } from './Services.styled'
 interface IServices {
@@ -37,16 +38,18 @@ export const Services: FC<IServices> = ({ id }) => {
     list: [t('list_section_3.list.0'), t('list_section_3.list.1')],
   }
   return (
-    <ServicesWrapper id={id}>
-      <Section content={LIST_SECTION_1} right>
-        <Image src={list1} />
-      </Section>
-      <Section content={LIST_SECTION_2} right={!isBelowDesktop ? false : true}>
-        <Image src={list2} />
-      </Section>
-      <Section content={LIST_SECTION_3} right>
-        <Image src={list3} />
-      </Section>
-    </ServicesWrapper>
+    <ContentWrapper id={id}>
+      <ServicesWrapper>
+        <Section content={LIST_SECTION_1} right>
+          <Image src={list1} />
+        </Section>
+        <Section content={LIST_SECTION_2} right={!isBelowDesktop ? false : true}>
+          <Image src={list2} />
+        </Section>
+        <Section content={LIST_SECTION_3} right>
+          <Image src={list3} />
+        </Section>
+      </ServicesWrapper>
+    </ContentWrapper>
   )
 }

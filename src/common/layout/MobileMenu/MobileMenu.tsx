@@ -1,18 +1,19 @@
+import aboutIcon from 'common/assets/about.svg'
+import contactIcon from 'common/assets/contact.svg'
+import recycleIcon from 'common/assets/recycle.svg'
+import serviceIcon from 'common/assets/service.svg'
 import type { FC } from 'react'
 import { useCallback, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { animateScroll } from 'react-scroll'
-
 import { useOnClickOutside } from 'usehooks-ts'
 
-import aboutIcon from 'common/assets/about.svg'
-import contactIcon from 'common/assets/contact.svg'
-// import recycleIcon from 'common/assets/recycle.svg'
-import serviceIcon from 'common/assets/service.svg'
-
+import { Button } from 'common/ui/Button/Button'
+import { SelectLanguage } from 'common/ui/SelectLanguage/SelectLanguage'
 import {
   BorderStyle,
+  ButtonWrapper,
   Icon,
   ItemWrapper,
   LanguageContainer,
@@ -21,8 +22,7 @@ import {
   Text,
   Title,
 } from './MobileMenu.styled'
-import { SelectLanguage } from 'common/ui/SelectLanguage/SelectLanguage'
-import { Button } from 'common/ui/Button/Button'
+import useBreakpoints from 'common/hooks/useBreakpoints'
 
 export interface MobileMenuProps {
   isOpen: boolean
@@ -31,7 +31,8 @@ export interface MobileMenuProps {
 
 export const MobileMenu: FC<MobileMenuProps> = ({ isOpen, handleOpen }) => {
   const topNavRef = useRef<HTMLElement | null>(null)
-  // const navigate = useNavigate()
+  const { isBelowDesktop } = useBreakpoints()
+  const navigate = useNavigate()
   const { t } = useTranslation()
 
   const handleDropdown = useCallback(() => {
@@ -39,7 +40,8 @@ export const MobileMenu: FC<MobileMenuProps> = ({ isOpen, handleOpen }) => {
   }, [isOpen, handleOpen])
 
   const handleNavigate = (link: string) => {
-    animateScroll.scrollTo(document.getElementById(link).offsetTop)
+    const targetOffset = document.getElementById(link).offsetTop - (isBelowDesktop ? 72 : 0)
+    animateScroll.scrollTo(targetOffset)
     handleOpen(false)
   }
 
@@ -52,10 +54,10 @@ export const MobileMenu: FC<MobileMenuProps> = ({ isOpen, handleOpen }) => {
           <Title>Menu</Title>
           <SelectLanguage />
         </LanguageContainer>
-        {/* <ItemWrapper onClick={() => navigate('/collect')}>
+        <ItemWrapper onClick={() => navigate('/collect')}>
           <Icon src={recycleIcon} />
           <Text>{t('navigation.collect')}</Text>
-        </ItemWrapper> */}
+        </ItemWrapper>
         <ItemWrapper onClick={() => handleNavigate('about-us')}>
           <Icon src={aboutIcon} />
           <Text>{t('navigation.about')}</Text>
@@ -69,9 +71,11 @@ export const MobileMenu: FC<MobileMenuProps> = ({ isOpen, handleOpen }) => {
           <Text>{t('navigation.contact')}</Text>
         </ItemWrapper>
         <BorderStyle />
-        <Button variant='empty' onClick={handleDropdown}>
-          {t('button.cancel')}
-        </Button>
+        <ButtonWrapper>
+          <Button variant='empty' onClick={handleDropdown}>
+            {t('button.cancel')}
+          </Button>
+        </ButtonWrapper>
       </MenuContent>
     </MenuWrapper>
   )

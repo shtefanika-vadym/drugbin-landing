@@ -9,10 +9,10 @@ export interface HeaderProps {
 
 export const HeaderWrapper: React.FC<HeaderProps> = ({ children }) => {
   return (
-    <div>
+    <>
       <Header />
       <Content>{children}</Content>
       <Footer />
-    </div>
+    </>
   )
 }

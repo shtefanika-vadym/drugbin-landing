@@ -17,12 +17,10 @@ import {
   WDS_SIZE_037_PX,
   WDS_SIZE_040_PX,
   WDS_SIZE_074_PX,
-  WDS_SIZE_400_PX,
 } from 'common/style/size'
 
 export const Container = styled.div<{ valid: boolean }>`
   width: 100%;
-  height: ${WDS_SIZE_040_PX};
   ${flex({ justifyContent: 'space-between', alignItems: 'center' })};
   border: 1px solid ${(props) => (props.valid ? WDS_COLOR_GREY : WDS_COLOR_RED)};
   border-radius: ${WDS_SIZE_008_PX};
@@ -93,5 +91,4 @@ export const CustomButton = styled.div`
 
 export const ContainerWrapper = styled.div`
   ${flex({ gap: WDS_SIZE_008_PX })};
-  max-width: ${WDS_SIZE_400_PX};
 `

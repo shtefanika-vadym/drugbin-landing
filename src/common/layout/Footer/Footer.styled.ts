@@ -5,17 +5,15 @@ import { flex } from 'common/style/mixins/flex.mixin'
 import { textVariant } from 'common/style/mixins/typography.mixin'
 
 export const FooterContent = styled.div`
-  ${flex({ direction: 'column', gap: '80px' })};
-  max-width: 1285px;
-  padding: 80px 0;
-  margin: 0 auto;
+  ${flex({ direction: 'column' })};
+  padding-top: 80px;
 
   @media (max-width: ${WDS_BREAKPOINT_MOBILE_UP_TO}) {
     ${flex({ direction: 'column', gap: '32px' })};
-    padding: 56px 16px;
+    padding: 0 16px;
   }
 `
-export const ContentWrapper = styled.div`
+export const Content = styled.div`
   ${flex({ justifyContent: 'space-between' })};
 
   @media (max-width: ${WDS_BREAKPOINT_MOBILE_UP_TO}) {
@@ -24,10 +22,16 @@ export const ContentWrapper = styled.div`
 `
 
 export const NavigationContent = styled.div`
+  ${flex({ justifyContent: 'center' })};
   ${textVariant('subheading')}
   ${flex({ gap: '32px' })};
   color: #01102e;
   cursor: pointer;
+  padding-top: 80px;
+
+  @media (max-width: ${WDS_BREAKPOINT_MOBILE_UP_TO}) {
+    padding-top: unset;
+  }
 `
 
 export const IconWrapper = styled.div`

@@ -6,12 +6,13 @@ import { flex } from 'common/style/mixins/flex.mixin'
 import { grid } from 'common/style/mixins/grid.mixin'
 import { textVariant } from 'common/style/mixins/typography.mixin'
 
-export const ContactWrapper = styled.div`
-  width: 100%;
-  ${grid({ gridTemplateColumns: '1fr 1fr' })};
+export const Content = styled.div`
+  max-width: 1285px;
+  margin: 0 auto;
+  ${grid({ gridTemplateColumns: '1.2fr 1fr' })};
   align-items: center;
   background-color: ${WDS_COLOR_WHITE};
-  padding: 32px 78px;
+  padding: 32px 0px;
 
   @media (max-width: ${WDS_BREAKPOINT_TABLET_UP_TO}) {
     ${grid({ gridTemplateColumns: '1fr', rowGap: '32px' })};

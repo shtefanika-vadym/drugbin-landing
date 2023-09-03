@@ -17,18 +17,16 @@ import {
   WDS_SIZE_022_PX,
   WDS_SIZE_024_PX,
   WDS_SIZE_032_PX,
-  WDS_SIZE_040_PX,
+  WDS_SIZE_064_PX,
   WDS_SIZE_080_PX,
-  WDS_SIZE_128_PX,
+  WDS_SIZE_104_PX,
 } from 'common/style/size'
 
 export const ContainerWrapper = styled.div`
   background: ${WDS_COLOR_WHITE};
   border-bottom: 1px solid ${WDS_COLOR_BLUE_100};
-  padding: ${WDS_SIZE_022_PX} ${WDS_SIZE_080_PX};
 
   @media (max-width: ${WDS_BREAKPOINT_TABLET_UP_TO}) {
-    padding: ${WDS_SIZE_024_PX} ${WDS_SIZE_016_PX};
     position: fixed;
     top: 0;
     width: 100%;
@@ -37,9 +35,14 @@ export const ContainerWrapper = styled.div`
 
 export const Container = styled.div`
   ${flex({ direction: 'row', alignItems: 'center', justifyContent: 'space-between' })}
+  padding: ${WDS_SIZE_022_PX} ${WDS_SIZE_080_PX};
   position: relative;
   max-width: 1311px;
   margin: 0px auto;
+
+  @media (max-width: ${WDS_BREAKPOINT_TABLET_UP_TO}) {
+    padding: ${WDS_SIZE_024_PX} ${WDS_SIZE_016_PX};
+  }
 `
 
 export const Navigation = styled.div`
@@ -77,11 +80,10 @@ export const UserIcon = styled.img`
 `
 
 export const Content = styled.div`
-  ${flex({ justifyContent: 'center' })};
-  padding: ${WDS_SIZE_040_PX} ${WDS_SIZE_080_PX};
+  padding: ${WDS_SIZE_064_PX} 0;
 
   @media (max-width: ${WDS_BREAKPOINT_TABLET_UP_TO}) {
-    padding: ${WDS_SIZE_128_PX} ${WDS_SIZE_016_PX};
+    padding: ${WDS_SIZE_104_PX} ${WDS_SIZE_016_PX};
   }
 `
 

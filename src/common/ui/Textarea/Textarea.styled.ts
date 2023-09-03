@@ -17,6 +17,5 @@ export const TextareaStyle = styled.textarea`
   outline: none;
   border: 1px solid #a3a6ad;
   border-radius: 8px;
-  max-width: 400px;
   height: 126px;
 `

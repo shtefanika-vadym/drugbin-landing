@@ -57,15 +57,10 @@ export const Header = () => {
         )}
 
         <Logo src={!isBelowDesktop ? logo : logoS} onClick={() => navigate('/')} />
-        {/* {!isBelowDesktop && (
-          <UserWrapper onClick={() => logout()}>
-            <Name>DrugBin Solution</Name>
-            <UserIcon src={userIcon} alt='user' />
-          </UserWrapper>
-        )} */}
+
         {!isBelowDesktop && <SelectLanguage />}
+        {isMenuOpen && <MobileMenu isOpen={isMenuOpen} handleOpen={setIsMenuOpen} />}
       </Container>
-      {isMenuOpen && <MobileMenu isOpen={isMenuOpen} handleOpen={setIsMenuOpen} />}
     </ContainerWrapper>
   )
 }
