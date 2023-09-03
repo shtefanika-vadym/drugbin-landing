@@ -8,7 +8,6 @@ import { textVariant } from 'common/style/mixins/typography.mixin'
 export const Wrapper = styled.div`
   ${flex({ direction: 'column', alignItems: 'center', justifyContent: 'center' })};
   gap: 164px;
-  max-width: 1280px;
 
   @media (max-width: ${WDS_BREAKPOINT_MOBILE_UP_TO}) {
     gap: 64px;

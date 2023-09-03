@@ -15,16 +15,15 @@ export const MenuWrapper = styled.div`
 
 export const MenuContent = styled.nav`
   position: absolute;
-  width: 100%;
-  min-height: 50%;
+  width: calc(100% - 48px);
   bottom: 0;
   background-color: ${WDS_COLOR_WHITE};
+  padding: 24px;
   box-shadow:
     0px 0px 2px rgba(0, 0, 0, 0.12),
     1px -6px 20px rgba(0, 0, 0, 0.08);
   border-radius: 16px 16px 0px 0px;
-  padding: 24px;
-  ${flex({ direction: 'column', gap: '32px' })};
+  ${flex({ direction: 'column', gap: '24px' })};
   transition: transform 0.3s ease-in-out;
 `
 export const Title = styled.div`
@@ -47,4 +46,9 @@ export const BorderStyle = styled.div`
 
 export const LanguageContainer = styled.div`
   ${flex({ justifyContent: 'space-between' })};
+`
+
+export const ButtonWrapper = styled.div`
+  padding: 16px 0;
+  margin: 0 auto;
 `

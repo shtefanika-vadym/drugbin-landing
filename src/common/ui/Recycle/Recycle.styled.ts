@@ -7,9 +7,7 @@ import { textVariant } from 'common/style/mixins/typography.mixin'
 
 export const RecycleWrapper = styled.div`
   ${flex({ direction: 'column', gap: '24px', alignItems: 'center' })};
-  width: 100%;
-  padding: 24px 16px;
-  background-color: #2949a6;
+  padding: 24px 0px;
   text-align: center;
 `
 export const Title = styled.h1`

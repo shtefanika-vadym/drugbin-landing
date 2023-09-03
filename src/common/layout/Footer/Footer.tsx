@@ -5,8 +5,9 @@ import LogoIcon from 'common/assets/logo-footer.svg'
 
 import useBreakpoints from 'common/hooks/useBreakpoints'
 
+import { ContentWrapper } from 'common/layout/ContentWrapper/ContentWrapper'
 import {
-  ContentWrapper,
+  Content,
   FooterContent,
   Icon,
   IconWrapper,
@@ -19,28 +20,26 @@ import {
 export const Footer = () => {
   const { isMobile } = useBreakpoints()
   return (
-    <FooterContent>
-      <ContentWrapper>
-        <Icon src={isMobile ? LogoIconMobile : LogoIcon} />
+    <ContentWrapper>
+      <FooterContent>
+        <Content>
+          <Icon src={isMobile ? LogoIconMobile : LogoIcon} />
+          <IconWrapper>
+            <Icon src={Instagram} />
+            <Icon src={Linkedin} />
+          </IconWrapper>
+        </Content>
         <NavigationContent>
           <LinkStyle>About us</LinkStyle>
           <LinkStyle>Services</LinkStyle>
           <LinkStyle>Contact</LinkStyle>
         </NavigationContent>
-        <IconWrapper>
-          <Icon src={Instagram} />
-          <Icon src={Linkedin} />
-        </IconWrapper>
-      </ContentWrapper>
-      <PolicyContent>
-        {isMobile && (
-          <>
-            <LinksWrapper>Privacy Policy</LinksWrapper>
-            <LinksWrapper>Terms of Service</LinksWrapper>
-            <LinksWrapper>Cookies Settings</LinksWrapper>
-          </>
-        )}
-      </PolicyContent>
-    </FooterContent>
+        <PolicyContent>
+          <LinksWrapper>Privacy Policy</LinksWrapper>
+          <LinksWrapper>Terms of Service</LinksWrapper>
+          <LinksWrapper>Cookies Settings</LinksWrapper>
+        </PolicyContent>
+      </FooterContent>
+    </ContentWrapper>
   )
 }

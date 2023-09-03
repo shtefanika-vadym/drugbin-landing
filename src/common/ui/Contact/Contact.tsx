@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 import { Formik } from 'formik'
 
-import location from 'common/assets/service.svg'
+import location from 'common/assets/location.svg'
 import email from 'common/assets/mail.svg'
 import phone from 'common/assets/phone.svg'
 
@@ -16,7 +16,7 @@ import Spinner from 'common/ui/Spinner/Spinner'
 import { Textarea } from 'common/ui/Textarea/Textarea'
 import {
   ContactDetails,
-  ContactWrapper,
+  Content,
   Error,
   FormContact,
   Icon,
@@ -26,6 +26,7 @@ import {
   SubTitle,
   Title,
 } from './Contact.styled'
+import { ContentWrapper } from 'common/layout/ContentWrapper/ContentWrapper'
 
 // TODO --> CHANGE THE LOCATION OF THIS ENUM
 export enum CONTACT_SECTION {
@@ -49,68 +50,70 @@ export const Contact: FC<IContact> = ({ id }) => {
     resetForm()
   }
   return (
-    <ContactWrapper id={id}>
-      <LeftSide>
-        <Title>{t('landing_page.contact_title')}</Title>
-        <ContactDetails>
-          <Icon src={email} />
-          <SubTitle>{CONTACT_SECTION.EMAIL}</SubTitle>
-        </ContactDetails>
-        <ContactDetails>
-          <Icon src={phone} />
-          <SubTitle>{CONTACT_SECTION.PHONE}</SubTitle>
-        </ContactDetails>
-        <ContactDetails>
-          <Icon src={location} />
-          <SubTitle>{CONTACT_SECTION.LOCATION}</SubTitle>
-        </ContactDetails>
-      </LeftSide>
-      <RightSide>
-        <Formik
-          initialValues={{ name: '', email: '', message: '' }}
-          onSubmit={handleSubmit}
-          validateOnChange={false}
-          validateOnBlur={false}
-          validationSchema={validationSchema}>
-          {({ values, handleChange, handleSubmit, errors }) => {
-            return (
-              <FormContact onSubmit={handleSubmit}>
-                <InputWrapper>
-                  <Input
-                    name='name'
-                    placeholder='EX: John Doe'
-                    label='Name'
-                    value={values.name}
+    <ContentWrapper color='white' fullWidth={true} id={id}>
+      <Content>
+        <LeftSide>
+          <Title>{t('landing_page.contact_title')}</Title>
+          <ContactDetails>
+            <Icon src={email} />
+            <SubTitle>{CONTACT_SECTION.EMAIL}</SubTitle>
+          </ContactDetails>
+          <ContactDetails>
+            <Icon src={phone} />
+            <SubTitle>{CONTACT_SECTION.PHONE}</SubTitle>
+          </ContactDetails>
+          <ContactDetails>
+            <Icon src={location} />
+            <SubTitle>{CONTACT_SECTION.LOCATION}</SubTitle>
+          </ContactDetails>
+        </LeftSide>
+        <RightSide>
+          <Formik
+            initialValues={{ name: '', email: '', message: '' }}
+            onSubmit={handleSubmit}
+            validateOnChange={false}
+            validateOnBlur={false}
+            validationSchema={validationSchema}>
+            {({ values, handleChange, handleSubmit, errors }) => {
+              return (
+                <FormContact onSubmit={handleSubmit}>
+                  <InputWrapper>
+                    <Input
+                      name='name'
+                      placeholder='EX: John Doe'
+                      label='Name'
+                      value={values.name}
+                      onChange={handleChange}
+                    />
+                    {errors.name && <Error>{errors.name}</Error>}
+                  </InputWrapper>
+                  <InputWrapper>
+                    <Input
+                      name='email'
+                      placeholder='EX: johndoe@gmail.com'
+                      label='Email'
+                      value={values.email}
+                      onChange={handleChange}
+                    />
+                    {errors.email && <Error>{errors.email}</Error>}
+                  </InputWrapper>
+                  <Textarea
+                    name='message'
+                    value={values.message}
                     onChange={handleChange}
+                    label='Message'
                   />
-                  {errors.name && <Error>{errors.name}</Error>}
-                </InputWrapper>
-                <InputWrapper>
-                  <Input
-                    name='email'
-                    placeholder='EX: johndoe@gmail.com'
-                    label='Email'
-                    value={values.email}
-                    onChange={handleChange}
-                  />
-                  {errors.email && <Error>{errors.email}</Error>}
-                </InputWrapper>
-                <Textarea
-                  name='message'
-                  value={values.message}
-                  onChange={handleChange}
-                  label='Message'
-                />
-                <div>
-                  <Button type='submit'>
-                    {false ? <Spinner isLoading={false} /> : t('button.send')}
-                  </Button>
-                </div>
-              </FormContact>
-            )
-          }}
-        </Formik>
-      </RightSide>
-    </ContactWrapper>
+                  <div>
+                    <Button type='submit'>
+                      {false ? <Spinner isLoading={false} /> : t('button.send')}
+                    </Button>
+                  </div>
+                </FormContact>
+              )
+            }}
+          </Formik>
+        </RightSide>
+      </Content>
+    </ContentWrapper>
   )
 }
