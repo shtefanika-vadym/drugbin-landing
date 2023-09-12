@@ -9,7 +9,7 @@ interface IRecycleSlice {
     firstName: string
     lastName: string
     email: string | null
-    pharmacyId: number
+    chainId: number | null
     drugList: {
       drugName: {
         drugId: number
@@ -32,7 +32,7 @@ const initialState: IRecycleSlice = {
     firstName: '',
     lastName: '',
     email: null,
-    pharmacyId: 1,
+    chainId: null,
     drugList: [
       {
         drugName: {
@@ -92,6 +92,9 @@ export const recycleSlice = createSlice({
       state.collectData.drugList.splice(action.payload, 1)
       state.drugsSize = state.drugsSize - 1
     },
+    SET_PHARMA(state, action: PayloadAction<number>) {
+      state.collectData.chainId = action.payload
+    },
   },
 })
 
@@ -105,4 +108,5 @@ export const {
   SET_TYPE,
   SET_DRUGS_FROM_CAMERA,
   DELETE_DRUG_BY_ID,
+  SET_PHARMA,
 } = recycleSlice.actions

@@ -26,7 +26,13 @@ export const recycleApi = createApi({
         method: HTTP_METHODS.POST,
       }),
     }),
+    pharmasDetails: build.query({
+      query: () => ({
+        url: `/chains`,
+      }),
+    }),
   }),
 })
 
-export const { useRecycleDrugMutation, useDrugsIdentifyMutation }: any = recycleApi
+export const { useRecycleDrugMutation, useDrugsIdentifyMutation, usePharmasDetailsQuery }: any =
+  recycleApi
