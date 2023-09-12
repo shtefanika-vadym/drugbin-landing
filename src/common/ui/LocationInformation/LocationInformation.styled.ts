@@ -1,20 +1,22 @@
 import styled from 'styled-components'
 
+import { WDS_COLOR_BLUE_300 } from 'common/style/colors'
 import { flex } from 'common/style/mixins/flex.mixin'
 import { textVariant } from 'common/style/mixins/typography.mixin'
 
 export const LocationInformationWrapper = styled.div`
-  ${flex({ direction: 'column', gap: '32px' })}
+  ${flex({ direction: 'column', gap: '16px' })}
 `
 
-export const PharmaCardDetails = styled.div`
-  ${flex({ direction: 'column', gap: '16px' })};
+export const PharmaCardDetails = styled.div<{ isActive: boolean }>`
+  border: ${({ isActive }) => isActive && `1px solid ${WDS_COLOR_BLUE_300}`};
+  ${flex({ direction: 'column', gap: '8px' })};
   background: #ffffff;
-  border-radius: 0px 0px 16px 16px;
-  padding: 24px 16px;
+  border-radius: 16px;
+  padding: 16px;
 `
 
-export const Schedule = styled.p`
+export const Description = styled.p`
   ${textVariant('bodyS')};
   color: #011640;
 `
@@ -24,7 +26,7 @@ export const Name = styled.p`
   color: #000611;
 `
 
-export const Location = styled.p`
+export const Email = styled.p`
   ${textVariant('bodyS')};
   color: #a3a6ad;
 `

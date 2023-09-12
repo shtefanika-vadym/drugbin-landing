@@ -12,7 +12,6 @@ import { Button } from 'common/ui/Button/Button'
 import { Camera } from 'common/ui/Camera/Camera'
 import { Dropdown } from 'common/ui/Dropdown/Dropdown'
 import { Input } from 'common/ui/Input/Input'
-import { SwitchButton } from 'common/ui/SwitchButton/SwitchButton'
 import type { ChangeEvent, FC } from 'react'
 import { useCallback, useState } from 'react'
 import {
@@ -81,7 +80,6 @@ export const DrugInformation: FC<IProps> = ({ setActiveStep }) => {
 
   return (
     <DrugInformationWrapper>
-      <SwitchButton />
       <MultiFormWrapper>
         <Camera />
         {Array.from({ length: drugsSize }, (_, i) => (
@@ -115,24 +113,6 @@ export const DrugInformation: FC<IProps> = ({ setActiveStep }) => {
                 onChange={(e) => handleChange(e, i)}
               />
             </InputWrapper>
-            {/* <InputWrapper>
-              <Input
-                name='expirationDate'
-                label='Expiration date'
-                value={collectData?.drugList[i]?.expirationDate}
-                onChange={(e) => handleChange(e, i)}
-                placeholder='EX: 16/12/2020'
-              />
-            </InputWrapper>
-            <InputWrapper>
-              <Input
-                name='lot'
-                label='LOT number'
-                value={collectData?.drugList[i]?.lot}
-                onChange={(e) => handleChange(e, i)}
-                placeholder='EX: M9080158'
-              />
-            </InputWrapper> */}
           </FormWrapper>
         ))}
       </MultiFormWrapper>

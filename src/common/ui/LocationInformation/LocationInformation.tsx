@@ -1,74 +1,57 @@
-import mapImg from 'common/assets/MAP.png'
-import { SET_SHOW_MODAL } from 'common/slices/modalSlice'
-import { useAppDispatch } from 'common/store/hooks'
+// import { useAppDispatch } from 'common/store/hooks'
 import { Button } from 'common/ui/Button/Button'
-import { Input } from 'common/ui/Input/Input'
-import { FinishModal } from 'common/ui/Modal/FinishModal/FinishModal'
-import type { ChangeEvent, FC } from 'react'
-import { useCallback, useState } from 'react'
+import type { FC } from 'react'
+import { useCallback } from 'react'
 import {
   ButtonWrapper,
-  Image,
-  Location,
+  Email,
   LocationInformationWrapper,
   Name,
   PharmaCardDetails,
-  Schedule,
+  Description,
 } from './LocationInformation.styled'
+import { usePharmasDetailsQuery } from 'common/api/recycleApi'
+import Spinner from 'common/ui/Spinner/Spinner'
+import { SET_PHARMA } from 'common/slices/recycleSlice'
+import { useAppDispatch, useAppSelector } from 'common/store/hooks'
 
 interface IProps {
   setActiveStep: (step: any) => void
 }
 
 export const LocationInformation: FC<IProps> = ({ setActiveStep }) => {
+  const { data, isLoading } = usePharmasDetailsQuery()
   const dispatch = useAppDispatch()
-  const [search, setSearch] = useState<string>('')
-
-  const handleCloseModal = () => {
-    dispatch(SET_SHOW_MODAL({ isOpenModal: false, childModal: null }))
-  }
-
-  const handleChange = (values: ChangeEvent<HTMLInputElement>) => {
-    const { value } = values.target
-    setSearch(value)
-  }
-
-  const callbackOnClickFinish = () => {
-    dispatch(
-      SET_SHOW_MODAL({
-        isOpenModal: true,
-        childModal: (
-          <FinishModal handleCloseModal={handleCloseModal} setActiveStep={setActiveStep} />
-        ),
-      }),
-    )
-  }
+  const { collectData } = useAppSelector((state) => state.recycleReducer)
 
   const hanldeSubmit = useCallback(() => {
-    callbackOnClickFinish()
+    setActiveStep((prevActiveStep: number) => prevActiveStep + 1)
   }, [])
 
   const handleBack = useCallback(() => {
     setActiveStep((prevActiveStep: number) => prevActiveStep - 1)
   }, [])
 
+  const selectPharma = useCallback((id: number) => {
+    dispatch(SET_PHARMA(id))
+  }, [])
+
+  if (isLoading) return <Spinner isLoading={true} />
+
   return (
     <LocationInformationWrapper>
-      <Input
-        type='search'
-        label='Search location/ address'
-        value={search}
-        onChange={(e) => handleChange(e)}
-        placeholder='EX: Tipografiei 1'
-      />
-      <div>
-        <Image src={mapImg} />
-        <PharmaCardDetails>
-          <Schedule>Mo-Fr 8:00 – 22.00</Schedule>
-          <Name>Farmacia Inimii Catena</Name>
-          <Location>Tipografiei 1, Suceava, SUCEAVA</Location>
-        </PharmaCardDetails>
-      </div>
+      {data.map((element: any) => {
+        return (
+          <PharmaCardDetails
+            onClick={() => selectPharma(element.id)}
+            key={element.id}
+            isActive={collectData.chainId === element.id}>
+            <Name>{element.name}</Name>
+            <Description>{element.description}</Description>
+            <Email>{element.email}</Email>
+          </PharmaCardDetails>
+        )
+      })}
       <ButtonWrapper>
         <Button variant='empty' size='None' onClick={handleBack}>
           Go back

@@ -22,13 +22,11 @@ i18n.init({
 function App() {
   return (
     <Provider store={store}>
-      <React.StrictMode>
-        <HashRouter>
-          <I18nextProvider i18n={i18n}>
-            <Routes />
-          </I18nextProvider>
-        </HashRouter>
-      </React.StrictMode>
+      <HashRouter>
+        <I18nextProvider i18n={i18n}>
+          <Routes />
+        </I18nextProvider>
+      </HashRouter>
     </Provider>
   )
 }
