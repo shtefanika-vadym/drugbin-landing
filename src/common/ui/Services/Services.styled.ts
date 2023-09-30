@@ -23,16 +23,23 @@ export const Tag = styled.p`
 `
 
 export const Title = styled.h1`
-  ${textVariant('titleH1')};
-  padding: 16px 0 24px 0;
+  ${textVariant('titleH3')};
+  padding: 0 0 24px 0;
 
   @media (max-width: ${WDS_BREAKPOINT_MOBILE_UP_TO}) {
     ${textVariant('titleH3')};
   }
 `
 
-export const SubTitle = styled.p`
+export const SubTitle = styled.p<{ bold?: boolean }>`
   ${textVariant('bodyM')};
+  ${(props) => props.bold && 'font-weight: bold'};
+  ${(props) => props.bold && 'color: #1C3375'};
+`
+
+export const Other = styled.div`
+  padding-top: 16px;
+  ${flex({ direction: 'column', gap: '8px' })};
 `
 
 export const ListWrapper = styled.div`

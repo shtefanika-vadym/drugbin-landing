@@ -9,8 +9,9 @@ export enum PathsEnum {
   documents = '/documents',
   donations = '/donations',
   create = '/create-new',
+  values = 'values',
   about = 'about-us',
-  services = 'services',
+  proces = '/proces',
   contact = 'contact',
 }
 
@@ -43,11 +44,15 @@ export const NAVIGATION_ITEMS_RECYCLE: INavigation[] = [
 export const NAVIGATION_ITEMS_UNAUTHORIZED: INavigation[] = [
   {
     route: PathsEnum.about,
-    title: 'About Us',
+    title: 'Despre noi',
   },
   {
-    route: PathsEnum.services,
-    title: 'Services',
+    route: PathsEnum.values,
+    title: 'Valorile noastre',
+  },
+  {
+    route: PathsEnum.proces,
+    title: 'Proces',
   },
   {
     route: PathsEnum.contact,

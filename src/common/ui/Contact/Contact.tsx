@@ -1,14 +1,10 @@
-import type { FC } from 'react'
-import { useTranslation } from 'react-i18next'
-
-import { Formik } from 'formik'
-
 import location from 'common/assets/location.svg'
 import email from 'common/assets/mail.svg'
 import phone from 'common/assets/phone.svg'
-
+import { Formik } from 'formik'
+import type { FC } from 'react'
 // import { useContactMutation } from 'features/LandingPage/store/api/landingApi'
-
+import { ContentWrapper } from 'common/layout/ContentWrapper/ContentWrapper'
 import { validationSchema } from 'common/schema/validationSchema'
 import { Button } from 'common/ui/Button/Button'
 import { Input } from 'common/ui/Input/Input'
@@ -26,7 +22,6 @@ import {
   SubTitle,
   Title,
 } from './Contact.styled'
-import { ContentWrapper } from 'common/layout/ContentWrapper/ContentWrapper'
 
 // TODO --> CHANGE THE LOCATION OF THIS ENUM
 export enum CONTACT_SECTION {
@@ -43,7 +38,6 @@ interface IContact {
 export const Contact: FC<IContact> = ({ id }) => {
   // TODO --> INTEGRATE BACKEND
   // const [contact, { isLoading }] = useContactMutation()
-  const { t } = useTranslation()
 
   const handleSubmit = (values: any, { resetForm }: any) => {
     // contact(values)
@@ -53,7 +47,7 @@ export const Contact: FC<IContact> = ({ id }) => {
     <ContentWrapper color='white' fullWidth={true} id={id}>
       <Content>
         <LeftSide>
-          <Title>{t('landing_page.contact_title')}</Title>
+          <Title>Contact</Title>
           <ContactDetails>
             <Icon src={email} />
             <SubTitle>{CONTACT_SECTION.EMAIL}</SubTitle>
@@ -105,7 +99,7 @@ export const Contact: FC<IContact> = ({ id }) => {
                   />
                   <div>
                     <Button type='submit'>
-                      {false ? <Spinner isLoading={false} /> : t('button.send')}
+                      {false ? <Spinner isLoading={false} /> : 'Trimite'}
                     </Button>
                   </div>
                 </FormContact>
