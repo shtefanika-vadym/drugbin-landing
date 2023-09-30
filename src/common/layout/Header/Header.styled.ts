@@ -50,11 +50,10 @@ export const Navigation = styled.div`
   gap: ${WDS_SIZE_032_PX};
 `
 
-export const NavLink = styled.div<{ isActive: boolean }>`
+export const NavLink = styled.div<{ isActive?: boolean }>`
   ${flex({ direction: 'column', alignItems: 'center' })};
   ${textVariant('subheading')};
   color: ${({ isActive }) => (isActive ? WDS_COLOR_BLUE_700 : WDS_COLOR_BLUE_400)};
-  position: relative;
   padding-bottom: ${WDS_SIZE_002_PX};
   cursor: pointer;
 `

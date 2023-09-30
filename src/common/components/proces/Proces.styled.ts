@@ -1,9 +1,7 @@
-import styled from 'styled-components'
-
 import { WDS_BREAKPOINT_MOBILE_UP_TO } from 'common/constants/breakpoint'
-import { WDS_COLOR_BLUE_400 } from 'common/style/colors'
 import { flex } from 'common/style/mixins/flex.mixin'
 import { textVariant } from 'common/style/mixins/typography.mixin'
+import styled from 'styled-components'
 
 export const Wrapper = styled.div`
   ${flex({ direction: 'column', alignItems: 'center', justifyContent: 'center' })};
@@ -37,20 +35,4 @@ export const SubTitle = styled.p`
     ${textVariant('bodyM')};
     width: 95%;
   }
-`
-
-export const Join = styled.p`
-  color: ${WDS_COLOR_BLUE_400};
-  ${textVariant('bodyL')};
-  font-weight: bold;
-  max-width: 847px;
-
-  @media (max-width: ${WDS_BREAKPOINT_MOBILE_UP_TO}) {
-    ${textVariant('bodyM')};
-    font-weight: 700;
-  }
-`
-
-export const Icon = styled.img`
-  width: 100%;
 `

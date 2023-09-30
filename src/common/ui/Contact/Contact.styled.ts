@@ -23,6 +23,10 @@ export const Content = styled.div`
 export const Title = styled.h1`
   ${textVariant('titleH1')};
   padding: 0 0 40px 0;
+
+  @media (max-width: ${WDS_BREAKPOINT_TABLET_UP_TO}) {
+    ${textVariant('titleH3')};
+  }
 `
 
 export const SubTitle = styled.h1`
