@@ -1,14 +1,8 @@
-import aboutIcon from 'common/assets/about.svg'
-import checkmark from 'common/assets/checkmark.svg'
-import contactIcon from 'common/assets/contact.svg'
-import recycleIcon from 'common/assets/recycle.svg'
-import serviceIcon from 'common/assets/service.svg'
-import useBreakpoints from 'common/hooks/useBreakpoints'
+import { NAVIGATION_MOBILE } from 'common/layout/Paths/Paths'
 import { Button } from 'common/ui/Button/Button'
 import type { FC } from 'react'
 import { useCallback, useRef } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { animateScroll } from 'react-scroll'
+import { HashLink as Link } from 'react-router-hash-link'
 import { useOnClickOutside } from 'usehooks-ts'
 import {
   BorderStyle,
@@ -22,6 +16,10 @@ import {
   Title,
 } from './MobileMenu.styled'
 
+const linkStyle = {
+  textDecoration: 'none',
+  color: 'inherit',
+}
 export interface MobileMenuProps {
   isOpen: boolean
   handleOpen: (isOpen: boolean) => void
@@ -29,26 +27,15 @@ export interface MobileMenuProps {
 
 export const MobileMenu: FC<MobileMenuProps> = ({ isOpen, handleOpen }) => {
   const topNavRef = useRef<HTMLElement | null>(null)
-  const { isBelowDesktop } = useBreakpoints()
-  const navigate = useNavigate()
-  const location = useLocation()
 
   const handleDropdown = useCallback(() => {
     handleOpen(!isOpen)
   }, [isOpen, handleOpen])
+  useOnClickOutside(topNavRef, handleDropdown)
 
-  const handleNavigate = (link: string) => {
-    if (link === '/proces') return navigate(link)
-    if (location.pathname === '/proces') {
-      navigate('/')
-      animateScroll.scrollTo(document.getElementById(link)?.offsetTop)
-    }
-    const targetOffset = document?.getElementById(link)?.offsetTop - (isBelowDesktop ? 72 : 0)
-    animateScroll?.scrollTo(targetOffset)
+  const handleNavigation = () => {
     handleOpen(false)
   }
-
-  useOnClickOutside(topNavRef, handleDropdown)
 
   return (
     <MenuWrapper>
@@ -56,26 +43,16 @@ export const MobileMenu: FC<MobileMenuProps> = ({ isOpen, handleOpen }) => {
         <LanguageContainer>
           <Title>Menu</Title>
         </LanguageContainer>
-        <ItemWrapper onClick={() => handleNavigate('about-us')}>
-          <Icon src={aboutIcon} />
-          <Text>Despre noi</Text>
-        </ItemWrapper>
-        <ItemWrapper onClick={() => handleNavigate('values')}>
-          <Icon src={serviceIcon} />
-          <Text>Valorile noastre</Text>
-        </ItemWrapper>
-        <ItemWrapper onClick={() => handleNavigate('/proces')}>
-          <Icon src={checkmark} />
-          <Text>Proces</Text>
-        </ItemWrapper>
-        <ItemWrapper onClick={() => handleNavigate('contact')}>
-          <Icon src={contactIcon} />
-          <Text>Contact</Text>
-        </ItemWrapper>
-        <ItemWrapper onClick={() => navigate('/collect')}>
-          <Icon src={recycleIcon} />
-          <Text>Colecteaza</Text>
-        </ItemWrapper>
+        {NAVIGATION_MOBILE.map((element, index) => {
+          return (
+            <Link key={index} style={linkStyle} smooth to={element.route}>
+              <ItemWrapper onClick={handleNavigation}>
+                <Icon src={element.icon} />
+                <Text>{element.title}</Text>
+              </ItemWrapper>
+            </Link>
+          )
+        })}
         <BorderStyle />
         <ButtonWrapper>
           <Button variant='empty' onClick={handleDropdown}>
