@@ -1,20 +1,20 @@
 export enum STEP_1 {
-  TITLE = 'Collect drug form',
-  DESCRIPTION = ' Fill in the form data. It will take a couple of minutes. All we need is your name, surname and some drug info.',
-  TAG = 'Enter your personal information',
+  TITLE = 'Colectează medicamente',
+  DESCRIPTION = 'Completează datele în formular. Va dura doar câteva minute. Tot ce avem nevoie sunt numele tău, prenumele și câteva informații despre medicamente.',
+  TAG = 'Te rugăm să introduci datele tale.',
 }
 
 export enum STEP_2 {
-  TITLE = 'Collect drug form',
-  TAG = 'Now you can add the drug/s information',
-  TAG_COMPLET = 'We have filled the information using the photo taken by you. Please check the info and correct it if that is the case.',
+  TITLE = 'Colectează medicamente',
+  TAG = 'Acum poți să introduci datele despre medicamentele pe care vrei sa le reciclezi.',
 }
 
 export enum STEP_3 {
-  TITLE = 'Collect drug form',
-  TAG = 'Choose location',
+  TITLE = 'Colectează medicamente',
+  TAG = 'Este timpul să alegi locația unde urmează să predai medicamentele.',
 }
 
 export enum PRIVACY_BOX {
-  DESCRIPTION = 'We take privacy issues seriously. You can be sure that your personal data is securely protected.',
+  DESCRIPTION_STEP_1 = 'Luăm în serios problemele legate de confidențialitate. Poți fi sigur că datele tale personale sunt protejate și în siguranță.',
+  DESCRIPTION_STEP_2 = 'Poți să folosești camera pentru a scana medicamentul, sau poți introduce manual datele.',
 }

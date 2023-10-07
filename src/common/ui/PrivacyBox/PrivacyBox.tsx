@@ -1,12 +1,15 @@
 import secureIcon from 'common/assets/secure-payment-line.svg'
 import { Description, Icon, PrivacyBoxWrapper } from './PrivacyBox.styled'
-import { PRIVACY_BOX } from 'common/constants/steps'
 
-export const PrivacyBox = () => {
+interface PrivacyBoxProps {
+  description: string
+}
+
+export const PrivacyBox: React.FC<PrivacyBoxProps> = ({ description }) => {
   return (
     <PrivacyBoxWrapper>
       <Icon src={secureIcon} />
-      <Description>{PRIVACY_BOX.DESCRIPTION}</Description>
+      <Description>{description}</Description>
     </PrivacyBoxWrapper>
   )
 }

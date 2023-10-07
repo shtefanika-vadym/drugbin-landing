@@ -2,17 +2,16 @@ import { Button } from 'common/ui/Button/Button'
 import type { FC } from 'react'
 import { ButtoWrapper, Text, TextBold, VerbalTitle, VerbalWrapper } from './VerbalProcess.styled'
 
-interface IProps {
-  setActiveStep: (step: any) => void
+interface VerbalProcessProps {
+  setActiveStep: (step: (prevActiveStep: number) => number) => void
+  handleFinishCollect: () => void
 }
 
-export const VerbalProcess: FC<IProps> = ({ setActiveStep }) => {
-  const handleAgree = () => {
-    setActiveStep((prevActiveStep: number) => prevActiveStep + 1)
-  }
+export const VerbalProcess: FC<VerbalProcessProps> = ({ setActiveStep, handleFinishCollect }) => {
   const handleCancel = () => {
-    setActiveStep((prevActiveStep: number) => prevActiveStep - 1)
+    setActiveStep((prevActiveStep) => prevActiveStep - 1)
   }
+
   return (
     <VerbalWrapper>
       <VerbalTitle>Verbal Process</VerbalTitle>
@@ -41,7 +40,7 @@ export const VerbalProcess: FC<IProps> = ({ setActiveStep }) => {
         <Button variant='secondary' onClick={handleCancel}>
           No, cancel
         </Button>
-        <Button onClick={handleAgree}>Yes, I agree</Button>
+        <Button onClick={handleFinishCollect}>Yes, I agree</Button>
       </ButtoWrapper>
     </VerbalWrapper>
   )

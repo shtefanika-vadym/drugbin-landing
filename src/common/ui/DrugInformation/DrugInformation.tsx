@@ -9,9 +9,9 @@ import {
 import { useAppDispatch, useAppSelector } from 'common/store/hooks'
 import { AutocompleteInput } from 'common/ui/AutocompleteInput/AutocompleteInput'
 import { Button } from 'common/ui/Button/Button'
-import { Camera } from 'common/ui/Camera/Camera'
 import { Dropdown } from 'common/ui/Dropdown/Dropdown'
 import { Input } from 'common/ui/Input/Input'
+import { gt } from 'lodash-es'
 import type { ChangeEvent, FC } from 'react'
 import { useCallback, useState } from 'react'
 import {
@@ -25,12 +25,14 @@ import {
   Label,
   LabelWrapper,
   MultiFormWrapper,
+  Psycholeptic,
 } from './DrugInformation.styled'
 
 interface IProps {
-  setActiveStep: (step: any) => void
+  setActiveStep: (step: (prevActiveStep: number) => number) => void
 }
 
+// TODO --> REFACTORING
 export const DrugInformation: FC<IProps> = ({ setActiveStep }) => {
   const dispatch = useAppDispatch()
   const { collectData, drugsSize } = useAppSelector((state) => state.recycleReducer)
@@ -80,14 +82,14 @@ export const DrugInformation: FC<IProps> = ({ setActiveStep }) => {
 
   return (
     <DrugInformationWrapper>
+      {/* <PrivacyBox description={PRIVACY_BOX.DESCRIPTION_STEP_2} /> */}
       <MultiFormWrapper>
-        <Camera />
         {Array.from({ length: drugsSize }, (_, i) => (
           <FormWrapper key={i}>
             <InputWrapper>
               <LabelWrapper>
-                <Label>Drug name *</Label>
-                {drugsSize > 1 && <Delete onClick={() => handleDeleteDrug(i)}>Delete</Delete>}
+                <Label>Numele *</Label>
+                {gt(drugsSize, 1) && <Delete onClick={() => handleDeleteDrug(i)}>Sterge</Delete>}
               </LabelWrapper>
               <AutocompleteInput
                 name='name'
@@ -95,20 +97,26 @@ export const DrugInformation: FC<IProps> = ({ setActiveStep }) => {
                 placeholder='EX: Ibuprofen'
                 onSelect={(e) => handleOnSelect(e, i)}
               />
+              {collectData?.drugList[i]?.drugName.isPsycholeptic && (
+                <Psycholeptic>
+                  Te informăm că medicamentul este de tip psihotrop. Procesul de colectare va fi un
+                  pic diferit.
+                </Psycholeptic>
+              )}
             </InputWrapper>
             <Dropdown
               name='pack'
               placeholder='Pack'
-              label='Package type *'
+              label='Tipul de ambalaj *'
               selectedOptions={collectData?.drugList[i]?.pack}
               options={DROPDOWN_VALUES}
-              callbackOnChange={(e: any) => handleChangeDropdown(e, i)}
+              callbackOnChange={(e) => handleChangeDropdown(e, i)}
             />
             <InputWrapper>
               <Input
                 name='quantity'
                 type='number'
-                label='Quantity *'
+                label='Cantitatea *'
                 value={collectData?.drugList[i]?.quantity}
                 onChange={(e) => handleChange(e, i)}
               />
@@ -118,15 +126,15 @@ export const DrugInformation: FC<IProps> = ({ setActiveStep }) => {
       </MultiFormWrapper>
       <AddNewWrapper>
         <Button variant='secondary' onClick={handleAddNewDrugForm}>
-          Add new drug
+          Adaugă alt medicament
         </Button>
         {error && <Error>{error}</Error>}
       </AddNewWrapper>
       <ButtonWrapper>
         <Button variant='empty' onClick={handleGoBack}>
-          Go back
+          Înapoi
         </Button>
-        <Button onClick={handleSubmit}>Continue</Button>
+        <Button onClick={handleSubmit}>Continuă</Button>
       </ButtonWrapper>
     </DrugInformationWrapper>
   )

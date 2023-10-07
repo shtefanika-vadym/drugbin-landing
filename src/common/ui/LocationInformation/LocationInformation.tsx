@@ -1,27 +1,21 @@
-// import { useAppDispatch } from 'common/store/hooks'
-import { Button } from 'common/ui/Button/Button'
-import type { FC } from 'react'
-import { useCallback } from 'react'
-import {
-  ButtonWrapper,
-  Email,
-  LocationInformationWrapper,
-  Name,
-  PharmaCardDetails,
-  Description,
-} from './LocationInformation.styled'
 import { usePharmasDetailsQuery } from 'common/api/recycleApi'
-import Spinner from 'common/ui/Spinner/Spinner'
+import type { LocationProps } from 'common/interface/Location'
 import { SET_PHARMA } from 'common/slices/recycleSlice'
 import { useAppDispatch, useAppSelector } from 'common/store/hooks'
+import { Button } from 'common/ui/Button/Button'
+import { PharmaCard } from 'common/ui/PharmaCard/PharmaCard'
+import Spinner from 'common/ui/Spinner/Spinner'
+import type { FC } from 'react'
+import { useCallback } from 'react'
+import { ButtonWrapper, LocationInformationWrapper } from './LocationInformation.styled'
 
-interface IProps {
-  setActiveStep: (step: any) => void
+interface LocationInformationProps {
+  setActiveStep: (step: (prevActiveStep: number) => number) => void
 }
 
-export const LocationInformation: FC<IProps> = ({ setActiveStep }) => {
-  const { data, isLoading } = usePharmasDetailsQuery()
+export const LocationInformation: FC<LocationInformationProps> = ({ setActiveStep }) => {
   const dispatch = useAppDispatch()
+  const { data, isLoading } = usePharmasDetailsQuery()
   const { collectData } = useAppSelector((state) => state.recycleReducer)
 
   const hanldeSubmit = useCallback(() => {
@@ -40,23 +34,21 @@ export const LocationInformation: FC<IProps> = ({ setActiveStep }) => {
 
   return (
     <LocationInformationWrapper>
-      {data.map((element: any) => {
+      {data?.map((item: LocationProps) => {
         return (
-          <PharmaCardDetails
-            onClick={() => selectPharma(element.id)}
-            key={element.id}
-            isActive={collectData.chainId === element.id}>
-            <Name>{element.name}</Name>
-            <Description>{element.description}</Description>
-            <Email>{element.email}</Email>
-          </PharmaCardDetails>
+          <PharmaCard
+            key={item?.id}
+            name={item?.name}
+            handleSelect={() => selectPharma(item?.id)}
+            isActive={collectData?.chainId === item?.id}
+          />
         )
       })}
       <ButtonWrapper>
-        <Button variant='empty' size='None' onClick={handleBack}>
-          Go back
+        <Button variant='empty' onClick={handleBack}>
+          Înapoi
         </Button>
-        <Button onClick={hanldeSubmit}>Select and finish</Button>
+        <Button onClick={hanldeSubmit}>Selectează</Button>
       </ButtonWrapper>
     </LocationInformationWrapper>
   )
