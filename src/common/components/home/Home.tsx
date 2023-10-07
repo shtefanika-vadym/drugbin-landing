@@ -2,14 +2,15 @@ import first from 'common/assets/first.jpg'
 import { ContentWrapper } from 'common/layout/ContentWrapper/ContentWrapper'
 import { About } from 'common/ui/About/About'
 import { Button } from 'common/ui/Button/Button'
-import { useNavigate } from 'react-router-dom'
-import { Icon, Join, Section, SubTitle, Title, Wrapper } from './Home.styled'
+import { Contact } from 'common/ui/Contact/Contact'
 import { Recycle } from 'common/ui/Recycle/Recycle'
 import { Values } from 'common/ui/Values/Values'
-import { Contact } from 'common/ui/Contact/Contact'
+import { useNavigate } from 'react-router-dom'
+import { Icon, Join, Section, SubTitle, Title, Wrapper } from './Home.styled'
 
 export const Home = () => {
   const navigate = useNavigate()
+
   return (
     <Wrapper>
       <ContentWrapper>
