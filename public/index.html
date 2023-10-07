@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -10,7 +10,7 @@
     <link href="%PUBLIC_URL%/manifest.json" rel="manifest" />
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet" />
@@ -19,8 +19,24 @@
       rel="stylesheet" />
     <title>Drugbin</title>
   </head>
-  <body  style="background-color: #f9f8f8; margin: unset;">
+  <body style="background-color: #f9f8f8; margin: unset">
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('serviceWorker.js').then(
+            function (registration) {
+              // Registration was successful
+              console.log('ServiceWorker registration successful with scope: ', registration.scope)
+            },
+            function (err) {
+              // registration failed :(
+              console.log('ServiceWorker registration failed: ', err)
+            },
+          )
+        })
+      }
+    </script>
     <div id="root"></div>
   </body>
 </html>
