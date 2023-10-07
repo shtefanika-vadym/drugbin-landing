@@ -13,6 +13,7 @@ interface AutocompleteInputProps {
   value?: {
     name: string
     drugId: number
+    isPsycholeptic: boolean
   }
   onSelect?: (selectedOption: any) => void
 }
@@ -34,6 +35,8 @@ export const AutocompleteInput: FC<AutocompleteInputProps> = ({
 
   const { data } = useDrugQuery(debouncedValue.toLowerCase())
 
+  console.log('data', data)
+
   //TODO --> CHANG THIS
   const options = useMemo(
     () =>
@@ -42,6 +45,7 @@ export const AutocompleteInput: FC<AutocompleteInputProps> = ({
           value: element?.name,
           name: element?.name,
           drugId: element?.id,
+          isPsycholeptic: element?.isPsycholeptic,
         }
       }),
     [data],
@@ -59,6 +63,7 @@ export const AutocompleteInput: FC<AutocompleteInputProps> = ({
     value: value?.name,
     name: value?.name,
     drugId: value?.drugId,
+    isPsycholeptic: value?.isPsycholeptic,
   }
 
   return (

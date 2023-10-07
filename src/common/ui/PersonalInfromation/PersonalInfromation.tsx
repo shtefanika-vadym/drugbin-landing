@@ -1,42 +1,49 @@
+import { PRIVACY_BOX } from 'common/constants/steps'
+import { SET_DATA } from 'common/slices/recycleSlice'
+import { useAppDispatch, useAppSelector } from 'common/store/hooks'
+import { Button } from 'common/ui/Button/Button'
+import { Input } from 'common/ui/Input/Input'
+import { PrivacyBox } from 'common/ui/PrivacyBox/PrivacyBox'
+import { isEmail, isStringNotEmpty } from 'common/utils/stringUtils'
 import type { ChangeEvent, FC, FormEvent, MouseEvent } from 'react'
 import { useCallback, useState } from 'react'
-import { isEmail, isStringNotEmpty } from 'common/utils/stringUtils'
 import {
   Error,
   FormWrapper,
   InputWrapper,
   PersonalInfromationWrapper,
 } from './PersonalInfromation.styled'
-import { Input } from 'common/ui/Input/Input'
-import { Button } from 'common/ui/Button/Button'
-import { SET_DATA } from 'common/slices/recycleSlice'
-import { useAppDispatch, useAppSelector } from 'common/store/hooks'
-import { PrivacyBox } from 'common/ui/PrivacyBox/PrivacyBox'
 
-interface IProps {
-  setActiveStep: (step: any) => void
+interface PersonalInfromationProps {
+  setActiveStep: (step: (prevActiveStep: number) => number) => void
 }
 
-export const PersonalInfromation: FC<IProps> = ({ setActiveStep }) => {
+interface ErrorProps {
+  firstName: string
+  lastName: string
+  email: string
+}
+
+export const PersonalInfromation: FC<PersonalInfromationProps> = ({ setActiveStep }) => {
   const dispatch = useAppDispatch()
   const { collectData } = useAppSelector((state) => state.recycleReducer)
   const { firstName, lastName, email } = collectData
 
-  const [errors, setErrors] = useState<{ firstName: string; lastName: string; email: string }>({
+  const [errors, setErrors] = useState<ErrorProps>({
     firstName: '',
     lastName: '',
     email: '',
   })
 
-  const handleChange = (props: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback((props: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = props.target
     dispatch(SET_DATA({ name: name, value: value }))
-  }
+  }, [])
 
   const handleSubmit = useCallback(
     (event: FormEvent | MouseEvent<HTMLButtonElement, MouseEvent> | undefined) => {
       event?.preventDefault()
-      setErrors((prevErrors: any) => ({
+      setErrors((prevErrors: ErrorProps) => ({
         ...prevErrors,
         firstName: firstName === '' ? 'Please fill in your first name' : '',
         lastName: lastName === '' ? 'Please fill in your last name' : '',
@@ -56,12 +63,12 @@ export const PersonalInfromation: FC<IProps> = ({ setActiveStep }) => {
 
   return (
     <PersonalInfromationWrapper>
-      <PrivacyBox />
+      <PrivacyBox description={PRIVACY_BOX.DESCRIPTION_STEP_1} />
       <FormWrapper>
         <InputWrapper>
           <Input
             name='firstName'
-            label='Name *'
+            label='Nume *'
             value={firstName}
             onChange={handleChange}
             placeholder='EX: John'
@@ -71,7 +78,7 @@ export const PersonalInfromation: FC<IProps> = ({ setActiveStep }) => {
         <InputWrapper>
           <Input
             name='lastName'
-            label='Surname *'
+            label='Prenume *'
             value={lastName}
             onChange={handleChange}
             placeholder='EX: Doe'
@@ -82,7 +89,7 @@ export const PersonalInfromation: FC<IProps> = ({ setActiveStep }) => {
           <Input
             type='email'
             name='email'
-            label='E-mail address (optional)'
+            label='Adresa de e-mail (optional)'
             value={email}
             onChange={handleChange}
             placeholder='EX: Doe'
@@ -90,7 +97,7 @@ export const PersonalInfromation: FC<IProps> = ({ setActiveStep }) => {
           {errors.email && <Error>{errors.email}</Error>}
         </InputWrapper>
       </FormWrapper>
-      <Button onClick={handleSubmit}>Continue</Button>
+      <Button onClick={handleSubmit}>Continuă</Button>
     </PersonalInfromationWrapper>
   )
 }

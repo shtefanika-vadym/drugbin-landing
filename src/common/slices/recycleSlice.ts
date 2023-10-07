@@ -15,6 +15,7 @@ interface IRecycleSlice {
         drugId: number
         name: string
         value: string
+        isPsycholeptic: boolean
       }
       pack: string
       quantity: number
@@ -39,6 +40,7 @@ const initialState: IRecycleSlice = {
           drugId: null,
           name: '',
           value: '',
+          isPsycholeptic: false,
         },
         pack: 'Pack',
         quantity: 1,

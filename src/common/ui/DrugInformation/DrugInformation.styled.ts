@@ -5,7 +5,7 @@ import { textVariant } from 'common/style/mixins/typography.mixin'
 import { WDS_COLOR_BLUE_700, WDS_COLOR_RED } from 'common/style/colors'
 
 export const DrugInformationWrapper = styled.div`
-  ${flex({ direction: 'column', gap: '24px' })};
+  ${flex({ direction: 'column' })};
 `
 
 export const MultiFormWrapper = styled.div`
@@ -27,11 +27,13 @@ export const Error = styled.p`
   padding-top: 4px;
 `
 export const ButtonWrapper = styled.div`
-  ${flex({ justifyContent: 'space-between' })}
+  ${flex({ justifyContent: 'space-between' })};
+  margin-top: 24px;
 `
 
 export const AddNewWrapper = styled.div`
-  ${flex({ direction: 'column' })}
+  ${flex({ direction: 'column' })};
+  margin-top: 24px;
 `
 
 export const Label = styled.p`
@@ -49,4 +51,10 @@ export const Delete = styled.p`
 export const LabelWrapper = styled.div`
   ${flex({ justifyContent: 'space-between' })};
   padding-bottom: 4px;
+`
+
+export const Psycholeptic = styled.p`
+  ${textVariant('bodyXS')};
+  color: #a12626;
+  margin-top: 4px;
 `
