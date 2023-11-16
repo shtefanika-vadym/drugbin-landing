@@ -1,0 +1,1 @@
+export { VerbalProcess } from './VerbalProcess'

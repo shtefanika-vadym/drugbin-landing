@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
 import { WDS_BREAKPOINT_TABLET_UP_TO } from 'common/constants/breakpoint'
-import { WDS_COLOR_RED, WDS_COLOR_WHITE } from 'common/style/colors'
-import { flex } from 'common/style/mixins/flex.mixin'
-import { grid } from 'common/style/mixins/grid.mixin'
-import { textVariant } from 'common/style/mixins/typography.mixin'
+import { WDS_COLOR_RED, WDS_COLOR_WHITE } from 'styles/colors'
+import { flex } from 'styles/mixins/flex.mixin'
+import { grid } from 'styles/mixins/grid.mixin'
+import { textVariant } from 'styles/mixins/typography.mixin'
 
 export const Content = styled.div`
   max-width: 1285px;

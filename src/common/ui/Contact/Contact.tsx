@@ -8,7 +8,6 @@ import { ContentWrapper } from 'common/layout/ContentWrapper/ContentWrapper'
 import { validationSchema } from 'common/schema/validationSchema'
 import { Button } from 'common/ui/Button/Button'
 import { Input } from 'common/ui/Input/Input'
-import Spinner from 'common/ui/Spinner/Spinner'
 import { Textarea } from 'common/ui/Textarea/Textarea'
 import {
   ContactDetails,
@@ -22,6 +21,7 @@ import {
   SubTitle,
   Title,
 } from './Contact.styled'
+import { Spinner } from '../Spinner/Spinner'
 
 // TODO --> CHANGE THE LOCATION OF THIS ENUM
 export enum CONTACT_SECTION {
@@ -99,7 +99,7 @@ export const Contact: FC<IContact> = ({ id }) => {
                   />
                   <div>
                     <Button type='submit'>
-                      {false ? <Spinner isLoading={false} /> : 'Trimite'}
+                      {false ? <Spinner /> : 'Trimite'}
                     </Button>
                   </div>
                 </FormContact>

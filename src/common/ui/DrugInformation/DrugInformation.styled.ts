@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
-import { flex } from 'common/style/mixins/flex.mixin'
-import { textVariant } from 'common/style/mixins/typography.mixin'
-import { WDS_COLOR_BLUE_700, WDS_COLOR_RED } from 'common/style/colors'
+import { flex } from 'styles/mixins/flex.mixin'
+import { textVariant } from 'styles/mixins/typography.mixin'
+import { WDS_COLOR_BLUE_700, WDS_COLOR_RED } from 'styles/colors'
 
 export const DrugInformationWrapper = styled.div`
   ${flex({ direction: 'column' })};
@@ -25,10 +25,6 @@ export const Error = styled.p`
   color: ${WDS_COLOR_RED};
   text-align: right;
   padding-top: 4px;
-`
-export const ButtonWrapper = styled.div`
-  ${flex({ justifyContent: 'space-between' })};
-  margin-top: 24px;
 `
 
 export const AddNewWrapper = styled.div`

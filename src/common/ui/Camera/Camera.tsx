@@ -52,6 +52,7 @@ export const Camera = () => {
     } else {
       dispatch(SET_SHOW_MODAL({ isOpenModal: false, childModal: null }))
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading])
 
   useEffect(() => {

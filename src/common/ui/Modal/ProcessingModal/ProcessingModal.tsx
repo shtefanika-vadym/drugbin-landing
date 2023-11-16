@@ -1,7 +1,7 @@
 import Modal from 'common/ui/Modal/Modal'
-import Spinner from 'common/ui/Spinner/Spinner'
 import type { FC } from 'react'
 import { SpinnerWrapper, Text, Title } from './ProcessingModal.styled'
+import { Spinner } from 'common/ui/Spinner/Spinner'
 
 interface IProcessingModal {
   handleCloseModal: any
@@ -17,7 +17,7 @@ export const ProcessingModal: FC<IProcessingModal> = ({ handleCloseModal, isLoad
         identify the drugs and retrieve their names for you.
       </Text>
       <SpinnerWrapper>
-        <Spinner isLoading={isLoading} />
+        {isLoading && <Spinner />}
       </SpinnerWrapper>
     </Modal>
   )

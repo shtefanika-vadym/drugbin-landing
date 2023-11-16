@@ -7,9 +7,9 @@ import {
   WDS_COLOR_BLUE_400,
   WDS_COLOR_BLUE_700,
   WDS_COLOR_WHITE,
-} from 'common/style/colors'
-import { flex } from 'common/style/mixins/flex.mixin'
-import { textVariant } from 'common/style/mixins/typography.mixin'
+} from 'styles/colors'
+import { flex } from 'styles/mixins/flex.mixin'
+import { textVariant } from 'styles/mixins/typography.mixin'
 import {
   WDS_SIZE_002_PX,
   WDS_SIZE_009_PX,
@@ -20,7 +20,7 @@ import {
   WDS_SIZE_064_PX,
   WDS_SIZE_080_PX,
   WDS_SIZE_104_PX,
-} from 'common/style/size'
+} from 'styles/size'
 
 export const ContainerWrapper = styled.div`
   background: ${WDS_COLOR_WHITE};

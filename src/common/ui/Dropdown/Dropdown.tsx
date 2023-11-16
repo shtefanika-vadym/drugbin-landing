@@ -27,12 +27,12 @@ export const Dropdown: FC<DropdownProps> = ({
 
   const handleClose = useCallback(() => {
     if (showDropdown) toggleShowDropdown(false)
-  }, [showDropdown])
+  }, [showDropdown, toggleShowDropdown])
 
   const handleChange = useCallback((option: string) => {
     callbackOnChange(option)
     toggleShowDropdown(false)
-  }, [])
+  }, [callbackOnChange, toggleShowDropdown])
 
   const containerRef = useRef(null)
   useOnClickOutside(containerRef, handleClose)

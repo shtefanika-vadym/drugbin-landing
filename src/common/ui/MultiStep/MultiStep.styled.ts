@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { flex } from 'common/style/mixins/flex.mixin'
+import { flex } from 'styles/mixins/flex.mixin'
 
 export const Dot = styled.div<{ isActive: boolean }>`
   height: 12px;

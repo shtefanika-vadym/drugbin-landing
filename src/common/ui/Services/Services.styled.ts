@@ -4,10 +4,10 @@ import {
   WDS_BREAKPOINT_MOBILE_UP_TO,
   WDS_BREAKPOINT_TABLET_UP_TO,
 } from 'common/constants/breakpoint'
-import { WDS_COLOR_BLUE_600 } from 'common/style/colors'
-import { flex } from 'common/style/mixins/flex.mixin'
-import { grid } from 'common/style/mixins/grid.mixin'
-import { textVariant } from 'common/style/mixins/typography.mixin'
+import { WDS_COLOR_BLUE_600 } from 'styles/colors'
+import { flex } from 'styles/mixins/flex.mixin'
+import { grid } from 'styles/mixins/grid.mixin'
+import { textVariant } from 'styles/mixins/typography.mixin'
 
 export const ServicesWrapper = styled.div`
   ${flex({ direction: 'column', gap: '94px' })};

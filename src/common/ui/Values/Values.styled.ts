@@ -1,6 +1,6 @@
 import { WDS_BREAKPOINT_MOBILE_UP_TO } from 'common/constants/breakpoint'
-import { grid } from 'common/style/mixins/grid.mixin'
-import { textVariant } from 'common/style/mixins/typography.mixin'
+import { grid } from 'styles/mixins/grid.mixin'
+import { textVariant } from 'styles/mixins/typography.mixin'
 import styled from 'styled-components'
 
 export const Content = styled.div`

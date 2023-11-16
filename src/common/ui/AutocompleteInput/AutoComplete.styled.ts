@@ -5,11 +5,13 @@ import {
   WDS_COLOR_BLUE_300,
   WDS_COLOR_BLUE_700,
   WDS_COLOR_GREY,
-} from 'common/style/colors'
-import { flex } from 'common/style/mixins/flex.mixin'
-import { textVariant } from 'common/style/mixins/typography.mixin'
-import { WDS_SIZE_016_PX, WDS_SIZE_024_PX } from 'common/style/size'
-import { WDS_TEXT_FAMILY_BASE, WDS_TEXT_WEIGHT_REGULAR } from 'common/style/typography'
+  WDS_COLOR_WHITE,
+} from 'styles/colors'
+import { flex } from 'styles/mixins/flex.mixin'
+import { textVariant } from 'styles/mixins/typography.mixin'
+import { WDS_SIZE_008_PX, WDS_SIZE_010_PX, WDS_SIZE_016_PX, WDS_SIZE_024_PX, WDS_SIZE_224_PX } from 'styles/size'
+import { WDS_TEXT_FAMILY_BASE, WDS_TEXT_WEIGHT_REGULAR } from 'styles/typography'
+import { border } from 'styles/mixins/border.mixin'
 
 export const customStyles = {
   control: () => ({
@@ -76,3 +78,49 @@ export const Label = styled.p`
   ${textVariant('bodyS')};
   color: ${WDS_COLOR_BLUE_700};
 `
+
+// FOR TEST
+
+export const AutoComplete = styled.div`
+`
+
+export const SearchInput = styled.input`
+  width: 100%;
+  box-sizing: border-box;
+  height: 40px;
+  ${flex({ justifyContent: 'space-between', alignItems: 'center' })};
+  border: 1px solid ${WDS_COLOR_GREY};
+  border-radius: ${WDS_SIZE_008_PX};
+  padding: ${WDS_SIZE_008_PX} ${WDS_SIZE_010_PX};
+  background-color: white;
+`;
+
+export const Dropdown = styled.div`
+  position: relative;
+  top: 4px;
+  box-sizing: border-box;
+  width: 100%;
+  overflow-y: auto;
+  z-index: 1;
+  max-height: ${WDS_SIZE_224_PX};
+  padding: ${WDS_SIZE_010_PX};
+  background: ${WDS_COLOR_WHITE};
+  ${border({ type: 'solid', color: WDS_COLOR_GREY })};
+  border-radius: ${WDS_SIZE_008_PX};
+`;
+
+export const Option = styled.div`
+  box-sizing: border-box;
+  padding: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: #f0f0f0;
+  }
+`;
+
+export const SelectedOption = styled(Label)<{isActive: boolean}>`
+  ${({ isActive }) => (isActive && `color:  ${WDS_COLOR_BLUE_300}` )};
+  ${({ isActive }) => (isActive && `font-weight: bold` )};
+`
+
+

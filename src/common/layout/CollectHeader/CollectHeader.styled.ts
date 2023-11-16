@@ -1,6 +1,6 @@
-import { WDS_COLOR_BLUE_100, WDS_COLOR_WHITE } from 'common/style/colors'
-import { flex } from 'common/style/mixins/flex.mixin'
 import { styled } from 'styled-components'
+import { WDS_COLOR_BLUE_100, WDS_COLOR_WHITE } from 'styles/colors'
+import { flex } from 'styles/mixins/flex.mixin'
 
 export const ContainerWrapperRecycle = styled.div`
   ${flex({ justifyContent: 'space-between' })};

@@ -1,12 +1,15 @@
 {
+  "semi": true,
+  "trailingComma": "es5",
+  "singleQuote": true,
   "tabWidth": 2,
   "useTabs": false,
-  "semi": false,
-  "printWidth": 100,
-  "singleQuote": true,
-  "bracketSpacing": true,
-  "bracketSameLine": true,
-  "jsxSingleQuote": true,
-  "trailingComma": "all",
-  "endOfLine": "lf"
+  "overrides": [
+    {
+      "files": ["**/*.css", "**/*.scss", "**/*.html"],
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
 }
