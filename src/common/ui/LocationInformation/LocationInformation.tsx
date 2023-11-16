@@ -1,12 +1,12 @@
+import { LocationProps } from '@/types/Location'
 import { usePharmasDetailsQuery } from 'common/api/recycleApi'
-import type { LocationProps } from 'common/interface/Location'
 import { SET_PHARMA } from 'common/slices/recycleSlice'
 import { useAppDispatch, useAppSelector } from 'common/store/hooks'
 import { Button } from 'common/ui/Button/Button'
 import { PharmaCard } from 'common/ui/PharmaCard/PharmaCard'
-import Spinner from 'common/ui/Spinner/Spinner'
 import type { FC } from 'react'
 import { useCallback } from 'react'
+import { Spinner } from '../Spinner/Spinner'
 import { ButtonWrapper, LocationInformationWrapper } from './LocationInformation.styled'
 
 interface LocationInformationProps {
@@ -20,17 +20,17 @@ export const LocationInformation: FC<LocationInformationProps> = ({ setActiveSte
 
   const hanldeSubmit = useCallback(() => {
     setActiveStep((prevActiveStep: number) => prevActiveStep + 1)
-  }, [])
+  }, [setActiveStep])
 
   const handleBack = useCallback(() => {
     setActiveStep((prevActiveStep: number) => prevActiveStep - 1)
-  }, [])
+  }, [setActiveStep])
 
   const selectPharma = useCallback((id: number) => {
     dispatch(SET_PHARMA(id))
-  }, [])
+  }, [dispatch])
 
-  if (isLoading) return <Spinner isLoading={true} />
+  if (isLoading) return <Spinner />
 
   return (
     <LocationInformationWrapper>

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
-import { grid } from 'common/style/mixins/grid.mixin'
-import { textVariant } from 'common/style/mixins/typography.mixin'
+import { grid } from 'styles/mixins/grid.mixin'
+import { textVariant } from 'styles/mixins/typography.mixin'
 
 export const SwitchButtonContent = styled.div`
   width: 100%;

@@ -1,5 +1,5 @@
-import { flex } from 'common/style/mixins/flex.mixin'
-import { textVariant } from 'common/style/mixins/typography.mixin'
+import { flex } from 'styles/mixins/flex.mixin'
+import { textVariant } from 'styles/mixins/typography.mixin'
 import styled from 'styled-components'
 
 export const VerbalTitle = styled.h1`

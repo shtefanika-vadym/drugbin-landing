@@ -1,84 +1,101 @@
-import { useDrugQuery } from 'common/api/addApi'
-import type { FC } from 'react'
-import { useMemo, useState } from 'react'
-import Select from 'react-select'
-import { useDebounce } from 'usehooks-ts'
-import { Content, Label, customStyles } from './AutoComplete.styled'
+import { useDrugQuery } from 'common/api/addApi';
+import useOnClickOutside from 'common/hooks/useOnClickOutside';
+import { SelectValue } from '@/types/CollectInterface';
+import { isEmpty } from 'lodash-es';
+import { ChangeEvent, useCallback, useRef, useState } from 'react';
+import { useDebounce } from 'usehooks-ts';
+import { Loader } from '../Loader/Loader';
+import {
+  AutoComplete,
+  Dropdown,
+  Label,
+  Option,
+  SearchInput,
+  SelectedOption,
+} from './AutoComplete.styled';
 
 interface AutocompleteInputProps {
-  name: string
-  type?: string
-  placeholder: string
-  label?: string
-  value?: {
-    name: string
-    drugId: number
-    isPsycholeptic: boolean
-  }
-  onSelect?: (selectedOption: any) => void
+  placeholder: string;
+  label?: string;
+  value: SelectValue
+  onSelect?: (selectedOption: SelectValue) => void;
 }
 
-export const AutocompleteInput: FC<AutocompleteInputProps> = ({
-  name,
+export const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
   placeholder,
   label,
-  onSelect,
   value,
+  onSelect,
 }) => {
-  const [inputValue, setInputValue] = useState<string>('')
+  const containerRef = useRef(null);
+  const [inputValue, setInputValue] = useState<string>('');
+  const debouncedValue = useDebounce(inputValue, 300);
+  const { data: options, isLoading } = useDrugQuery(
+    debouncedValue.toLowerCase()
+  );
+  const [showDropdown, setShowDropdown] = useState<boolean>(false);
 
-  const debouncedValue = useDebounce(inputValue, 300)
+  const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+    setShowDropdown(true);
+  }, []);
 
-  const handleInputChange = (props: string) => {
-    setInputValue(props)
-  }
+  const handleSelectOption = useCallback(
+    (selectedOption: SelectValue) => {
+      setInputValue(selectedOption.value);
+      setShowDropdown(false);
+      onSelect(selectedOption);
+    },
+    [onSelect]
+  );
 
-  const { data } = useDrugQuery(debouncedValue.toLowerCase())
+  const handleCreateOption = useCallback(() => {
+    const newOption = {
+      drugId: 0,
+      name: inputValue,
+      value: inputValue,
+      isPsycholeptic: false,
+    };
 
-  console.log('data', data)
+    setInputValue(newOption.value);
+    setShowDropdown(false);
+    onSelect(newOption);
+  }, [inputValue, onSelect]);
 
-  //TODO --> CHANG THIS
-  const options = useMemo(
-    () =>
-      data?.map((element: any) => {
-        return {
-          value: element?.name,
-          name: element?.name,
-          drugId: element?.id,
-          isPsycholeptic: element?.isPsycholeptic,
-        }
-      }),
-    [data],
-  )
+  const handleClose = useCallback(() => {
+    setShowDropdown(false);
+  }, []);
 
-  const getOptionLabel = (option: any) => {
-    return option.name
-  }
+  const handleOpen = useCallback(() => {
+    setShowDropdown(!showDropdown)
+  }, [showDropdown]);
 
-  const handleOnChange = (props: any) => {
-    onSelect(props)
-  }
-
-  const valueObj = {
-    value: value?.name,
-    name: value?.name,
-    drugId: value?.drugId,
-    isPsycholeptic: value?.isPsycholeptic,
-  }
+  useOnClickOutside(containerRef, handleClose);
 
   return (
-    <Content>
+    <AutoComplete ref={containerRef}>
       <Label>{label}</Label>
-      <Select
-        name={name}
-        value={valueObj.name && valueObj}
+      <SearchInput
+        type="text"
         placeholder={placeholder}
-        styles={customStyles}
-        options={options}
-        onInputChange={handleInputChange}
-        onChange={handleOnChange}
-        getOptionLabel={getOptionLabel}
+        value={inputValue}
+        onChange={handleInputChange}
+        onClick={handleOpen}
       />
-    </Content>
-  )
-}
+      {showDropdown && (
+        <Dropdown>
+          <Loader isLoading={isLoading} size={24} justify="center">
+            {options?.map((option: SelectValue, index: number) => (
+              <Option key={index} onClick={() => handleSelectOption(option)}>
+                <SelectedOption isActive={option.drugId === value.drugId}>{option.value}</SelectedOption>
+              </Option>
+            ))}
+            {isEmpty(options) && (
+              <button onClick={handleCreateOption}>Create Option</button>
+            )}
+          </Loader>
+        </Dropdown>
+      )}
+    </AutoComplete>
+  );
+};

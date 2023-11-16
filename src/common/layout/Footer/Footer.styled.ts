@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 import { WDS_BREAKPOINT_MOBILE_UP_TO } from 'common/constants/breakpoint'
-import { flex } from 'common/style/mixins/flex.mixin'
-import { textVariant } from 'common/style/mixins/typography.mixin'
+import { flex } from 'styles/mixins/flex.mixin'
+import { textVariant } from 'styles/mixins/typography.mixin'
 
 export const FooterContent = styled.div`
   ${flex({ direction: 'column' })};

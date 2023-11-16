@@ -1,0 +1,1 @@
+export { PharmaCard } from './PharmaCard'

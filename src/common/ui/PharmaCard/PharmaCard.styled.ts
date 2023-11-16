@@ -1,5 +1,5 @@
-import { WDS_COLOR_BLACK, WDS_COLOR_BLUE_500, WDS_COLOR_WHITE } from 'common/style/colors'
-import { textVariant } from 'common/style/mixins/typography.mixin'
+import { WDS_COLOR_BLACK, WDS_COLOR_BLUE_500, WDS_COLOR_WHITE } from 'styles/colors'
+import { textVariant } from 'styles/mixins/typography.mixin'
 import styled from 'styled-components'
 
 export const PharmaCardContainer = styled.div<{ isActive: boolean }>`

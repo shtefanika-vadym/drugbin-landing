@@ -14,7 +14,7 @@ export const CollectHeader: React.FC<HeaderProps> = ({ children }) => {
   const handleClose = useCallback(() => {
     dispatch(SET_TO_INITIAL())
     navigate('/')
-  }, [])
+  }, [dispatch, navigate])
 
   return (
     <>

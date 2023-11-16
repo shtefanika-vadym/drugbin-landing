@@ -20,6 +20,16 @@ export const addApi = createApi({
       query: (query) => ({
         url: `/drugs/search/${query}`,
       }),
+      transformResponse: (respons: any) => {
+        return  respons?.map((element: any) => {
+          return {
+            value: element?.name,
+            name: element?.name,
+            drugId: element?.id,
+            isPsycholeptic: element?.isPsycholeptic,
+          }
+        })
+      }
     }),
     createDrug: build.mutation({
       query: (product) => ({

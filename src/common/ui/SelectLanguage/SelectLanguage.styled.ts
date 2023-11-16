@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
-import { flex } from 'common/style/mixins/flex.mixin'
-import { textVariant } from 'common/style/mixins/typography.mixin'
+import { flex } from 'styles/mixins/flex.mixin'
+import { textVariant } from 'styles/mixins/typography.mixin'
 
 export const SelectWrapper = styled.div`
   ${flex({ gap: '8px', alignItems: 'center' })};

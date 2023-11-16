@@ -1,5 +1,5 @@
-import { remToPxVal } from 'common/style/cssHelpers'
-import type { Dictionary } from 'common/types/utils.types'
+import { Dictionary } from "@reduxjs/toolkit"
+import { remToPxVal } from "styles/cssHelpers"
 
 export const WDS_BREAKPOINT_MOBILE = '20rem' // from 320 px
 export const WDS_BREAKPOINT_MOBILE_UP_TO = '39.9375rem' // less than 640 px

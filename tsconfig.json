@@ -19,6 +19,16 @@
     "useUnknownInCatchVariables": false,
     "noImplicitThis": false,
     "strictNullChecks": false,
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/pages/*": ["pages/*"],
+      "@/styles/*": ["src/styles/*"],
+      "@/assets/*": ["assets/*"],
+      "@/utils/*": ["utils/*"],
+      "@/lib/*": ["src/lib/*"],
+      "@/types/*": ["types/*"],
+      "@/fixtures/*": ["__fixtures__/*"]
+    },
   },
   "include": ["src/**/*", "src/index.d.ts"],
   "exclude": ["node_modules", "src/**/*.spec.ts"]

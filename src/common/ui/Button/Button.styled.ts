@@ -6,17 +6,17 @@ import {
   WDS_COLOR_BLUE_400,
   WDS_COLOR_WHITE,
   WDS_COLOR_WHITE_100,
-} from 'common/style/colors'
-import { border } from 'common/style/mixins/border.mixin'
-import { flex } from 'common/style/mixins/flex.mixin'
-import { textVariant } from 'common/style/mixins/typography.mixin'
+} from 'styles/colors'
+import { border } from 'styles/mixins/border.mixin'
+import { flex } from 'styles/mixins/flex.mixin'
+import { textVariant } from 'styles/mixins/typography.mixin'
 import {
   WDS_SIZE_004_PX,
   WDS_SIZE_006_PX,
   WDS_SIZE_008_PX,
   WDS_SIZE_010_PX,
   WDS_SIZE_024_PX,
-} from 'common/style/size'
+} from 'styles/size'
 
 import type { StyledButtonProps } from './Button.types'
 

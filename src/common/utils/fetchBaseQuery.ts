@@ -1,7 +1,7 @@
+import { IUser } from '@/types/IUser'
 import type { BaseQueryFn } from '@reduxjs/toolkit/query'
 import type { AxiosError, AxiosRequestConfig } from 'axios'
 import axios from 'axios'
-import type { IUser } from 'common/interface/IUser'
 
 export const baseQuery =
   (): BaseQueryFn<
@@ -29,7 +29,7 @@ export const baseQuery =
       })
       return { data: result.data }
     } catch (axiosError) {
-      let err = axiosError as AxiosError
+      const err = axiosError as AxiosError
       if (err.response?.status === 401) {
         localStorage.clear()
         window.location.assign('/auth/login')

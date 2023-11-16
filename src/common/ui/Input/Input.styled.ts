@@ -6,10 +6,10 @@ import {
   WDS_COLOR_BLUE_700,
   WDS_COLOR_GREY,
   WDS_COLOR_RED,
-} from 'common/style/colors'
-import { border } from 'common/style/mixins/border.mixin'
-import { flex } from 'common/style/mixins/flex.mixin'
-import { textVariant } from 'common/style/mixins/typography.mixin'
+} from 'styles/colors'
+import { border } from 'styles/mixins/border.mixin'
+import { flex } from 'styles/mixins/flex.mixin'
+import { textVariant } from 'styles/mixins/typography.mixin'
 import {
   WDS_SIZE_008_PX,
   WDS_SIZE_010_PX,
@@ -17,7 +17,7 @@ import {
   WDS_SIZE_037_PX,
   WDS_SIZE_040_PX,
   WDS_SIZE_074_PX,
-} from 'common/style/size'
+} from 'styles/size'
 
 export const Container = styled.div<{ valid: boolean }>`
   width: 100%;

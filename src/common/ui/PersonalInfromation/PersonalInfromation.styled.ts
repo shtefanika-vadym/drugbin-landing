@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
-import { flex } from 'common/style/mixins/flex.mixin'
-import { textVariant } from 'common/style/mixins/typography.mixin'
-import { WDS_COLOR_RED } from 'common/style/colors'
+import { flex } from 'styles/mixins/flex.mixin'
+import { textVariant } from 'styles/mixins/typography.mixin'
+import { WDS_COLOR_RED } from 'styles/colors'
 
 export const PersonalInfromationWrapper = styled.div`
   ${flex({ direction: 'column', gap: '24px' })};
@@ -10,6 +10,11 @@ export const PersonalInfromationWrapper = styled.div`
 
 export const FormWrapper = styled.div`
   ${flex({ direction: 'column', gap: '16px' })};
+`
+
+export const ButtonWrapper = styled.div`
+  ${flex({ justifyContent: 'space-between' })};
+  margin-top: 24px;
 `
 
 export const InputWrapper = styled.div``
