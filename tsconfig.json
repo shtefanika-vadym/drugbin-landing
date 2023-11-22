@@ -21,6 +21,7 @@
     "strictNullChecks": false,
     "paths": {
       "@/components/*": ["components/*"],
+      "@/ui/*": ["src/common/ui/*"],
       "@/pages/*": ["pages/*"],
       "@/styles/*": ["src/styles/*"],
       "@/assets/*": ["assets/*"],

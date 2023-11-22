@@ -1,23 +1,16 @@
+import { PersonalDetailsProps } from '@/types/collect';
 import { PRIVACY_BOX } from 'common/constants/steps';
-import { SET_DATA } from 'common/slices/recycleSlice';
-import { useAppDispatch, useAppSelector } from 'common/store/hooks';
-import { Button } from 'common/ui/Button/Button';
 import { Input } from 'common/ui/Input/Input';
 import { PrivacyBox } from 'common/ui/PrivacyBox/PrivacyBox';
-import { isEmail, isStringNotEmpty } from 'common/utils/stringUtils';
-import type { ChangeEvent, FC, FormEvent, MouseEvent } from 'react';
+import type { ChangeEvent } from 'react';
 import { useCallback, useState } from 'react';
+import { CNPInformation } from '../CNPInformation/CNPInformation';
 import {
-  ButtonWrapper,
   Error,
   FormWrapper,
   InputWrapper,
   PersonalInfromationWrapper,
 } from './PersonalInfromation.styled';
-
-interface PersonalInfromationProps {
-  setActiveStep: (step: (prevActiveStep: number) => number) => void;
-}
 
 interface ErrorProps {
   firstName: string;
@@ -25,59 +18,34 @@ interface ErrorProps {
   email: string;
 }
 
-export const PersonalInfromation: FC<PersonalInfromationProps> = ({
-  setActiveStep,
-}) => {
-  const dispatch = useAppDispatch();
-  const { collectData } = useAppSelector((state) => state.recycleReducer);
-  const { firstName, lastName, email } = collectData;
+interface PersonalInfromationProps {
+  isPsycholeptic: boolean;
+  personalDetails: PersonalDetailsProps;
+  setPersonalDetails: (details: PersonalDetailsProps) => void;
+}
 
-  const [errors, setErrors] = useState<ErrorProps>({
+export const PersonalInfromation: React.FC<PersonalInfromationProps> = ({
+  isPsycholeptic,
+  personalDetails,
+  setPersonalDetails,
+}) => {
+  const handleInputChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+      setPersonalDetails({
+        ...personalDetails,
+        [name]: value,
+      });
+    },
+    [personalDetails, setPersonalDetails]
+  );
+
+  // OLD
+  const [errors] = useState<ErrorProps>({
     firstName: '',
     lastName: '',
     email: '',
   });
-
-  const handleChange = useCallback(
-    (props: ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = props.target;
-      dispatch(SET_DATA({ name: name, value: value }));
-    },
-    [dispatch]
-  );
-
-  const handleSubmit = useCallback(
-    (
-      event: FormEvent | MouseEvent<HTMLButtonElement, MouseEvent> | undefined
-    ) => {
-      event?.preventDefault();
-      setErrors((prevErrors: ErrorProps) => ({
-        ...prevErrors,
-        firstName: firstName === '' ? 'Please fill in your first name' : '',
-        lastName: lastName === '' ? 'Please fill in your last name' : '',
-        email:
-          email === null || email === ''
-            ? ''
-            : isEmail(email)
-            ? ''
-            : 'Email is not valid.',
-      }));
-
-      const isFirstNameValid = isStringNotEmpty(firstName);
-      const isLastNameValid = isStringNotEmpty(lastName);
-      const isEmailValide =
-        email === null || email === '' ? true : isEmail(email) ? true : false;
-
-      if (isFirstNameValid && isLastNameValid && isEmailValide) {
-        setActiveStep((prevActiveStep: number) => prevActiveStep + 1);
-      }
-    },
-    [firstName, lastName, email, setActiveStep]
-  );
-
-  const handleGoBack = useCallback(() => {
-    setActiveStep((prevActiveStep: number) => prevActiveStep - 1);
-  }, [setActiveStep]);
 
   return (
     <PersonalInfromationWrapper>
@@ -87,9 +55,9 @@ export const PersonalInfromation: FC<PersonalInfromationProps> = ({
           <Input
             name="firstName"
             label="Nume *"
-            value={firstName}
-            onChange={handleChange}
-            placeholder="EX: John"
+            value={personalDetails?.firstName}
+            onChange={handleInputChange}
+            placeholder="EX: Ion"
           />
           {errors.firstName && <Error>{errors.firstName}</Error>}
         </InputWrapper>
@@ -97,30 +65,48 @@ export const PersonalInfromation: FC<PersonalInfromationProps> = ({
           <Input
             name="lastName"
             label="Prenume *"
-            value={lastName}
-            onChange={handleChange}
-            placeholder="EX: Doe"
+            value={personalDetails?.lastName}
+            onChange={handleInputChange}
+            placeholder="EX: Popescu"
           />
           {errors.lastName && <Error>{errors.lastName}</Error>}
         </InputWrapper>
+        {isPsycholeptic && (
+          <>
+            <InputWrapper>
+              <Input
+                name="cnp"
+                label="CNP (Codul Numeric Personal) *"
+                value={personalDetails?.cnp}
+                onChange={handleInputChange}
+                placeholder="EX: 1990106330211"
+                type='number'
+              />
+              <CNPInformation />
+            </InputWrapper>
+            <InputWrapper>
+              <Input
+                name="address"
+                label="Adresa de domiciliu *"
+                value={personalDetails?.address}
+                onChange={handleInputChange}
+                placeholder="EX: Strada Victoriei Nr.16 Bloc F2 Scara B"
+              />
+            </InputWrapper>
+          </>
+        )}
         <InputWrapper>
           <Input
             type="email"
             name="email"
             label="Adresa de e-mail (optional)"
-            value={email}
-            onChange={handleChange}
+            value={personalDetails?.email}
+            onChange={handleInputChange}
             placeholder="EX: Doe"
           />
           {errors.email && <Error>{errors.email}</Error>}
         </InputWrapper>
       </FormWrapper>
-      <ButtonWrapper>
-        <Button variant="empty" onClick={handleGoBack}>
-          Înapoi
-        </Button>
-        <Button onClick={handleSubmit}>Continuă</Button>
-      </ButtonWrapper>
     </PersonalInfromationWrapper>
   );
 };

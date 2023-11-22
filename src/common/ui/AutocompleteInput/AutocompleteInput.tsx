@@ -28,7 +28,7 @@ export const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
   onSelect,
 }) => {
   const containerRef = useRef(null);
-  const [inputValue, setInputValue] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>(value?.name);
   const debouncedValue = useDebounce(inputValue, 300);
   const { data: options, isLoading } = useDrugQuery(
     debouncedValue.toLowerCase()
@@ -78,7 +78,7 @@ export const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
       <SearchInput
         type="text"
         placeholder={placeholder}
-        value={inputValue}
+        value={inputValue ?? value.name}
         onChange={handleInputChange}
         onClick={handleOpen}
       />
@@ -87,7 +87,7 @@ export const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
           <Loader isLoading={isLoading} size={24} justify="center">
             {options?.map((option: SelectValue, index: number) => (
               <Option key={index} onClick={() => handleSelectOption(option)}>
-                <SelectedOption isActive={option.drugId === value.drugId}>{option.value}</SelectedOption>
+                <SelectedOption isActive={option?.drugId === value?.drugId}>{option?.value}</SelectedOption>
               </Option>
             ))}
             {isEmpty(options) && (

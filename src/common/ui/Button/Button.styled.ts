@@ -109,6 +109,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   ${flex({ direction: 'row', justifyContent: 'center', alignItems: 'center' })};
   ${({ variant }) => buttonVariants[variant]};
   ${({ size }) => buttonSizes[size]};
+  ${({ isFullWidth }) => isFullWidth && `width: 100%` };
   transition-property: background-color, border-color;
   transition-duration: 0.2s;
   box-sizing: border-box;

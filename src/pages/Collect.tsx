@@ -3,8 +3,8 @@ import { Collect } from 'components/collect/Collect';
 
 export const CollectPage = () => {
   return (
-    <CollectHeader>
-      <Collect />
-    </CollectHeader>
+      <CollectHeader>
+        <Collect />
+      </CollectHeader>
   );
 };
