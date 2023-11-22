@@ -77,6 +77,7 @@ export const Content = styled.div`
 export const Label = styled.p`
   ${textVariant('bodyS')};
   color: ${WDS_COLOR_BLUE_700};
+  margin-bottom: 4px;
 `
 
 // FOR TEST

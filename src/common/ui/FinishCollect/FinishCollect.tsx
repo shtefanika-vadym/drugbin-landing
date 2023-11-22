@@ -1,45 +1,58 @@
-import { Button } from 'common/ui/Button/Button'
-import QRCode from 'react-qr-code'
+import { QRCode } from 'antd';
+import successIcon from 'common/assets/fi_check-circle.svg';
+import { Button } from 'common/ui/Button/Button';
+import { useNavigate } from 'react-router-dom';
+import { DocumentBox } from '../DocumentBox/DocumentBox';
+import QRCodeWithBorder from '../QRCodeWithBorder/QRCodeWithBorder';
 import {
-  BorderCorner,
   ButtonWrapper,
   Description,
+  DocumentWrapper,
   FinishCollectContent,
-  QRCodeWrapper,
-  Title,
-} from './FinishCollect.styled'
-import { useNavigate } from 'react-router-dom'
-import { Spinner } from '../Spinner/Spinner'
+  Icon,
+  Title
+} from './FinishCollect.styled';
+import { FinishCollectLoader } from './FinishCollectLoader';
 
 interface QrCodeProps {
-  data: { drugCode: string }
-  isLoading: boolean
+  data: { drugCode: string };
+  isLoading: boolean;
 }
 
 export const FinishCollect: React.FC<QrCodeProps> = ({ data, isLoading }) => {
-  const navigate = useNavigate()
-  if (isLoading) return <Spinner />
+  const navigate = useNavigate();
+
+  if (isLoading) return <FinishCollectLoader />;
 
   return (
     <FinishCollectContent>
-      <Title>Cod QR creat cu succes!</Title>
+      <Icon src={successIcon} alt="" />
+      <Title>Cerere de colectare finalizată cu succes!</Title>
       <Description>
-        Când ajungi la locația aleasă, trebuie să scanezi acest cod QR pentru a finaliza procesul de
-        reciclare. <br /> Mulțumim că ai ales să reciclezi medicamentele neutilizate astăzi!
+        Când ajungi la locația aleasă, trebuie să scanezi acest cod QR pentru a
+        finaliza procesul de colectare. <br /> Mulțumim că ai ales să colectezi
+        medicamentele neutilizate astăzi!
       </Description>
-      <QRCodeWrapper>
+      <QRCodeWithBorder>
         {data?.drugCode && (
-          <BorderCorner>
-            <QRCode id='qrcode' value={data?.drugCode} size={120} />
-          </BorderCorner>
+          <QRCode
+            value={data?.drugCode}
+            size={150}
+            icon="https://i.ibb.co/kcCzDTQ/Frame-1252.png"
+            iconSize={32}
+          />
         )}
-      </QRCodeWrapper>
+      </QRCodeWithBorder>
+      <DocumentWrapper>
+        <DocumentBox name="Declaratie PR Stupefiante" />
+        <DocumentBox name="PV Predare General" />
+      </DocumentWrapper>
       <ButtonWrapper>
-        <Button variant='primary' onClick={() => navigate('/proces')}>
+        <Button variant="primary" onClick={() => navigate('/proces')}>
           Află cum pregătești medicamentele
         </Button>
-        <Button variant='secondary'>Salvează în galerie</Button>
+        <Button variant="secondary">Salvează în galerie</Button>
       </ButtonWrapper>
     </FinishCollectContent>
-  )
-}
+  );
+};

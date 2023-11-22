@@ -10,6 +10,7 @@ export const DrugInformationWrapper = styled.div`
 
 export const MultiFormWrapper = styled.div`
   ${flex({ direction: 'column', gap: '24px' })};
+  margin-top: 24px;
 `
 
 export const FormWrapper = styled.div`
@@ -42,6 +43,8 @@ export const Delete = styled.p`
   text-decoration: underline;
   color: #a3a6ad;
   cursor: pointer;
+  position: absolute;
+  right: 28px;
 `
 
 export const LabelWrapper = styled.div`

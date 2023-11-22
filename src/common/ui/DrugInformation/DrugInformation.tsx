@@ -1,19 +1,14 @@
-import { PRIVACY_BOX } from 'common/constants/steps';
 import type { SelectValue } from '@/types/CollectInterface';
+import { DrugProps } from '@/types/collect';
+import { PRIVACY_BOX } from 'common/constants/steps';
 import { DROPDOWN_VALUES } from 'common/mockData/mockData';
-import {
-  DELETE_DRUG_BY_ID,
-  SET_DATA_DRUG,
-  SET_DRUGS_SIZE,
-  SET_NEW_DRUG,
-} from 'common/slices/recycleSlice';
-import { useAppDispatch, useAppSelector } from 'common/store/hooks';
 import { Button } from 'common/ui/Button/Button';
 import { Dropdown } from 'common/ui/Dropdown/Dropdown';
 import { Input } from 'common/ui/Input/Input';
+import { initialDrug } from 'components/collect/Collect.config';
 import { gt } from 'lodash-es';
-import type { ChangeEvent, FC } from 'react';
-import { useCallback, useState } from 'react';
+import type { ChangeEvent } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { AutocompleteInput } from '../AutocompleteInput/AutocompleteInput';
 import { PrivacyBox } from '../PrivacyBox/PrivacyBox';
 import {
@@ -23,94 +18,86 @@ import {
   Error,
   FormWrapper,
   InputWrapper,
-  LabelWrapper,
   MultiFormWrapper,
   Psycholeptic
 } from './DrugInformation.styled';
 
 interface DrugInformationProps {
-  setActiveStep: (step: (prevActiveStep: number) => number) => void;
+  drugList: DrugProps[];
+  setDrugList: (drugList: DrugProps[]) => void;
+  isLastDrugValid: boolean;
 }
 
-// TODO --> REFACTORING
-export const DrugInformation: FC<DrugInformationProps> = ({ setActiveStep }) => {
-  const { collectData, drugsSize } = useAppSelector(
-    (state) => state.recycleReducer
-  );
+export const DrugInformation: React.FC<DrugInformationProps> = ({
+  drugList,
+  setDrugList,
+  isLastDrugValid,
+}) => {
   const [error, setError] = useState<string>('');
-  const dispatch = useAppDispatch();
 
-  const handleChangeDropdown = useCallback(
-    (value: string, key: number) => {
-      const name = 'pack';
-      dispatch(SET_DATA_DRUG({ name, value, key }));
-    },
-    [dispatch]
-  );
-
-  const handleChange = useCallback(
+  const handleInputChange = useCallback(
     (values: ChangeEvent<HTMLInputElement>, key: number) => {
       const { name, value } = values.target;
-      dispatch(SET_DATA_DRUG({ name, value, key }));
+      setDrugList(
+        drugList.map((drug, i) =>
+          i === key ? { ...drug, [name]: value } : drug
+        )
+      );
     },
-    [dispatch]
+    [drugList, setDrugList]
   );
 
-  const handleOnSelect = useCallback(
-    (value: SelectValue, key: number) => {
-      const name = 'drugName';
-      dispatch(SET_DATA_DRUG({ name, value, key }));
+  const handleSelector = useCallback(
+    (value: SelectValue | string, key: number, keyValue: string) => {
+      setDrugList(
+        drugList.map((drug, i) =>
+          i === key ? { ...drug, [keyValue]: value } : drug
+        )
+      );
     },
-    [dispatch]
+    [drugList, setDrugList]
   );
 
   const handleAddNewDrugForm = useCallback(() => {
-    const lastDrug = collectData.drugList[drugsSize - 1];
-
-    if (lastDrug.drugName.name && lastDrug.quantity > 0) {
-      dispatch(SET_DRUGS_SIZE(drugsSize + 1));
-      dispatch(SET_NEW_DRUG());
-    }
-    lastDrug.drugName.name
-      ? setError('')
-      : setError('Please fill the last drug name');
-  }, [collectData.drugList, dispatch, drugsSize]);
-
-  const handleSubmit = useCallback(() => {
-    const lastDrug = collectData.drugList[drugsSize - 1];
-    if (lastDrug.drugName.name !== '' && lastDrug.quantity > 0) {
-      setActiveStep((prevActiveStep: number) => prevActiveStep + 1);
+    if (isLastDrugValid) {
+      setDrugList([...drugList, initialDrug]);
     } else {
-      setError('Please fill the last drug name');
+      setError(
+        'Pentru a adăuga un medicament nou, completează toate câmpurile.'
+      );
     }
-  }, [collectData.drugList, drugsSize, setActiveStep]);
+  }, [isLastDrugValid, setDrugList, drugList]);
 
   const handleDeleteDrug = useCallback(
-    (id: number) => {
-      dispatch(DELETE_DRUG_BY_ID(id));
+    (index: number) => {
+      const newArray = [...drugList];
+      newArray.splice(index, 1);
+      setDrugList(newArray);
     },
-    [dispatch]
+    [drugList, setDrugList]
   );
+
+  useEffect(() => {
+    if (isLastDrugValid) setError('');
+  }, [isLastDrugValid]);
 
   return (
     <DrugInformationWrapper>
       <PrivacyBox description={PRIVACY_BOX.DESCRIPTION_STEP_2} />
       <MultiFormWrapper>
-        {Array.from({ length: drugsSize }, (_, i) => (
+        {Array.from({ length: drugList?.length }, (_, i) => (
           <FormWrapper key={i}>
-            <InputWrapper id="test">
-              {gt(drugsSize, 1) && (
-                <LabelWrapper>
+            <InputWrapper>
+              {gt(drugList?.length, 1) && (
                   <Delete onClick={() => handleDeleteDrug(i)}>Sterge</Delete>
-                </LabelWrapper>
               )}
               <AutocompleteInput
                 label="Numele*"
                 placeholder="EX: Ibuprofen"
-                onSelect={(e: SelectValue) => handleOnSelect(e, i)}
-                value={collectData?.drugList[i]?.drugName}
+                onSelect={(e: SelectValue) => handleSelector(e, i, 'drugName')}
+                value={drugList[i]?.drugName}
               />
-              {collectData?.drugList[i]?.drugName.isPsycholeptic && (
+              {drugList[i]?.drugName.isPsycholeptic && (
                 <Psycholeptic>
                   Te informăm că medicamentul este de tip psihotrop. Procesul de
                   colectare va fi un pic diferit.
@@ -121,17 +108,17 @@ export const DrugInformation: FC<DrugInformationProps> = ({ setActiveStep }) => 
               name="pack"
               placeholder="Pack"
               label="Tipul de ambalaj *"
-              selectedOptions={collectData?.drugList[i]?.pack}
+              selectedOptions={drugList[i]?.pack}
               options={DROPDOWN_VALUES}
-              callbackOnChange={(e) => handleChangeDropdown(e, i)}
+              callbackOnChange={(e) => handleSelector(e, i, 'pack')}
             />
             <InputWrapper>
               <Input
                 name="quantity"
                 type="number"
                 label="Cantitatea *"
-                value={collectData?.drugList[i]?.quantity}
-                onChange={(e) => handleChange(e, i)}
+                value={drugList[i]?.quantity}
+                onChange={(e) => handleInputChange(e, i)}
               />
             </InputWrapper>
           </FormWrapper>
@@ -143,7 +130,6 @@ export const DrugInformation: FC<DrugInformationProps> = ({ setActiveStep }) => 
         </Button>
         {error && <Error>{error}</Error>}
       </AddNewWrapper>
-      <Button onClick={handleSubmit}>Continuă</Button>
     </DrugInformationWrapper>
   );
 };

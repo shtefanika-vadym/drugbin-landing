@@ -91,4 +91,5 @@ export const CustomButton = styled.div`
 
 export const ContainerWrapper = styled.div`
   ${flex({ gap: WDS_SIZE_008_PX })};
+  margin-top: 4px;
 `

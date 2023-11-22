@@ -12,6 +12,7 @@ export type ButtonSize = 'S' | 'S-square' | 'S-round' | 'None'
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant
   size?: ButtonSize
+  isFullWidth?: boolean 
 }
 
-export type StyledButtonProps = Required<Pick<ButtonProps, 'variant' | 'size'>>
+export type StyledButtonProps = Required<Pick<ButtonProps, 'variant' | 'size' | 'isFullWidth'>>

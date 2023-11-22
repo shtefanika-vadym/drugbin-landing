@@ -1,17 +1,20 @@
 export enum STEP_1 {
   TITLE = 'Colectează medicamente',
-  TAG = 'Acum poți să introduci datele despre medicamentele pe care vrei sa le reciclezi.',
+  DESCRIPTION = 'Completează datele despre medicamentele pe care vrei sa le reciclezi, va dura doar câteva minute. Poți să adaugi mai multe medicamente spre reciclare.',
 }
 
 export enum STEP_2 {
   TITLE = 'Colectează medicamente',
-  DESCRIPTION = 'Completează datele în formular. Va dura doar câteva minute. Tot ce avem nevoie sunt numele tău, prenumele și câteva informații despre medicamente.',
-  TAG = 'Te rugăm să introduci datele tale.',
+  DESCRIPTION = 'Acum este momentul să introduci datele tale personale. Avem nevoie de acestea pentru a asigura calitatea procesului de recilcare și siguranța tuturor, inclusiv a ta.',
 }
 
 export enum STEP_3 {
   TITLE = 'Colectează medicamente',
-  TAG = 'Este timpul să alegi locația unde urmează să predai medicamentele.',
+  DESCRIPTION = 'Este timpul să alegi spitalul (de stat sau privat) unde urmează să predai medicamentele, în mod gratuit.',
+}
+
+export enum STEP_4 {
+  TITLE = 'Proces verbal',
 }
 
 export enum PRIVACY_BOX {

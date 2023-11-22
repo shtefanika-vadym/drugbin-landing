@@ -3,8 +3,8 @@ import { textVariant } from 'styles/mixins/typography.mixin'
 import styled from 'styled-components'
 
 export const FinishCollectContent = styled.div`
-  ${flex({ direction: 'column', gap: '16px' })};
-  min-height: 80vh;
+  ${flex({ direction: 'column', gap: '16px', alignItems: 'center' })};
+  box-sizing: border-box;
 `
 
 export const Title = styled.h1`
@@ -21,6 +21,7 @@ export const Description = styled.p`
 export const ButtonWrapper = styled.div`
   width: 100%;
   ${flex({ direction: 'column', gap: '8px' })};
+  padding-top: 48px;
   margin-top: auto;
 `
 
@@ -32,4 +33,17 @@ export const QRCode = styled.img``
 
 export const BorderCorner = styled.div`
   padding: 12px;
+`
+
+export const Content = styled.div`
+  padding: 16px;
+  ${flex({ direction: 'column', gap: '8px', alignItems: 'center' })};
+`
+
+export const Icon = styled.img`
+  height: 24px;
+`
+
+export const DocumentWrapper = styled.div`
+  ${flex({ direction: 'column', gap: '16px', alignItems: 'center' })};
 `

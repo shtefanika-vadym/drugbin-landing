@@ -1,55 +1,54 @@
-import { LocationProps } from '@/types/Location'
-import { usePharmasDetailsQuery } from 'common/api/recycleApi'
-import { SET_PHARMA } from 'common/slices/recycleSlice'
-import { useAppDispatch, useAppSelector } from 'common/store/hooks'
-import { Button } from 'common/ui/Button/Button'
-import { PharmaCard } from 'common/ui/PharmaCard/PharmaCard'
-import type { FC } from 'react'
-import { useCallback } from 'react'
-import { Spinner } from '../Spinner/Spinner'
-import { ButtonWrapper, LocationInformationWrapper } from './LocationInformation.styled'
+import { LocationProps } from '@/types/Location';
+import { usePharmasDetailsQuery } from 'common/api/recycleApi';
+import { useCallback } from 'react';
+import { Dropdown } from '../Dropdown';
+import { Loader } from '../Loader';
+import { LocationCard } from '../LocationCard';
+import { Content, LocationWrapper } from './LocationInformation.styled';
 
 interface LocationInformationProps {
-  setActiveStep: (step: (prevActiveStep: number) => number) => void
+  hospitalId: number;
+  setHospitalId: (id: number) => void;
 }
 
-export const LocationInformation: FC<LocationInformationProps> = ({ setActiveStep }) => {
-  const dispatch = useAppDispatch()
-  const { data, isLoading } = usePharmasDetailsQuery()
-  const { collectData } = useAppSelector((state) => state.recycleReducer)
+export const LocationInformation: React.FC<LocationInformationProps> = ({
+  hospitalId,
+  setHospitalId,
+}) => {
+  const { data, isLoading } = usePharmasDetailsQuery();
 
-  const hanldeSubmit = useCallback(() => {
-    setActiveStep((prevActiveStep: number) => prevActiveStep + 1)
-  }, [setActiveStep])
-
-  const handleBack = useCallback(() => {
-    setActiveStep((prevActiveStep: number) => prevActiveStep - 1)
-  }, [setActiveStep])
-
-  const selectPharma = useCallback((id: number) => {
-    dispatch(SET_PHARMA(id))
-  }, [dispatch])
-
-  if (isLoading) return <Spinner />
+  const handleSelectLocation = useCallback(
+    (id: number) => {
+      setHospitalId(id);
+    },
+    [setHospitalId]
+  );
 
   return (
-    <LocationInformationWrapper>
-      {data?.map((item: LocationProps) => {
-        return (
-          <PharmaCard
-            key={item?.id}
-            name={item?.name}
-            handleSelect={() => selectPharma(item?.id)}
-            isActive={collectData?.chainId === item?.id}
-          />
-        )
-      })}
-      <ButtonWrapper>
-        <Button variant='empty' onClick={handleBack}>
-          Înapoi
-        </Button>
-        <Button onClick={hanldeSubmit}>Selectează</Button>
-      </ButtonWrapper>
-    </LocationInformationWrapper>
-  )
-}
+    <Loader isLoading={isLoading} justify="center">
+      <Content>
+        <Dropdown
+          name="pack"
+          placeholder="EX: Suceava"
+          label="Selectează județul *"
+          selectedOptions={''}
+          options={DROPDOWN_VALUES}
+        />
+        <LocationWrapper>
+          {data?.map((item: LocationProps) => {
+            return (
+              <LocationCard
+                key={item?.id}
+                name={item?.name}
+                handleSelect={() => handleSelectLocation(item?.id)}
+                isActive={hospitalId === item?.id}
+              />
+            );
+          })}
+        </LocationWrapper>
+      </Content>
+    </Loader>
+  );
+};
+
+const DROPDOWN_VALUES = ['Suceava', 'Iasi', 'Bucuresti'];

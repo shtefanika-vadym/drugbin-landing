@@ -1,76 +1,151 @@
-import { useRecycleDrugMutation } from 'common/api/recycleApi';
-import { STEP_1, STEP_2, STEP_3 } from 'common/constants/steps';
-import { SET_TO_INITIAL } from 'common/slices/recycleSlice';
-import { useAppSelector } from 'common/store/hooks';
+import { DrugProps, PersonalDetailsProps } from '@/types/collect';
+import { STEP_1, STEP_2, STEP_3, STEP_4 } from 'common/constants/steps';
 import { DrugInformation } from 'common/ui/DrugInformation/DrugInformation';
-import { FinishCollect } from 'common/ui/FinishCollect/FinishCollect';
+import { FinishCollect } from 'common/ui/FinishCollect';
 import { LocationInformation } from 'common/ui/LocationInformation/LocationInformation';
+import { MultiStep } from 'common/ui/MultiStep';
 import { PersonalInfromation } from 'common/ui/PersonalInfromation/PersonalInfromation';
 import { Stepper } from 'common/ui/Stepper';
-import { VerbalProcess } from 'common/ui/VerbalProcess/VerbalProcess';
-import { toCollectDrugs } from 'common/utils/mappers';
+import { VerbalProcess } from 'common/ui/VerbalProcess';
+import { isCNP, isStringNotEmpty } from 'common/utils/stringUtils';
+import { gt, isNumber } from 'lodash-es';
 import { useCallback, useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { RecycleWrapper } from './Collect.styled';
+import { initialDrug, initialPersonalDetails } from './Collect.config';
+import { Content } from './Collect.styled';
+import { useRecycleDrugMutation } from 'common/api/recycleApi';
+import { toCollectDrugs } from 'common/utils/mappers';
 
 export const Collect = () => {
-  const dispatch = useDispatch();
   const [recycleDrug, { data, isLoading }] = useRecycleDrugMutation();
-  const { collectData } = useAppSelector((state) => state.recycleReducer);
+  const [personalDetails, setPersonalDetails] = useState<PersonalDetailsProps>(
+    initialPersonalDetails
+  );
+  const [drugList, setDrugList] = useState<DrugProps[]>([{ ...initialDrug }]);
   const [activeStep, setActiveStep] = useState<number>(1);
+  const [hospitalId, setHospitalId] = useState<number>(null);
+
+  const isFirstNameValid = isStringNotEmpty(personalDetails?.firstName);
+  const isLastNameValid = isStringNotEmpty(personalDetails?.lastName);
+  const isHospitalValid = isNumber(hospitalId);
+  const isLastDrugValid = useMemo(() => {
+    const lastDrugIndex = drugList?.length - 1;
+    return (
+      drugList[lastDrugIndex]?.drugName?.name !== '' &&
+      gt(drugList[lastDrugIndex]?.quantity, 0)
+    );
+  }, [drugList]);
+  const isPsycholeptic = useMemo(
+    () => drugList.some((obj) => obj.drugName.isPsycholeptic),
+    [drugList]
+  );
+  const isCNPValid = isPsycholeptic ? isCNP(personalDetails.cnp) : true;
+  const isAddressValid = isPsycholeptic
+    ? isStringNotEmpty(personalDetails?.address)
+    : true;
+
+  const handleNextStep = useCallback(() => {
+    setActiveStep((prevActiveStep: number) => prevActiveStep + 1);
+  }, []);
+
+  const handlePrevStep = useCallback(() => {
+    setActiveStep((prevActiveStep: number) => prevActiveStep - 1);
+  }, []);
 
   const handleFinishCollect = useCallback(() => {
-    recycleDrug(toCollectDrugs(collectData));
-    setActiveStep((prevActiveStep: number) => prevActiveStep + 1);
-    dispatch(SET_TO_INITIAL());
-  }, [collectData, dispatch, recycleDrug]);
+    recycleDrug(toCollectDrugs(personalDetails, drugList, hospitalId));
+    handleNextStep();
+  }, [drugList, handleNextStep, hospitalId, personalDetails, recycleDrug]);
 
-  const recycleSteps = useMemo(() => {
+  const collectStep = useMemo(() => {
     switch (activeStep) {
       case 1:
-        return (
-          <Stepper
-            title={STEP_1.TITLE}
-            tag={STEP_1.TAG}
-            activeStep={activeStep}
-          >
-            <DrugInformation setActiveStep={setActiveStep} />
-          </Stepper>
-        );
+        return {
+          title: STEP_1.TITLE,
+          description: STEP_1.DESCRIPTION,
+          component: () => (
+            <DrugInformation
+              drugList={drugList}
+              setDrugList={setDrugList}
+              isLastDrugValid={isLastDrugValid}
+            />
+          ),
+          onNext: handleNextStep,
+          nextDisabled: !isLastDrugValid,
+          backDisabled: true,
+        };
       case 2:
-        return (
-          <Stepper
-            title={STEP_2.TITLE}
-            description={STEP_2.DESCRIPTION}
-            tag={STEP_2.TAG}
-            activeStep={activeStep}
-          >
-            <PersonalInfromation setActiveStep={setActiveStep} />
-          </Stepper>
-        );
+        return {
+          title: STEP_2.TITLE,
+          description: STEP_2.DESCRIPTION,
+          component: () => (
+            <PersonalInfromation
+              isPsycholeptic={isPsycholeptic}
+              personalDetails={personalDetails}
+              setPersonalDetails={setPersonalDetails}
+            />
+          ),
+          onNext: handleNextStep,
+          nextDisabled:
+            !isLastNameValid ||
+            !isFirstNameValid ||
+            !isCNPValid ||
+            !isAddressValid,
+        };
       case 3:
-        return (
-          <Stepper
-            title={STEP_3.TITLE}
-            tag={STEP_3.TAG}
-            activeStep={activeStep}
-          >
-            <LocationInformation setActiveStep={setActiveStep} />
-          </Stepper>
-        );
+        return {
+          title: STEP_3.TITLE,
+          description: STEP_3.DESCRIPTION,
+          component: () => (
+            <LocationInformation
+              hospitalId={hospitalId}
+              setHospitalId={setHospitalId}
+            />
+          ),
+          onNext: handleNextStep,
+          nextDisabled: !isHospitalValid,
+        };
       case 4:
-        return (
-          <VerbalProcess
-            setActiveStep={setActiveStep}
-            handleFinishCollect={handleFinishCollect}
-          />
-        );
+        return {
+          title: STEP_4.TITLE,
+          component: () => <VerbalProcess />,
+          onNext: handleFinishCollect,
+        };
       case 5:
-        return <FinishCollect data={data} isLoading={isLoading} />;
-      default:
-        return null;
+        return {
+          component: () => <FinishCollect data={data} isLoading={isLoading} />,
+        };
     }
-  }, [activeStep, data, handleFinishCollect, isLoading]);
+  }, [
+    activeStep,
+    data,
+    drugList,
+    handleFinishCollect,
+    handleNextStep,
+    hospitalId,
+    isAddressValid,
+    isCNPValid,
+    isFirstNameValid,
+    isHospitalValid,
+    isLastDrugValid,
+    isLastNameValid,
+    isLoading,
+    isPsycholeptic,
+    personalDetails,
+  ]);
 
-  return <RecycleWrapper>{recycleSteps}</RecycleWrapper>;
+  return (
+    <Content>
+      {!gt(activeStep, 3) && <MultiStep activeStep={activeStep} />}
+      <Stepper
+        title={collectStep?.title}
+        description={collectStep?.description}
+        onNext={collectStep?.onNext}
+        onBack={handlePrevStep}
+        nextDisabled={collectStep?.nextDisabled}
+        backDisabled={collectStep?.backDisabled}
+      >
+        {collectStep?.component && collectStep.component()}
+      </Stepper>
+    </Content>
+  );
 };

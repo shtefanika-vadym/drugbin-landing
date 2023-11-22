@@ -27,6 +27,7 @@ export const Container = styled.div`
 export const Label = styled.div`
   ${textVariant('bodyS')};
   color: ${WDS_COLOR_BLUE_700};
+  margin-bottom: 4px;
 `
 
 export const DropdownWrapper = styled.div`
