@@ -11,7 +11,7 @@ export const recycleApi = createApi({
   endpoints: (build: EndpointBuilder<BaseQueryFn, string, string>) => ({
     recycleDrug: build.mutation({
       query: (product) => ({
-        url: '/recycle-drug',
+        url: '/recycle',
         data: product,
         method: HTTP_METHODS.POST,
       }),
@@ -26,13 +26,22 @@ export const recycleApi = createApi({
         method: HTTP_METHODS.POST,
       }),
     }),
-    pharmasDetails: build.query({
+    hospitalsDetails: build.query({
       query: () => ({
-        url: `/chains`,
+        url: `/hospitals`,
+      }),
+    }),
+    documnet: build.query({
+      query: (id) => ({
+        headers: {
+          Accept: 'application/pdf',
+        },
+        responseType: 'arraybuffer',
+        url: `/recycle/process/${id}`,
       }),
     }),
   }),
 })
 
-export const { useRecycleDrugMutation, useDrugsIdentifyMutation, usePharmasDetailsQuery }: any =
+export const { useRecycleDrugMutation, useDrugsIdentifyMutation, useHospitalsDetailsQuery, useDocumnetQuery }: any =
   recycleApi

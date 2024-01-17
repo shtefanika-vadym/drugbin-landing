@@ -1,27 +1,24 @@
-import location from 'common/assets/location.svg'
-import email from 'common/assets/mail.svg'
-import phone from 'common/assets/phone.svg'
-import { Formik } from 'formik'
-import type { FC } from 'react'
+import { Formik } from 'formik';
+import type { FC } from 'react';
 // import { useContactMutation } from 'features/LandingPage/store/api/landingApi'
-import { ContentWrapper } from 'common/layout/ContentWrapper/ContentWrapper'
-import { validationSchema } from 'common/schema/validationSchema'
-import { Button } from 'common/ui/Button/Button'
-import { Input } from 'common/ui/Input/Input'
-import { Textarea } from 'common/ui/Textarea/Textarea'
+import { ContentWrapper } from 'common/layout/ContentWrapper/ContentWrapper';
+import { validationSchema } from 'common/schema/validationSchema';
+import { Button } from 'common/ui/Button/Button';
+import { Input } from 'common/ui/Input/Input';
+import { Textarea } from 'common/ui/Textarea/Textarea';
+import { LocationIcon, MailIcon, PhoneIcon } from '../Icon/Icon';
+import { Spinner } from '../Spinner/Spinner';
 import {
   ContactDetails,
   Content,
   Error,
   FormContact,
-  Icon,
   InputWrapper,
   LeftSide,
   RightSide,
   SubTitle,
-  Title,
-} from './Contact.styled'
-import { Spinner } from '../Spinner/Spinner'
+  Title
+} from './Contact.styled';
 
 // TODO --> CHANGE THE LOCATION OF THIS ENUM
 export enum CONTACT_SECTION {
@@ -32,7 +29,7 @@ export enum CONTACT_SECTION {
 }
 
 interface IContact {
-  id: string
+  id: string;
 }
 
 export const Contact: FC<IContact> = ({ id }) => {
@@ -41,23 +38,23 @@ export const Contact: FC<IContact> = ({ id }) => {
 
   const handleSubmit = (values: any, { resetForm }: any) => {
     // contact(values)
-    resetForm()
-  }
+    resetForm();
+  };
   return (
-    <ContentWrapper color='white' fullWidth={true} id={id}>
+    <ContentWrapper color="white" fullWidth={true} id={id}>
       <Content>
         <LeftSide>
           <Title>Contact</Title>
           <ContactDetails>
-            <Icon src={email} />
+            <MailIcon />
             <SubTitle>{CONTACT_SECTION.EMAIL}</SubTitle>
           </ContactDetails>
           <ContactDetails>
-            <Icon src={phone} />
+            <PhoneIcon />
             <SubTitle>{CONTACT_SECTION.PHONE}</SubTitle>
           </ContactDetails>
           <ContactDetails>
-            <Icon src={location} />
+            <LocationIcon />
             <SubTitle>{CONTACT_SECTION.LOCATION}</SubTitle>
           </ContactDetails>
         </LeftSide>
@@ -67,15 +64,16 @@ export const Contact: FC<IContact> = ({ id }) => {
             onSubmit={handleSubmit}
             validateOnChange={false}
             validateOnBlur={false}
-            validationSchema={validationSchema}>
+            validationSchema={validationSchema}
+          >
             {({ values, handleChange, handleSubmit, errors }) => {
               return (
                 <FormContact onSubmit={handleSubmit}>
                   <InputWrapper>
                     <Input
-                      name='name'
-                      placeholder='EX: John Doe'
-                      label='Name'
+                      name="name"
+                      placeholder="EX: John Doe"
+                      label="Name"
                       value={values.name}
                       onChange={handleChange}
                     />
@@ -83,31 +81,31 @@ export const Contact: FC<IContact> = ({ id }) => {
                   </InputWrapper>
                   <InputWrapper>
                     <Input
-                      name='email'
-                      placeholder='EX: johndoe@gmail.com'
-                      label='Email'
+                      name="email"
+                      placeholder="EX: johndoe@gmail.com"
+                      label="Email"
                       value={values.email}
                       onChange={handleChange}
                     />
                     {errors.email && <Error>{errors.email}</Error>}
                   </InputWrapper>
                   <Textarea
-                    name='message'
+                    name="message"
                     value={values.message}
                     onChange={handleChange}
-                    label='Message'
+                    label="Message"
                   />
                   <div>
-                    <Button type='submit'>
+                    <Button type="submit">
                       {false ? <Spinner /> : 'Trimite'}
                     </Button>
                   </div>
                 </FormContact>
-              )
+              );
             }}
           </Formik>
         </RightSide>
       </Content>
     </ContentWrapper>
-  )
-}
+  );
+};

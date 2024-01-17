@@ -1,1 +1,1 @@
-export const DROPDOWN_VALUES = ['Pack', 'Blister', 'Pill']
+export const DROPDOWN_VALUES = ['Cutie', 'Blister', 'Pastila']

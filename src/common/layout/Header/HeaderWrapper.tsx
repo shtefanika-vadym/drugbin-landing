@@ -1,10 +1,10 @@
-import type { ReactNode } from 'react'
-import { Header } from './Header'
-import { Content } from './Header.styled'
-import { Footer } from 'common/layout/Footer/Footer'
+import type { ReactNode } from 'react';
+import { Header } from './Header';
+import { Content } from './Header.styled';
+import { Footer } from 'common/layout/Footer/Footer';
 
 export interface HeaderProps {
-  children?: ReactNode
+  children?: ReactNode;
 }
 
 export const HeaderWrapper: React.FC<HeaderProps> = ({ children }) => {
@@ -14,5 +14,5 @@ export const HeaderWrapper: React.FC<HeaderProps> = ({ children }) => {
       <Content>{children}</Content>
       <Footer />
     </>
-  )
-}
+  );
+};

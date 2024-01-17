@@ -32,6 +32,6 @@ export const Tag = styled.p`
 export const ButtonWrapper = styled.div`
   width: 100%;
   margin-top: auto;
-  padding-top: 48px;
+  padding-top: 24px;
   ${flex({ justifyContent: 'space-between' })};
 `

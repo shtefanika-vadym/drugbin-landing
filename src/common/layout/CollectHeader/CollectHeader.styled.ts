@@ -13,4 +13,6 @@ export const Content = styled.div`
   ${flex({ justifyContent: 'center' })};
 `
 
-export const Icon = styled.img``
+export const IconWrapper = styled.div`
+  ${flex({ alignItems: 'center' })};
+`

@@ -10,7 +10,7 @@ export const RecycleWrapper = styled.div`
   text-align: center;
 `
 export const Title = styled.h1`
-  ${textVariant('titleH1')};
+  ${textVariant('titleH3')};
   max-width: 800px;
   color: #000611;
 

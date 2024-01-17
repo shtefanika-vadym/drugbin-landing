@@ -1,20 +1,18 @@
-import type { FC } from 'react'
-import { useRef, useCallback } from 'react'
-import arrowDonwIcon from 'common/assets/arrow-down.svg'
-import arrowUpIcon from 'common/assets/arrow-up.svg'
-import useOnClickOutside from 'common/hooks/useOnClickOutside'
-import useToggle from 'common/hooks/useToggle'
+import useOnClickOutside from 'common/hooks/useOnClickOutside';
+import useToggle from 'common/hooks/useToggle';
+import type { FC } from 'react';
+import { useCallback, useRef } from 'react';
 
+import { ChevronDown, ChevronUp } from '../Icon/Icon';
 import {
   Container,
+  DropdownList,
   DropdownWrapper,
   Label,
-  DropdownList,
   Option,
-  Select,
-  Icon,
-} from './Dropdown.styled'
-import type { DropdownProps } from './Dropdown.types'
+  Select
+} from './Dropdown.styled';
+import type { DropdownProps } from './Dropdown.types';
 
 export const Dropdown: FC<DropdownProps> = ({
   placeholder,
@@ -23,26 +21,29 @@ export const Dropdown: FC<DropdownProps> = ({
   callbackOnChange,
   options,
 }) => {
-  const [showDropdown, toggleShowDropdown] = useToggle(false)
+  const [showDropdown, toggleShowDropdown] = useToggle(false);
 
   const handleClose = useCallback(() => {
-    if (showDropdown) toggleShowDropdown(false)
-  }, [showDropdown, toggleShowDropdown])
+    if (showDropdown) toggleShowDropdown(false);
+  }, [showDropdown, toggleShowDropdown]);
 
-  const handleChange = useCallback((option: string) => {
-    callbackOnChange(option)
-    toggleShowDropdown(false)
-  }, [callbackOnChange, toggleShowDropdown])
+  const handleChange = useCallback(
+    (option: string) => {
+      callbackOnChange(option);
+      toggleShowDropdown(false);
+    },
+    [callbackOnChange, toggleShowDropdown]
+  );
 
-  const containerRef = useRef(null)
-  useOnClickOutside(containerRef, handleClose)
+  const containerRef = useRef(null);
+  useOnClickOutside(containerRef, handleClose);
 
   return (
     <Container ref={containerRef}>
       <Label>{label}</Label>
       <DropdownWrapper onClick={() => toggleShowDropdown(!showDropdown)}>
         {selectedOptions ? selectedOptions : placeholder}
-        {showDropdown ? <Icon src={arrowUpIcon} /> : <Icon src={arrowDonwIcon} />}
+        {showDropdown ? <ChevronUp /> : <ChevronDown />}
       </DropdownWrapper>
       {showDropdown && (
         <DropdownList>
@@ -51,7 +52,8 @@ export const Dropdown: FC<DropdownProps> = ({
               <Option
                 key={option}
                 onClick={() => handleChange(option)}
-                isActive={selectedOptions === option}>
+                isActive={selectedOptions === option}
+              >
                 {option}
               </Option>
             ))}
@@ -59,5 +61,5 @@ export const Dropdown: FC<DropdownProps> = ({
         </DropdownList>
       )}
     </Container>
-  )
-}
+  );
+};

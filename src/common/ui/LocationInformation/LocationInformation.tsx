@@ -1,5 +1,5 @@
 import { LocationProps } from '@/types/Location';
-import { usePharmasDetailsQuery } from 'common/api/recycleApi';
+import { useHospitalsDetailsQuery } from 'common/api/recycleApi';
 import { useCallback } from 'react';
 import { Dropdown } from '../Dropdown';
 import { Loader } from '../Loader';
@@ -15,7 +15,7 @@ export const LocationInformation: React.FC<LocationInformationProps> = ({
   hospitalId,
   setHospitalId,
 }) => {
-  const { data, isLoading } = usePharmasDetailsQuery();
+  const { data, isLoading } = useHospitalsDetailsQuery();
 
   const handleSelectLocation = useCallback(
     (id: number) => {
@@ -31,7 +31,7 @@ export const LocationInformation: React.FC<LocationInformationProps> = ({
           name="pack"
           placeholder="EX: Suceava"
           label="Selectează județul *"
-          selectedOptions={''}
+          selectedOptions={DROPDOWN_VALUES[0]}
           options={DROPDOWN_VALUES}
         />
         <LocationWrapper>
@@ -40,6 +40,9 @@ export const LocationInformation: React.FC<LocationInformationProps> = ({
               <LocationCard
                 key={item?.id}
                 name={item?.name}
+                location={item?.location}
+                street={item?.street}
+                schedule={item?.schedule}
                 handleSelect={() => handleSelectLocation(item?.id)}
                 isActive={hospitalId === item?.id}
               />
@@ -51,4 +54,4 @@ export const LocationInformation: React.FC<LocationInformationProps> = ({
   );
 };
 
-const DROPDOWN_VALUES = ['Suceava', 'Iasi', 'Bucuresti'];
+const DROPDOWN_VALUES = ['Suceava'];

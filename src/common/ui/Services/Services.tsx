@@ -1,81 +1,49 @@
-import list1 from 'common/assets/line1.png'
-import list2 from 'common/assets/line2.png'
-import list3 from 'common/assets/line3.png'
-import list4 from 'common/assets/line4.png'
+import list1 from 'common/assets/line1.png';
+import list3 from 'common/assets/line3.png';
+import list4 from 'common/assets/line4.png';
 
-import useBreakpoints from 'common/hooks/useBreakpoints'
+import useBreakpoints from 'common/hooks/useBreakpoints';
 
-import { ContentWrapper } from 'common/layout/ContentWrapper/ContentWrapper'
-import { Section } from './Section'
-import { Image, ServicesWrapper } from './Services.styled'
+import { ContentWrapper } from 'common/layout/ContentWrapper/ContentWrapper';
+import { Navigation } from '../About/About.styled';
+import { Section } from './Section';
+import { Image, ServicesWrapper } from './Services.styled';
 
-export const Services = () => {
-  const { isBelowDesktop } = useBreakpoints()
+export const Services: React.FC<{ id?: string }> = ({ id }) => {
+  const { isBelowDesktop } = useBreakpoints();
 
   const LIST_SECTION_1 = {
     title: 'ETAPA 1: IDENTIFICAREA MEDICAMENTELOR',
     subTitle:
-      'Oricine preocupat de mediu se confruntă la un moment dat cu această întrebare, mai ales că există cazuri care creează mai multe incertitudini decât altele: cremele de protecție solară, pastele de dinți, termometrul... Intră aceste produse sub incidența sistemului de sortare DrugBin și trebuie returnate la farmacie?',
-    otherTitle: 'Dar ce înseamnă cu adevărat un medicament?',
-    otherContent:
-      'Un medicament a primit o Autorizație de Punere pe Piață din partea autorităților. Acesta este compus dintr-un ingredient activ și din excipienți:',
-    list: [
-      'Ingredientul activ este substanța care acționează asupra simptomelor organismului bolnav.',
-      'Excipienții sunt celelalte substanțe din medicament. Acestea permit conservarea ingredientului activ, facilitarea absorbției acestuia de către organism și controlul difuziei ingredientului activ în corp.',
-    ],
-  }
+      'Pregătește acasă medicamentele expirate sau neutilizate și, de asemenea, este o idee bună să le separi de ambalajul lor (cutia din carton, prospectul). Urmărește cu atenție data de expirare înscrisă pe cutie sau blisterul medicamentelor. Separarea corectă a medicamentelor și ambalajelor contribuie la gestionarea responsabilă a deșeurilor și protejează mediul înconjurător.',
+  };
 
   const LIST_SECTION_2 = {
-    title: 'ETAPA 2: SEPARAREA AMBALAJELOR DIN CARTON ȘI A PROSPECTELOR DIN HÂRTIE DE MEDICAMENTE',
+    title: 'ETAPA 2: FACILITEAZĂ PROCESUL',
     subTitle:
-      'Doar medicamentul în sine este afectat de procesul de sortare DrugBin. Deci, ce facem cu prospectul și ambalajul?',
-    otherTitle:
-      'Chiar dacă rămâne doar o capsulă sau un comprimat în blister, toți farmaciștii sunt obligați să colecteze medicamentul.',
-    otherContent:
-      'Cu excepția medicamentelor de care avem nevoie în mod regulat, este mai bine să dezvoltăm obiceiul de a separa medicamentele de ambalaje (cutii din carton și prospecte pentru colectarea selectivă) la sfârșitul tratamentului și să returnăm la farmacie ceea ce rămâne din medicamentele tale.',
-    list: [
-      'Returnarea medicamentelor la farmacie și colectarea selectivă a ambalajelor asociate este un gest simplu pentru a evita poluarea mediului.',
-    ],
-  }
+      'Cu ajutorul aplicației noastre, completează detaliile referitoare la medicamentele expirate sau neutilizate pentru a simplifica întocmirea procesului verbal de predare. Beneficiezi astfel de o soluție eficientă și transparentă în gestionarea și colectarea acestor medicamente.',
+  };
 
   const LIST_SECTION_3 = {
-    title: 'ETAPA 3: FOLOSEȘTE PLATFORMA DrugBin PENTRU A FACILITA PROCESUL DE RECICLARE',
+    title: 'ETAPA 3: PREDARE EFICIENTĂ',
     subTitle:
-      'Cu ajutorul platformei noastre, poți iniția procesul de reciclare chiar înainte să ieși din casă.',
-    otherTitle:
-      'De la repartizarea medicamentelor, preluarea lor și reciclarea și mai apoi donarea dacă este cazul, ne ocupăm noi.',
-    otherContent:
-      'Tot ce trebuie să faci este să completezi formularul cu datele medicamentului, să alegi o farmacie din apropierea ta care colaborează cu noi și să mergi direct acolo cu medicamentele pregătite.',
-  }
-
-  const LIST_SECTION_4 = {
-    title: 'ETAPA 4: MERGI LA CEA MAI APROPIATĂ FARMACIE',
-    subTitle:
-      'Atunci când îți reînnoiești tratamentul, cu siguranță treci pe la farmacie. Deci, de ce să nu profiți de ocazie pentru a returna și Medicamentele Neutilizate destinate uzului uman, fie ele expirate sau nu?',
-    otherTitle:
-      'Toate farmaciile colectează Medicamentele Neutilizate (MNU) de la persoanele fizice, destinate uzului uman, fie ele expirate sau nu.',
-    otherContent: 'Oriunde te-ai afla, găsește cea mai apropiată farmacie!',
-    list: [
-      'Returnarea medicamentelor la farmacie și colectarea selectivă a ambalajelor asociate este un gest simplu pentru a evita poluarea mediului.',
-    ],
-  }
+      'Prezintă codul QR împreună cu medicamentele pe care vrei să le predai la centrul de colectare selectat de tine.',
+  };
 
   return (
-    <ContentWrapper>
+    <ContentWrapper id={id}>
+      <Navigation>Ghid complet</Navigation>
       <ServicesWrapper>
         <Section content={LIST_SECTION_1} right>
           <Image src={list1} />
         </Section>
-        <Section content={LIST_SECTION_2} right={!isBelowDesktop ? false : true}>
-          <Image src={list2} />
-        </Section>
-        <Section content={LIST_SECTION_3} right>
+        <Section content={LIST_SECTION_2} right={isBelowDesktop}>
           <Image src={list3} />
         </Section>
-        <Section content={LIST_SECTION_4} right={!isBelowDesktop ? false : true}>
+        <Section content={LIST_SECTION_3} right>
           <Image src={list4} />
         </Section>
       </ServicesWrapper>
     </ContentWrapper>
-  )
-}
+  );
+};

@@ -50,10 +50,11 @@ export const buttonVariants = {
     width: 100%;
   `,
   secondary: css`
-    color: ${WDS_COLOR_BLUE_300};
-    background-color: transparent;
     ${border({ type: 'solid', color: WDS_COLOR_BLUE_300 })};
+    background-color: transparent;
+    color: ${WDS_COLOR_BLUE_300};
     border-radius: ${WDS_SIZE_008_PX};
+    
     &:hover {
       background-color: ${WDS_COLOR_BLUE_300};
       color: ${WDS_COLOR_WHITE};

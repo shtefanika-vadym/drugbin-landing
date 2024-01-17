@@ -3,28 +3,18 @@
   "name": "DrugBin.Solution",
   "icons": [
     {
-      "src": "logo.svg",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo.svg",
+      "src": "logo_v2.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "1024x1024"
     },
     {
-      "src": "logo.svg",
-      "type": "image/png",
-      "sizes": "512x512"
-    },
-    {
-      "src": "ogo.svg",
+      "src": "logo_v2.png",
       "sizes": "196x196",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
     }
   ],
-  "start_url": "index.html",
+  "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"

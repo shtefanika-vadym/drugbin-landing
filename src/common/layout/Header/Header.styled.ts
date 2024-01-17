@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { WDS_BREAKPOINT_TABLET_UP_TO } from 'common/constants/breakpoint'
+import { BREAKPOINTS, WDS_BREAKPOINT_TABLET_UP_TO } from 'common/constants/breakpoint'
 import {
   WDS_COLOR_BLUE_100,
   WDS_COLOR_BLUE_300,
@@ -48,13 +48,17 @@ export const Container = styled.div`
 export const Navigation = styled.div`
   ${flex({ direction: 'row' })}
   gap: ${WDS_SIZE_032_PX};
+
+  @media ${BREAKPOINTS.TABLET_UP_TO} {
+   display: none;
+  }
 `
 
 export const NavLink = styled.div<{ isActive?: boolean }>`
-  ${flex({ direction: 'column', alignItems: 'center' })};
-  ${textVariant('subheading')};
   color: ${({ isActive }) => (isActive ? WDS_COLOR_BLUE_700 : WDS_COLOR_BLUE_400)};
+  ${flex({ direction: 'column', alignItems: 'center' })};
   padding-bottom: ${WDS_SIZE_002_PX};
+  ${textVariant('subheading')};
   cursor: pointer;
 `
 
@@ -65,7 +69,8 @@ export const Dot = styled.div<{ isActive: boolean }>`
   background-color: ${({ isActive }) => (isActive ? WDS_COLOR_BLUE_300 : 'transparent')};
 `
 
-export const Logo = styled.img`
+export const LogoWrapper = styled.div`
+  ${flex({ alignItems: 'center' })};
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0);
@@ -74,8 +79,12 @@ export const Logo = styled.img`
   cursor: pointer;
 `
 
-export const UserIcon = styled.img`
-  cursor: pointer;
+export const HamburgerMenu = styled.div`
+  display: none;
+
+  @media ${BREAKPOINTS.TABLET_UP_TO} {
+   display: unset;
+  }
 `
 
 export const Content = styled.div`

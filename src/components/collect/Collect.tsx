@@ -1,4 +1,5 @@
 import { DrugProps, PersonalDetailsProps } from '@/types/collect';
+import { useRecycleDrugMutation } from 'common/api/recycleApi';
 import { STEP_1, STEP_2, STEP_3, STEP_4 } from 'common/constants/steps';
 import { DrugInformation } from 'common/ui/DrugInformation/DrugInformation';
 import { FinishCollect } from 'common/ui/FinishCollect';
@@ -7,13 +8,12 @@ import { MultiStep } from 'common/ui/MultiStep';
 import { PersonalInfromation } from 'common/ui/PersonalInfromation/PersonalInfromation';
 import { Stepper } from 'common/ui/Stepper';
 import { VerbalProcess } from 'common/ui/VerbalProcess';
+import { toCollectDrugs } from 'common/utils/mappers';
 import { isCNP, isStringNotEmpty } from 'common/utils/stringUtils';
 import { gt, isNumber } from 'lodash-es';
 import { useCallback, useMemo, useState } from 'react';
 import { initialDrug, initialPersonalDetails } from './Collect.config';
 import { Content } from './Collect.styled';
-import { useRecycleDrugMutation } from 'common/api/recycleApi';
-import { toCollectDrugs } from 'common/utils/mappers';
 
 export const Collect = () => {
   const [recycleDrug, { data, isLoading }] = useRecycleDrugMutation();

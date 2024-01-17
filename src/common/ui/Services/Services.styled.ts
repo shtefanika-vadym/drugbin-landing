@@ -62,7 +62,7 @@ export const Image = styled.img`
   max-height: 464px;
 
   @media (max-width: ${WDS_BREAKPOINT_MOBILE_UP_TO}) {
-    max-height: 262px;
+    height: 504px;
   }
 `
 

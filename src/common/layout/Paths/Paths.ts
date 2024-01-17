@@ -13,7 +13,7 @@ export enum PathsEnum {
   create = '/create-new',
   values = '/#values',
   about = '/#about-us',
-  proces = '/proces',
+  proces = '/#proces',
   contact = '/#contact',
 }
 
@@ -66,7 +66,6 @@ export const NAVIGATION_MOBILE: INavigation[] = [
   {
     route: PathsEnum.about,
     title: 'Despre noi',
-    icon: require('common/assets/about.svg'),
   },
   {
     route: PathsEnum.values,

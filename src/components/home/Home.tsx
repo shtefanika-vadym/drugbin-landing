@@ -1,43 +1,47 @@
-import first from 'common/assets/first.jpg'
-import { ContentWrapper } from 'common/layout/ContentWrapper/ContentWrapper'
-import { About } from 'common/ui/About/About'
-import { Button } from 'common/ui/Button/Button'
-import { Contact } from 'common/ui/Contact/Contact'
-import { Recycle } from 'common/ui/Recycle/Recycle'
-import { Values } from 'common/ui/Values/Values'
-import { useNavigate } from 'react-router-dom'
-import { Icon, Join, Section, SubTitle, Title, Wrapper } from './Home.styled'
+import first from 'common/assets/first.jpg';
+import { ContentWrapper } from 'common/layout/ContentWrapper/ContentWrapper';
+import { About } from 'common/ui/About';
+import { Button } from 'common/ui/Button';
+import { Contact } from 'common/ui/Contact/Contact';
+import { Recycle } from 'common/ui/Recycle/Recycle';
+import { Services } from 'common/ui/Services';
+import { Values } from 'common/ui/Values';
+import { HashLink as Link } from 'react-router-hash-link';
+import { Image, Join, Section, SubTitle, Title, Wrapper } from './Home.styled';
+
+const linkStyle = {
+  textDecoration: 'none',
+  color: 'inherit',
+};
 
 export const Home = () => {
-  const navigate = useNavigate()
-
   return (
     <Wrapper>
       <ContentWrapper>
         <Section>
-          <Title>
-            Știai că natura luptă neîncetat pentru binele tău? Acum este momentul să te alături și
-            tu acestei lupte!
-          </Title>
+          <Title>Natura luptă pentru tine! Fă-o și tu!</Title>
           <SubTitle>
-            În fiecare an, nu mai puțin de 1,500 de tone de medicamente ajung în apele din România.
-            Și mai alarmant este că avem la fel de multe decese cauzate de rezistența la
-            antibiotice. Dar iată noutatea: nu doar utilizarea nechibzuită a antibioticelor este
-            responsabilă pentru această problemă. Poluarea masivă afectează și biodiversitatea
-            prețioasă.
+            1500 de tone de medicamente ajung anual în apele din România!
           </SubTitle>
           <Join>
-            Nu arunca medicamentele expirate sau neutilizate! Predă-le în farmacii și noi te învățăm
-            cum să faci asta!
+            Nu arunca medicamentele expirate sau neutilizate!
+            <br />
+            Predă-le în centrele de colectare special amenajate! Noi te învățăm
+            cum.
           </Join>
-          <Button onClick={() => navigate('/proces')}>Află mai multe</Button>
-          <Icon src={first} />
+          <Button>
+            <Link style={linkStyle} smooth to="/#proces">
+              Află cum
+            </Link>
+          </Button>
+          <Image src={first} />
         </Section>
       </ContentWrapper>
-      <About id='about-us' />
+      <Services id="proces" />
       <Recycle />
-      <Values id='values' />
-      <Contact id='contact' />
+      <About id="about-us" />
+      <Values id="values" />
+      <Contact id="contact" />
     </Wrapper>
-  )
-}
+  );
+};
