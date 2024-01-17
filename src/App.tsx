@@ -1,13 +1,16 @@
-// import { Routes } from 'common/routes/Routes'
-import { Provider } from 'react-redux'
-import { store } from 'common/store/store'
+import { Routes } from 'common/routes/Routes';
+import { store } from 'common/store/store';
+import { Provider } from 'react-redux';
 
 function App() {
+
+  return null 
+  
   return (
     <Provider store={store}>
-      {/* <Routes /> */}
+      <Routes />
     </Provider>
-  )
+  );
 }
 
-export default App
+export default App;

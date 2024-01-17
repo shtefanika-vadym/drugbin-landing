@@ -19,3 +19,21 @@ export interface PersonalDetailsProps {
     lot: string;
   }
   
+export interface SearchResponsProps {
+  atc: string,
+  id: number,
+  importer: string,
+  isPsycholeptic: boolean
+  name: string
+  packaging: string
+  prescription: string
+  producer: string
+}
+
+export interface SearchProps {
+  value: string,
+  name: string,
+  packaging: string,
+  drugId: number,
+  isPsycholeptic: false,
+}

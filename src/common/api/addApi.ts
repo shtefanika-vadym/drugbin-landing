@@ -1,9 +1,10 @@
+import { SearchResponsProps } from '@/types/collect'
 import { createApi } from '@reduxjs/toolkit/query/react'
 import type { BaseQueryFn } from '@reduxjs/toolkit/src/query/baseQueryTypes'
 import type { EndpointBuilder } from '@reduxjs/toolkit/src/query/endpointDefinitions'
-
 import { HTTP_METHODS } from 'common/constants/httpMethodsConstants'
 import { baseQuery } from 'common/utils/fetchBaseQuery'
+import { toDrugSearch } from 'common/utils/mappers'
 
 export const addApi = createApi({
   reducerPath: 'add',
@@ -20,15 +21,8 @@ export const addApi = createApi({
       query: (query) => ({
         url: `/drugs/search/${query}`,
       }),
-      transformResponse: (respons: any) => {
-        return  respons?.map((element: any) => {
-          return {
-            value: element?.name,
-            name: element?.name,
-            drugId: element?.id,
-            isPsycholeptic: element?.isPsycholeptic,
-          }
-        })
+      transformResponse: (respons: SearchResponsProps[]) => {
+        return toDrugSearch(respons)
       }
     }),
     createDrug: build.mutation({

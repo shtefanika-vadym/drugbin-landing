@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { Button } from '../Button';
 import {
   AddressText,
@@ -8,36 +9,39 @@ import {
 } from './LocationCard.styled';
 
 interface PharmaCardProps {
-  name?: string;
+  name: string;
+  location: string;
+  street: string;
+  schedule: string[];
   isActive: boolean;
   handleSelect: () => void;
 }
 
 export const LocationCard: React.FC<PharmaCardProps> = ({
+  name,
+  location,
+  street,
+  schedule,
   handleSelect,
   isActive,
 }) => {
-
-  // TODO --> implement open maps 
-  const location = {
-    address: '1600 Amphitheatre Parkway, Mountain View, california.',
-    lat: 47.638827829001535,
-    lng: 26.240925940849255,
-  }
-
-  const openMaps = () => {
-    const url = `https://www.google.com/maps?q=${location.lat},${location.lng}`;
+  const openMaps = useCallback(() => {
+    const url = location;
     window.open(url, '_blank');
-  };
+  }, [location]);
 
   return (
     <Container onClick={handleSelect} isActive={isActive}>
       <TextWrapper>
-        <NameText>Spitalul Județean Sf. Ioan</NameText>
-        <ScheduleText>Lu-Mi 08:00 – 17.00 &#x2022; Sâ-Du 10:00 – 12.00</ScheduleText>
-        <AddressText>Bld. 1 Mai nr 24, Secția “Nume”, Cabinet “Nr”</AddressText>
+        <NameText>{name}</NameText>
+        <ScheduleText>
+          {schedule[0]} &#x2022; {schedule[1]}
+        </ScheduleText>
+        <AddressText>{street}</AddressText>
       </TextWrapper>
-      <Button variant="secondary" onClick={openMaps}>Deschide in Maps</Button>
+      <Button variant="secondary" onClick={openMaps}>
+        Deschide in Maps
+      </Button>
     </Container>
   );
 };

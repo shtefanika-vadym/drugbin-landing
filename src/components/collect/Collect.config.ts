@@ -7,7 +7,7 @@ export const initialDrug: DrugProps = {
       value: '',
       isPsycholeptic: false,
     },
-    pack: '',
+    pack: 'Cutie',
     quantity: 1,
     expirationDate: null,
     lot: '',

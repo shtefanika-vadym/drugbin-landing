@@ -22,3 +22,11 @@ export const PIXEL_BREAKPOINT_VALUES: Dictionary<number> = {
   DESKTOP_M_UP_TO: remToPxVal(WDS_BREAKPOINT_DESKTOP_M_UP_TO),
   DESKTOP_L: remToPxVal(WDS_BREAKPOINT_DESKTOP_L),
 }
+
+export const BREAKPOINTS: Dictionary<string> = {
+  MOBILE_UP_TO: `screen and (max-width: ${WDS_BREAKPOINT_MOBILE_UP_TO})`, // < 640px
+  TABLET: `screen and (min-width: ${WDS_BREAKPOINT_TABLET})`, // > 640px
+  TABLET_UP_TO: `screen and (max-width: ${WDS_BREAKPOINT_TABLET_UP_TO})`, // < 1023px
+  DESKTOP_S: `screen and (min-width: ${WDS_BREAKPOINT_DESKTOP_S})`, // > 1024px
+  DESKTOP_M: `screen and (min-width: ${WDS_BREAKPOINT_DESKTOP_M})`, // > 1440px+
+};

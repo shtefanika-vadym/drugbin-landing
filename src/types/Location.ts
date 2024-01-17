@@ -1,7 +1,7 @@
 export interface LocationProps {
-  description: string
-  email: string
   id: number
-  image: string
+  location: string
   name: string
+  street: string
+  schedule: string[]
 }

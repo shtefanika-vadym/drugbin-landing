@@ -13,10 +13,10 @@ import { textVariant } from 'styles/mixins/typography.mixin'
 import {
   WDS_SIZE_008_PX,
   WDS_SIZE_010_PX,
-  WDS_SIZE_016_PX,
+  WDS_SIZE_014_PX,
   WDS_SIZE_037_PX,
   WDS_SIZE_040_PX,
-  WDS_SIZE_074_PX,
+  WDS_SIZE_074_PX
 } from 'styles/size'
 
 export const Container = styled.div<{ valid: boolean }>`
@@ -26,6 +26,7 @@ export const Container = styled.div<{ valid: boolean }>`
   border-radius: ${WDS_SIZE_008_PX};
   padding: ${WDS_SIZE_010_PX};
   background-color: white;
+  box-sizing: border-box;
 `
 
 export const StyledInput = styled.input<{ valid: boolean }>`
@@ -35,7 +36,8 @@ export const StyledInput = styled.input<{ valid: boolean }>`
   flex-grow: 1;
   color: ${(props) => (props.valid ? WDS_COLOR_BLACK : WDS_COLOR_RED)};
   caret-color: ${WDS_COLOR_GREY};
-  font-size: ${WDS_SIZE_016_PX};
+  font-size: ${WDS_SIZE_014_PX};
+  box-sizing: border-box;
 
   ${({ type }) =>
     type === 'number' &&
@@ -82,8 +84,8 @@ export const IconButton = styled.button.attrs({ type: 'button' })`
 export const Icon = styled.img``
 
 export const CustomButton = styled.div`
-  ${flex({ direction: 'row' })};
   ${border({ type: 'solid', color: WDS_COLOR_GREY })};
+  ${flex({ direction: 'row' })};
   border-radius: ${WDS_SIZE_008_PX};
   width: ${WDS_SIZE_074_PX};
   height: ${WDS_SIZE_040_PX};

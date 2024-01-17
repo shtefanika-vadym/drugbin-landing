@@ -11,17 +11,16 @@ import { border } from 'styles/mixins/border.mixin'
 import { flex } from 'styles/mixins/flex.mixin'
 import { textVariant } from 'styles/mixins/typography.mixin'
 import {
-  WDS_SIZE_003_PX,
   WDS_SIZE_008_PX,
   WDS_SIZE_010_PX,
   WDS_SIZE_020_PX,
-  WDS_SIZE_224_PX,
-  WDS_SIZE_400_PX,
+  WDS_SIZE_224_PX
 } from 'styles/size'
 
 export const Container = styled.div`
-  max-width: ${WDS_SIZE_400_PX};
+  position: relative;
   cursor: pointer;
+  width: 100%;
 `
 
 export const Label = styled.div`
@@ -34,16 +33,18 @@ export const DropdownWrapper = styled.div`
   ${flex({ alignItems: 'center', justifyContent: 'space-between' })};
   ${border({ type: 'solid', color: WDS_COLOR_GREY })};
   ${textVariant('bodyS')};
-  position: relative;
   color: ${WDS_COLOR_BLACK};
   border-radius: ${WDS_SIZE_008_PX};
-  padding: ${WDS_SIZE_008_PX} ${WDS_SIZE_010_PX};
+  padding: ${WDS_SIZE_010_PX};
   background-color: white;
 `
 
 export const DropdownList = styled.div`
-  position: relative;
-  top: ${WDS_SIZE_003_PX};
+  box-sizing: border-box;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
   max-height: ${WDS_SIZE_224_PX};
   padding: ${WDS_SIZE_010_PX};
   background: ${WDS_COLOR_WHITE};
@@ -63,5 +64,3 @@ export const Option = styled.div<{ isActive: boolean }>`
     color: ${WDS_COLOR_BLUE_300};
   }
 `
-
-export const Icon = styled.img``

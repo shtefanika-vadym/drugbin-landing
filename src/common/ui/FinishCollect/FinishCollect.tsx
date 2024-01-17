@@ -10,9 +10,10 @@ import {
   DocumentWrapper,
   FinishCollectContent,
   Icon,
-  Title
+  Title,
 } from './FinishCollect.styled';
 import { FinishCollectLoader } from './FinishCollectLoader';
+import { useDocumnetQuery } from 'common/api/recycleApi';
 
 interface QrCodeProps {
   data: { drugCode: string };
@@ -21,11 +22,24 @@ interface QrCodeProps {
 
 export const FinishCollect: React.FC<QrCodeProps> = ({ data, isLoading }) => {
   const navigate = useNavigate();
+  const { data: document } = useDocumnetQuery(
+    '66c8fb87-8762-4ed4-b34c-8eea50c7254e'
+  );
+
+  const pdfBlob = new Blob([document], { type: 'application/pdf' });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const pdfUrlObject = URL.createObjectURL(pdfBlob);
 
   if (isLoading) return <FinishCollectLoader />;
 
   return (
     <FinishCollectContent>
+      {/* <embed
+        src={pdfUrlObject}
+        type="application/pdf"
+        width="100%"
+        height="600px"
+      /> */}
       <Icon src={successIcon} alt="" />
       <Title>Cerere de colectare finalizată cu succes!</Title>
       <Description>
@@ -34,11 +48,11 @@ export const FinishCollect: React.FC<QrCodeProps> = ({ data, isLoading }) => {
         medicamentele neutilizate astăzi!
       </Description>
       <QRCodeWithBorder>
-        {data?.drugCode && (
+        {data && (
           <QRCode
-            value={data?.drugCode}
+            value={'123-321'}
             size={150}
-            icon="https://i.ibb.co/kcCzDTQ/Frame-1252.png"
+            icon="https://ibb.co/sVVwLVn"
             iconSize={32}
           />
         )}

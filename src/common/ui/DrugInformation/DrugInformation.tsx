@@ -9,17 +9,16 @@ import { initialDrug } from 'components/collect/Collect.config';
 import { gt } from 'lodash-es';
 import type { ChangeEvent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
-import { AutocompleteInput } from '../AutocompleteInput/AutocompleteInput';
 import { PrivacyBox } from '../PrivacyBox/PrivacyBox';
+import { Select } from '../Select/Select';
 import {
   AddNewWrapper,
-  Delete,
   DrugInformationWrapper,
   Error,
   FormWrapper,
   InputWrapper,
   MultiFormWrapper,
-  Psycholeptic
+  Psycholeptic,
 } from './DrugInformation.styled';
 
 interface DrugInformationProps {
@@ -88,14 +87,11 @@ export const DrugInformation: React.FC<DrugInformationProps> = ({
         {Array.from({ length: drugList?.length }, (_, i) => (
           <FormWrapper key={i}>
             <InputWrapper>
-              {gt(drugList?.length, 1) && (
-                  <Delete onClick={() => handleDeleteDrug(i)}>Sterge</Delete>
-              )}
-              <AutocompleteInput
-                label="Numele*"
-                placeholder="EX: Ibuprofen"
+              <Select
                 onSelect={(e: SelectValue) => handleSelector(e, i, 'drugName')}
                 value={drugList[i]?.drugName}
+                isDeleteButtonActive={gt(drugList?.length, 1)}
+                onDelete={() => handleDeleteDrug(i)}
               />
               {drugList[i]?.drugName.isPsycholeptic && (
                 <Psycholeptic>
@@ -106,7 +102,7 @@ export const DrugInformation: React.FC<DrugInformationProps> = ({
             </InputWrapper>
             <Dropdown
               name="pack"
-              placeholder="Pack"
+              placeholder="Cutie"
               label="Tipul de ambalaj *"
               selectedOptions={drugList[i]?.pack}
               options={DROPDOWN_VALUES}
