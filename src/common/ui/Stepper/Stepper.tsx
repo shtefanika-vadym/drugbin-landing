@@ -8,17 +8,17 @@ import {
   Title,
 } from './Stepper.styled';
 
-interface IStepper {
+interface StepperProps {
   title?: string;
   description?: string;
   children?: ReactNode;
-  nextDisabled?: boolean;
   backDisabled?: boolean;
+  nextDisabled?: boolean;
   onNext?: () => void;
   onBack?: () => void;
 }
 
-export const Stepper: FC<IStepper> = ({
+export const Stepper: FC<StepperProps> = ({
   title,
   description,
   children,

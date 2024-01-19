@@ -5,7 +5,7 @@ import {
   WDS_COLOR_BLUE_300,
   WDS_COLOR_BLUE_400,
   WDS_COLOR_WHITE,
-  WDS_COLOR_WHITE_100,
+  WDS_COLOR_WHITE_100
 } from 'styles/colors'
 import { border } from 'styles/mixins/border.mixin'
 import { flex } from 'styles/mixins/flex.mixin'
@@ -28,6 +28,7 @@ const primaryStyles = css`
   color: ${WDS_COLOR_WHITE};
   background-color: ${WDS_COLOR_BLUE_300};
   border-radius: ${WDS_SIZE_008_PX};
+  
   &:hover {
     background-color: ${WDS_COLOR_BLUE_400};
   }
@@ -41,6 +42,7 @@ export const buttonVariants = {
     ${primaryStyles};
     background-color: ${WDS_COLOR_WHITE};
     color: ${WDS_COLOR_BLUE_300};
+
     &:hover {
       background-color: ${WDS_COLOR_WHITE_100};
     }
@@ -56,8 +58,7 @@ export const buttonVariants = {
     border-radius: ${WDS_SIZE_008_PX};
     
     &:hover {
-      background-color: ${WDS_COLOR_BLUE_300};
-      color: ${WDS_COLOR_WHITE};
+      background-color: unset;
     }
     &:disabled {
       ${border({ type: 'solid', color: WDS_COLOR_BLUE_300 })};
@@ -66,6 +67,7 @@ export const buttonVariants = {
   square: css`
     background-color: ${WDS_COLOR_BLUE_200};
     border-radius: ${WDS_SIZE_004_PX};
+
     &:hover {
       transition: transform 0.3s ease-out;
       transform: translateY(-1px);
@@ -74,6 +76,7 @@ export const buttonVariants = {
   round: css`
     background-color: ${WDS_COLOR_BLUE_200};
     border-radius: 50%;
+
     &:hover {
       transition: transform 0.3s ease-out;
       transform: translateY(-1px);
@@ -82,6 +85,7 @@ export const buttonVariants = {
   empty: css`
     background-color: transparent;
     border-radius: 8px;
+    
     &:hover {
       background-color: ${WDS_COLOR_BLUE_200};
     }
@@ -116,9 +120,10 @@ export const StyledButton = styled.button<StyledButtonProps>`
   box-sizing: border-box;
   cursor: pointer;
   gap: ${WDS_SIZE_008_PX};
-  &:focus {
+
+  /* &:focus {
     outline: solid 1px ${WDS_COLOR_BLUE_400};
-  }
+  } */
   &:disabled {
     cursor: not-allowed;
   }

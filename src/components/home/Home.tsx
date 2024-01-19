@@ -34,7 +34,7 @@ export const Home = () => {
               Află cum
             </Link>
           </Button>
-          <Image src={first} />
+          <Image src={first} alt='protejare'/>
         </Section>
       </ContentWrapper>
       <Services id="proces" />

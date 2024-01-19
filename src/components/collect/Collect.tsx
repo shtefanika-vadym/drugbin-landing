@@ -15,6 +15,9 @@ import { useCallback, useMemo, useState } from 'react';
 import { initialDrug, initialPersonalDetails } from './Collect.config';
 import { Content } from './Collect.styled';
 
+export const VALIDATION_ERROR =
+  'Te rugăm să te asiguri că ai completat toate câmpurile obligatorii înainte de a continua.';
+
 export const Collect = () => {
   const [recycleDrug, { data, isLoading }] = useRecycleDrugMutation();
   const [personalDetails, setPersonalDetails] = useState<PersonalDetailsProps>(

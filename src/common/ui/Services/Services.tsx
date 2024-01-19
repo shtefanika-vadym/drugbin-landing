@@ -35,13 +35,13 @@ export const Services: React.FC<{ id?: string }> = ({ id }) => {
       <Navigation>Ghid complet</Navigation>
       <ServicesWrapper>
         <Section content={LIST_SECTION_1} right>
-          <Image src={list1} />
+          <Image src={list1} alt='identificare' />
         </Section>
         <Section content={LIST_SECTION_2} right={isBelowDesktop}>
-          <Image src={list3} />
+          <Image src={list3} alt='app' />
         </Section>
         <Section content={LIST_SECTION_3} right>
-          <Image src={list4} />
+          <Image src={list4} alt='predare' />
         </Section>
       </ServicesWrapper>
     </ContentWrapper>
