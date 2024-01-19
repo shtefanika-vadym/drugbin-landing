@@ -17,7 +17,7 @@ import {
   LeftSide,
   RightSide,
   SubTitle,
-  Title
+  Title,
 } from './Contact.styled';
 
 // TODO --> CHANGE THE LOCATION OF THIS ENUM

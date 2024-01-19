@@ -84,16 +84,18 @@ export const DrugInformation: React.FC<DrugInformationProps> = ({
     <DrugInformationWrapper>
       <PrivacyBox description={PRIVACY_BOX.DESCRIPTION_STEP_2} />
       <MultiFormWrapper>
-        {Array.from({ length: drugList?.length }, (_, i) => (
-          <FormWrapper key={i}>
+        {Array.from({ length: drugList?.length }, (_, index) => (
+          <FormWrapper key={index}>
             <InputWrapper>
               <Select
-                onSelect={(e: SelectValue) => handleSelector(e, i, 'drugName')}
-                value={drugList[i]?.drugName}
+                onSelect={(value: SelectValue) =>
+                  handleSelector(value, index, 'drugName')
+                }
+                value={drugList[index]?.drugName}
                 isDeleteButtonActive={gt(drugList?.length, 1)}
-                onDelete={() => handleDeleteDrug(i)}
+                onDelete={() => handleDeleteDrug(index)}
               />
-              {drugList[i]?.drugName.isPsycholeptic && (
+              {drugList[index]?.drugName.isPsycholeptic && (
                 <Psycholeptic>
                   Te informăm că medicamentul este de tip psihotrop. Procesul de
                   colectare va fi un pic diferit.
@@ -104,17 +106,17 @@ export const DrugInformation: React.FC<DrugInformationProps> = ({
               name="pack"
               placeholder="Cutie"
               label="Tipul de ambalaj *"
-              selectedOptions={drugList[i]?.pack}
+              selectedOptions={drugList[index]?.pack}
               options={DROPDOWN_VALUES}
-              callbackOnChange={(e) => handleSelector(e, i, 'pack')}
+              callbackOnChange={(pack) => handleSelector(pack, index, 'pack')}
             />
             <InputWrapper>
               <Input
                 name="quantity"
                 type="number"
                 label="Cantitatea *"
-                value={drugList[i]?.quantity}
-                onChange={(e) => handleInputChange(e, i)}
+                value={drugList[index]?.quantity}
+                onChange={(e) => handleInputChange(e, index)}
               />
             </InputWrapper>
           </FormWrapper>

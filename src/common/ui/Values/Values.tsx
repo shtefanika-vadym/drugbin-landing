@@ -8,7 +8,7 @@ export const Values: React.FC<{ id: string }> = ({ id }) => {
       <Navigation>Valorile noastre</Navigation>
       <Content>
         <CardWrapper>
-          <Icon src={starIcon} />
+          <Icon src={starIcon} alt='star'/>
           <CardTitle>Responsabilitate</CardTitle>
           <CardContent>
             Suntem conștienți de impactul negativ pe care medicamentele expirate îl au asupra apei,
@@ -18,7 +18,7 @@ export const Values: React.FC<{ id: string }> = ({ id }) => {
           </CardContent>
         </CardWrapper>
         <CardWrapper>
-          <Icon src={starIcon} />
+          <Icon src={starIcon} alt='star'/>
           <CardTitle>Inovație</CardTitle>
           <CardContent>
             Suntem ferm convinși că tehnologia poate aduce soluții revoluționare în gestionarea
@@ -27,7 +27,7 @@ export const Values: React.FC<{ id: string }> = ({ id }) => {
           </CardContent>
         </CardWrapper>
         <CardWrapper>
-          <Icon src={starIcon} />
+          <Icon src={starIcon} alt='star' />
           <CardTitle>Angajament</CardTitle>
           <CardContent>
             Suntem aici pentru a oferi programe de educație dedicate populației, împreună cu primul
