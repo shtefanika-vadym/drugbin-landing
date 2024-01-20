@@ -27,8 +27,8 @@ export const Header = () => {
     <ContainerWrapper>
       <Container>
         <Navigation>
-          {NAVIGATION_DESKTOP.map((navigation: INavigation) => (
-            <Link style={linkStyle} smooth to={navigation.route}>
+          {NAVIGATION_DESKTOP.map((navigation: INavigation, index: number) => (
+            <Link key={index} style={linkStyle} smooth to={navigation.route}>
               <NavLink key={navigation.title}>{navigation.title}</NavLink>
             </Link>
           ))}
