@@ -14,12 +14,14 @@ import { gt, isNumber } from 'lodash-es';
 import { useCallback, useMemo, useState } from 'react';
 import { initialDrug, initialPersonalDetails } from './Collect.config';
 import { Content } from './Collect.styled';
+import { useGoogleAnalytics } from 'common/analytics/googleAnalyticsInstance';
 
 export const VALIDATION_ERROR =
   'Te rugăm să te asiguri că ai completat toate câmpurile obligatorii înainte de a continua.';
 
 export const Collect = () => {
   const [recycleDrug, { data, isLoading }] = useRecycleDrugMutation();
+  const { trackButtonClick } = useGoogleAnalytics();
   const [personalDetails, setPersonalDetails] = useState<PersonalDetailsProps>(
     initialPersonalDetails
   );
@@ -55,9 +57,17 @@ export const Collect = () => {
   }, []);
 
   const handleFinishCollect = useCallback(() => {
+    trackButtonClick('Submit');
     recycleDrug(toCollectDrugs(personalDetails, drugList, hospitalId));
     handleNextStep();
-  }, [drugList, handleNextStep, hospitalId, personalDetails, recycleDrug]);
+  }, [
+    drugList,
+    handleNextStep,
+    hospitalId,
+    personalDetails,
+    recycleDrug,
+    trackButtonClick,
+  ]);
 
   const collectStep = useMemo(() => {
     switch (activeStep) {

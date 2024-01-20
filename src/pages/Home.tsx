@@ -1,9 +1,11 @@
 import { Metadata } from 'common/Metadata/Metadata';
+import { usePageLoadDetailsAnalytics } from 'common/hooks/usePageLoadDetailsAnalytics';
 import { HeaderWrapper } from 'common/layout/Header/HeaderWrapper';
 import { Home } from 'components/home/Home';
 
 export const HomePage = () => {
-  // eslint-disable-next-line no-console
+  usePageLoadDetailsAnalytics({ pageType: 'home page' });
+  
   return (
     <Metadata
       title="DrugBin"
