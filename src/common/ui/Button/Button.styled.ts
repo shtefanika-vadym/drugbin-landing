@@ -1,9 +1,11 @@
 import styled, { css } from 'styled-components'
 
 import {
+  WDS_COLOR_BLUE_100,
   WDS_COLOR_BLUE_200,
   WDS_COLOR_BLUE_300,
   WDS_COLOR_BLUE_400,
+  WDS_COLOR_BLUE_500,
   WDS_COLOR_WHITE,
   WDS_COLOR_WHITE_100
 } from 'styles/colors'
@@ -90,6 +92,11 @@ export const buttonVariants = {
       background-color: ${WDS_COLOR_BLUE_200};
     }
   `,
+  document: css`
+    ${primaryStyles};
+    color: ${WDS_COLOR_BLUE_500};
+    background-color: ${WDS_COLOR_BLUE_100};
+  `
 }
 
 export const buttonSizes = {

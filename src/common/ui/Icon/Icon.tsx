@@ -15,6 +15,7 @@ import { ReactComponent as PhoneIcon } from 'common/assets/icon/phone.svg';
 import { ReactComponent as ProcesIcon } from 'common/assets/icon/proces.svg';
 import { ReactComponent as RecycleIcon } from 'common/assets/icon/recycle.svg';
 import { ReactComponent as ServicesIcon } from 'common/assets/icon/services.svg';
+import { ReactComponent as DocumentIcon } from 'common/assets/icon/doc.svg';
 
 export {
   AboutIcon,
@@ -34,4 +35,5 @@ export {
   ProcesIcon,
   RecycleIcon,
   ServicesIcon,
+  DocumentIcon,
 };

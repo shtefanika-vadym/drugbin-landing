@@ -1,4 +1,5 @@
 import { DrugProps, PersonalDetailsProps } from '@/types/collect';
+import { useGoogleAnalytics } from 'common/analytics/googleAnalyticsInstance';
 import { useRecycleDrugMutation } from 'common/api/recycleApi';
 import { STEP_1, STEP_2, STEP_3, STEP_4 } from 'common/constants/steps';
 import { DrugInformation } from 'common/ui/DrugInformation/DrugInformation';
@@ -14,12 +15,12 @@ import { gt, isNumber } from 'lodash-es';
 import { useCallback, useMemo, useState } from 'react';
 import { initialDrug, initialPersonalDetails } from './Collect.config';
 import { Content } from './Collect.styled';
-import { useGoogleAnalytics } from 'common/analytics/googleAnalyticsInstance';
 
 export const VALIDATION_ERROR =
   'Te rugăm să te asiguri că ai completat toate câmpurile obligatorii înainte de a continua.';
 
 export const Collect = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [recycleDrug, { data, isLoading }] = useRecycleDrugMutation();
   const { trackButtonClick } = useGoogleAnalytics();
   const [personalDetails, setPersonalDetails] = useState<PersonalDetailsProps>(
@@ -125,12 +126,17 @@ export const Collect = () => {
         };
       case 5:
         return {
-          component: () => <FinishCollect data={data} isLoading={isLoading} />,
+          component: () => (
+            <FinishCollect
+              data={drugList}
+              personalInfo={personalDetails}
+              isLoading={isLoading}
+            />
+          ),
         };
     }
   }, [
     activeStep,
-    data,
     drugList,
     handleFinishCollect,
     handleNextStep,
