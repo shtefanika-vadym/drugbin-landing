@@ -1,8 +1,17 @@
+import { DrugProps, PersonalDetailsProps } from '@/types/collect';
 import { QRCode } from 'antd';
+import { useDocumnetQuery } from 'common/api/recycleApi';
 import successIcon from 'common/assets/fi_check-circle.svg';
+import { SET_SHOW_MODAL } from 'common/slices/modalSlice';
 import { Button } from 'common/ui/Button/Button';
+import { isEmpty } from 'lodash-es';
+import { useCallback, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { DocumentBox } from '../DocumentBox/DocumentBox';
+import { DocumentIcon } from '../Icon/Icon';
+import { DocumnetModal } from '../Modal/DocumnetPVModal/DocumnetModal';
+import { DocumnetPVModal } from '../Modal/DocumnetPVModal/DocumnetPVModal';
+import { DocumnetPshiotropModal } from '../Modal/DocumnetPVModal/DocumnetPshiotropModal';
 import QRCodeWithBorder from '../QRCodeWithBorder/QRCodeWithBorder';
 import {
   ButtonWrapper,
@@ -13,15 +22,21 @@ import {
   Title,
 } from './FinishCollect.styled';
 import { FinishCollectLoader } from './FinishCollectLoader';
-import { useDocumnetQuery } from 'common/api/recycleApi';
 
 interface QrCodeProps {
-  data: { drugCode: string };
+  // data: { drugCode: string };
+  data: DrugProps[];
+  personalInfo: PersonalDetailsProps;
   isLoading: boolean;
 }
 
-export const FinishCollect: React.FC<QrCodeProps> = ({ data, isLoading }) => {
+export const FinishCollect: React.FC<QrCodeProps> = ({ data, isLoading, personalInfo }) => {
+  const psycholepticObjects = useMemo(
+    () => data.filter((obj) => obj.drugName.isPsycholeptic === true),
+    [data]
+  );
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { data: document } = useDocumnetQuery(
     '66c8fb87-8762-4ed4-b34c-8eea50c7254e'
   );
@@ -29,6 +44,48 @@ export const FinishCollect: React.FC<QrCodeProps> = ({ data, isLoading }) => {
   const pdfBlob = new Blob([document], { type: 'application/pdf' });
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const pdfUrlObject = URL.createObjectURL(pdfBlob);
+
+  const handleCloseModal = () => {
+    dispatch(SET_SHOW_MODAL({ isOpenModal: false, childModal: null }));
+  };
+
+  const handlePVGeneral = useCallback(() => {
+    dispatch(
+      SET_SHOW_MODAL({
+        isOpenModal: true,
+        childModal: (
+          <DocumnetPVModal data={data} personalInfo={personalInfo} handleCloseModal={handleCloseModal} />
+        ),
+      })
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, isLoading]);
+
+  const handlePVStupefiante = useCallback(() => {
+    dispatch(
+      SET_SHOW_MODAL({
+        isOpenModal: true,
+        childModal: (
+          <DocumnetPshiotropModal
+            data={psycholepticObjects}
+            personalInfo={personalInfo}
+            handleCloseModal={handleCloseModal}
+          />
+        ),
+      })
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, isLoading]);
+
+  const handlePVDocument = useCallback(() => {
+    dispatch(
+      SET_SHOW_MODAL({
+        isOpenModal: true,
+        childModal: <DocumnetModal personalInfo={personalInfo} handleCloseModal={handleCloseModal} />,
+      })
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, isLoading]);
 
   if (isLoading) return <FinishCollectLoader />;
 
@@ -58,8 +115,21 @@ export const FinishCollect: React.FC<QrCodeProps> = ({ data, isLoading }) => {
         )}
       </QRCodeWithBorder>
       <DocumentWrapper>
-        <DocumentBox name="Declaratie PR Stupefiante" />
-        <DocumentBox name="PV Predare General" />
+        {!isEmpty(psycholepticObjects) ? (
+          <Button variant="document" onClick={handlePVStupefiante}>
+            <DocumentIcon />
+            Declaratie PR Stupefiante
+          </Button>
+        ) : (
+          <Button variant="document" onClick={handlePVDocument}>
+            <DocumentIcon />
+            Declaratie PR Stupefiante
+          </Button>
+        )}
+        <Button variant="document" onClick={handlePVGeneral}>
+          <DocumentIcon />
+          PV Predare General
+        </Button>
       </DocumentWrapper>
       <ButtonWrapper>
         <Button variant="primary" onClick={() => navigate('/proces')}>

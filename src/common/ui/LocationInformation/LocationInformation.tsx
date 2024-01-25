@@ -33,6 +33,7 @@ export const LocationInformation: React.FC<LocationInformationProps> = ({
           label="Selectează județul *"
           selectedOptions={DROPDOWN_VALUES[0]}
           options={DROPDOWN_VALUES}
+          callbackOnChange={() => console.log('Suceava')}
         />
         <LocationWrapper>
           {data?.map((item: LocationProps) => {

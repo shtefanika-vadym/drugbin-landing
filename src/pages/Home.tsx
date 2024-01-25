@@ -5,7 +5,7 @@ import { Home } from 'components/home/Home';
 
 export const HomePage = () => {
   usePageLoadDetailsAnalytics({ pageType: 'home page' });
-  
+
   return (
     <Metadata
       title="DrugBin"
