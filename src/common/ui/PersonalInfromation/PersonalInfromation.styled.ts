@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
+import { WDS_COLOR_RED } from 'styles/colors'
 import { flex } from 'styles/mixins/flex.mixin'
 import { textVariant } from 'styles/mixins/typography.mixin'
-import { WDS_COLOR_RED } from 'styles/colors'
 
-export const PersonalInfromationWrapper = styled.div`
+export const Container = styled.div`
   ${flex({ direction: 'column', gap: '24px' })};
 `
 

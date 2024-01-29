@@ -1,13 +1,13 @@
+import styled from 'styled-components'
 import { flex } from 'styles/mixins/flex.mixin'
 import { textVariant } from 'styles/mixins/typography.mixin'
-import styled from 'styled-components'
 
 export const VerbalTitle = styled.h1`
   ${textVariant('titleH3')};
   font-weight: 700;
 `
 
-export const VerbalWrapper = styled.div`
+export const Container = styled.div`
   ${flex({ direction: 'column', gap: '24px' })};
 `
 

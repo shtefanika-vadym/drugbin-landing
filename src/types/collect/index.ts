@@ -1,4 +1,4 @@
-export interface PersonalDetailsProps {
+export interface PersonalInfo {
     firstName: string;
     lastName: string;
     email: string | null;
@@ -14,7 +14,7 @@ export interface PersonalDetailsProps {
       isPsycholeptic: boolean;
     };
     pack: string;
-    quantity: number;
+    quantity: number | string;
     expirationDate: string | null;
     lot: string;
   }

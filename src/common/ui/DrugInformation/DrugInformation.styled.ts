@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
+import { WDS_COLOR_BLUE_700, WDS_COLOR_RED } from 'styles/colors'
 import { flex } from 'styles/mixins/flex.mixin'
 import { textVariant } from 'styles/mixins/typography.mixin'
-import { WDS_COLOR_BLUE_700, WDS_COLOR_RED } from 'styles/colors'
 
 export const DrugInformationWrapper = styled.div`
   ${flex({ direction: 'column' })};
@@ -24,7 +24,7 @@ export const InputWrapper = styled.div``
 export const Error = styled.p`
   ${textVariant('bodyXS')};
   color: ${WDS_COLOR_RED};
-  text-align: right;
+  text-align: center;
   padding-top: 4px;
 `
 

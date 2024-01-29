@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from 'common/ui/Button/Button';
 import type { FC, ReactNode } from 'react';
 import {
@@ -14,6 +15,7 @@ interface StepperProps {
   children?: ReactNode;
   backDisabled?: boolean;
   nextDisabled?: boolean;
+  isLoading?: boolean;
   onNext?: () => void;
   onBack?: () => void;
 }
@@ -24,6 +26,7 @@ export const Stepper: FC<StepperProps> = ({
   children,
   nextDisabled,
   backDisabled,
+  isLoading,
   onBack,
   onNext,
 }) => {
@@ -39,7 +42,7 @@ export const Stepper: FC<StepperProps> = ({
       {!!onNext && (
         <ButtonWrapper>
           {!backDisabled && (
-            <Button variant="secondary" onClick={onBack}>
+            <Button variant="secondary" onClick={onBack} disabled={isLoading}>
               Înapoi
             </Button>
           )}
@@ -47,7 +50,7 @@ export const Stepper: FC<StepperProps> = ({
             variant="primary"
             onClick={onNext}
             isFullWidth={backDisabled}
-            disabled={nextDisabled}
+            disabled={nextDisabled || isLoading}
           >
             Continuă
           </Button>

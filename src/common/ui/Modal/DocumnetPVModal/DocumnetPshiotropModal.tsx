@@ -1,4 +1,4 @@
-import { DrugProps, PersonalDetailsProps } from '@/types/collect';
+import { DrugProps, PersonalInfo } from '@/types/collect';
 import { LogoIcon } from 'common/ui/Icon/Icon';
 import Modal from '../Modal';
 import {
@@ -15,7 +15,7 @@ import {
 
 interface DocumnetPshiotropModalProps {
   data: DrugProps[];
-  personalInfo: PersonalDetailsProps;
+  personalInfo: PersonalInfo;
   handleCloseModal: () => void;
 }
 

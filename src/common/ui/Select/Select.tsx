@@ -28,10 +28,10 @@ import {
 } from './Select.styled';
 
 interface SelectProps {
+  isDeleteButtonActive: boolean;
   value: SelectValue;
   onSelect: (selectedOption: SelectValue) => void;
-  onDelete: MouseEventHandler<HTMLParagraphElement>;
-  isDeleteButtonActive: boolean;
+  onDelete?: MouseEventHandler<HTMLParagraphElement>;
 }
 
 export const Select: React.FC<SelectProps> = ({

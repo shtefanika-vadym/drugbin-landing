@@ -1,3 +1,4 @@
+import { SuccessPage } from 'pages/Success';
 import { Show } from 'Show';
 import { useAppSelector } from 'common/store/hooks';
 import { CollectPage } from 'pages/Collect';
@@ -14,6 +15,7 @@ export const Routes = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/collect" element={<CollectPage />} />
         <Route path="/proces" element={<ProcesPage />} />
+        <Route path="/success/collect/:id" element={<SuccessPage />} />
       </ReactRoutes>
       <Show when={isOpenModal}>{childModal}</Show>
     </BrowserRouter>

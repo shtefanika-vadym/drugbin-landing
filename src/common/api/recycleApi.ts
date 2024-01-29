@@ -15,6 +15,9 @@ export const recycleApi = createApi({
         data: product,
         method: HTTP_METHODS.POST,
       }),
+      transformResponse: (response: {recycleId: string}) => {
+       return `/success/collect/${response.recycleId}`
+      }
     }),
     drugsIdentify: build.mutation({
       query: (image) => ({
@@ -32,13 +35,17 @@ export const recycleApi = createApi({
       }),
     }),
     documnet: build.query({
-      query: (id) => ({
+      query: ({id, type}) => ({
         headers: {
           Accept: 'application/pdf',
         },
         responseType: 'arraybuffer',
-        url: `/recycle/process/${id}`,
+        url: `/recycle/process/${id}?type=${type}`,
       }),
+      transformResponse: (respons: any) => {
+        const pdfBlob = new Blob([respons], { type: 'application/pdf' });
+        return URL.createObjectURL(pdfBlob);
+      }
     }),
   }),
 })

@@ -1,6 +1,5 @@
-import { DrugProps, PersonalDetailsProps } from '@/types/collect';
+import { DrugProps, PersonalInfo } from '@/types/collect';
 import { QRCode } from 'antd';
-import { useDocumnetQuery } from 'common/api/recycleApi';
 import successIcon from 'common/assets/fi_check-circle.svg';
 import { SET_SHOW_MODAL } from 'common/slices/modalSlice';
 import { Button } from 'common/ui/Button/Button';
@@ -26,24 +25,21 @@ import { FinishCollectLoader } from './FinishCollectLoader';
 interface QrCodeProps {
   // data: { drugCode: string };
   data: DrugProps[];
-  personalInfo: PersonalDetailsProps;
+  personalInfo: PersonalInfo;
   isLoading: boolean;
 }
 
-export const FinishCollect: React.FC<QrCodeProps> = ({ data, isLoading, personalInfo }) => {
+export const FinishCollect: React.FC<QrCodeProps> = ({
+  data,
+  isLoading,
+  personalInfo,
+}) => {
   const psycholepticObjects = useMemo(
     () => data.filter((obj) => obj.drugName.isPsycholeptic === true),
     [data]
   );
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { data: document } = useDocumnetQuery(
-    '66c8fb87-8762-4ed4-b34c-8eea50c7254e'
-  );
-
-  const pdfBlob = new Blob([document], { type: 'application/pdf' });
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const pdfUrlObject = URL.createObjectURL(pdfBlob);
 
   const handleCloseModal = () => {
     dispatch(SET_SHOW_MODAL({ isOpenModal: false, childModal: null }));
@@ -53,9 +49,7 @@ export const FinishCollect: React.FC<QrCodeProps> = ({ data, isLoading, personal
     dispatch(
       SET_SHOW_MODAL({
         isOpenModal: true,
-        childModal: (
-          <DocumnetPVModal data={data} personalInfo={personalInfo} handleCloseModal={handleCloseModal} />
-        ),
+        childModal: <DocumnetPVModal handleCloseModal={handleCloseModal} />,
       })
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -81,7 +75,12 @@ export const FinishCollect: React.FC<QrCodeProps> = ({ data, isLoading, personal
     dispatch(
       SET_SHOW_MODAL({
         isOpenModal: true,
-        childModal: <DocumnetModal personalInfo={personalInfo} handleCloseModal={handleCloseModal} />,
+        childModal: (
+          <DocumnetModal
+            personalInfo={personalInfo}
+            handleCloseModal={handleCloseModal}
+          />
+        ),
       })
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -89,14 +88,15 @@ export const FinishCollect: React.FC<QrCodeProps> = ({ data, isLoading, personal
 
   if (isLoading) return <FinishCollectLoader />;
 
+  // NEW
+
   return (
     <FinishCollectContent>
-      {/* <embed
-        src={pdfUrlObject}
-        type="application/pdf"
-        width="100%"
-        height="600px"
-      /> */}
+      {/* <Viewer fileUrl={pdfUrlObject} /> */}
+      {/* <iframe title="pdf" width="100%" height="100%" src={pdfUrlObject} /> */}
+      {/* <Document file={{ data: document }}>
+        <Page pageNumber={1} />
+      </Document> */}
       <Icon src={successIcon} alt="" />
       <Title>Cerere de colectare finalizată cu succes!</Title>
       <Description>

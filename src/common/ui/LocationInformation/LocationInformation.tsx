@@ -1,28 +1,14 @@
 import { LocationProps } from '@/types/Location';
 import { useHospitalsDetailsQuery } from 'common/api/recycleApi';
-import { useCallback } from 'react';
+import { useCollectState } from 'common/hooks/useCollectState';
 import { Dropdown } from '../Dropdown';
 import { Loader } from '../Loader';
 import { LocationCard } from '../LocationCard';
 import { Content, LocationWrapper } from './LocationInformation.styled';
 
-interface LocationInformationProps {
-  hospitalId: number;
-  setHospitalId: (id: number) => void;
-}
-
-export const LocationInformation: React.FC<LocationInformationProps> = ({
-  hospitalId,
-  setHospitalId,
-}) => {
+export const LocationInformation = () => {
   const { data, isLoading } = useHospitalsDetailsQuery();
-
-  const handleSelectLocation = useCallback(
-    (id: number) => {
-      setHospitalId(id);
-    },
-    [setHospitalId]
-  );
+  const { hospitalId, setHospitalId } = useCollectState();
 
   return (
     <Loader isLoading={isLoading} justify="center">
@@ -44,7 +30,7 @@ export const LocationInformation: React.FC<LocationInformationProps> = ({
                 location={item?.location}
                 street={item?.street}
                 schedule={item?.schedule}
-                handleSelect={() => handleSelectLocation(item?.id)}
+                handleSelect={() => setHospitalId(item?.id)}
                 isActive={hospitalId === item?.id}
               />
             );
