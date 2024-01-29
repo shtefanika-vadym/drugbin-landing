@@ -1,35 +1,38 @@
-import { DrugProps, PersonalDetailsProps } from '@/types/collect';
-import { CloseIcon, LogoIcon } from 'common/ui/Icon/Icon';
+import { useDocumnetQuery } from 'common/api/recycleApi';
 import Modal from '../Modal';
-import {
-  Border,
-  Container,
-  Content,
-  ContentTable,
-  DataContent,
-  HeaderTable,
-  IconWrapper,
-  ReasonContent,
-  SignatureWrapper,
-  Span,
-  Title,
-} from './DocumnetPVModal.styled';
+import { Container } from './DocumnetPVModal.styled';
+import './index.css';
 
 interface DocumnetPVModalProps {
-  data: DrugProps[];
-  personalInfo: PersonalDetailsProps;
   handleCloseModal: () => void;
 }
 
 export const DocumnetPVModal: React.FC<DocumnetPVModalProps> = ({
-  data,
-  personalInfo,
   handleCloseModal,
 }) => {
+  const { data: document } = useDocumnetQuery(
+    '86b41a7f-00d5-4e86-83c5-72e893372858'
+  );
+
   return (
     <Modal callbackOnClose={handleCloseModal}>
       <Container>
-        <div>
+        {document && (
+          <>
+            {/* <iframe title="pdf" width="100%" height="100%" src={document} /> */}
+            {/* <Viewer fileUrl={document} /> */}
+            {/* <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+              <Viewer fileUrl={document} />
+            </Worker> */}
+          </>
+        )}
+      </Container>
+    </Modal>
+  );
+};
+
+{
+  /* <div>
           <IconWrapper>
             <LogoIcon />
             <div onClick={handleCloseModal}>
@@ -75,7 +78,5 @@ export const DocumnetPVModal: React.FC<DocumnetPVModalProps> = ({
             {personalInfo.firstName} {personalInfo.lastName}
           </Content>
         </SignatureWrapper>
-      </Container>
-    </Modal>
-  );
-};
+      </Container> */
+}

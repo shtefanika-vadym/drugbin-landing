@@ -14,7 +14,7 @@ export enum STEP_3 {
 }
 
 export enum STEP_4 {
-  TITLE = 'Proces verbal',
+  TITLE = 'Semnătură',
 }
 
 export enum PRIVACY_BOX {

@@ -8,7 +8,6 @@ import { ButtonWrapper, ContentModal, Icon, ModalWrapper } from './Modal.styled'
 import { SET_SHOW_MODAL } from 'common/slices/modalSlice'
 import { useAppDispatch } from 'common/store/hooks'
 import { Button } from 'common/ui/Button/Button'
-
 interface IModalProps {
   children: ReactChild | ReactNode
   callbackOnClose: () => void

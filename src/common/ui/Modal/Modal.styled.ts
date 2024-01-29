@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 import { WDS_BREAKPOINT_TABLET_UP_TO } from 'common/constants/breakpoint'
+import { flex } from 'styles/mixins/flex.mixin'
 
 export const ContentModal = styled.nav`
   position: fixed;
@@ -28,7 +29,7 @@ export const ModalWrapper = styled.nav`
   border-radius: 10px;
   padding: 36px 40px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
 
@@ -44,4 +45,19 @@ export const ButtonWrapper = styled.div`
   position: absolute;
   right: 11px;
   top: 12px;
+`
+
+export const ContentPdf = styled.nav`
+  width: 366px;
+  height: 100%;
+  position: relative;
+  min-width: min-content;
+  height: auto;
+  margin: 0 auto;
+  background-color: transparent;
+`
+
+export const PdfButton = styled.div`
+  ${flex( {gap: '4px', justifyContent: 'flex-end'} )};
+  margin-bottom: 8px;
 `

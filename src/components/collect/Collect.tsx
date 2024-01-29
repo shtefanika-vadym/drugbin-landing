@@ -1,37 +1,34 @@
-import { DrugProps, PersonalDetailsProps } from '@/types/collect';
 import { useGoogleAnalytics } from 'common/analytics/googleAnalyticsInstance';
 import { useRecycleDrugMutation } from 'common/api/recycleApi';
 import { STEP_1, STEP_2, STEP_3, STEP_4 } from 'common/constants/steps';
+import { useCollectState } from 'common/hooks/useCollectState';
 import { DrugInformation } from 'common/ui/DrugInformation/DrugInformation';
-import { FinishCollect } from 'common/ui/FinishCollect';
 import { LocationInformation } from 'common/ui/LocationInformation/LocationInformation';
 import { MultiStep } from 'common/ui/MultiStep';
 import { PersonalInfromation } from 'common/ui/PersonalInfromation/PersonalInfromation';
+import { usePersonalFormValidation } from 'common/ui/PersonalInfromation/personalFormValidation';
+import { Signature } from 'common/ui/Signature';
 import { Stepper } from 'common/ui/Stepper';
-import { VerbalProcess } from 'common/ui/VerbalProcess';
 import { toCollectDrugs } from 'common/utils/mappers';
-import { isCNP, isStringNotEmpty } from 'common/utils/stringUtils';
 import { gt, isNumber } from 'lodash-es';
-import { useCallback, useMemo, useState } from 'react';
-import { initialDrug, initialPersonalDetails } from './Collect.config';
+import { useCallback, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Content } from './Collect.styled';
 
-export const VALIDATION_ERROR =
-  'Te rugăm să te asiguri că ai completat toate câmpurile obligatorii înainte de a continua.';
-
 export const Collect = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [recycleDrug, { data, isLoading }] = useRecycleDrugMutation();
+  const navigate = useNavigate();
   const { trackButtonClick } = useGoogleAnalytics();
-  const [personalDetails, setPersonalDetails] = useState<PersonalDetailsProps>(
-    initialPersonalDetails
-  );
-  const [drugList, setDrugList] = useState<DrugProps[]>([{ ...initialDrug }]);
-  const [activeStep, setActiveStep] = useState<number>(1);
-  const [hospitalId, setHospitalId] = useState<number>(null);
+  const [recycleDrug, { isLoading }] = useRecycleDrugMutation();
+  const {
+    drugList,
+    personalDetails,
+    hospitalId,
+    activeStep,
+    setActiveStep,
+    reset,
+  } = useCollectState();
+  const validations = usePersonalFormValidation(personalDetails);
 
-  const isFirstNameValid = isStringNotEmpty(personalDetails?.firstName);
-  const isLastNameValid = isStringNotEmpty(personalDetails?.lastName);
   const isHospitalValid = isNumber(hospitalId);
   const isLastDrugValid = useMemo(() => {
     const lastDrugIndex = drugList?.length - 1;
@@ -41,34 +38,45 @@ export const Collect = () => {
     );
   }, [drugList]);
   const isPsycholeptic = useMemo(
-    () => drugList.some((obj) => obj.drugName.isPsycholeptic),
+    () => drugList.some((drug) => drug.drugName.isPsycholeptic),
     [drugList]
   );
-  const isCNPValid = isPsycholeptic ? isCNP(personalDetails.cnp) : true;
-  const isAddressValid = isPsycholeptic
-    ? isStringNotEmpty(personalDetails?.address)
-    : true;
 
   const handleNextStep = useCallback(() => {
-    setActiveStep((prevActiveStep: number) => prevActiveStep + 1);
-  }, []);
+    setActiveStep(activeStep + 1);
+  }, [activeStep, setActiveStep]);
 
   const handlePrevStep = useCallback(() => {
-    setActiveStep((prevActiveStep: number) => prevActiveStep - 1);
-  }, []);
+    setActiveStep(activeStep - 1);
+  }, [activeStep, setActiveStep]);
 
-  const handleFinishCollect = useCallback(() => {
+  const handleFinishCollect = useCallback(async () => {
     trackButtonClick('Submit');
-    recycleDrug(toCollectDrugs(personalDetails, drugList, hospitalId));
-    handleNextStep();
+    const respone = await recycleDrug(
+      toCollectDrugs(personalDetails, drugList, hospitalId)
+    );
+    navigate(respone.data);
+    reset();
   }, [
     drugList,
-    handleNextStep,
     hospitalId,
+    navigate,
     personalDetails,
     recycleDrug,
+    reset,
     trackButtonClick,
   ]);
+
+  const isPersonalInfoValid = useMemo(() => {
+    const { firstName, lastName, cnp, address } = validations;
+    const basicInfoValid = firstName.isValid && lastName.isValid;
+
+    if (isPsycholeptic) {
+      return basicInfoValid && cnp.isValid && address.isValid;
+    }
+
+    return basicInfoValid;
+  }, [validations, isPsycholeptic]);
 
   const collectStep = useMemo(() => {
     switch (activeStep) {
@@ -77,11 +85,7 @@ export const Collect = () => {
           title: STEP_1.TITLE,
           description: STEP_1.DESCRIPTION,
           component: () => (
-            <DrugInformation
-              drugList={drugList}
-              setDrugList={setDrugList}
-              isLastDrugValid={isLastDrugValid}
-            />
+            <DrugInformation isLastDrugValid={isLastDrugValid} />
           ),
           onNext: handleNextStep,
           nextDisabled: !isLastDrugValid,
@@ -92,65 +96,27 @@ export const Collect = () => {
           title: STEP_2.TITLE,
           description: STEP_2.DESCRIPTION,
           component: () => (
-            <PersonalInfromation
-              isPsycholeptic={isPsycholeptic}
-              personalDetails={personalDetails}
-              setPersonalDetails={setPersonalDetails}
-            />
+            <PersonalInfromation isPsycholeptic={isPsycholeptic} />
           ),
           onNext: handleNextStep,
-          nextDisabled:
-            !isLastNameValid ||
-            !isFirstNameValid ||
-            !isCNPValid ||
-            !isAddressValid,
+          nextDisabled: !isPersonalInfoValid,
         };
       case 3:
         return {
           title: STEP_3.TITLE,
           description: STEP_3.DESCRIPTION,
-          component: () => (
-            <LocationInformation
-              hospitalId={hospitalId}
-              setHospitalId={setHospitalId}
-            />
-          ),
+          component: () => <LocationInformation />,
           onNext: handleNextStep,
           nextDisabled: !isHospitalValid,
         };
       case 4:
         return {
           title: STEP_4.TITLE,
-          component: () => <VerbalProcess />,
+          component: () => <Signature />,
           onNext: handleFinishCollect,
         };
-      case 5:
-        return {
-          component: () => (
-            <FinishCollect
-              data={drugList}
-              personalInfo={personalDetails}
-              isLoading={isLoading}
-            />
-          ),
-        };
     }
-  }, [
-    activeStep,
-    drugList,
-    handleFinishCollect,
-    handleNextStep,
-    hospitalId,
-    isAddressValid,
-    isCNPValid,
-    isFirstNameValid,
-    isHospitalValid,
-    isLastDrugValid,
-    isLastNameValid,
-    isLoading,
-    isPsycholeptic,
-    personalDetails,
-  ]);
+  }, [activeStep, handleFinishCollect, handleNextStep, isHospitalValid, isLastDrugValid, isPersonalInfoValid, isPsycholeptic]);
 
   return (
     <Content>
@@ -162,6 +128,7 @@ export const Collect = () => {
         onBack={handlePrevStep}
         nextDisabled={collectStep?.nextDisabled}
         backDisabled={collectStep?.backDisabled}
+        isLoading={isLoading}
       >
         {collectStep?.component && collectStep.component()}
       </Stepper>

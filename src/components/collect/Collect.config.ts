@@ -1,4 +1,4 @@
-import { DrugProps, PersonalDetailsProps } from "@/types/collect";
+import { DrugProps, PersonalInfo } from "@/types/collect";
 
 export const initialDrug: DrugProps = {
     drugName: {
@@ -13,7 +13,7 @@ export const initialDrug: DrugProps = {
     lot: '',
   };
   
-  export const initialPersonalDetails: PersonalDetailsProps = {
+  export const initialPersonalDetails: PersonalInfo = {
     firstName: '',
     lastName: '',
     email: null,

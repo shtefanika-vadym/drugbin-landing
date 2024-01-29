@@ -1,132 +1,138 @@
 import type { SelectValue } from '@/types/CollectInterface';
-import { DrugProps } from '@/types/collect';
 import { PRIVACY_BOX } from 'common/constants/steps';
+import { useCollectState } from 'common/hooks/useCollectState';
 import { DROPDOWN_VALUES } from 'common/mockData/mockData';
 import { Button } from 'common/ui/Button/Button';
 import { Dropdown } from 'common/ui/Dropdown/Dropdown';
 import { Input } from 'common/ui/Input/Input';
-import { initialDrug } from 'components/collect/Collect.config';
 import { gt } from 'lodash-es';
-import type { ChangeEvent } from 'react';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 import { PrivacyBox } from '../PrivacyBox/PrivacyBox';
 import { Select } from '../Select/Select';
+import { ValidationMessage } from '../ValidationMessage/ValidationMessage';
 import {
   AddNewWrapper,
   DrugInformationWrapper,
-  Error,
   FormWrapper,
   InputWrapper,
   MultiFormWrapper,
   Psycholeptic,
 } from './DrugInformation.styled';
+import { DrugFormFieldState, DrugValue } from './DrugInformation.type';
+import { useDrugFormValidation } from './drugFormValidation';
 
 interface DrugInformationProps {
-  drugList: DrugProps[];
-  setDrugList: (drugList: DrugProps[]) => void;
   isLastDrugValid: boolean;
 }
 
 export const DrugInformation: React.FC<DrugInformationProps> = ({
-  drugList,
-  setDrugList,
   isLastDrugValid,
 }) => {
-  const [error, setError] = useState<string>('');
+  const {
+    drugList,
+    drugFormState,
+    updateDrugList,
+    addDrug,
+    deleteDrug,
+    setFormState,
+    setNewFormState,
+  } = useCollectState();
 
-  const handleInputChange = useCallback(
-    (values: ChangeEvent<HTMLInputElement>, key: number) => {
-      const { name, value } = values.target;
-      setDrugList(
-        drugList.map((drug, i) =>
-          i === key ? { ...drug, [name]: value } : drug
-        )
-      );
+  const handleQuantityChange = useCallback(
+    (values: React.ChangeEvent<HTMLInputElement>, index: number) => {
+      const { value } = values.target;
+      updateDrugList(index, 'quantity', value);
     },
-    [drugList, setDrugList]
+    [updateDrugList]
   );
 
-  const handleSelector = useCallback(
-    (value: SelectValue | string, key: number, keyValue: string) => {
-      setDrugList(
-        drugList.map((drug, i) =>
-          i === key ? { ...drug, [keyValue]: value } : drug
-        )
-      );
-    },
-    [drugList, setDrugList]
-  );
-
-  const handleAddNewDrugForm = useCallback(() => {
+  const handleAddDrug = useCallback(() => {
     if (isLastDrugValid) {
-      setDrugList([...drugList, initialDrug]);
-    } else {
-      setError(
-        'Pentru a adăuga un medicament nou, completează toate câmpurile.'
-      );
+      addDrug();
+      setNewFormState();
     }
-  }, [isLastDrugValid, setDrugList, drugList]);
+  }, [addDrug, isLastDrugValid, setNewFormState]);
 
-  const handleDeleteDrug = useCallback(
-    (index: number) => {
-      const newArray = [...drugList];
-      newArray.splice(index, 1);
-      setDrugList(newArray);
+  const { getValidationObject } = useDrugFormValidation(drugList);
+
+  const handleTouch = useCallback(
+    (
+      event: React.FocusEvent<
+        HTMLInputElement | HTMLSelectElement | HTMLDivElement
+      >,
+      index: number
+    ) => {
+      event.preventDefault();
+      const { name } = event.target as HTMLInputElement & HTMLSelectElement;
+      setFormState(index, name);
     },
-    [drugList, setDrugList]
+    [setFormState]
   );
 
-  useEffect(() => {
-    if (isLastDrugValid) setError('');
-  }, [isLastDrugValid]);
+  const isFieldTouched = useCallback(
+    (fieldName: keyof DrugValue, index: number) =>
+      drugFormState[index][fieldName] !== DrugFormFieldState.pristine,
+    [drugFormState]
+  );
 
   return (
     <DrugInformationWrapper>
       <PrivacyBox description={PRIVACY_BOX.DESCRIPTION_STEP_2} />
       <MultiFormWrapper>
-        {Array.from({ length: drugList?.length }, (_, index) => (
-          <FormWrapper key={index}>
-            <InputWrapper>
-              <Select
-                onSelect={(value: SelectValue) =>
-                  handleSelector(value, index, 'drugName')
-                }
-                value={drugList[index]?.drugName}
-                isDeleteButtonActive={gt(drugList?.length, 1)}
-                onDelete={() => handleDeleteDrug(index)}
+        {drugList.map((form, index) => {
+          return (
+            <FormWrapper key={index}>
+              <InputWrapper>
+                <Select
+                  onSelect={(value: SelectValue) =>
+                    updateDrugList(index, 'drugName', value)
+                  }
+                  value={form.drugName}
+                  isDeleteButtonActive={gt(drugList?.length, 1)}
+                  onDelete={() => deleteDrug(index)}
+                />
+                {form.drugName.isPsycholeptic && (
+                  <Psycholeptic>
+                    Te informăm că medicamentul este de tip psihotrop. Procesul
+                    de colectare va fi un pic diferit.
+                  </Psycholeptic>
+                )}
+              </InputWrapper>
+              <Dropdown
+                name="pack"
+                placeholder="Cutie"
+                label="Tipul de ambalaj *"
+                selectedOptions={form.pack}
+                options={DROPDOWN_VALUES}
+                callbackOnChange={(pack) => updateDrugList(index, 'pack', pack)}
               />
-              {drugList[index]?.drugName.isPsycholeptic && (
-                <Psycholeptic>
-                  Te informăm că medicamentul este de tip psihotrop. Procesul de
-                  colectare va fi un pic diferit.
-                </Psycholeptic>
-              )}
-            </InputWrapper>
-            <Dropdown
-              name="pack"
-              placeholder="Cutie"
-              label="Tipul de ambalaj *"
-              selectedOptions={drugList[index]?.pack}
-              options={DROPDOWN_VALUES}
-              callbackOnChange={(pack) => handleSelector(pack, index, 'pack')}
-            />
-            <InputWrapper>
-              <Input
-                name="quantity"
-                type="number"
-                label="Cantitatea *"
-                value={drugList[index]?.quantity}
-                onChange={(e) => handleInputChange(e, index)}
-              />
-            </InputWrapper>
-          </FormWrapper>
-        ))}
+              <InputWrapper>
+                <Input
+                  name="quantity"
+                  type="number"
+                  label="Cantitatea *"
+                  value={form?.quantity}
+                  onChange={(e) => handleQuantityChange(e, index)}
+                  onBlur={(e) => handleTouch(e, index)}
+                  valid={!getValidationObject(index)?.quantity?.isValid}
+                />
+                <ValidationMessage
+                  show={
+                    isFieldTouched('quantity', index) &&
+                    getValidationObject(index)?.quantity?.isValid
+                  }
+                >
+                  {getValidationObject(index)?.quantity?.errorMessage}
+                </ValidationMessage>
+              </InputWrapper>
+            </FormWrapper>
+          );
+        })}
       </MultiFormWrapper>
       <AddNewWrapper>
-        <Button variant="secondary" onClick={handleAddNewDrugForm}>
+        <Button variant="secondary" onClick={handleAddDrug}>
           Adaugă alt medicament
         </Button>
-        {error && <Error>{error}</Error>}
       </AddNewWrapper>
     </DrugInformationWrapper>
   );

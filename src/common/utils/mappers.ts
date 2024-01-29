@@ -1,6 +1,7 @@
-import { DrugProps, PersonalDetailsProps, SearchResponsProps } from '@/types/collect'
+import { DrugProps, PersonalInfo, SearchResponsProps } from '@/types/collect'
+import { toNumber } from 'lodash-es'
 
-export const toCollectDrugs = (personalDetails: PersonalDetailsProps, drugList: DrugProps[], hospitalId: number) => {
+export const toCollectDrugs = (personalDetails: PersonalInfo, drugList: DrugProps[], hospitalId: number) => {
   return {
     firstName: personalDetails?.firstName,
     hospitalId: hospitalId,
@@ -15,7 +16,7 @@ export const toCollectDrugs = (personalDetails: PersonalDetailsProps, drugList: 
 const toDrugList = (input: DrugProps) => {
   return {
     lot: input.lot,
-    quantity: input.quantity,
+    quantity: toNumber(input.quantity),
     pack: toDrugPack(input.pack),
     expirationDate: input.expirationDate,
     drugId: input.drugName.drugId,

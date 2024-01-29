@@ -1,1 +1,0 @@
-export { FinishCollect } from './FinishCollect'

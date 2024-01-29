@@ -1,4 +1,4 @@
-import { PersonalDetailsProps } from '@/types/collect';
+import { PersonalInfo } from '@/types/collect';
 import { LogoIcon } from 'common/ui/Icon/Icon';
 import Modal from '../Modal';
 import {
@@ -13,7 +13,7 @@ import {
 
 interface DocumnetModalProps {
   handleCloseModal: () => void;
-  personalInfo: PersonalDetailsProps;
+  personalInfo: PersonalInfo;
 }
 
 export const DocumnetModal: React.FC<DocumnetModalProps> = ({
