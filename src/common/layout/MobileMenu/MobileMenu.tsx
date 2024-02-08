@@ -21,6 +21,9 @@ import {
   Text,
   Title,
 } from './MobileMenu.styled';
+import { SelectLanguage } from 'common/ui/SelectLanguage';
+// eslint-disable-next-line no-restricted-imports
+import { useTranslation } from 'react-i18next';
 
 const linkStyle = {
   textDecoration: 'none',
@@ -33,6 +36,7 @@ export interface MobileMenuProps {
 
 export const MobileMenu: FC<MobileMenuProps> = ({ isOpen, handleOpen }) => {
   const topNavRef = useRef<HTMLElement | null>(null);
+  const { t } = useTranslation();
 
   const handleDropdown = useCallback(() => {
     handleOpen(!isOpen);
@@ -49,41 +53,42 @@ export const MobileMenu: FC<MobileMenuProps> = ({ isOpen, handleOpen }) => {
       <MenuContent ref={topNavRef}>
         <LanguageContainer>
           <Title>Menu</Title>
+          <SelectLanguage />
         </LanguageContainer>
         <Link style={linkStyle} smooth to={PathsEnum.proces}>
           <ItemWrapper onClick={handleNavigation}>
             <ProcesIcon />
-            <Text>Ghid complet</Text>
+            <Text>{t('navigation.guide')}</Text>
           </ItemWrapper>
         </Link>
         <Link style={linkStyle} smooth to={PathsEnum.about}>
           <ItemWrapper onClick={handleNavigation}>
             <AboutIcon />
-            <Text>Despre noi</Text>
+            <Text>{t('navigation.about')}</Text>
           </ItemWrapper>
         </Link>
         <Link style={linkStyle} smooth to={PathsEnum.values}>
           <ItemWrapper onClick={handleNavigation}>
             <ServicesIcon />
-            <Text>Valorile noastre</Text>
+            <Text>{t('navigation.values')}</Text>
           </ItemWrapper>
         </Link>
         <Link style={linkStyle} smooth to={PathsEnum.contact}>
           <ItemWrapper onClick={handleNavigation}>
             <ContactIcon />
-            <Text>Contact</Text>
+            <Text>{t('navigation.contact')}</Text>
           </ItemWrapper>
         </Link>
         <Link style={linkStyle} smooth to={PathsEnum.collect}>
           <ItemWrapper onClick={handleNavigation}>
             <RecycleIcon />
-            <Text>Colecteaza</Text>
+            <Text>{t('navigation.collect')}</Text>
           </ItemWrapper>
         </Link>
         <BorderStyle />
         <ButtonWrapper>
           <Button variant="empty" onClick={handleDropdown}>
-            Inchide
+            {t('button.close')}
           </Button>
         </ButtonWrapper>
       </MenuContent>
