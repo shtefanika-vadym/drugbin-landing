@@ -1,17 +1,23 @@
 {
   "landing_page": {
-    "about_title": "Protejeza mediul si salveaza vieti colectand medicamentele expirate sau neutilizate! Noi credem ca se poate face mai mult!",
-    "about_description": "Programul nostru de colectare iti usureaza identificarea, colectarea selectiva si procesul de predare a medicamentelor expirate sau neutilizate catre farmacii. Impreuna putem contribui la protejarea mediului prin reducerea poluarii apelor. Mai putine medicamente ajunse in ape, mai putine bacterii rezistente la antibiotice, mai multe vieti salvate!",
-    "about_join": "Preda medicamentele (oameni)  Colecteaza (farmacie)  Caseaza (firma de casare)",
-    "collect_title": "DrugBin - Reduce Save Protect",
-    "collect_description": "Nu arunca medicamentele neutilizate, returneaza-le la farmacie! Protejezi mediul! Reduci poluarea apelor! Salvezi vieti!",
-    "contact_title": "Contact"
+    "title": "Natura luptă pentru tine! Fă-o și tu!",
+    "subTitle": "1500 de tone de medicamente ajung anual în apele din România!",
+    "join_1": "Nu arunca medicamentele expirate sau neutilizate!",
+    "join_2": "Predă-le în centrele de colectare special amenajate! Noi te învățăm cum."
+  },
+  "services": {
+    "guide": "Ghid complet",
+    "s1_title": "ETAPA 1: IDENTIFICAREA MEDICAMENTELOR",
+    "s1_subTitle": "Pregătește acasă medicamentele expirate sau neutilizate și, de asemenea, este o idee bună să le separi de ambalajul lor (cutia din carton, prospectul). Urmărește cu atenție data de expirare înscrisă pe cutie sau blisterul medicamentelor. Separarea corectă a medicamentelor și ambalajelor contribuie la gestionarea responsabilă a deșeurilor și protejează mediul înconjurător.",
+    "s2_title": "ETAPA 2: FACILITEAZĂ PROCESUL",
+    "s2_subTitle": "Cu ajutorul aplicației noastre, completează detaliile referitoare la medicamentele expirate sau neutilizate pentru a simplifica întocmirea procesului verbal de predare. Beneficiezi astfel de o soluție eficientă și transparentă în gestionarea și colectarea acestor medicamente.",
+    "s3_title": "ETAPA 3: PREDARE EFICIENTĂ",
+    "s3_subTitle": "Prezintă codul QR împreună cu medicamentele pe care vrei să le predai la centrul de colectare selectat de tine."
   },
   "list_section_1": {
     "tag": "Servicii",
     "title": "Proces de predare simplu, rapid si profesionist catre farmacii!",
-    "subTitle":
-      "Aplicatia noastra pune la dispozitie o interfata intuitiva care transforma procesul de predare a medicamentelor expirate intr-unul simplu si elegant atat pentru populatie cat si pentru farmacii.",
+    "subTitle": "Aplicatia noastra pune la dispozitie o interfata intuitiva care transforma procesul de predare a medicamentelor expirate intr-unul simplu si elegant atat pentru populatie cat si pentru farmacii.",
     "list": [
       "Generam informatic procesul verbal de predare in farmacii asociat cu un cod QR",
       "Rapid si simplu de primit medicamentele expirate in farmacii prin validarea cod QR",
@@ -20,8 +26,7 @@
   },
   "list_section_2": {
     "title": "O baza de date completa si reala a medicamentelor scoase din uz",
-    "subTitle":
-      "Site-ul nostru oferă o bază de date în timp real a medicamentelor expirate și vă conectează cu farmaciile din apropiere care le colectează. Prin utilizarea bazei noastre de date, puteți avea încredere în siguranța medicamentelor expirate și neutilizate.",
+    "subTitle": "Site-ul nostru oferă o bază de date în timp real a medicamentelor expirate și vă conectează cu farmaciile din apropiere care le colectează. Prin utilizarea bazei noastre de date, puteți avea încredere în siguranța medicamentelor expirate și neutilizate.",
     "list": [
       "Acces simplu la o baza de date reala si bine structurata pentru evidenta gestiunii deseurilor medicamentoase",
       "Informatii concrete pentru politici de mediu coerente",
@@ -30,22 +35,24 @@
   },
   "list_section_3": {
     "title": "Informatii pentru comunitate",
-    "subTitle":
-      "Prin parteneriatul cu noi, puteți contribui la creșterea gradului de conștientizare și la promovarea schimbărilor pozitive în comunitatea dvs.",
+    "subTitle": "Prin parteneriatul cu noi, puteți contribui la creșterea gradului de conștientizare și la promovarea schimbărilor pozitive în comunitatea dvs.",
     "list": [
       "Informatii privind importanta valorificarii si eliminarii medicamentelor neutilizate",
       "Articole de informare guvernamentala si europeana"
     ]
   },
   "navigation": {
-    "collect": "Colectare",
+    "guide": "Ghid complet",
     "about": "Despre noi",
-    "services": "Servicii",
-    "contact": "Contact"
+    "values": "Valorile noastre",
+    "contact": "Contact",
+    "collect": "Colectare"
   },
   "button": {
     "collect": "Colecteaza",
     "cancel": "Anulare",
-    "send": "Trimite"
+    "send": "Trimite",
+    "close": "Inchide",
+    "find": "Află cum"
   }
 }

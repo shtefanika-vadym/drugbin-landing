@@ -9,7 +9,6 @@ import { gt } from 'lodash-es';
 import React, { useCallback } from 'react';
 import { PrivacyBox } from '../PrivacyBox/PrivacyBox';
 import { Select } from '../Select/Select';
-import { ValidationMessage } from '../ValidationMessage/ValidationMessage';
 import {
   AddNewWrapper,
   DrugInformationWrapper,
@@ -18,7 +17,6 @@ import {
   MultiFormWrapper,
   Psycholeptic,
 } from './DrugInformation.styled';
-import { DrugFormFieldState, DrugValue } from './DrugInformation.type';
 import { useDrugFormValidation } from './drugFormValidation';
 
 interface DrugInformationProps {
@@ -30,13 +28,14 @@ export const DrugInformation: React.FC<DrugInformationProps> = ({
 }) => {
   const {
     drugList,
-    drugFormState,
     updateDrugList,
     addDrug,
     deleteDrug,
     setFormState,
     setNewFormState,
   } = useCollectState();
+
+  console.log('drugList', drugList)
 
   const handleQuantityChange = useCallback(
     (values: React.ChangeEvent<HTMLInputElement>, index: number) => {
@@ -69,11 +68,11 @@ export const DrugInformation: React.FC<DrugInformationProps> = ({
     [setFormState]
   );
 
-  const isFieldTouched = useCallback(
-    (fieldName: keyof DrugValue, index: number) =>
-      drugFormState[index][fieldName] !== DrugFormFieldState.pristine,
-    [drugFormState]
-  );
+  // const isFieldTouched = useCallback(
+  //   (fieldName: keyof DrugValue, index: number) =>
+  //     drugFormState[index][fieldName] !== DrugFormFieldState.pristine,
+  //   [drugFormState]
+  // );
 
   return (
     <DrugInformationWrapper>
@@ -116,14 +115,14 @@ export const DrugInformation: React.FC<DrugInformationProps> = ({
                   onBlur={(e) => handleTouch(e, index)}
                   valid={!getValidationObject(index)?.quantity?.isValid}
                 />
-                <ValidationMessage
+                {/* <ValidationMessage
                   show={
                     isFieldTouched('quantity', index) &&
                     getValidationObject(index)?.quantity?.isValid
                   }
                 >
                   {getValidationObject(index)?.quantity?.errorMessage}
-                </ValidationMessage>
+                </ValidationMessage> */}
               </InputWrapper>
             </FormWrapper>
           );

@@ -1,35 +1,32 @@
-import { useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
+// eslint-disable-next-line no-restricted-imports
+import { useTranslation } from 'react-i18next';
+import { BarStyle, Language, SelectWrapper } from './SelectLanguage.styled';
 
-import { useLocalStorage } from 'usehooks-ts'
-
-import { BarStyle, Language, SelectWrapper } from './SelectLanguage.styled'
-
-type Languages = 'en' | 'ro'
+type Languages = 'en' | 'ro';
 
 export const SelectLanguage = () => {
-  const { i18n } = useTranslation()
-  const [selectedLanguage, setSelectedLanguage] = useLocalStorage<Languages>(
-    'selectedLanguage',
-    'en',
-  )
-
-  useEffect(() => {
-    i18n.changeLanguage(selectedLanguage)
-  }, [i18n, selectedLanguage])
+  const { i18n } = useTranslation();
+  const currentLanguage = i18n.language;
 
   const handleLanguageChange = (language: Languages) => {
-    setSelectedLanguage(language)
-  }
+    i18n.changeLanguage(language);
+  };
+  
   return (
     <SelectWrapper>
-      <Language isActive={selectedLanguage === 'en'} onClick={() => handleLanguageChange('en')}>
-        EN
-      </Language>
-      <BarStyle>|</BarStyle>
-      <Language isActive={selectedLanguage === 'ro'} onClick={() => handleLanguageChange('ro')}>
+      <Language
+        isActive={currentLanguage === 'ro'}
+        onClick={() => handleLanguageChange('ro')}
+      >
         RO
       </Language>
+      <BarStyle>|</BarStyle>
+      <Language
+        isActive={currentLanguage === 'en'}
+        onClick={() => handleLanguageChange('en')}
+      >
+        EN
+      </Language>
     </SelectWrapper>
-  )
-}
+  );
+};

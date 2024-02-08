@@ -8,6 +8,8 @@ import { Services } from 'common/ui/Services';
 import { Values } from 'common/ui/Values';
 import { HashLink as Link } from 'react-router-hash-link';
 import { Image, Join, Section, SubTitle, Title, Wrapper } from './Home.styled';
+// eslint-disable-next-line no-restricted-imports
+import { useTranslation } from 'react-i18next';
 
 const linkStyle = {
   textDecoration: 'none',
@@ -15,26 +17,25 @@ const linkStyle = {
 };
 
 export const Home = () => {
+  const { t } = useTranslation();
+
   return (
     <Wrapper>
       <ContentWrapper>
         <Section>
-          <Title>Natura luptă pentru tine! Fă-o și tu!</Title>
-          <SubTitle>
-            1500 de tone de medicamente ajung anual în apele din România!
-          </SubTitle>
+          <Title>{t('landing_page.title')}</Title>
+          <SubTitle>{t('landing_page.subTitle')}</SubTitle>
           <Join>
-            Nu arunca medicamentele expirate sau neutilizate!
+            {t('landing_page.join_1')}
             <br />
-            Predă-le în centrele de colectare special amenajate! Noi te învățăm
-            cum.
+            {t('landing_page.join_2')}
           </Join>
           <Button>
             <Link style={linkStyle} smooth to="/#proces">
-              Află cum
+              {t('button.find')}
             </Link>
           </Button>
-          <Image src={first} alt='protejare'/>
+          <Image src={first} alt="protejare" />
         </Section>
       </ContentWrapper>
       <Services id="proces" />

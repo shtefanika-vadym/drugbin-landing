@@ -1,16 +1,20 @@
-import { useEffect, useRef } from 'react'
-import { useDispatch } from 'react-redux'
-import { useAppSelector } from 'common/store/hooks'
-import { ProcessingModal } from 'common/ui/Modal/ProcessingModal/ProcessingModal'
-import { SET_SHOW_MODAL } from 'common/slices/modalSlice'
-import { useDrugsIdentifyMutation } from 'common/api/recycleApi'
-import { SET_DRUGS_FROM_CAMERA, SET_DRUGS_SIZE } from 'common/slices/recycleSlice'
+import { useDrugsIdentifyMutation } from 'common/api/recycleApi';
+import { SET_SHOW_MODAL } from 'common/slices/modalSlice';
+import {
+  SET_DRUGS_FROM_CAMERA,
+  SET_DRUGS_SIZE,
+} from 'common/slices/recycleSlice';
+import { useAppSelector } from 'common/store/hooks';
+import { ProcessingModal } from 'common/ui/Modal/ProcessingModal/ProcessingModal';
+import { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { CameraOpen } from './Camera.styled';
 
 export const Camera = () => {
-  const dispatch = useDispatch()
-  const { type } = useAppSelector((state) => state.recycleReducer)
-  const inputFileRef = useRef(null)
-  const [drugsIdentify, { isLoading }] = useDrugsIdentifyMutation()
+  const dispatch = useDispatch();
+  const { type } = useAppSelector((state) => state.recycleReducer);
+  const inputFileRef = useRef(null);
+  const [drugsIdentify, { isLoading }] = useDrugsIdentifyMutation();
 
   const formatDrugObject = (obj: any) => {
     const formattedObject = {
@@ -23,52 +27,58 @@ export const Camera = () => {
       quantity: 1,
       expirationDate: obj?.expirationDate || null,
       lot: obj?.lot || null,
-    }
+    };
 
-    return formattedObject
-  }
+    return formattedObject;
+  };
 
   const handleFileUpload = async (event: any) => {
-    const image = event.target.files[0]
-    const response = await drugsIdentify({ image })
-    const { data } = response
-    const formattedResponse = data.map((obj: any) => formatDrugObject(obj))
-    dispatch(SET_DRUGS_SIZE(formattedResponse.length))
-    dispatch(SET_DRUGS_FROM_CAMERA(formattedResponse))
-  }
+    const image = event.target.files[0];
+    const response = await drugsIdentify({ image });
+    const { data } = response;
+    const formattedResponse = data.map((obj: any) => formatDrugObject(obj));
+    dispatch(SET_DRUGS_SIZE(formattedResponse.length));
+    dispatch(SET_DRUGS_FROM_CAMERA(formattedResponse));
+  };
 
   const handleCloseModal = () => {
-    dispatch(SET_SHOW_MODAL({ isOpenModal: false, childModal: null }))
-  }
+    dispatch(SET_SHOW_MODAL({ isOpenModal: false, childModal: null }));
+  };
 
   useEffect(() => {
     if (isLoading) {
       dispatch(
         SET_SHOW_MODAL({
           isOpenModal: true,
-          childModal: <ProcessingModal handleCloseModal={handleCloseModal} isLoading={isLoading} />,
-        }),
-      )
+          childModal: (
+            <ProcessingModal
+              handleCloseModal={handleCloseModal}
+              isLoading={isLoading}
+            />
+          ),
+        })
+      );
     } else {
-      dispatch(SET_SHOW_MODAL({ isOpenModal: false, childModal: null }))
+      dispatch(SET_SHOW_MODAL({ isOpenModal: false, childModal: null }));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading]);
 
   useEffect(() => {
-    if (type === 'automatic') inputFileRef.current.click()
-  }, [type])
+    if (type === 'automatic') inputFileRef.current.click();
+  }, [type]);
 
   return (
-    <div>
+    <>
+      <CameraOpen>Open</CameraOpen>
       <input
-        type='file'
-        accept='image/*'
+        type="file"
+        accept="image/*"
         capture={true}
         style={{ display: 'none' }}
         ref={inputFileRef}
         onChange={handleFileUpload}
       />
-    </div>
-  )
-}
+    </>
+  );
+};
