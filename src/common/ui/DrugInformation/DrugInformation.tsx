@@ -1,5 +1,4 @@
 import type { SelectValue } from '@/types/CollectInterface';
-import { PRIVACY_BOX } from 'common/constants/steps';
 import { useCollectState } from 'common/hooks/useCollectState';
 import { DROPDOWN_VALUES } from 'common/mockData/mockData';
 import { Button } from 'common/ui/Button/Button';
@@ -7,7 +6,6 @@ import { Dropdown } from 'common/ui/Dropdown/Dropdown';
 import { Input } from 'common/ui/Input/Input';
 import { gt } from 'lodash-es';
 import React, { useCallback } from 'react';
-import { PrivacyBox } from '../PrivacyBox/PrivacyBox';
 import { Select } from '../Select/Select';
 import {
   AddNewWrapper,
@@ -34,8 +32,6 @@ export const DrugInformation: React.FC<DrugInformationProps> = ({
     setFormState,
     setNewFormState,
   } = useCollectState();
-
-  console.log('drugList', drugList)
 
   const handleQuantityChange = useCallback(
     (values: React.ChangeEvent<HTMLInputElement>, index: number) => {
@@ -76,7 +72,7 @@ export const DrugInformation: React.FC<DrugInformationProps> = ({
 
   return (
     <DrugInformationWrapper>
-      <PrivacyBox description={PRIVACY_BOX.DESCRIPTION_STEP_2} />
+      {/* <PrivacyBox description={PRIVACY_BOX.DESCRIPTION_STEP_2} /> */}
       <MultiFormWrapper>
         {drugList.map((form, index) => {
           return (

@@ -9,16 +9,19 @@ import {
   useRef,
   useState,
 } from 'react';
+import { WDS_COLOR_GREY } from 'styles/colors';
 import { useDebounce, useOnClickOutside } from 'usehooks-ts';
 import { Button } from '../Button';
 import { Input } from '../Input';
 import { Loader } from '../Loader';
+import { Text } from '../Text/Text';
 import {
   Container,
   DeleteText,
   DropdownList,
   Label,
   LabelWrapper,
+  List,
   ListItem,
   Placeholder,
   SelectDropdown,
@@ -44,9 +47,10 @@ export const Select: React.FC<SelectProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const [searchInput, setSearchInput] = useState('');
   const debouncedValue = useDebounce(searchInput, 300);
-  const { data: options, isLoading } = useDrugQuery(
-    debouncedValue?.toLowerCase()
-  );
+  const { data: options, isLoading } = useDrugQuery({
+    query: debouncedValue.toLowerCase(),
+    limit: 20,
+  });
 
   const handleToggleDropdown = useCallback(() => {
     setSearchInput('');
@@ -115,14 +119,16 @@ export const Select: React.FC<SelectProps> = ({
           <Loader isLoading={isLoading} size={24} justify="center">
             <DropdownList>
               {options?.map((option: SearchProps, index: number) => (
-                <ListItem
-                  key={index}
-                  onClick={() => handleSelectOption(option)}
-                  isActive={option?.drugId === value?.drugId}
-                >
-                  {option.value}
-                </ListItem>
+                <List key={index} onClick={() => handleSelectOption(option)}>
+                  <ListItem isActive={option?.drugId === value?.drugId}>
+                    {option.value}
+                  </ListItem>
+                  <Text textVariant="bodyXS" color={WDS_COLOR_GREY}>
+                    {option?.packaging}
+                  </Text>
+                </List>
               ))}
+
               {isEmpty(options) && (
                 <>
                   <WarningMessage>
