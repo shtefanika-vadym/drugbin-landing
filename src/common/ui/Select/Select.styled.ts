@@ -67,10 +67,14 @@ export const DropdownList = styled.div`
   padding: ${WDS_SIZE_004_PX};
 `
 
+export const List = styled.div`
+  ${flex({ direction: 'column', gap: '4px' })};
+  padding: ${WDS_SIZE_012_PX} 0;
+`
+
 export const ListItem = styled.div<{isActive: boolean}>`
   color: ${({ isActive }) => (isActive ? WDS_COLOR_BLUE_300 : WDS_COLOR_BLUE_700 )};
   ${({ isActive }) => (isActive && `font-weight: bold` )};
-  padding: ${WDS_SIZE_012_PX} 0;
   ${textVariant('bodyS')};
 `
 

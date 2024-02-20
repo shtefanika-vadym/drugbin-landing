@@ -18,8 +18,8 @@ export const addApi = createApi({
       }),
     }),
     drug: build.query({
-      query: (query) => ({
-        url: `/drugs/search/${query}`,
+      query: ({query, limit}) => ({
+        url: `/drugs/search/?${query && `name=${query}&`}limit=${limit}`,
       }),
       transformResponse: (respons: SearchResponsProps[]) => {
         return toDrugSearch(respons)
