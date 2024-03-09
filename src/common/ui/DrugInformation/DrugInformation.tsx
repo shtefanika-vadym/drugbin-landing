@@ -5,7 +5,7 @@ import { Button } from 'common/ui/Button/Button';
 import { Dropdown } from 'common/ui/Dropdown/Dropdown';
 import { Input } from 'common/ui/Input/Input';
 import { gt } from 'lodash-es';
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { Select } from '../Select/Select';
 import {
   AddNewWrapper,
@@ -16,6 +16,9 @@ import {
   Psycholeptic,
 } from './DrugInformation.styled';
 import { useDrugFormValidation } from './drugFormValidation';
+import { PrivacyBox } from '../PrivacyBox';
+import { PRIVACY_BOX } from 'common/constants/steps';
+import { useSearchParams } from 'react-router-dom';
 
 interface DrugInformationProps {
   isLastDrugValid: boolean;
@@ -70,9 +73,14 @@ export const DrugInformation: React.FC<DrugInformationProps> = ({
   //   [drugFormState]
   // );
 
+  const [searchParams] = useSearchParams();
+  const admin = useMemo(() => searchParams.get('admin'), [searchParams]);
+
   return (
     <DrugInformationWrapper>
-      {/* <PrivacyBox description={PRIVACY_BOX.DESCRIPTION_STEP_2} /> */}
+      {admin === 'true' && (
+        <PrivacyBox description={PRIVACY_BOX.DESCRIPTION_STEP_2} />
+      )}
       <MultiFormWrapper>
         {drugList.map((form, index) => {
           return (

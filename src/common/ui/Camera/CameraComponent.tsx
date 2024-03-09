@@ -1,22 +1,22 @@
-import { useCollectState } from 'common/hooks/useCollectState';
-import { useRef } from 'react';
+import { useDrugsIdentifyMutation } from 'common/api/recycleApi';
+import { ChangeEvent, useCallback, useRef } from 'react';
 import { CameraOpen } from './Camera.styled';
 
-function CameraComponent() {
+export const CameraComponent = () => {
   const fileInputRef = useRef(null);
-  const { addDrugsFromArray } = useCollectState();
+  const [mutate, { data }] = useDrugsIdentifyMutation();
 
-  const handleFileChange = (event: any) => {
-    const file = event?.target?.files[0];
-    addDrugsFromArray(mock_data);
-    // Do something with the selected file
-    console.log('Selected file:', file);
-  };
+  const handleFileChange = useCallback(
+    async (event: ChangeEvent<HTMLInputElement>) => {
+      const file = event?.target?.files[0];
+      await mutate({ image: file });
+    },
+    [mutate]
+  );
 
-  const handleClick = () => {
-    // Click the hidden file input element to trigger file selection
+  const handleClick = useCallback(() => {
     fileInputRef.current.click();
-  };
+  }, []);
 
   return (
     <>
@@ -29,9 +29,10 @@ function CameraComponent() {
         onChange={handleFileChange}
       />
       <CameraOpen onClick={handleClick}>Deschide</CameraOpen>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
     </>
   );
-}
+};
 
 export default CameraComponent;
 
