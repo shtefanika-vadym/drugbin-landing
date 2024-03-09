@@ -16,7 +16,6 @@ export const PrivacyBox: React.FC<PrivacyBoxProps> = ({ description }) => {
       <Icon src={secureIcon} />
       <div>
         <Description>{description}</Description>
-        {/* <CameraOpen>Deschide</CameraOpen> */}
         <CameraComponent />
       </div>
     </PrivacyBoxWrapper>
