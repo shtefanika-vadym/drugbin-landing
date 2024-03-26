@@ -1,5 +1,5 @@
 import { Metadata } from 'common/Metadata/Metadata';
-// import { Routes } from 'common/routes/Routes';
+import { Routes } from 'common/routes/Routes';
 import { store } from 'common/store/store';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
@@ -26,7 +26,7 @@ function App() {
     >
       <Provider store={store}>
         <I18nextProvider i18n={i18n}>
-          {/* <Routes /> */}
+          <Routes />
         </I18nextProvider>
       </Provider>
     </Metadata>
