@@ -1,11 +1,13 @@
 import type { SelectValue } from '@/types/CollectInterface';
+import { PRIVACY_BOX } from 'common/constants/steps';
 import { useCollectState } from 'common/hooks/useCollectState';
 import { DROPDOWN_VALUES } from 'common/mockData/mockData';
 import { Button } from 'common/ui/Button/Button';
 import { Dropdown } from 'common/ui/Dropdown/Dropdown';
 import { Input } from 'common/ui/Input/Input';
 import { gt } from 'lodash-es';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
+import { PrivacyBox } from '../PrivacyBox';
 import { Select } from '../Select/Select';
 import {
   AddNewWrapper,
@@ -16,9 +18,6 @@ import {
   Psycholeptic,
 } from './DrugInformation.styled';
 import { useDrugFormValidation } from './drugFormValidation';
-import { PrivacyBox } from '../PrivacyBox';
-import { PRIVACY_BOX } from 'common/constants/steps';
-import { useSearchParams } from 'react-router-dom';
 
 interface DrugInformationProps {
   isLastDrugValid: boolean;
@@ -73,14 +72,14 @@ export const DrugInformation: React.FC<DrugInformationProps> = ({
   //   [drugFormState]
   // );
 
-  const [searchParams] = useSearchParams();
-  const admin = useMemo(() => searchParams.get('admin'), [searchParams]);
+  // const [searchParams] = useSearchParams();
+  // const admin = useMemo(() => searchParams.get('admin'), [searchParams]);
 
   return (
     <DrugInformationWrapper>
-      {admin === 'true' && (
-        <PrivacyBox description={PRIVACY_BOX.DESCRIPTION_STEP_2} />
-      )}
+      {/* {admin === 'true' && ( */}
+        <PrivacyBox description={PRIVACY_BOX.DESCRIPTION_STEP_2} enableCamera/>
+      {/* )} */}
       <MultiFormWrapper>
         {drugList.map((form, index) => {
           return (
