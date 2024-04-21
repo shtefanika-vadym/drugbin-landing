@@ -3,11 +3,11 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import type { BaseQueryFn } from "@reduxjs/toolkit/src/query/baseQueryTypes";
 import type { EndpointBuilder } from "@reduxjs/toolkit/src/query/endpointDefinitions";
 import { toDrugSearch } from "src/utils/mappers";
-import axiosBaseQuery, { api } from ".";
+import { api, baseQuery } from ".";
 
 export const drugApi = createApi({
   reducerPath: "drug",
-  baseQuery: axiosBaseQuery(),
+  baseQuery: baseQuery(),
   endpoints: (build: EndpointBuilder<BaseQueryFn, string, string>) => ({
     drug: build.query({
       query: ({ query, limit }) => ({
