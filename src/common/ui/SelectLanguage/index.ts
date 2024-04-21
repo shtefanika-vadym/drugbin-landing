@@ -1,1 +1,0 @@
-export { SelectLanguage } from './SelectLanguage'

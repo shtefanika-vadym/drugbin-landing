@@ -1,1 +1,0 @@
-export { DrugInformation } from './DrugInformation'

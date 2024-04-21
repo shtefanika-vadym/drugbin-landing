@@ -12,24 +12,14 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "src",
-    "useUnknownInCatchVariables": false,
-    "noImplicitThis": false,
-    "strictNullChecks": false,
+    "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"],
-      "@/ui/*": ["src/common/ui/*"],
-      "@/pages/*": ["pages/*"],
       "@/styles/*": ["src/styles/*"],
-      "@/assets/*": ["assets/*"],
-      "@/utils/*": ["utils/*"],
-      "@/lib/*": ["src/lib/*"],
-      "@/types/*": ["types/*"],
-      "@/fixtures/*": ["__fixtures__/*"]
-    },
+      "@/types/*": ["src/types/*"]
+    }
   },
   "include": ["src/**/*", "src/index.d.ts"],
   "exclude": ["node_modules", "src/**/*.spec.ts"]

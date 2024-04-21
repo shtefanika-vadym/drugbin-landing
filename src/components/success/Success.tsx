@@ -1,82 +1,50 @@
-import { QRCode } from 'antd';
-import { useDocumnetQuery } from 'common/api/recycleApi';
-import { SET_SHOW_MODAL } from 'common/slices/modalSlice';
-import { Button } from 'common/ui/Button';
-import { DocumentIcon, SuccessIcon } from 'common/ui/Icon/Icon';
-import ModalPreviewFile from 'common/ui/Modal/ModalPDF';
-import QRCodeWithBorder from 'common/ui/QRCodeWithBorder/QRCodeWithBorder';
-import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import {
-  Container,
-  Description,
-  DocumentWrapper,
-  Title,
-} from './Success.styled';
+import QRCode from "react-qr-code";
+import { useParams } from "react-router-dom";
+import { Button } from "../ui/Button/Button";
+import { AttachmentIcon, CheckCircle } from "../ui/Icon";
+import QRCodeWithBorder from "../ui/QRCodeWithBorder/QRCodeWithBorder";
+import { Container, Description, Title } from "./Success.styled";
 
 export const Success = () => {
-  const dispatch = useDispatch();
   const { id } = useParams();
-  const { data: documentPsycholeptic } = useDocumnetQuery({
-    id,
-    type: 'psycholeptic',
-  });
-  const { data: documentNormal } = useDocumnetQuery({ id, type: 'normal' });
-
-  const handlePVDocument = useCallback(
-    (type: string) => {
-      dispatch(
-        SET_SHOW_MODAL({
-          isOpenModal: true,
-          childModal: (
-            <ModalPreviewFile
-              previewFile={
-                type === 'normal' ? documentNormal : documentPsycholeptic
-              }
-            />
-          ),
-        })
-      );
-    },
-    [dispatch, documentNormal, documentPsycholeptic]
-  );
+  // const { data: documentPsycholeptic } = useDocumnetQuery({
+  //   id,
+  //   type: DocumentType.PSYCHOLEPTIC,
+  // });
+  // const { data: documentNormal, isLoading } = useDocumnetUrlQuery({
+  //   id,
+  //   type: DocumentType.NORMAL,
+  // });
 
   return (
     <Container>
-      <SuccessIcon />
+      <CheckCircle />
       <Title>Cerere de colectare finalizată cu succes!</Title>
       <Description>
         Când ajungi la locația aleasă, trebuie să scanezi acest cod QR pentru a
-        finaliza procesul de colectare. <br /> Mulțumim că ai ales să colectezi
-        medicamentele neutilizate astăzi!
+        finaliza procesul de colectare.
+        <br />
+        Mulțumim că ai ales să colectezi medicamentele neutilizate astăzi!
       </Description>
       <QRCodeWithBorder>
         <QRCode
+          size={256}
+          style={{ height: "auto", maxWidth: "100%", width: "100%" }}
           value={`/gestionare?page=1?id=${id}`}
-          size={150}
-          icon="https://ibb.co/sVVwLVn"
-          iconSize={32}
+          viewBox={`0 0 256 256`}
         />
       </QRCodeWithBorder>
-      <DocumentWrapper>
-        <Button
-          variant="document"
-          onClick={() => handlePVDocument('psycholeptic')}
-        >
-          <DocumentIcon />
-          Declaratie PR Stupefiante
-        </Button>
-        <Button variant="document" onClick={() => handlePVDocument('normal')}>
-          <DocumentIcon />
-          PV Predare General
-        </Button>
-      </DocumentWrapper>
-      {/* <ButtonWrapper>
-        <Button variant="secondary" onClick={downloadQRCode}>
-          Salvează în galerie
-        </Button>
-      </ButtonWrapper> */}
+      <Button variant="document">
+        <AttachmentIcon />
+        Declaratie PR Stupefiante
+      </Button>
+      <Button variant="document">
+        <AttachmentIcon />
+        PV Predare General
+      </Button>
+      {/* {id && documentPsycholeptic && (
+        <DocumentViewer id={id} document={documentPsycholeptic} />
+      )} */}
     </Container>
   );
 };

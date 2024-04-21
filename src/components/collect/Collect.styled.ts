@@ -1,15 +1,15 @@
-import styled from 'styled-components'
+import { flex } from "src/styles/mixins/flex.mixin";
+import { Layout } from "src/layout/Layout/Layout";
+import styled from "styled-components";
+import { WDS_SIZE_032_PX } from "src/styles/tokens";
 
-import { flex } from 'styles/mixins/flex.mixin'
+export const Container = styled(Layout)`
+  min-height: 100vh;
+`;
 
-export const ButtonWrapper = styled.div`
-  width: 100%;
-  ${flex({ justifyContent: 'space-between', alignItems: 'flex-end', alignContent: 'flex-end' })}
-`
+export const InputContainer = styled.div``;
 
-export const Content = styled.div`
-  max-width: 600px;
-  ${flex({ direction: 'column', gap: '24px', alignItems: 'center' })};
-  box-sizing: border-box;
-  padding: 24px 12px;
-`
+export const ButtonContainer = styled.div`
+  ${flex({ justifyContent: "space-between" })};
+  margin-top: ${WDS_SIZE_032_PX};
+`;

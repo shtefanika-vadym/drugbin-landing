@@ -1,140 +1,144 @@
-import {
-  WDS_SIZE_012_PX,
-  WDS_SIZE_014_PX,
-  WDS_SIZE_016_PX,
-  WDS_SIZE_018_PX,
-  WDS_SIZE_020_PX,
-  WDS_SIZE_024_PX,
-  WDS_SIZE_032_PX,
-  WDS_SIZE_040_PX,
-  WDS_SIZE_048_PX,
-  WDS_SIZE_064_PX,
-} from 'styles/size'
+import { Dictionary } from "@/types/utils.types";
 import {
   WDS_TEXT_FAMILY_BASE,
   WDS_TEXT_WEIGHT_BOLD,
-  WDS_TEXT_WEIGHT_DEMI,
   WDS_TEXT_WEIGHT_REGULAR,
-} from 'styles/typography'
-
-export interface Dictionary<T> {
-  [Key: string]: T
-}
+} from "../tokens";
 
 export const TEXT_VARIANT_NAMES = [
-  'bodyXS',
-  'bodyS',
-  'bodyM',
-  'bodyL',
-  'titleH1',
-  'titleH5',
-  'titleH4',
-  'titleH3',
-  'subheading',
-] as const
+  "bodyInfo",
+  "bodyXS",
+  "bodyS",
+  "bodyM",
+  "bodyL",
+  "titleXS",
+  "titleS",
+  "titleM",
+  "titleL",
+  "titleXL",
+  "headlineS",
+  "headlineM",
+  "headlineL",
+  "inputLabel",
+  "inputPlaceholder100",
+] as const;
 
-export type TextVariantName = (typeof TEXT_VARIANT_NAMES)[number]
-export type TextVariantType = TextVariantName
+export type TextVariantType = (typeof TEXT_VARIANT_NAMES)[number];
 
 export interface TextVariant {
-  family: string
-  weight: number | string
-  textTransform: 'none' | 'uppercase'
-  style: 'normal' | 'italic'
-  size: number | string
-  lineHeight: number | string
-  letterSpacing: 'normal' | string
+  family: string;
+  weight: number | string;
+  textTransform: "none" | "uppercase";
+  style: "normal" | "italic";
+  size: number | string;
+  lineHeight: number | string;
+  letterSpacing: "normal" | string;
 }
 
 export const TEXT_VARIANTS: Dictionary<TextVariant> = {
+  titleXL: {
+    family: WDS_TEXT_FAMILY_BASE,
+    size: "48px",
+    lineHeight: "64px",
+    weight: WDS_TEXT_WEIGHT_BOLD,
+    letterSpacing: "normal",
+    textTransform: "none",
+    style: "normal",
+  },
+  titleL: {
+    family: WDS_TEXT_FAMILY_BASE,
+    size: "40px",
+    lineHeight: "48px",
+    weight: WDS_TEXT_WEIGHT_BOLD,
+    letterSpacing: "normal",
+    textTransform: "none",
+    style: "normal",
+  },
+  titleM: {
+    family: WDS_TEXT_FAMILY_BASE,
+    size: "32px",
+    lineHeight: "40px",
+    weight: WDS_TEXT_WEIGHT_BOLD,
+    letterSpacing: "normal",
+    textTransform: "none",
+    style: "normal",
+  },
+  titleS: {
+    family: WDS_TEXT_FAMILY_BASE,
+    size: "24px",
+    lineHeight: "32px",
+    weight: WDS_TEXT_WEIGHT_BOLD,
+    letterSpacing: "normal",
+    textTransform: "none",
+    style: "normal",
+  },
+  titleXS: {
+    family: WDS_TEXT_FAMILY_BASE,
+    size: "15px",
+    lineHeight: "24px",
+    weight: WDS_TEXT_WEIGHT_BOLD,
+    letterSpacing: "normal",
+    textTransform: "none",
+    style: "normal",
+  },
+  bodyInfo: {
+    family: WDS_TEXT_FAMILY_BASE,
+    size: "12px",
+    lineHeight: "16px",
+    weight: WDS_TEXT_WEIGHT_REGULAR,
+    letterSpacing: "normal",
+    textTransform: "none",
+    style: "normal",
+  },
   bodyXS: {
     family: WDS_TEXT_FAMILY_BASE,
-    weight: WDS_TEXT_WEIGHT_DEMI,
-    style: 'normal',
-    size: WDS_SIZE_012_PX,
-    lineHeight: WDS_SIZE_018_PX,
-    textTransform: 'none',
-    letterSpacing: 'normal',
+    size: "14px",
+    lineHeight: "22px",
+    weight: WDS_TEXT_WEIGHT_REGULAR,
+    letterSpacing: "normal",
+    textTransform: "none",
+    style: "normal",
   },
   bodyS: {
     family: WDS_TEXT_FAMILY_BASE,
+    size: "16px",
+    lineHeight: "20px",
     weight: WDS_TEXT_WEIGHT_REGULAR,
-    style: 'normal',
-    size: WDS_SIZE_014_PX,
-    lineHeight: WDS_SIZE_018_PX,
-    textTransform: 'none',
-    letterSpacing: 'normal',
+    letterSpacing: "normal",
+    textTransform: "none",
+    style: "normal",
   },
   bodyM: {
     family: WDS_TEXT_FAMILY_BASE,
+    size: "18px",
+    lineHeight: "20px",
     weight: WDS_TEXT_WEIGHT_REGULAR,
-    style: 'normal',
-    size: WDS_SIZE_016_PX,
-    lineHeight: WDS_SIZE_024_PX,
-    textTransform: 'none',
-    letterSpacing: 'normal',
+    letterSpacing: "normal",
+    textTransform: "none",
+    style: "normal",
   },
-
-  bodyL: {
+  inputLabel: {
     family: WDS_TEXT_FAMILY_BASE,
+    size: "13px",
+    lineHeight: "18px",
     weight: WDS_TEXT_WEIGHT_REGULAR,
-    style: 'normal',
-    size: WDS_SIZE_018_PX,
-    lineHeight: WDS_SIZE_024_PX,
-    textTransform: 'none',
-    letterSpacing: 'normal',
+    letterSpacing: "normal",
+    textTransform: "none",
+    style: "normal",
   },
+  inputPlaceholder100: {
+    family: WDS_TEXT_FAMILY_BASE,
+    size: "13px",
+    lineHeight: "18px",
+    weight: WDS_TEXT_WEIGHT_REGULAR,
+    letterSpacing: "normal",
+    textTransform: "none",
+    style: "normal",
+  },
+};
 
-  titleH1: {
-    family: WDS_TEXT_FAMILY_BASE,
-    weight: WDS_TEXT_WEIGHT_BOLD,
-    style: 'normal',
-    size: WDS_SIZE_048_PX,
-    lineHeight: WDS_SIZE_064_PX,
-    textTransform: 'none',
-    letterSpacing: 'normal',
-  },
-  titleH5: {
-    family: WDS_TEXT_FAMILY_BASE,
-    weight: WDS_TEXT_WEIGHT_BOLD,
-    style: 'normal',
-    size: WDS_SIZE_024_PX,
-    lineHeight: WDS_SIZE_032_PX,
-    textTransform: 'none',
-    letterSpacing: 'normal',
-  },
-  titleH4: {
-    family: WDS_TEXT_FAMILY_BASE,
-    weight: WDS_TEXT_WEIGHT_BOLD,
-    style: 'normal',
-    size: WDS_SIZE_024_PX,
-    lineHeight: WDS_SIZE_032_PX,
-    textTransform: 'none',
-    letterSpacing: 'normal',
-  },
-  titleH3: {
-    family: WDS_TEXT_FAMILY_BASE,
-    weight: WDS_TEXT_WEIGHT_BOLD,
-    style: 'normal',
-    size: WDS_SIZE_032_PX,
-    lineHeight: WDS_SIZE_040_PX,
-    textTransform: 'none',
-    letterSpacing: 'normal',
-  },
-
-  subheading: {
-    family: WDS_TEXT_FAMILY_BASE,
-    weight: WDS_TEXT_WEIGHT_DEMI,
-    style: 'normal',
-    size: WDS_SIZE_016_PX,
-    lineHeight: WDS_SIZE_020_PX,
-    textTransform: 'none',
-    letterSpacing: 'normal',
-  },
-}
-
-export const textVariant = (variantName: TextVariantType) => {
-  const variant = TEXT_VARIANTS[variantName]
+export const textVariant = (variantName: TextVariantType): string => {
+  const variant = Object.assign(TEXT_VARIANTS)[variantName];
 
   return variant
     ? `
@@ -145,11 +149,10 @@ export const textVariant = (variantName: TextVariantType) => {
       line-height: ${variant.lineHeight};
       text-transform: ${variant.textTransform};
       letter-spacing: ${variant.letterSpacing};
-      margin: 0;
       `
     : `
       /* DEBUG */
       /*font-size:18px;*/
       /*color:red!important;*/
-      `
-}
+      `;
+};
