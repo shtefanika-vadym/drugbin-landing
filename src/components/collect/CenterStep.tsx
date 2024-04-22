@@ -4,11 +4,10 @@ import { useCallback, useContext } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useCenterDetailsQuery } from "src/api/drug";
 import { MultipleFormContext } from "src/hooks/useMultipleForm";
-import useToast from "src/hooks/useToast";
 import { Button } from "../ui/Button/Button";
 import { CenterCard } from "../ui/CenterCard/CenterCard";
 import { Dropdown } from "../ui/Dropdown";
-import { Toast, ToastType } from "../ui/Toast/Toast";
+import { ToastType, notify } from "../ui/Toast/CustomToast";
 import { ValidationMessage } from "../ui/ValidationMessage/ValidationMessage";
 import { Container } from "./CenterStep.styled";
 import { ButtonContainer } from "./Collect.styled";
@@ -17,7 +16,6 @@ const DROPDOWN_VALUES = ["Suceava"];
 
 export const CenterStep = () => {
   const { nextStep, prevStep } = useContext(MultipleFormContext);
-  const { notify, toastVisible, toastMessage } = useToast();
   const { data } = useCenterDetailsQuery("");
 
   const {
@@ -32,23 +30,20 @@ export const CenterStep = () => {
     name: "center",
   });
 
+
   const onSubmit = useCallback(() => {
     if (!watchedCenter) {
       notify(
-        "Te rugăm să selectezi un centru de colectare înainte de a continua."
+        "Te rugăm să selectezi un centru de colectare înainte de a continua.",
+        ToastType.ERROR
       );
     } else {
       nextStep();
     }
-  }, [nextStep, notify, watchedCenter]);
+  }, [nextStep, watchedCenter]);
 
   return (
     <Container onSubmit={handleSubmit(onSubmit)}>
-      <Toast
-        message={toastMessage}
-        show={toastVisible}
-        type={ToastType.ERROR}
-      />
       <Dropdown
         name="pack"
         placeholder="EX: Suceava"

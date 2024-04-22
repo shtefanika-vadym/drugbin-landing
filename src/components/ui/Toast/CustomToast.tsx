@@ -1,7 +1,8 @@
 import { WDS_COLOR_ERROR_100, WDS_COLOR_SUCCESS } from "src/styles/tokens";
 import { AlertIcon, SuccessIcon } from "../Icon";
 import { Text } from "../Text/Text";
-import { Container, Icon } from "./Toast.styled";
+import { Container, Icon } from "./CustomToast.styled";
+import { toast } from "react-toastify";
 
 export enum ToastType {
   SUCCES = "succes",
@@ -10,13 +11,11 @@ export enum ToastType {
 
 interface ToastProps {
   message: string;
-  show: boolean;
   type: ToastType;
 }
 
-export const Toast: React.FC<ToastProps> = ({
+export const CustomToast: React.FC<ToastProps> = ({
   message,
-  show,
   type = ToastType.SUCCES,
 }) => {
   const toastColor =
@@ -24,7 +23,7 @@ export const Toast: React.FC<ToastProps> = ({
   const toastIcon = type === ToastType.SUCCES ? <SuccessIcon /> : <AlertIcon />;
 
   return (
-    <Container show={show}>
+    <Container>
       <div>
         <Icon color={toastColor}>{toastIcon}</Icon>
       </div>
@@ -32,3 +31,6 @@ export const Toast: React.FC<ToastProps> = ({
     </Container>
   );
 };
+
+export const notify = (message: string, type: ToastType) =>
+  toast(<CustomToast message={message} type={type} />);

@@ -1,19 +1,17 @@
 import { useCallback, useContext } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useGoogleAnalytics } from "src/analytics/googleAnalyticsInstance";
 import { useRecycleDrugMutation } from "src/api/drug";
 import { MultipleFormContext } from "src/hooks/useMultipleForm";
-import useToast from "src/hooks/useToast";
 import { toCollectDrugs } from "src/utils/mappers";
 import { Button } from "../ui/Button/Button";
 import { Text } from "../ui/Text/Text";
-import { Toast, ToastType } from "../ui/Toast/Toast";
+import { ToastType, notify } from "../ui/Toast/CustomToast";
 import { ButtonContainer } from "./Collect.styled";
 import { Consent, Container, PrivacyPolicy } from "./TermsStep.styled";
-import { useGoogleAnalytics } from "src/analytics/googleAnalyticsInstance";
 
 export const TermsStep = () => {
-  const { notify, toastVisible, toastMessage } = useToast();
   const { prevStep } = useContext(MultipleFormContext);
   const [recycleDrug] = useRecycleDrugMutation();
   const { trackButtonClick } = useGoogleAnalytics();
@@ -42,18 +40,14 @@ export const TermsStep = () => {
       navigate(response?.data);
     } catch (error) {
       notify(
-        "Oops! Ceva nu a mers conform planului. Te rog să încerci din nou mai târziu."
+        "Oops! Ceva nu a mers conform planului. Te rog să încerci din nou mai târziu.",
+        ToastType.ERROR
       );
     }
-  }, [navigate, notify, recycleDrug, trackButtonClick, watchedCenter, watchedDetailsFields, watchedDrugFields]);
+  }, [navigate, recycleDrug, trackButtonClick, watchedCenter, watchedDetailsFields, watchedDrugFields]);
 
   return (
     <Container>
-      <Toast
-        message={toastMessage}
-        show={toastVisible}
-        type={ToastType.ERROR}
-      />
       <PrivacyPolicy>
         <Text>{privacyPolicyText}</Text>
       </PrivacyPolicy>
