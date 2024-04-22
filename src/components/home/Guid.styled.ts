@@ -1,6 +1,7 @@
 import { flex } from "src/styles/mixins/flex.mixin";
 import {
     BREAKPOINTS,
+    WDS_SIZE_024_PX,
     WDS_SIZE_048_PX,
     WDS_SIZE_096_PX,
     WDS_SIZE_350_PX,
@@ -44,6 +45,7 @@ export const Content = styled.div<{ reverse?: boolean }>`
 export const Description = styled.div`
   grid-area: description;
   margin: auto;
+  ${flex({ direction: 'column', gap: WDS_SIZE_024_PX })}
 `;
 
 export const Image = styled.img`

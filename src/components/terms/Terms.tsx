@@ -4,7 +4,7 @@ import { Text } from "../ui/Text/Text";
 export const Terms = () => {
   return (
     <div>
-      <Text variant="titleL">Termenii și condițiile de utilizare</Text>
+      <Text variant="titleL" element="h1">Termenii și condițiile de utilizare</Text>
       <Text variant="bodyXS" element="h2" color={WDS_COLOR_BLUE_100}>
         Ultima actualizare: 21 aprilie 2024
       </Text>

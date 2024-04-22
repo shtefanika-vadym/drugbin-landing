@@ -5,7 +5,7 @@ import { Container } from "./Privacy.styled";
 export const Privacy = () => {
   return (
     <Container>
-      <Text variant="titleL">Politica de Confidențialitate</Text>
+      <Text variant="titleL" element="h1">Politica de Confidențialitate</Text>
       <Text variant="bodyXS" element="h2" color={WDS_COLOR_BLUE_100}>
         Ultima actualizare: 21 aprilie 2024
       </Text>
