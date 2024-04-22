@@ -16,6 +16,7 @@ export const StyledElement = styled(Element)<StyledElementProps>(
   display: block;
   white-space: pre-wrap;
   color: ${color};
+  margin: 0;
 
   ${
     transform &&

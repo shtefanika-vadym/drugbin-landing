@@ -57,6 +57,7 @@ export const NavLink = styled.a`
   color: ${WDS_COLOR_BLUE_100};
   text-decoration: none;
   white-space: nowrap;
+  cursor: pointer;
 `;
 
 export const Navigation = styled.div`

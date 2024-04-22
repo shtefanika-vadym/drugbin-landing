@@ -1,23 +1,26 @@
 import homeImage from "src/assets/images/home_content.png";
 import { Button } from "src/components/ui/Button/Button";
 import { Text } from "src/components/ui/Text/Text";
+import { useScrollTo } from "src/hooks/useScrollTo";
+import { Layout } from "src/layout/Layout/Layout";
 import { WDS_COLOR_PRIMARY_50 } from "src/styles/tokens";
 import { Container, Image } from "./Main.styled";
-import { Layout } from "src/layout/Layout/Layout";
 
 export const Main = () => {
+  const { scrollTo } = useScrollTo();
+
   return (
     <Layout>
       <Container>
-        <Text variant="titleXL">Natura luptă pentru tine! Fă-o și tu!</Text>
-        <Text variant="bodyM">
+        <Text variant="titleXL" element="h1">Natura luptă pentru tine! Fă-o și tu!</Text>
+        <Text variant="bodyM" element="h2">
           1500 de tone de medicamente ajung anual în apele din România!
         </Text>
-        <Text variant="bodyM" color={WDS_COLOR_PRIMARY_50}>
+        <Text variant="bodyM" element="p" color={WDS_COLOR_PRIMARY_50}>
           Nu arunca medicamentele expirate sau neutilizate! Predă-le în centrele
           de colectare special amenajate! Noi te învățăm cum.
         </Text>
-        <Button>Află cum</Button>
+        <Button onClick={() => scrollTo("proces")}>Află cum</Button>
       </Container>
       <Image src={homeImage} alt="Home Content" />
     </Layout>

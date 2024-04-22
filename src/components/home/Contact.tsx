@@ -15,7 +15,6 @@ import { EmailIcon, LocationIcon, PhoneIcon } from "../ui/Icon";
 import { Input } from "../ui/Input/Input";
 import { Text } from "../ui/Text/Text";
 import { Textarea } from "../ui/Textarea/Textarea";
-import { ToastType, notify } from "../ui/Toast/CustomToast";
 import { ValidationMessage } from "../ui/ValidationMessage/ValidationMessage";
 import {
   Container,
@@ -25,6 +24,7 @@ import {
   LeftSection,
   RightSection,
 } from "./Contact.styled";
+import { ToastType, notify } from "../ui/Toast/CustomToast";
 
 type ContactProps = {
   name: string;
@@ -89,19 +89,19 @@ export const Contact = () => {
     <Layout fullWidth color={WDS_COLOR_NEUTRAL_WHITE}>
       <Container>
         <LeftSection>
-          <Text variant="titleL">Contactează-ne</Text>
+          <Text variant="titleL" element="h1">Contactează-ne</Text>
           <Details>
             <Data>
               <EmailIcon />
-              <Text>drugbin.solution@gmail.com</Text>
+              <Text element="p">drugbin.solution@gmail.com</Text>
             </Data>
             <Data>
               <PhoneIcon />
-              <Text>+40 755 493 184</Text>
+              <Text element="p">+40 755 493 184</Text>
             </Data>
             <Data>
               <LocationIcon />
-              <Text>Suceava, Romania</Text>
+              <Text element="p">Suceava, Romania</Text>
             </Data>
           </Details>
         </LeftSection>

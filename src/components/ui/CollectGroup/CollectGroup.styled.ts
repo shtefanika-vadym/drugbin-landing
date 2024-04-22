@@ -15,6 +15,7 @@ export const Container = styled.div`
 
 export const Title = styled(Text).attrs({
   variant: "titleM",
+  element: 'h1'
 })`
   text-align: center;
   padding: ${WDS_SIZE_016_PX} 0;
@@ -22,6 +23,7 @@ export const Title = styled(Text).attrs({
 
 export const Description = styled(Text).attrs({
   variant: "bodyS",
+  element: 'p'
 })`
   text-align: left;
   padding-top: ${WDS_SIZE_016_PX};
