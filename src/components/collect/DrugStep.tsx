@@ -7,11 +7,10 @@ import {
   MultipleFormContext,
   initialDrugValue,
 } from "src/hooks/useMultipleForm";
-import useToast from "src/hooks/useToast";
 import { Button } from "../ui/Button/Button";
 import { Dropdown } from "../ui/Dropdown";
 import { Input } from "../ui/Input/Input";
-import { Toast, ToastType } from "../ui/Toast/Toast";
+import { ToastType, notify } from "../ui/Toast/CustomToast";
 import { ValidationMessage } from "../ui/ValidationMessage/ValidationMessage";
 import { InputContainer } from "./Collect.styled";
 import { Container, Delete, DrugData } from "./DrugStep.styled";
@@ -21,7 +20,6 @@ import { SelectDrug } from "./SelectDrug";
 export const DROPDOWN_VALUES = ["Cutie", "Blister", "Pastila"];
 
 export const DrugStep = () => {
-  const { notify, toastVisible, toastMessage, disableButtons } = useToast();
   const { nextStep } = useContext(MultipleFormContext);
 
   const {
@@ -49,31 +47,27 @@ export const DrugStep = () => {
   );
 
   const handleAddEntry = useCallback(() => {
-    if (isEmpty(errors) && areFieldsValid) {
+    if (areFieldsValid) {
       append(initialDrugValue);
     } else {
-      !disableButtons &&
-        notify(
-          "Vă rugăm să completați detaliile medicamentelor curente înainte de a adăuga altele."
-        );
+      notify(
+        "Vă rugăm să completați detaliile medicamentelor curente înainte de a adăuga altele.",
+        ToastType.ERROR
+      );
     }
-  }, [errors, areFieldsValid, append, disableButtons, notify]);
+  }, [areFieldsValid, append]);
 
   const handleSubmit = useCallback(() => {
     return areFieldsValid
       ? nextStep()
       : notify(
-          "Vă rugăm să completați detaliile medicamentelor curente."
+          "Vă rugăm să completați detaliile medicamentelor curente.",
+          ToastType.ERROR
         );
-  }, [areFieldsValid, nextStep, notify]);
+  }, [areFieldsValid, nextStep]);
 
   return (
     <Container>
-      <Toast
-        message={toastMessage}
-        show={toastVisible}
-        type={ToastType.ERROR}
-      />
       {fields.map((field, index) => (
         <DrugData key={field.id}>
           {gt(watchedFields.length, 1) && (

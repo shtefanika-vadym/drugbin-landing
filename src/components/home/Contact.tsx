@@ -3,7 +3,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { Resolver, SubmitHandler, useForm } from "react-hook-form";
 import { useContactMutation } from "src/api/drug";
-import useToast from "src/hooks/useToast";
 import { Layout } from "src/layout/Layout/Layout";
 import {
   WDS_COLOR_NEUTRAL_WHITE,
@@ -16,7 +15,7 @@ import { EmailIcon, LocationIcon, PhoneIcon } from "../ui/Icon";
 import { Input } from "../ui/Input/Input";
 import { Text } from "../ui/Text/Text";
 import { Textarea } from "../ui/Textarea/Textarea";
-import { Toast, ToastType } from "../ui/Toast/Toast";
+import { ToastType, notify } from "../ui/Toast/CustomToast";
 import { ValidationMessage } from "../ui/ValidationMessage/ValidationMessage";
 import {
   Container,
@@ -52,7 +51,6 @@ export const Contact = () => {
   const [isChecked, setIsChecked] = useState(false);
 
   const [contact, { isLoading, isError }] = useContactMutation();
-  const { notify, toastVisible, toastMessage } = useToast();
   const {
     register,
     handleSubmit,
@@ -69,10 +67,14 @@ export const Contact = () => {
 
     if (!isLoading && !isError) {
       reset();
-      notify("Mulțumim pentru mesaj! Vom reveni în curând. Echipa DrugBin.");
+      notify(
+        "Mulțumim pentru mesaj! Vom reveni în curând. Echipa DrugBin.",
+        ToastType.SUCCES
+      );
     } else {
       notify(
-        "Oops! Ceva nu a mers conform planului. Te rog să încerci din nou mai târziu."
+        "Oops! Ceva nu a mers conform planului. Te rog să încerci din nou mai târziu.",
+        ToastType.ERROR
       );
     }
   };
@@ -85,11 +87,6 @@ export const Contact = () => {
 
   return (
     <Layout fullWidth color={WDS_COLOR_NEUTRAL_WHITE}>
-      <Toast
-        message={toastMessage}
-        show={toastVisible}
-        type={ToastType.SUCCES}
-      />
       <Container>
         <LeftSection>
           <Text variant="titleL">Contactează-ne</Text>

@@ -40,12 +40,12 @@ export const TopNavigation = () => {
           <NavLink onClick={() => scrollTo("contact")}>Contact</NavLink>
           <NavLink href="/collect">Colecteaza</NavLink>
         </Navigation>
-        <LogoS href="/" />
+        <LogoS onClick={() => scrollTo("main")} />
       </DesktopContainer>
 
       <TableContainer>
         <MenuIcon onClick={handleOpenNavigation} />
-        <LogoXS href="/" />
+        <LogoXS onClick={() => scrollTo("main")} />
 
         {isOpen && <MobileNavigation close={handleCloseNavigation} />}
       </TableContainer>
