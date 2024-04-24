@@ -1,6 +1,6 @@
-import GuidImageStep1 from "src/assets/images/guid1.png";
-import GuidImageStep2 from "src/assets/images/guid2.png";
-import GuidImageStep3 from "src/assets/images/guid3.png";
+import GuidImageStep1 from "src/assets/images/guid1.webp";
+import GuidImageStep2 from "src/assets/images/guid2.webp";
+import GuidImageStep3 from "src/assets/images/guid3.webp";
 import { Layout } from "src/layout/Layout/Layout";
 import { Text } from "../ui/Text/Text";
 import { Container, Content, Description, Image } from "./Guid.styled";
@@ -11,7 +11,7 @@ export const Guid: React.FC<{ id: string }> = ({ id }) => {
       <Container id={id}>
         <Content>
           <Description>
-            <Text variant="titleM" element="h1">
+            <Text variant="titleM" element="h2">
               ETAPA 1: IDENTIFICAREA MEDICAMENTELOR
             </Text>
             <Text element="p" variant="bodyS">
@@ -28,7 +28,7 @@ export const Guid: React.FC<{ id: string }> = ({ id }) => {
 
         <Content reverse>
           <Description>
-            <Text variant="titleM" element="h1">
+            <Text variant="titleM" element="h2">
               ETAPA 2: FACILITEAZĂ PROCESUL
             </Text>
             <Text element="p" variant="bodyS">
@@ -44,7 +44,7 @@ export const Guid: React.FC<{ id: string }> = ({ id }) => {
 
         <Content>
           <Description>
-            <Text variant="titleM" element="h1">
+            <Text variant="titleM" element="h2">
               ETAPA 3: PREDARE EFICIENTĂ
             </Text>
             <Text element="p" variant="bodyS">
