@@ -1,4 +1,4 @@
-import homeImage from "src/assets/images/home_content.png";
+import homeImage from "src/assets/images/home_content.webp";
 import { Button } from "src/components/ui/Button/Button";
 import { Text } from "src/components/ui/Text/Text";
 import { useScrollTo } from "src/hooks/useScrollTo";
@@ -13,7 +13,7 @@ export const Main = () => {
     <Layout>
       <Container>
         <Text variant="titleXL" element="h1">Natura luptă pentru tine! Fă-o și tu!</Text>
-        <Text variant="bodyM" element="h2">
+        <Text variant="bodyM" element="h3">
           1500 de tone de medicamente ajung anual în apele din România!
         </Text>
         <Text variant="bodyM" element="p" color={WDS_COLOR_PRIMARY_50}>
