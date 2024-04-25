@@ -4,12 +4,28 @@
     <loc>https://www.drugbin.ro</loc>
     <changefreq>daily</changefreq>
   </url>
-  <url>
-    <loc>https://www.drugbin.ro/proces</loc>
+   <url>
+    <loc>https://www.drugbin.ro/collect</loc>
     <changefreq>weekly</changefreq>
   </url>
    <url>
-    <loc>https://www.drugbin.ro/collect</loc>
+    <loc>https://www.drugbin.ro/terms</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+     <url>
+    <loc>https://www.drugbin.ro/privacy</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+    <url>
+    <loc>https://www.drugbin.ro/article/colectarea-medicamentelor-expirate-sau-neutilizate</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+    <url>
+    <loc>https://www.drugbin.ro/article/rezistenta-la-antibiotice-in-romania</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+    <url>
+    <loc>https://www.drugbin.ro/article/drugbin-ghid-complet-pentru-utilizatori</loc>
     <changefreq>weekly</changefreq>
   </url>
 </urlset>

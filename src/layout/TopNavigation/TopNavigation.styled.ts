@@ -11,6 +11,7 @@ import {
   WDS_SIZE_016_PX,
   WDS_SIZE_022_PX,
   WDS_SIZE_032_PX,
+  WDS_SIZE_048_PX,
   WDS_SIZE_072_PX,
   WDS_SIZE_080_PX,
   WDS_TEXT_WEIGHT_DEMI,
@@ -33,7 +34,14 @@ export const TableContainer = styled.div`
   position: relative;
   ${flex({})};
   width: 100%;
-  padding: ${WDS_SIZE_016_PX};
+
+  @media ${BREAKPOINTS.TABLET_UP_TO} {
+    padding: ${WDS_SIZE_032_PX} ${WDS_SIZE_048_PX};
+  }
+
+  @media ${BREAKPOINTS.MOBILE_UP_TO} {
+    padding: ${WDS_SIZE_032_PX} ${WDS_SIZE_016_PX};
+  }
 
   @media ${BREAKPOINTS.DESKTOP_S} {
     display: none;
@@ -41,6 +49,7 @@ export const TableContainer = styled.div`
 `;
 
 export const DesktopContainer = styled.div`
+  box-sizing: border-box;
   max-width: ${WDS_BREAKPOINT_DESKTOP_M};
   width: 100%;
   padding: ${WDS_SIZE_022_PX} ${WDS_SIZE_080_PX};

@@ -22,6 +22,7 @@ export const ArticleBox: React.FC<ArticleBoxProps> = ({
 
   const handleClick = useCallback(() => {
     navigate(`/article/${path}`);
+    window.scrollTo(0, 0);
   }, [navigate, path]);
 
   return (

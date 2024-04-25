@@ -15,7 +15,7 @@ expirare și consultă un medic sau un farmacist pentru orice nelămurire
 legată de siguranța sau eficacitatea acestuia.
 </p>
 <p>
-Farmaciile au responsabilitatea de a colecta medicamentele expirate de
+Spitalele au responsabilitatea de a colecta medicamentele expirate de
 la populație pentru eliminare prin incinerare, conform legislației în
 vigoare.
 </p>
@@ -49,7 +49,7 @@ expirate sau neutilizate, urmează acești pași:
     </li>
     <li>
       Este recomandat să le separi de ambalajele lor (cutiile din
-      carton, prospectele).
+      carton, prospecte).
     </li>
     <li>
       Verifică cu atenție data de expirare înscrisă pe cutie sau
@@ -78,7 +78,7 @@ expirate sau neutilizate, urmează acești pași:
       expirate sau neutilizate.
     </li>
     <li>
-      Acest lucru va simplifica procesul de predare și întocmirea
+      Acest lucru va simplifica procesul de predare și întocmirea a 
       procesului verbal de predare la centrul de colectare.
     </li>
     <li>
@@ -93,11 +93,6 @@ expirate sau neutilizate, urmează acești pași:
     <li>
       Prezintă codul QR generat de aplicație împreună cu medicamentele
       la centrul de colectare selectat de tine.
-    </li>
-    <li>
-      Personalul din centrul de colectare va prelua medicamentele și
-      va întocmi procesul verbal de predare în conformitate cu
-      detaliile furnizate de tine în aplicație.
     </li>
   </ul>
 </li>
@@ -156,10 +151,14 @@ export const contentTutorial = `<p>În era preocupărilor pentru mediu și săn�
 <p>Începeți prin a identifica toate medicamentele expirate sau nefolosite din casa dumneavoastră. Asigurați-vă că sortați și reciclați corect cutiile din carton, iar pentru medicamentele în blister, acestea vor fi predate la centrul de colectare.</p>
 
 <h2>Pasul 2: Accesarea secțiunii 'Colectare' în aplicația noastră</h2>
-<p>Deschideți aplicația noastră și navigați către secțiunea 'Colectare'. Aici veți găsi un formular simplu de completat pentru a predarea medicamentelor.</p>
+<p>Deschideți aplicația noastră și navigați către secțiunea  <a
+href="https://www.drugbin.ro/collect"
+target="_blank"
+rel="noreferrer"
+>Colectare</a>. Aici veți găsi un formular simplu de completat pentru a predarea medicamentelor.</p>
 
 <h2>Pasul 3: Completarea detaliilor despre medicamente</h2>
-<p>Introduceți numele medicamentelor, tipul de ambalaj (de exemplu, blister) și cantitatea acestora în formular. Asigurați-vă că detaliile introduse sunt corecte pentru o gestionare eficientă a predării medicamentelor.</p>
+<p>Introduceți numele medicamentelor, tipul de ambalaj și cantitatea acestora în formular. Asigurați-vă că detaliile introduse sunt corecte pentru o gestionare eficientă a predării medicamentelor.</p>
 
 <h2>Pasul 4: Introducerea detaliilor personale</h2>
 <p>Dacă aveți medicamente stupefiante, veți fi rugat să furnizați câteva detalii suplimentare, cum ar fi CNP-ul și adresa dumneavoastră. Aceste informații sunt necesare pentru a asigura conformitatea cu reglementările legale și pentru a garanta siguranța procesului.</p>
@@ -168,6 +167,6 @@ export const contentTutorial = `<p>În era preocupărilor pentru mediu și săn�
 <p>Alegeți locația centrului de colectare cel mai convenabil pentru dumneavoastră din lista de opțiuni disponibilă în aplicație.</p>
 
 <h2>Pasul 6: Generarea raportului și prezentarea la centrul de colectare</h2>
-<p>După completarea tuturor detaliilor, aplicația va genera un raport care va fi asociat cu medicamentele predând. Este important să vă prezentați la centrul de colectare cu medicamentele expirate sau nefolosite și cu codul QR generat de aplicație.</p>
+<p>După completarea tuturor detaliilor, aplicația va genera un raport care va fi asociat cu medicamentele predate. Este important să vă prezentați la centrul de colectare cu medicamentele expirate sau nefolosite și cu codul QR generat de aplicație.</p>
 
 <p>Prin contribuția dumneavoastră la acest proces, veți avea un impact pozitiv asupra mediului și asupra sănătății publice. Împreună, putem asigura un viitor mai sănătos și mai sustenabil pentru generațiile viitoare!</p>`

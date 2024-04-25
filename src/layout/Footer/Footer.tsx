@@ -22,10 +22,6 @@ interface CookieConsentObject {
   renew: () => void;
 }
 
-interface Window {
-  CookieConsent: CookieConsentObject | undefined;
-}
-
 declare global {
   interface Window {
     CookieConsent: CookieConsentObject | undefined;
@@ -62,7 +58,13 @@ export const Footer = () => {
           </TopContent>
           <TopContent position="flex-end" gap={WDS_SIZE_012_PX}>
             <InstagramIcon />
-            <LinkedInIcon />
+            <a
+              href="https://www.linkedin.com/company/drugbin-solution"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <LinkedInIcon />
+            </a>
           </TopContent>
         </TopLinks>
         <Border />
