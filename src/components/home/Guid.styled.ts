@@ -1,11 +1,11 @@
 import { flex } from "src/styles/mixins/flex.mixin";
 import {
-    BREAKPOINTS,
-    WDS_SIZE_024_PX,
-    WDS_SIZE_048_PX,
-    WDS_SIZE_096_PX,
-    WDS_SIZE_350_PX,
-    WDS_SIZE_488_PX
+  BREAKPOINTS,
+  WDS_SIZE_024_PX,
+  WDS_SIZE_048_PX,
+  WDS_SIZE_096_PX,
+  WDS_SIZE_272_PX,
+  WDS_SIZE_350_PX
 } from "src/styles/tokens";
 import styled from "styled-components";
 
@@ -25,14 +25,6 @@ export const Content = styled.div<{ reverse?: boolean }>`
   grid-template-areas: ${({ reverse }) =>
     reverse ? '"img description"' : '"description img"'};
 
-  @media ${BREAKPOINTS.TABLET_UP_TO} {
-    grid-template-columns: 1fr;
-    row-gap: ${WDS_SIZE_048_PX};
-    grid-template-areas:
-      "description"
-      "img";
-  }
-
   @media ${BREAKPOINTS.MOBILE_UP_TO} {
     grid-template-columns: 1fr;
     row-gap: ${WDS_SIZE_048_PX};
@@ -45,7 +37,7 @@ export const Content = styled.div<{ reverse?: boolean }>`
 export const Description = styled.div`
   grid-area: description;
   margin: auto;
-  ${flex({ direction: 'column', gap: WDS_SIZE_024_PX })}
+  ${flex({ direction: "column", gap: WDS_SIZE_024_PX })}
 `;
 
 export const Image = styled.img`
@@ -58,6 +50,6 @@ export const Image = styled.img`
   }
 
   @media ${BREAKPOINTS.MOBILE_UP_TO} {
-    height: ${WDS_SIZE_488_PX};
+    height: ${WDS_SIZE_272_PX};
   }
 `;

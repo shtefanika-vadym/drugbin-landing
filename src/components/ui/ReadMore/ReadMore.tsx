@@ -5,14 +5,14 @@ import { Button } from "../Button/Button";
 import { ArrowRight } from "../Icon";
 import { Text } from "../Text/Text";
 import {
-    Box,
-    ButtonWrapper,
-    Container,
-    Description,
-    Title,
-} from "./More.styled";
+  Box,
+  ButtonWrapper,
+  Container,
+  Description,
+  Title,
+} from "./ReadMore.styled";
 
-interface MoreProps {
+interface ReadMoreProps {
   data?: {
     date: string;
     title: string;
@@ -22,13 +22,13 @@ interface MoreProps {
   }[];
 }
 
-// TODO: refactor
-export const More: React.FC<MoreProps> = ({ data }) => {
+export const ReadMore: React.FC<ReadMoreProps> = ({ data }) => {
   const navigate = useNavigate();
 
   const handleClick = useCallback(
     (path: string) => {
       navigate(`/article/${path}`);
+      window.scrollTo(0, 0);
     },
     [navigate]
   );

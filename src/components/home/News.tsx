@@ -1,11 +1,14 @@
 import { Layout } from "src/layout/Layout/Layout";
 import { ARTICLE_DATA } from "src/mockData/news";
 import { ArticleBox } from "../ui/ArticleBox/ArticleBox";
-import { Container } from "./News.styled";
+import { Container, Title } from "./News.styled";
 
 export const News = () => {
   return (
     <Layout>
+      <Title variant="titleL">
+        Materiale educaționale pentru colectarea responsabilă a medicamentelor
+      </Title>
       <Container>
         {ARTICLE_DATA.map((article) => {
           return (
@@ -15,7 +18,7 @@ export const News = () => {
               altImage={article.path}
               title={article.title}
               description={article.description}
-            />  
+            />
           );
         })}
       </Container>

@@ -1,5 +1,6 @@
 import {
   BREAKPOINTS,
+  WDS_SIZE_032_PX,
   WDS_TEXT_FAMILY_BASE,
   WDS_TEXT_WEIGHT_MEDIUM,
   WDS_TEXT_WEIGHT_REGULAR,
@@ -8,7 +9,7 @@ import styled from "styled-components";
 import { Text } from "../ui/Text/Text";
 
 export const Container = styled.div`
-  margin-top: 32px;
+  margin-top: ${WDS_SIZE_032_PX};
   display: grid;
   grid-template-columns: 2.5fr 1fr;
   grid-column-gap: 32px;
@@ -66,6 +67,10 @@ export const Image = styled.img`
 
 export const RightSection = styled.div`
   grid-area: more;
+
+  @media ${BREAKPOINTS.MOBILE_UP_TO} {
+    margin-top: ${WDS_SIZE_032_PX};
+  }
 `;
 
 export const LeftSection = styled.div`
