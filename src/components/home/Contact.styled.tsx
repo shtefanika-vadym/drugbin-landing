@@ -1,15 +1,17 @@
 import { flex } from "src/styles/mixins/flex.mixin";
 import {
-    BREAKPOINTS,
-    WDS_SIZE_016_PX,
-    WDS_SIZE_024_PX,
-    WDS_SIZE_032_PX
+  BREAKPOINTS,
+  WDS_SIZE_016_PX,
+  WDS_SIZE_024_PX,
+  WDS_SIZE_032_PX,
 } from "src/styles/tokens";
 import styled from "styled-components";
 
 export const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  max-width: 1280px;
+  margin: 0 auto;
 
   @media ${BREAKPOINTS.TABLET_UP_TO} {
     grid-template-columns: 1fr;

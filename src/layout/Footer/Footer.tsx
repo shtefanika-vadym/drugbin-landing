@@ -57,6 +57,7 @@ export const Footer = () => {
             <NavLink onClick={() => scrollTo("main")}>Valorile noastre</NavLink>
             <NavLink onClick={() => scrollTo("proces")}>Proces</NavLink>
             <NavLink onClick={() => scrollTo("contact")}>Contact</NavLink>
+            <NavLink onClick={() => scrollTo("stiri")}>Stiri</NavLink>
             <NavLink href="/collect">Colecteaza</NavLink>
           </TopContent>
           <TopContent position="flex-end" gap={WDS_SIZE_012_PX}>
