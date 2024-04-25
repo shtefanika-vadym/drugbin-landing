@@ -11,6 +11,8 @@ export const WDS_COLOR_PRIMARY_100 = '#EBF0FB';
 export const WDS_COLOR_BLUE_100 = '#1C3375'
 export const WDS_COLOR_BLUE_200 = '#F0F2F4'
 export const WDS_COLOR_BLUE_300 = '#011640'
+export const WDS_COLOR_BLUE_400 = '#464797'
+
 
 // GREY
 export const WDS_COLOR_NEUTRALGREY_50 = '#A3A6AD';
