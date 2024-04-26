@@ -118,9 +118,16 @@ export const DetailsStep = () => {
           {...register("details.email", {
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "invalid email address",
+              message: "Adresa de e-mail invalidă",
             },
           })}
+        />
+        <ErrorMessage
+          errors={errors}
+          name={"details.email"}
+          render={({ message }) => (
+            <ValidationMessage>{message}</ValidationMessage>
+          )}
         />
       </InputContainer>
 
