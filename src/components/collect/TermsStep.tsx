@@ -33,18 +33,27 @@ export const TermsStep = () => {
 
   const handleNext = useCallback(async () => {
     trackButtonClick("final step");
-    try {
-      const response: any = await recycleDrug(
-        toCollectDrugs(watchedDetailsFields, watchedDrugFields, watchedCenter)
-      );
-      navigate(response?.data);
-    } catch (error) {
+
+    const response: any = await recycleDrug(
+      toCollectDrugs(watchedDetailsFields, watchedDrugFields, watchedCenter)
+    );
+
+    if (response.error) {
       notify(
         "Oops! Ceva nu a mers conform planului. Te rog să încerci din nou mai târziu.",
         ToastType.ERROR
       );
+    } else {
+      navigate(response?.data);
     }
-  }, [navigate, recycleDrug, trackButtonClick, watchedCenter, watchedDetailsFields, watchedDrugFields]);
+  }, [
+    navigate,
+    recycleDrug,
+    trackButtonClick,
+    watchedCenter,
+    watchedDetailsFields,
+    watchedDrugFields,
+  ]);
 
   return (
     <Container>

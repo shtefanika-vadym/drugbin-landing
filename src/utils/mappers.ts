@@ -26,7 +26,7 @@ export const toCollectDrugs = (
     firstName: personalDetails.name,
     hospitalId: hospitalId,
     lastName: personalDetails?.surname,
-    email: personalDetails?.email,
+    email: personalDetails?.email || null,
     drugList: drugList.map((item: Drugs) => toDrugList(item)),
     addres: personalDetails?.address,
     cnp: personalDetails?.cnp,
