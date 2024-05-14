@@ -9,8 +9,8 @@ export const PrivacyPage = () => {
 
   return (
     <Metadata
-      title="Privacy Policy - DrugBin"
-      description="Ajutăm la eliminarea în siguranță a medicamentelor expirate sau neutilizate. Împreună, susținem un mediu mai sănătos."
+      title="Politica de Confidențialitate"
+      description="Această Politică de Confidențialitate descrie politicile și procedurile noastre referitoare la colectarea, utilizarea și dezvăluirea informațiilor tale atunci când utilizezi Serviciul și îți informează despre drepturile tale privind confidențialitatea și modul în care legea te protejează."
     >
       <Header>
         <Layout>

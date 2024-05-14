@@ -8,7 +8,7 @@ export const CollectPage = () => {
 
   return (
     <Metadata
-      title="Colectează - DrugBin"
+      title="Colectează"
       description="Descoperiți centrele din apropiere pentru eliminarea în siguranță a medicamentelor expirate sau neutilizate. Alăturați-vă mișcării pentru o comunitate mai curată."
     >
       <HeaderCollect>

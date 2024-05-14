@@ -1,6 +1,8 @@
 import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { ARTICLE_DATA } from "src/mockData/news";
+import { Metadata } from "../ui/Metadata/Metadata";
+import { ReadMore } from "../ui/ReadMore/ReadMore";
 import {
   Container,
   Image,
@@ -8,8 +10,6 @@ import {
   RightSection,
   Title,
 } from "./Article.styled";
-import { Metadata } from "../ui/Metadata/Metadata";
-import { ReadMore } from "../ui/ReadMore/ReadMore";
 
 export const Article = () => {
   const { article } = useParams();

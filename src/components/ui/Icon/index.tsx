@@ -20,6 +20,9 @@ import { ReactComponent as PhoneIcon } from "src/assets/icon/phone-line.svg";
 import { ReactComponent as EmailIcon } from "src/assets/icon/mail-line.svg";
 import { ReactComponent as CheckIcon } from "src/assets/icon/check.svg";
 import { ReactComponent as ArrowRight } from "src/assets/icon/arrow-right.svg";
+import { ReactComponent as YouTubeIcon } from "src/assets/icon/youtube.svg";
+import { ReactComponent as TikTokIcon } from "src/assets/icon/tiktok.svg";
+// import { ReactComponent as LocationIcon } from "src/assets/icon/tiktok.svg";
 
 import { ReactComponent as ServiceIcon } from "src/assets/icon/service.svg";
 import { ReactComponent as BenefitIcon } from "src/assets/icon/benefit.svg";
@@ -54,4 +57,6 @@ export {
   EmailIcon,
   CheckIcon,
   ArrowRight,
+  YouTubeIcon,
+  TikTokIcon,
 };

@@ -8,7 +8,7 @@ export const HomePage = () => {
 
   return (
     <Metadata
-      title="DrugBin - Nu arunca medicamentele expirate sau neutilizate! Predă-le în centrele de colectare special amenajate! Noi te învățăm cum."
+      title="Nu arunca medicamentele expirate sau neutilizate! Predă-le în centrele de colectare special amenajate! Noi te învățăm cum."
       description="Ajutăm la eliminarea în siguranță a medicamentelor expirate sau neutilizate. Împreună, susținem un mediu mai sănătos."
     >
       <Header>

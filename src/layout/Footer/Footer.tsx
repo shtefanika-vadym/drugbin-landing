@@ -4,6 +4,8 @@ import {
   LinkedInIcon,
   LogoFooterS,
   LogoFooterXS,
+  TikTokIcon,
+  YouTubeIcon,
 } from "src/components/ui/Icon";
 import { useBreakpoints } from "src/hooks/useBreakpoints";
 import { useScrollTo } from "src/hooks/useScrollTo";
@@ -57,7 +59,21 @@ export const Footer = () => {
             <NavLink href="/collect">Colecteaza</NavLink>
           </TopContent>
           <TopContent position="flex-end" gap={WDS_SIZE_012_PX}>
+            <a
+              href="https://www.youtube.com/channel/UCE4MAh-aJTQhAY3fSpwofNA"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <YouTubeIcon />
+            </a>
             <InstagramIcon />
+            <a
+              href="https://www.tiktok.com/@drugbin.solution?_t=8mBh0qkmqC9&_r=1"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <TikTokIcon />
+            </a>
             <a
               href="https://www.linkedin.com/company/drugbin-solution"
               target="_blank"

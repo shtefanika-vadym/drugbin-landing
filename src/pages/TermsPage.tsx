@@ -9,8 +9,8 @@ export const TermsPage = () => {
 
   return (
     <Metadata
-      title="Terms of Service - DrugBin"
-      description="Ajutăm la eliminarea în siguranță a medicamentelor expirate sau neutilizate. Împreună, susținem un mediu mai sănătos."
+      title="Termenii și condițiile de utilizare"
+      description="Vă rugăm să citiți acești termeni și condiții cu atenție înainte de a utiliza Serviciul nostru. Cuvintele cu litera inițială majusculă au înțelesuri definite în condițiile următoare. Definițiile următoare vor avea același înțeles indiferent dacă apar în singular sau în plural."
     >
       <Header>
         <Layout>

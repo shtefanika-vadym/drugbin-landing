@@ -144,7 +144,6 @@ export const contentRezistentaLaAntibiotice = `<p>În România, rezistența la a
 <p>În plus, este important să se sprijine cercetarea și dezvoltarea de noi antibiotice și alternative la antibiotice, pentru a combate bacteriile rezistente și pentru a asigura că avem opțiuni eficiente de tratament în viitor.</p>
 <p>Rezistența la antibiotice este o problemă complexă și urgentă, care necesită angajament și acțiune imediată din partea autorităților, a profesioniștilor din domeniul sănătății și a publicului în general. Ignorarea acestei amenințe nu este o opțiune - este momentul să acționăm în mod decisiv pentru a proteja eficacitatea antibioticelor și sănătatea viitoare a populației noastre.</p>`;
 
-
 export const contentTutorial = `<p>În era preocupărilor pentru mediu și sănătate publică, este important să avem grijă de modul în care gestionăm medicamentele expirate sau nefolosite. Reciclarea acestora nu numai că protejează mediul înconjurător, dar și previne riscurile legate de consumul incorect sau neadecvat al acestor produse. Cu ajutorul aplicației noastre, procesul de predare a acestor medicamente este simplificat și eficientizat. Iată un ghid pas cu pas pentru utilizarea aplicației noastre în acest sens:</p>
 
 <h2>Pasul 1: Identificarea medicamentelor expirate sau nefolosite</h2>
@@ -169,4 +168,50 @@ rel="noreferrer"
 <h2>Pasul 6: Generarea raportului și prezentarea la centrul de colectare</h2>
 <p>După completarea tuturor detaliilor, aplicația va genera un raport care va fi asociat cu medicamentele predate. Este important să vă prezentați la centrul de colectare cu medicamentele expirate sau nefolosite și cu codul QR generat de aplicație.</p>
 
-<p>Prin contribuția dumneavoastră la acest proces, veți avea un impact pozitiv asupra mediului și asupra sănătății publice. Împreună, putem asigura un viitor mai sănătos și mai sustenabil pentru generațiile viitoare!</p>`
+<p>Prin contribuția dumneavoastră la acest proces, veți avea un impact pozitiv asupra mediului și asupra sănătății publice. Împreună, putem asigura un viitor mai sănătos și mai sustenabil pentru generațiile viitoare!</p>`;
+
+export const gestionareaDeseurilorMedicamentoase = `<div>
+<p>
+    INSTRUCȚIUNE privind modalitatea de gestionare a deșeurilor de medicamente neutilizate și/sau expirate provenite de la populație
+    Văzând Referatul Direcției generale sănătate publică și programe de sănătate nr. A.R./6.227 din 5.04.2024 și Adresa Institutului Național de Sănătate Publică nr. 380 din 5.03.2024,
+    având în vedere art. 2 alin. (6), art. 5 lit. j) și art. 244 alin. (6) din Legea nr. 95/2006 privind reforma în domeniul sănătății, republicată, cu modificările și completările ulterioare,
+    în temeiul art. 7 alin. (4) din Hotărârea Guvernului nr. 144/2010 privind organizarea și funcționarea Ministerului Sănătății, cu modificările și completările ulterioare,
+    ministrul sănătății emite prezenta instrucțiune.
+</p>
+<h3>Art. 1.</h3>
+<p>Prezenta instrucțiune stabilește modalitatea de gestionare a deșeurilor de medicamente neutilizate și/sau expirate provenite de la populație.</p>
+<h3>Art. 2.</h3>
+<p>Deșeurile de medicamente rezultate de la populație sunt reprezentate de medicamente cu termenul de valabilitate depășit, medicamente care nu mai sunt utilizate, reziduuri de medicamente, medicamente care au recipiente deteriorate, medicamente retrase de pe piață etc.</p>
+<h3>Art. 3.</h3>
+<p>Deșeurile de medicamente se depun de către cetățeni la spitale publice sau private, conform programului stabilit și afișat de unitățile respective.</p>
+<ul>
+    <li>Recipientele de colectare a deșeurilor de medicamente se amplasează în curtea spitalului, într-un spațiu special destinat, astfel cum este prevăzut la alin (3).</li>
+    <li>În stabilirea spațiului destinat amplasării recipientelor de colectare a deșeurilor de medicamente de la populație se vor lua în considerare următoarele aspecte:
+        <ul>
+            <li>acces facil al cetățenilor;</li>
+            <li>zonă acoperită;</li>
+            <li>zonă monitorizată, prin personalul de pază sau prin intermediul sistemelor de supraveghere video;</li>
+            <li>asigurarea condițiilor igienico-sanitare.</li>
+        </ul>
+    </li>
+    <li>Deșeurile de medicamente se colectează diferențiat de cele rezultate din activitatea medicală a spitalului, luând în considerare următoarele categorii:
+        <ul>
+            <li>deșeuri de medicamente citotoxice și citostatice — se colectează în recipiente confecționate din carton sau plastic, prevăzute în interior cu sac din polietilenă care să nu permită scurgeri de lichid. Recipientele sunt prevăzute cu sistem antiretur, pentru a împiedica recuperarea deșeurilor;</li>
+            <li>deșeuri de medicamente, altele decât cele citotoxice și citostatice — se colectează în recipiente confecționate din carton sau plastic, prevăzute în interior cu sac din polietilenă care să nu permită scurgeri de lichid. Recipientele sunt prevăzute cu sistem antiretur, pentru a împiedica recuperarea deșeurilor;</li>
+            <li>deșeuri de medicamente aflate în stare lichidă care sunt conținute într-un recipient cu potențial înțepător—tăietor (fiole din sticlă, seringi preumplute cu reziduu de medicament sau goale) — se colectează în recipiente specifice deșeurilor înțepătoare— tăietoare medicale, prevăzute cu sistem de închidere temporară și definitivă;</li>
+            <li>deșeuri de medicamente aflate în recipiente sub presiune — se colectează separat de celelalte categorii, fără a fi eliminate prin incinerare. Acestea urmează circuitul deșeurilor reciclabile.</li>
+        </ul>
+    </li>
+</ul>
+<h3>Art. 4.</h3>
+<p>Deșeurile de medicamente colectate de la populație în recipientele respective intră în circuitul de transport și eliminare a deșeurilor rezultate din activitatea medicală generate de spital, fiind predate operatorilor economici autorizați pentru această activitate, în conformitate cu Ordinul ministrului sănătății nr. 2.829/2022 privind aprobarea Metodologiei de evaluare a autovehiculelor utilizate pentru transportul deșeurilor rezultate din activitatea medicală.</p>
+<h3>Art. 5.</h3>
+<p>În vederea monitorizării activității de preluare a deșeurilor de medicamente de la populație, spitalul desemnează o persoană responsabilă cu această activitate din cadrul spitalului.</p>
+<h3>Art. 6.</h3>
+<p>Generarea deșeurilor de medicamente de la populație se monitorizează de către persoana desemnată, iar cantitățile rezultate în urma cântăririi se consemnează în fișa de evidență internă a gestiunii deșeurilor a spitalului respectiv.</p>
+<h3>Art. 7.</h3>
+<p>Direcțiile de sănătate publică județene și a municipiului București și spitalele publice sau private duc la îndeplinire prevederile prezentei instrucțiuni.</p>
+<h3>Art. 8.</h3>
+<p>Prezenta instrucțiune se publică în Monitorul Oficial al României, Partea I</p>
+<p><strong>P. Ministrul sănătății, Adriana Pistol,</strong><br>secretar de stat<br>București, 4 aprilie 2024.<br>Nr. 6.226.</p>
+</div>`;

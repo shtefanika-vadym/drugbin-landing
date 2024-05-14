@@ -71,6 +71,10 @@ export const buttonVariants = {
     color: ${WDS_COLOR_BLUE_300};
     background-color: ${WDS_COLOR_PRIMARY_100};
   `,
+  white: css`
+    color: ${WDS_COLOR_PRIMARY_50};
+    background-color: ${WDS_COLOR_BUTTON_SECONDARY_BACKGROUND};
+  `,
 };
 
 export const buttonSizes = {

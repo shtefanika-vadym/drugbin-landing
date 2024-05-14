@@ -46,11 +46,13 @@ export const DropdownList = styled.div`
   background: ${WDS_COLOR_NEUTRAL_WHITE};
   ${border({ type: "solid", color: WDS_COLOR_NEUTRALGREY_50 })};
   border-radius: ${WDS_SIZE_008_PX};
+  overflow: scroll;
 `;
 
 export const Select = styled.div`
   ${flex({ direction: "column", gap: WDS_SIZE_020_PX })};
 `;
+
 export const Option = styled.div<{ isActive: boolean }>`
   cursor: pointer;
   ${textVariant("bodyS")};
