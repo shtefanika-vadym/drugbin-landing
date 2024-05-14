@@ -33,6 +33,7 @@ export const Metadata: React.FC<MetadataProps> = ({
 };
 
 export const KEYWORDS = [
+  "medicamente expirate",
   "eliminare medicamente expirate",
   "procedura eliminare medicamente",
   "depozitare medicamente expirate",
@@ -46,9 +47,6 @@ export const KEYWORDS = [
   "sănătate naturală",
   "conștientizare sănătate",
   "gestionare responsabilă medicamente",
-  "siguranță sanitară",
-  "ecologie medicamente",
-  "reciclare sănătoasă",
   "gestionare durabilă medicamente expirate",
   "impactul asupra mediului",
   "sănătatea comunității",

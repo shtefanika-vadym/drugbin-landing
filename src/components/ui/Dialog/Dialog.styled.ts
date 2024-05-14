@@ -15,7 +15,6 @@ import { Button } from "../Button/Button";
 export const DIALOG_MIN_WIDTH = "560px";
 export const DIALOG_MAX_WIDTH = "90%";
 
-//same value as for SidebarNavigation container to keep layout in place
 const DIALOG_CONTAINER_MAX_WIDTH_FOR_TABLET = `${WDS_SIZE_400_PX}`;
 interface DialogContainerProps {
   zIndex?: number;

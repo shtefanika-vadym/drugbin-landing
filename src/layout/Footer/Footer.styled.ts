@@ -38,11 +38,16 @@ export const TopContent = styled.div<{
   position: "flex-end" | "center" | "flex-start";
   gap?: string;
 }>`
-  ${({ position, gap }) => flex({ justifyContent: position, gap: gap })};
+  ${({ position, gap }) =>
+    flex({ justifyContent: position, gap: gap, alignItems: "center" })};
 
   @media ${BREAKPOINTS.MOBILE_UP_TO} {
     ${flex({ justifyContent: "flex-start", gap: WDS_SIZE_012_PX })};
     flex-wrap: wrap;
+  }
+
+  & a {
+    ${flex({ alignItems: "center" })}
   }
 `;
 

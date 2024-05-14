@@ -1,8 +1,9 @@
 import { CenterDetails } from "@/types/drug.types";
 import { ErrorMessage } from "@hookform/error-message";
-import { useCallback, useContext } from "react";
+import { useCallback, useContext, useState } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useCenterDetailsQuery } from "src/api/drug";
+import { useCurrentLocation } from "src/hooks/useCurrentLocation";
 import { MultipleFormContext } from "src/hooks/useMultipleForm";
 import { Button } from "../ui/Button/Button";
 import { CenterCard } from "../ui/CenterCard/CenterCard";
@@ -12,11 +13,14 @@ import { ValidationMessage } from "../ui/ValidationMessage/ValidationMessage";
 import { Container } from "./CenterStep.styled";
 import { ButtonContainer } from "./Collect.styled";
 
-const DROPDOWN_VALUES = ["Suceava"];
-
 export const CenterStep = () => {
+  const [city, setCity] = useState<string>(JUDETE_ROMANIA[0]);
+
   const { nextStep, prevStep } = useContext(MultipleFormContext);
+  const { location, isLoading } = useCurrentLocation();
   const { data } = useCenterDetailsQuery("");
+
+  console.log("location", isLoading, location);
 
   const {
     control,
@@ -30,6 +34,9 @@ export const CenterStep = () => {
     name: "center",
   });
 
+  const handleChangeCities = useCallback((city: string) => {
+    setCity(city);
+  }, []);
 
   const onSubmit = useCallback(() => {
     if (!watchedCenter) {
@@ -48,9 +55,9 @@ export const CenterStep = () => {
         name="pack"
         placeholder="EX: Suceava"
         label="Selectează județul *"
-        selectedOptions={DROPDOWN_VALUES[0]}
-        options={DROPDOWN_VALUES}
-        callbackOnChange={() => console.log("Suceava")}
+        selectedOptions={city}
+        options={JUDETE_ROMANIA}
+        callbackOnChange={handleChangeCities}
       />
       {data?.map((item: CenterDetails) => {
         return (
@@ -78,6 +85,52 @@ export const CenterStep = () => {
         </Button>
         <Button type="submit">Selectează</Button>
       </ButtonContainer>
+      <>{JSON.stringify(location)}</>
     </Container>
   );
 };
+
+const JUDETE_ROMANIA = [
+  "Alba",
+  "Arad",
+  "Argeș",
+  "Bacău",
+  "Bihor",
+  "Bistrița-Năsăud",
+  "Botoșani",
+  "Brașov",
+  "Brăila",
+  "Buzău",
+  "Caraș-Severin",
+  "Călărași",
+  "Cluj",
+  "Constanța",
+  "Covasna",
+  "Dâmbovița",
+  "Dolj",
+  "Galați",
+  "Giurgiu",
+  "Gorj",
+  "Harghita",
+  "Hunedoara",
+  "Ialomița",
+  "Iași",
+  "Ilfov",
+  "Maramureș",
+  "Mehedinți",
+  "Mureș",
+  "Neamț",
+  "Olt",
+  "Prahova",
+  "Satu Mare",
+  "Sălaj",
+  "Sibiu",
+  "Suceava",
+  "Teleorman",
+  "Timiș",
+  "Tulcea",
+  "Vaslui",
+  "Vâlcea",
+  "Vrancea",
+  "Municipiul București",
+];

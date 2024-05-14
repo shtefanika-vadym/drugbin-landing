@@ -3,6 +3,7 @@ import {
   WDS_COLOR_NEUTRAL_WHITE,
   WDS_COLOR_PRIMARY_100,
   WDS_SIZE_012_PX,
+  WDS_SIZE_016_PX,
   WDS_SIZE_024_PX,
   WDS_SIZE_036_PX,
 } from "src/styles/tokens";
@@ -25,7 +26,7 @@ export const Navigation = styled.nav`
   background-color: ${WDS_COLOR_NEUTRAL_WHITE};
   padding: ${WDS_SIZE_024_PX};
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 1px -6px 20px rgba(0, 0, 0, 0.08);
-  border-radius: 16px 16px 0px 0px;
+  border-radius: ${WDS_SIZE_016_PX} ${WDS_SIZE_016_PX} 0px 0px;
   ${flex({ direction: "column", gap: WDS_SIZE_024_PX })};
   transition: transform 0.3s ease-in-out;
   box-sizing: border-box;
@@ -34,6 +35,7 @@ export const Navigation = styled.nav`
 export const NavLink = styled.a`
   ${flex({ gap: WDS_SIZE_012_PX, alignItems: "center" })};
   text-decoration: none;
+  cursor: pointer;
 `;
 
 export const Border = styled.div`
