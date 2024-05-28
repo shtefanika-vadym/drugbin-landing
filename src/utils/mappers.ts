@@ -4,7 +4,7 @@ import {
   SearchDrug,
   SearchDrugResponse,
 } from "@/types/drug.types";
-import { toNumber } from "lodash-es";
+import { toNumber, toString } from "lodash-es";
 
 export const toDrugSearch = (input: SearchDrugResponse[]): SearchDrug[] => {
   return input.map((drug) => {
@@ -29,7 +29,7 @@ export const toCollectDrugs = (
     email: personalDetails?.email || null,
     drugList: drugList.map((item: Drugs) => toDrugList(item)),
     addres: personalDetails?.address,
-    cnp: personalDetails?.cnp,
+    cnp: toString(personalDetails?.cnp),
   };
 };
 
