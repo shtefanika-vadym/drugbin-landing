@@ -2,7 +2,7 @@ import { flex } from "src/styles/mixins/flex.mixin";
 import {
   WDS_COLOR_BLUE_200,
   WDS_SIZE_008_PX,
-  WDS_SIZE_016_PX
+  WDS_SIZE_016_PX,
 } from "src/styles/tokens";
 import styled from "styled-components";
 
@@ -13,4 +13,8 @@ export const Container = styled.div`
   border-radius: ${WDS_SIZE_008_PX};
   box-sizing: border-box;
   ${flex({ gap: WDS_SIZE_016_PX })};
+`;
+
+export const CameraContainer = styled.div`
+  ${flex({ direction: "column" })};
 `;

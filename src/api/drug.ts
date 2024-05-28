@@ -52,6 +52,16 @@ export const drugApi = createApi({
         method: "post",
       }),
     }),
+    drugsIdentify: build.mutation({
+      query: (image) => ({
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        url: "/drugs/identify",
+        data: image,
+        method: "post",
+      }),
+    }),
   }),
 });
 
@@ -67,4 +77,5 @@ export const {
   useRecycleDrugMutation,
   useDocumnetQuery,
   useContactMutation,
+  useDrugsIdentifyMutation,
 } = drugApi;
