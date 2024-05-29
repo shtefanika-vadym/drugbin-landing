@@ -1,4 +1,4 @@
-import { Camera } from "../Camera/Camera";
+import { DrugIdentifier } from "../DrugIdentifier/DrugIdentifier";
 import { CameraIcon, SecureIcon } from "../Icon";
 import { Text } from "../Text/Text";
 import { CameraContainer, Container } from "./InfoBox.styled";
@@ -30,7 +30,7 @@ const renderCameraInfo = () => (
         Poți să folosești camera pentru a scana medicamentul, sau poți introduce
         manual datele.
       </Text>
-      <Camera />
+      <DrugIdentifier />
     </CameraContainer>
   </>
 );
