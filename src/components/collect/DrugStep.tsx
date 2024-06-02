@@ -1,7 +1,7 @@
 import { ErrorMessage } from "@hookform/error-message";
 import { every, gt, isEmpty } from "lodash-es";
 import { useCallback, useContext, useMemo } from "react";
-import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import "react-toastify/dist/ReactToastify.css";
 import {
   MultipleFormContext,
@@ -27,22 +27,20 @@ export const DrugStep = () => {
     register,
     formState: { errors },
     setValue,
+    watch,
   } = useFormContext();
 
-  const { fields, append, remove } = useFieldArray({
+  const { append, remove } = useFieldArray({
     control,
     name: "drug",
     rules: { minLength: 1 },
   });
 
-  const watchedFields = useWatch({
-    control,
-    name: "drug",
-  });
+  const watchedFields = watch("drug");
 
   const areFieldsValid = useMemo(
     () =>
-      every(watchedFields, (item) => !isEmpty(item.name) && item.amount > 0),
+      every(watchedFields, (item) => !isEmpty(item?.name) && item?.amount > 0),
     [watchedFields]
   );
 
@@ -68,7 +66,7 @@ export const DrugStep = () => {
 
   return (
     <Container>
-      {fields.map((field, index) => (
+      {watchedFields.map((field: any, index: number) => (
         <DrugData key={field.id}>
           {gt(watchedFields.length, 1) && (
             <Delete onClick={() => remove(index)}>Șterge</Delete>

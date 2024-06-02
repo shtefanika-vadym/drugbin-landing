@@ -4,6 +4,12 @@ import {
   SearchDrug,
   SearchDrugResponse,
 } from "@/types/drug.types";
+import {
+  DrugsIdentify,
+  DrugsIdentifyList,
+  DrugsIdentifyListResponse,
+  DrugsIdentifyResponse,
+} from "@/types/drugsIdentify.types";
 import { toNumber, toString } from "lodash-es";
 
 export const toDrugSearch = (input: SearchDrugResponse[]): SearchDrug[] => {
@@ -47,4 +53,42 @@ const toDrugPack = (pack: string) => {
   if (pack === "Cutie") return "pack";
   if (pack === "Blister") return "blister";
   if (pack === "Pastila") return "pill";
+};
+
+export const toDrugsIdentify = (
+  input: DrugsIdentifyResponse
+): DrugsIdentify => {
+  return {
+    count: input.result.length,
+    drugs: toDrugsIdentifyList(input.result),
+  };
+};
+
+export const toDrugsIdentifyList = (
+  drugs: DrugsIdentifyListResponse[]
+): DrugsIdentifyList[] => {
+  return drugs.map((drug) => {
+    return {
+      name: {
+        id: null,
+        isPsycholeptic: false,
+        label: drug.name,
+        value: drug.name,
+      },
+      amount: drug.count,
+      pack: drug.package,
+      concentration: drug.concentration,
+      atc: drug.atc,
+    };
+  });
+};
+
+export const toDrugsIdentifyAppend = (drugs: DrugsIdentifyList[]) => {
+  return drugs.map((drug) => {
+    return {
+      name: drug.name,
+      pack: drug.pack,
+      amount: drug.amount,
+    };
+  });
 };

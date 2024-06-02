@@ -36,16 +36,18 @@ export const DialogContainer = styled.dialog.attrs({
 
 export const DialogContainerWithMaxWidth = styled(DialogContainer)`
   @media ${BREAKPOINTS.TABLET} {
-    max-width: ${DIALOG_CONTAINER_MAX_WIDTH_FOR_TABLET};
+    max-width: calc(DIALOG_CONTAINER_MAX_WIDTH_FOR_TABLET);
   }
 `;
 
 export const DialogContent = styled.div`
-  height: 100%;
-  width: 100vw;
+  max-height: 75%;
+  width: 95vw;
   background-color: ${WDS_COLOR_NEUTRAL_WHITE};
   border-radius: ${WDS_SIZE_008_PX};
   overflow: auto;
+  box-sizing: border-box;
+
   @media ${BREAKPOINTS.DESKTOP_S} {
     width: auto;
     min-width: ${DIALOG_MIN_WIDTH};
@@ -55,11 +57,14 @@ export const DialogContent = styled.div`
     box-shadow: 0px 1px 2px rgba(17, 24, 28, 0.16),
       0px 8px 40px rgba(17, 24, 28, 0.2);
   }
+
+  @media ${BREAKPOINTS.MOBILE} {
+    padding: 16px;
+  }
 `;
 
 export const DialogForm = styled.form`
   ${flex({ direction: "column" })};
-  padding: ${WDS_SIZE_024_PX} ${WDS_SIZE_032_PX};
 `;
 
 export const ButtonWrapper = styled.div`

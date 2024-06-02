@@ -16,6 +16,8 @@ export const WDS_COLOR_BLUE_400 = '#464797'
 
 // GREY
 export const WDS_COLOR_NEUTRALGREY_50 = '#A3A6AD';
+export const WDS_COLOR_NEUTRALGREY_100 = '#e5e5e5';
+export const WDS_COLOR_NEUTRALGREY_200 = '#737373';
 
 // ERROR
 export const WDS_COLOR_ERROR_50 = '#FF494B';
