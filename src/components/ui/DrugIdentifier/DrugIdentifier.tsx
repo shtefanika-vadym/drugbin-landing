@@ -1,8 +1,9 @@
 import { useCallback, useRef } from "react";
 import { useDrugsIdentifyMutation } from "src/api/drug";
-import { Container, OpenText } from "./DrugIdentifier.styled";
-import { LoadingScreen } from "../LoadingScreen/LoadingScreen";
 import useDialog from "src/hooks/useDialog";
+import { LoadingScreen } from "../LoadingScreen/LoadingScreen";
+import { Container, OpenText } from "./DrugIdentifier.styled";
+import { DrugIdentifierDialog } from "./DrugIdentifierDialog";
 
 export const DrugIdentifier = () => {
   const inputFileRef = useRef(null);
@@ -18,26 +19,15 @@ export const DrugIdentifier = () => {
     toggleResponseViewerDialog(true);
   }, [toggleResponseViewerDialog]);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const formatDrugObject = (obj: any) => {
-    const formattedObject = {
-      drugName: {
-        drugId: obj.id,
-        name: obj.name,
-        value: obj.name,
-      },
-      pack: "Pack",
-      quantity: 1,
-      expirationDate: obj?.expirationDate || null,
-      lot: obj?.lot || null,
-    };
-
-    return formattedObject;
-  };
+  const closeDialog = useCallback(() => {
+    toggleResponseViewerDialog(false);
+  }, [toggleResponseViewerDialog]);
 
   const handleFileUpload = async (event: any) => {
     const image = event.target.files[0];
     const response = await drugsIdentify({ image });
+
+    openDialog();
 
     if ("data" in response) {
       openDialog();
@@ -50,8 +40,9 @@ export const DrugIdentifier = () => {
 
   return (
     <Container>
-      <ResponseViewerDialog {...responseViewerDialogProps}>
-        <pre>{JSON.stringify(data, null, 2)}</pre>
+      <ResponseViewerDialog {...responseViewerDialogProps} closeButton={true}>
+        {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
+        <DrugIdentifierDialog data={data} closeDialog={closeDialog} />
       </ResponseViewerDialog>
       <input
         id="file-upload"

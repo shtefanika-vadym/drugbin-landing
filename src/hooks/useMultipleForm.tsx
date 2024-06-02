@@ -76,3 +76,4 @@ export const useMultipleForm = (totalSteps: number) => {
     prevStep,
   };
 };
+

@@ -23,6 +23,7 @@ export type DialogProps = {
   preventClosingOnClickOutside?: boolean;
   zIndex?: number;
   hasRightCloseIcon?: boolean;
+  closeButton?: boolean;
 };
 
 export const Dialog: React.FC<DialogProps> = ({
@@ -36,6 +37,7 @@ export const Dialog: React.FC<DialogProps> = ({
   preventClosingOnClickOutside = true,
   zIndex,
   hasRightCloseIcon = true,
+  closeButton = true,
 }) => {
   const contentRef = useRef(null);
 
@@ -77,18 +79,24 @@ export const Dialog: React.FC<DialogProps> = ({
   return (
     <DialogWrapper zIndex={zIndex}>
       <DialogContent ref={contentRef}>
-        <DialogForm>
-          <ButtonWrapper>
-            <CloseButton variant="ghost" size="XS" onClick={handleCloseIfOpen}>
-              {closeIcon}
-            </CloseButton>
-          </ButtonWrapper>
-          {heading && (
-            <Text variant="bodyM" element="h1">
-              {heading}
-            </Text>
-          )}
-        </DialogForm>
+        {closeButton && (
+          <DialogForm>
+            <ButtonWrapper>
+              <CloseButton
+                variant="ghost"
+                size="XS"
+                onClick={handleCloseIfOpen}
+              >
+                {closeIcon}
+              </CloseButton>
+            </ButtonWrapper>
+            {heading && (
+              <Text variant="bodyM" element="h1">
+                {heading}
+              </Text>
+            )}
+          </DialogForm>
+        )}
         {children}
       </DialogContent>
     </DialogWrapper>

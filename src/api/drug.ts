@@ -2,8 +2,9 @@ import { SearchDrugResponse } from "@/types/drug.types";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import type { BaseQueryFn } from "@reduxjs/toolkit/src/query/baseQueryTypes";
 import type { EndpointBuilder } from "@reduxjs/toolkit/src/query/endpointDefinitions";
-import { toDrugSearch } from "src/utils/mappers";
+import { toDrugSearch, toDrugsIdentify } from "src/utils/mappers";
 import { api, baseQuery } from ".";
+import { DrugsIdentifyResponse } from "@/types/drugsIdentify.types";
 
 export const drugApi = createApi({
   reducerPath: "drug",
@@ -61,6 +62,9 @@ export const drugApi = createApi({
         data: image,
         method: "post",
       }),
+      transformResponse: (respons: DrugsIdentifyResponse) => {
+        return toDrugsIdentify(respons);
+      },
     }),
   }),
 });

@@ -7,17 +7,17 @@ import store from "./store/store";
 
 function App() {
   return (
-    <Metadata
-      title="DrugBin"
-      description="Ajutăm la eliminarea în siguranță a medicamentelor expirate sau neutilizate. Împreună, susținem un mediu mai sănătos."
-    >
-      <Provider store={store}>
-        <Container>
-          <Routes />
-          <StyledContainer position="top-center" hideProgressBar limit={1} />
-        </Container>
-      </Provider>
-    </Metadata>
+      <Metadata
+        title="DrugBin"
+        description="Ajutăm la eliminarea în siguranță a medicamentelor expirate sau neutilizate. Împreună, susținem un mediu mai sănătos."
+      >
+        <Provider store={store}>
+          <Container>
+            <Routes />
+            <StyledContainer position="top-center" hideProgressBar limit={1} />
+          </Container>
+        </Provider>
+      </Metadata>
   );
 }
 
