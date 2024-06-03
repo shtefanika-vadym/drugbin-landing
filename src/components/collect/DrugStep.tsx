@@ -1,6 +1,6 @@
 import { ErrorMessage } from "@hookform/error-message";
-import { every, gt, isEmpty } from "lodash-es";
-import { useCallback, useContext, useMemo } from "react";
+import { every, gt } from "lodash-es";
+import { useCallback, useContext } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -9,7 +9,7 @@ import {
 } from "src/hooks/useMultipleForm";
 import { Button } from "../ui/Button/Button";
 import { Dropdown } from "../ui/Dropdown";
-import { Input } from "../ui/Input/Input";
+import { QuantityInput } from "../ui/QuantityInput/QuantityInput";
 import { ToastType, notify } from "../ui/Toast/CustomToast";
 import { ValidationMessage } from "../ui/ValidationMessage/ValidationMessage";
 import { InputContainer } from "./Collect.styled";
@@ -38,10 +38,9 @@ export const DrugStep = () => {
 
   const watchedFields = watch("drug");
 
-  const areFieldsValid = useMemo(
-    () =>
-      every(watchedFields, (item) => !isEmpty(item?.name) && item?.amount > 0),
-    [watchedFields]
+  const areFieldsValid = every(
+    watchedFields,
+    (item) => item?.name?.value && item.amount > 0
   );
 
   const handleAddEntry = useCallback(() => {
@@ -102,9 +101,12 @@ export const DrugStep = () => {
           />
 
           <InputContainer>
-            <Input
-              type="number"
+            <QuantityInput
+              callbackOnChange={(number) =>
+                setValue(`drug.${index}.amount`, number)
+              }
               label="Cantitatea *"
+              value={watchedFields[index]?.amount}
               {...register(`drug.${index}.amount`, {
                 required: "Cantitatea este un câmp obligatoriu.",
                 valueAsNumber: true,
