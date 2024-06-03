@@ -37,6 +37,7 @@ export const WDS_SIZE_030_PX = "1.875rem";
 export const WDS_SIZE_032_PX = "2rem";
 export const WDS_SIZE_036_PX = "2.25rem";
 export const WDS_SIZE_040_PX = "2.5rem";
+export const WDS_SIZE_042_PX = "2.62rem";
 export const WDS_SIZE_048_PX = "3rem";
 export const WDS_SIZE_050_PX = "3.125rem";
 export const WDS_SIZE_056_PX = "3.5rem";
