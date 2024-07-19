@@ -45,7 +45,7 @@ export const QuantityInput = React.forwardRef<
         <Button variant="ghost" size="S" onClick={handleDecrement}>
           <MinusIcon />
         </Button>
-        <Button variant="ghost" size="FULL" onClick={handleIncrement}>
+        <Button variant="ghost" size="S" onClick={handleIncrement}>
           <PlusIcon />
         </Button>
       </ButtonWrapper>

@@ -12,7 +12,9 @@ export const Main = () => {
   return (
     <Layout>
       <Container>
-        <Text variant="titleXL" element="h1">Natura luptă pentru tine! Fă-o și tu!</Text>
+        <Text variant="titleXL" element="h1">
+          Natura luptă pentru tine! Fă-o și tu!
+        </Text>
         <Text variant="bodyM" element="h3">
           1500 de tone de medicamente ajung anual în apele din România!
         </Text>

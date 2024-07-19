@@ -25,6 +25,7 @@ import { ReactComponent as TikTokIcon } from "src/assets/icon/tiktok.svg";
 import { ReactComponent as EditIcon } from "src/assets/icon/edit-3.svg";
 import { ReactComponent as PlusIcon } from "src/assets/icon/plus-add.svg";
 import { ReactComponent as MinusIcon } from "src/assets/icon/minus.svg";
+import { ReactComponent as EmptyIcon } from "src/assets/icon/empty.svg";
 
 import { ReactComponent as ServiceIcon } from "src/assets/icon/service.svg";
 import { ReactComponent as BenefitIcon } from "src/assets/icon/benefit.svg";
@@ -64,4 +65,5 @@ export {
   EditIcon,
   PlusIcon,
   MinusIcon,
+  EmptyIcon,
 };

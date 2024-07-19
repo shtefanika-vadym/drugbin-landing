@@ -35,17 +35,20 @@ export const toCollectDrugs = (
     email: personalDetails?.email || null,
     drugList: drugList.map((item: Drugs) => toDrugList(item)),
     addres: personalDetails?.address,
-    cnp: toString(personalDetails?.cnp),
+    cnp: personalDetails?.cnp ? toString(personalDetails?.cnp) : null,
   };
 };
 
+// TODO: REMOVE THIS WHEN BACKEND IS FIXED
 const toDrugList = (input: Drugs) => {
   return {
     lot: null,
     quantity: toNumber(input.amount),
-    pack: toDrugPack(input.pack),
+    // pack: toDrugPack(input.pack),
+    pack: "pack",
     expirationDate: null,
-    drugId: input.name.id,
+    // drugId: input.name.id
+    drugId: input.name.id ?? 1,
   };
 };
 
