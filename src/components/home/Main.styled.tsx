@@ -33,3 +33,13 @@ export const Image = styled.img`
     height: 270px;
   }
 `;
+
+export const Video = styled.video`
+  width: 100%;
+  padding-top: ${WDS_SIZE_024_PX};
+
+  @media ${BREAKPOINTS.MOBILE_UP_TO} {
+    height: 270px;
+  }
+`;
+

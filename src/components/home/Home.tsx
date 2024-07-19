@@ -6,6 +6,7 @@ import { Container } from "./Home.styled";
 import { Main } from "./Main";
 import { News } from "./News";
 import { useCallback } from "react";
+import { Layout } from "src/layout/Layout/Layout";
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -23,6 +24,15 @@ export const Home = () => {
         <Guid id="proces" />
       </section>
       <EventBanner onClick={handleNavigateCollect} />
+      <Layout>
+        <iframe
+          width="100%"
+          height="553"
+          src="https://www.youtube.com/embed/CBFiP44TRvU"
+          title="Tu Știi Ce Să Faci cu Medicamentele Expirate?"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        />
+      </Layout>
       <section id="stiri">
         <News />
       </section>

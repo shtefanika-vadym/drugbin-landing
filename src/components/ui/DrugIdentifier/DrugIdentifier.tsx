@@ -1,3 +1,4 @@
+import { DrugsIdentify } from "@/types/drugsIdentify.types";
 import { useCallback, useRef } from "react";
 import { useDrugsIdentifyMutation } from "src/api/drug";
 import useDialog from "src/hooks/useDialog";
@@ -23,11 +24,11 @@ export const DrugIdentifier = () => {
     toggleResponseViewerDialog(false);
   }, [toggleResponseViewerDialog]);
 
-  const handleFileUpload = async (event: any) => {
-    const image = event.target.files[0];
+  const handleFileUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const image = event?.target?.files?.[0];
     const response = await drugsIdentify({ image });
-
-    openDialog();
 
     if ("data" in response) {
       openDialog();
@@ -41,8 +42,10 @@ export const DrugIdentifier = () => {
   return (
     <Container>
       <ResponseViewerDialog {...responseViewerDialogProps} closeButton={true}>
-        {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
-        <DrugIdentifierDialog data={data} closeDialog={closeDialog} />
+        <DrugIdentifierDialog
+          data={data as DrugsIdentify}
+          closeDialog={closeDialog}
+        />
       </ResponseViewerDialog>
       <input
         id="file-upload"

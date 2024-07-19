@@ -1,10 +1,11 @@
 import { SearchDrugResponse } from "@/types/drug.types";
+import { DrugsIdentifyResponse } from "@/types/drugsIdentify.types";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import type { BaseQueryFn } from "@reduxjs/toolkit/src/query/baseQueryTypes";
 import type { EndpointBuilder } from "@reduxjs/toolkit/src/query/endpointDefinitions";
+import { ApiResponse } from "apisauce";
 import { toDrugSearch, toDrugsIdentify } from "src/utils/mappers";
 import { api, baseQuery } from ".";
-import { DrugsIdentifyResponse } from "@/types/drugsIdentify.types";
 
 export const drugApi = createApi({
   reducerPath: "drug",
