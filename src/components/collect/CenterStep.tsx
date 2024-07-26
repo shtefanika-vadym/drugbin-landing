@@ -1,6 +1,6 @@
 import { CenterDetails } from "@/types/drug.types";
 import { ErrorMessage } from "@hookform/error-message";
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useCenterDetailsQuery } from "src/api/drug";
 import { useCurrentLocation } from "src/hooks/useCurrentLocation";
@@ -10,17 +10,16 @@ import { CenterCard } from "../ui/CenterCard/CenterCard";
 import { Dropdown } from "../ui/Dropdown";
 import { ToastType, notify } from "../ui/Toast/CustomToast";
 import { ValidationMessage } from "../ui/ValidationMessage/ValidationMessage";
-import { Container } from "./CenterStep.styled";
+import { Container, DropdownWrapper, LocationButton } from "./CenterStep.styled";
 import { ButtonContainer } from "./Collect.styled";
+import { LocationIcon } from "../ui/Icon";
 
 export const CenterStep = () => {
   const [city, setCity] = useState<string>(JUDETE_ROMANIA[0]);
 
   const { nextStep, prevStep } = useContext(MultipleFormContext);
-  const { location, isLoading } = useCurrentLocation();
+  const { location, getCurrentLocation } = useCurrentLocation();
   const { data } = useCenterDetailsQuery("");
-
-  console.log("location", isLoading, location);
 
   const {
     control,
@@ -51,14 +50,19 @@ export const CenterStep = () => {
 
   return (
     <Container onSubmit={handleSubmit(onSubmit)}>
-      <Dropdown
-        name="pack"
-        placeholder="EX: Suceava"
-        label="Selectează județul *"
-        selectedOptions={city}
-        options={JUDETE_ROMANIA}
-        callbackOnChange={handleChangeCities}
-      />
+      <DropdownWrapper>
+        <Dropdown
+          name="pack"
+          placeholder="EX: Suceava"
+          label="Selectează județul *"
+          selectedOptions={city}
+          options={JUDETE_ROMANIA}
+          callbackOnChange={handleChangeCities}
+        />
+        <LocationButton variant="ghost" size="XS" type='button' onClick={getCurrentLocation}>
+          <LocationIcon />
+        </LocationButton>
+      </DropdownWrapper>
       {data?.map((item: CenterDetails) => {
         return (
           <CenterCard
@@ -85,7 +89,7 @@ export const CenterStep = () => {
         </Button>
         <Button type="submit">Selectează</Button>
       </ButtonContainer>
-      <>{JSON.stringify(location)}</>
+      <>{location && JSON.stringify(location)}</>
     </Container>
   );
 };

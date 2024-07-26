@@ -5,7 +5,7 @@ import {
   WDS_SIZE_048_PX,
   WDS_SIZE_096_PX,
   WDS_SIZE_272_PX,
-  WDS_SIZE_350_PX
+  WDS_SIZE_350_PX,
 } from "src/styles/tokens";
 import styled from "styled-components";
 
@@ -16,6 +16,13 @@ export const Container = styled.div`
   @media ${BREAKPOINTS.MOBILE_UP_TO} {
     ${flex({ direction: "column", gap: WDS_SIZE_048_PX })}
   }
+`;
+
+export const TopContent = styled.div`
+  max-width: 847px;
+  ${flex({ direction: "column", gap: WDS_SIZE_024_PX  })}
+  text-align: center;
+  margin: 0 auto;
 `;
 
 export const Content = styled.div<{ reverse?: boolean }>`

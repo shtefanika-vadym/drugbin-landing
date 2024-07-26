@@ -3,12 +3,46 @@ import GuidImageStep2 from "src/assets/images/guid2.webp";
 import GuidImageStep3 from "src/assets/images/guid3.webp";
 import { Layout } from "src/layout/Layout/Layout";
 import { Text } from "../ui/Text/Text";
-import { Container, Content, Description, Image } from "./Guid.styled";
+import {
+  Container,
+  Content,
+  Description,
+  Image,
+  TopContent,
+} from "./Guid.styled";
 
 export const Guid: React.FC<{ id: string }> = ({ id }) => {
   return (
     <Layout>
       <Container id={id}>
+        <TopContent>
+          <Text variant="titleM" element="h2">
+            Ce trebuie să știi?
+          </Text>
+          <Text element="p" variant="bodyS">
+            Medicamentele expirate sau neutilizate sunt deșeuri periculoase și
+            se predau la punctele de colectare special amenajate din cadrul
+            spitalelor publice și private din România. Putem genera, cu o simplă
+            fotografie, un proces verbal de predare, astfel încât să nu existe
+            riscuri privind traficul cu medicamente iar predarea acestora să
+            decurgă în mod sigur și elegant. Trebuie doar să poziționezi toate
+            medicamentele în fața camerei foto, cât mai vizibil. Dacă predarea
+            nu se face pe bază de proces verbal, atunci trebuie să știi că
+            medicamentele se colectează în patru categorii distincte:
+            {/* <ul>
+              <li>Deșeuri de medicamente citotoxice și citostatice</li>
+              <li>Deșeuri de medicamente (cu excepția primei categorii)</li>
+              <li>
+                Deșeuri de medicamente aflate în stare lichidă cu potențial
+                înțepător
+              </li>
+              <li>
+                Deșeuri de medicamente aflate în recipiente sub presiune
+                (spray-uri)
+              </li>
+            </ul> */}
+          </Text>
+        </TopContent>
         <Content>
           <Description>
             <Text variant="titleM" element="h2">
@@ -16,17 +50,8 @@ export const Guid: React.FC<{ id: string }> = ({ id }) => {
             </Text>
             <Text element="p" variant="bodyS">
               Identifică, acasă, medicamentele expirate sau cele pe care nu le
-              mai folosești. Trebuie să știi că, medicamentele expirate sau
-              neutilizate sunt <b>deșeuri periculoase</b> și se predau la
-              punctele de colectare special amenajate din cadrul{" "}
-              <b>spitalelor publice și private din România</b>. Conform
-              instrucțiunilor emise de către Ministerul Sănătății privind
-              gestionarea deșeurilor medicale neutilizate provenite de la
-              populație, deșeurile de medicamente rezultate de la populație sunt
-              reprezentate de medicamente cu termenul de valabilitate depășit,
-              medicamente care nu mai sunt utilizate, reziduuri de medicamente,
-              medicamente care au recipiente deteriorate, medicamente retrase de
-              pe piață etc.
+              mai folosești și generează procesul verbal de predare în maxim un
+              minut, cu o simplă fotografie
             </Text>
           </Description>
           <Image src={GuidImageStep1} alt="Guid" />
@@ -58,16 +83,9 @@ export const Guid: React.FC<{ id: string }> = ({ id }) => {
               ETAPA 3
             </Text>
             <Text element="p" variant="bodyS">
-              Cu o simplă poză, cu telefonul tău, la ce urmează să predai (fie
-              medicamente în blistere sau medicamente în ambalajul lor original)
-              putem genera instant un proces verbal de predare, astfel încât
-              acest proces să decurgă în siguranță sau te îndrumăm Cum să predai
-              corect medicamentele expirate sau neutilizate. Aplicația va
-              genera, în urma fotografierii medicamentelor expirate sau
-              neutilizate pe care urmează să le predai, detalii privind tipurile
-              de produse pe care le ai și separarea lor fizică, încă de acasă,
-              astfel încât procesul de predare la centrul de colectare să fie
-              <b> Rapid</b>, <b>Sigur</b> și <b>Eficient</b>.
+              Prezintă procesul verbal de predare la centrele partenere. Astfel,
+              procesul de predare poate să decurgă<b> Rapid</b>, <b>Sigur</b> și{" "}
+              <b>Eficient</b>.
             </Text>
           </Description>
           <Image src={GuidImageStep3} alt="Guid" />
