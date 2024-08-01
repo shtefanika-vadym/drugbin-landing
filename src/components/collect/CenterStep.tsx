@@ -1,8 +1,11 @@
 import { CenterDetails } from "@/types/drug.types";
 import { ErrorMessage } from "@hookform/error-message";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
-import { useCenterDetailsQuery } from "src/api/drug";
+import {
+  useCitiesQuery
+} from "src/api/drug";
+import { useCenter } from "src/hooks/useCenter";
 import { useCurrentLocation } from "src/hooks/useCurrentLocation";
 import { MultipleFormContext } from "src/hooks/useMultipleForm";
 import { Button } from "../ui/Button/Button";
@@ -10,16 +13,16 @@ import { CenterCard } from "../ui/CenterCard/CenterCard";
 import { Dropdown } from "../ui/Dropdown";
 import { ToastType, notify } from "../ui/Toast/CustomToast";
 import { ValidationMessage } from "../ui/ValidationMessage/ValidationMessage";
-import { Container, DropdownWrapper, LocationButton } from "./CenterStep.styled";
+import { Container, DropdownWrapper } from "./CenterStep.styled";
 import { ButtonContainer } from "./Collect.styled";
-import { LocationIcon } from "../ui/Icon";
 
 export const CenterStep = () => {
-  const [city, setCity] = useState<string>(JUDETE_ROMANIA[0]);
+  const [city, setCity] = useState<string>();
 
   const { nextStep, prevStep } = useContext(MultipleFormContext);
-  const { location, getCurrentLocation } = useCurrentLocation();
-  const { data } = useCenterDetailsQuery("");
+  const { verifyLocationAccess } = useCurrentLocation();
+  const { data: cities } = useCitiesQuery("");
+  const { centers } = useCenter(city);
 
   const {
     control,
@@ -48,6 +51,11 @@ export const CenterStep = () => {
     }
   }, [nextStep, watchedCenter]);
 
+  const handleCurrentLocation = async () => {
+    await verifyLocationAccess();
+    setCity("");
+  };
+
   return (
     <Container onSubmit={handleSubmit(onSubmit)}>
       <DropdownWrapper>
@@ -56,20 +64,21 @@ export const CenterStep = () => {
           placeholder="EX: Suceava"
           label="Selectează județul *"
           selectedOptions={city}
-          options={JUDETE_ROMANIA}
+          options={cities}
           callbackOnChange={handleChangeCities}
         />
-        <LocationButton variant="ghost" size="XS" type='button' onClick={getCurrentLocation}>
-          <LocationIcon />
-        </LocationButton>
       </DropdownWrapper>
-      {data?.map((item: CenterDetails) => {
+      <Button variant="secondary" type="button" onClick={handleCurrentLocation}>
+        Găsește locația cea mai apropiată
+      </Button>
+      {centers?.map((item: CenterDetails) => {
         return (
           <CenterCard
             key={item?.id}
             name={item?.name}
-            location={item?.location}
-            street={item?.street}
+            latitude={item?.lat}
+            longitude={item?.lng}
+            street={item?.fullAddress}
             schedule={item?.schedule}
             handleSelect={() => setValue("center", item.id)}
             isActive={watchedCenter === item?.id}
@@ -89,7 +98,6 @@ export const CenterStep = () => {
         </Button>
         <Button type="submit">Selectează</Button>
       </ButtonContainer>
-      <>{location && JSON.stringify(location)}</>
     </Container>
   );
 };

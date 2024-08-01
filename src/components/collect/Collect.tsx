@@ -29,7 +29,7 @@ const steps = [
   {
     title: "Colectează medicamente",
     description:
-      "Este timpul să alegi spitalul (de stat sau privat) unde urmează să predai medicamentele, în mod gratuit.",
+      "Este timpul să alegi centrul de colectare unde urmează să predai medicamentele.",
     mandatoryField: false,
     renderComponent: <CenterStep />,
   },
