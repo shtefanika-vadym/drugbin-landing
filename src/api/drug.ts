@@ -3,7 +3,6 @@ import { DrugsIdentifyResponse } from "@/types/drugsIdentify.types";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import type { BaseQueryFn } from "@reduxjs/toolkit/src/query/baseQueryTypes";
 import type { EndpointBuilder } from "@reduxjs/toolkit/src/query/endpointDefinitions";
-import { ApiResponse } from "apisauce";
 import { toDrugSearch, toDrugsIdentify } from "src/utils/mappers";
 import { api, baseQuery } from ".";
 
@@ -13,7 +12,7 @@ export const drugApi = createApi({
   endpoints: (build: EndpointBuilder<BaseQueryFn, string, string>) => ({
     drug: build.query({
       query: ({ query, limit }) => ({
-        url: `/drugs/search/?${query && `name=${query}&`}limit=${limit}`,
+        url: `/drugs/search/?${query && `name=${query}&`}limit=10000`,
       }),
       transformResponse: (respons: SearchDrugResponse[]) => {
         return toDrugSearch(respons);
@@ -22,6 +21,21 @@ export const drugApi = createApi({
     centerDetails: build.query({
       query: () => ({
         url: `/hospitals`,
+      }),
+    }),
+    closestCenterDetails: build.query({
+      query: ({ latitude, longitude }) => ({
+        url: `/hospitals/location?lat=47.151726&lng=27.587914`,
+      }),
+    }),
+    countiesCenterDetails: build.query({
+      query: (city) => ({
+        url: `/hospitals?county=${city}`,
+      }),
+    }),
+    cities: build.query({
+      query: () => ({
+        url: `/hospitals/counties`,
       }),
     }),
     recycleDrug: build.mutation({
@@ -79,6 +93,9 @@ export const getDrugsRequest = (query: string, limit: number) =>
 export const {
   useDrugQuery,
   useCenterDetailsQuery,
+  useClosestCenterDetailsQuery,
+  useCountiesCenterDetailsQuery,
+  useCitiesQuery,
   useRecycleDrugMutation,
   useDocumnetQuery,
   useContactMutation,

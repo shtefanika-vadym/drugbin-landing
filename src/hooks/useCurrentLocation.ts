@@ -1,3 +1,4 @@
+import { isNil } from "lodash-es";
 import { useCallback, useEffect, useState } from "react";
 import { ToastType, notify } from "src/components/ui/Toast/CustomToast";
 
@@ -13,9 +14,14 @@ export const useCurrentLocation = () => {
     longitude: null,
   });
 
+  const isLocationValid =
+    !isNil(location.latitude) && !isNil(location.longitude);
+
   const getCurrentLocation = useCallback(() => {
     setIsLoading(true);
-    if (!navigator.geolocation) return;
+    if (!navigator.geolocation) {
+      return notify("A apărut o eroare necunoscută.", ToastType.ERROR);
+    }
 
     navigator.geolocation.getCurrentPosition(
       handleLocationSuccess,
@@ -30,6 +36,7 @@ export const useCurrentLocation = () => {
       });
 
       if (permissionStatus.state === "granted") getCurrentLocation();
+      if (permissionStatus.state === "prompt") getCurrentLocation();
     } catch (error) {
       console.error("Error checking geolocation permission:", error);
     }
@@ -70,9 +77,9 @@ export const useCurrentLocation = () => {
     }
   };
 
-  useEffect(() => {
-    verifyLocationAccess();
-  }, [verifyLocationAccess]);
+  // useEffect(() => {
+  //   verifyLocationAccess();
+  // }, [verifyLocationAccess]);
 
-  return { getCurrentLocation, isLoading, location };
+  return { getCurrentLocation, verifyLocationAccess, isLocationValid, isLoading, location };
 };

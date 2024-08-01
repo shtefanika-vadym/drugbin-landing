@@ -20,7 +20,9 @@ export interface CenterDetails {
   id: number;
   location: string;
   name: string;
-  street: string;
+  fullAddress: string;
+  lng: string;
+  lat: string;
   schedule: string[];
 }
 
