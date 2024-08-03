@@ -5,6 +5,7 @@ import useDialog from "src/hooks/useDialog";
 import { LoadingScreen } from "../LoadingScreen/LoadingScreen";
 import { Container, OpenText } from "./DrugIdentifier.styled";
 import { DrugIdentifierDialog } from "./DrugIdentifierDialog";
+import { ToastType, notify } from "../Toast/CustomToast";
 
 export const DrugIdentifier = () => {
   const inputFileRef = useRef(null);
@@ -33,7 +34,7 @@ export const DrugIdentifier = () => {
     if ("data" in response) {
       openDialog();
     } else {
-      console.error("Error in response", response.error);
+      notify("A apărut o eroare necunoscută.", ToastType.ERROR);
     }
   };
 

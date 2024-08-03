@@ -1,5 +1,5 @@
 import { isNil } from "lodash-es";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { ToastType, notify } from "src/components/ui/Toast/CustomToast";
 
 interface PositionType {
@@ -37,6 +37,12 @@ export const useCurrentLocation = () => {
 
       if (permissionStatus.state === "granted") getCurrentLocation();
       if (permissionStatus.state === "prompt") getCurrentLocation();
+      if (permissionStatus.state === "denied") {
+        notify(
+          "Accesul la locație a fost refuzat. Vă rugăm să activați această opțiune în setările browserului dumneavoastră.",
+          ToastType.ERROR
+        );
+      }
     } catch (error) {
       console.error("Error checking geolocation permission:", error);
     }
@@ -77,9 +83,10 @@ export const useCurrentLocation = () => {
     }
   };
 
-  // useEffect(() => {
-  //   verifyLocationAccess();
-  // }, [verifyLocationAccess]);
-
-  return { getCurrentLocation, verifyLocationAccess, isLocationValid, isLoading, location };
+  return {
+    verifyLocationAccess,
+    isLocationValid,
+    isLoading,
+    location,
+  };
 };

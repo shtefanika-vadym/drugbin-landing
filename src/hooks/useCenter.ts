@@ -3,25 +3,42 @@ import {
   useClosestCenterDetailsQuery,
   useCountiesCenterDetailsQuery,
 } from "src/api/drug";
-import { useCurrentLocation } from "./useCurrentLocation";
 
-export const useCenter = (city?: string) => {
-  const { location, isLocationValid } = useCurrentLocation();
+interface UseCenterProps {
+  city?: string;
+  isLocationValid: boolean;
+  location: {
+    latitude: number | null;
+    longitude: number | null;
+  };
+}
 
-  const { data: allCenter, isLoading: isLoadingAllCenter } =
+export const useCenter = ({
+  city,
+  isLocationValid,
+  location,
+}: UseCenterProps) => {
+  const { data: allCenters, isLoading: isLoadingAllCenters } =
     useCenterDetailsQuery("");
-  const { data: closestCenter, isLoading: isLoadingClosestCenter } =
+  const { data: nearestCenter, isLoading: isLoadingNearestCenter } =
     useClosestCenterDetailsQuery(location, {
       skip: !isLocationValid,
     });
-  const { data: cityCenters, isLoading: isLoadingCityCenters } =
+  const { data: citySpecificCenters, isLoading: isLoadingCitySpecificCenters } =
     useCountiesCenterDetailsQuery(city, {
       skip: !city,
     });
 
-  const centers = closestCenter ?? cityCenters ?? allCenter;
+  // TODO: make this code easy to understand
+  const centersToReturn = city
+    ? citySpecificCenters
+    : isLocationValid
+    ? [nearestCenter]
+    : allCenters;
   const isLoading =
-    isLoadingAllCenter || isLoadingClosestCenter || isLoadingCityCenters;
+    isLoadingAllCenters ||
+    isLoadingNearestCenter ||
+    isLoadingCitySpecificCenters;
 
-  return { centers, isLoading };
+  return { centers: centersToReturn, isLoading };
 };

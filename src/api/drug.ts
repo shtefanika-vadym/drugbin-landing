@@ -5,6 +5,7 @@ import type { BaseQueryFn } from "@reduxjs/toolkit/src/query/baseQueryTypes";
 import type { EndpointBuilder } from "@reduxjs/toolkit/src/query/endpointDefinitions";
 import { toDrugSearch, toDrugsIdentify } from "src/utils/mappers";
 import { api, baseQuery } from ".";
+import { orderBy } from "lodash-es";
 
 export const drugApi = createApi({
   reducerPath: "drug",
@@ -25,7 +26,7 @@ export const drugApi = createApi({
     }),
     closestCenterDetails: build.query({
       query: ({ latitude, longitude }) => ({
-        url: `/hospitals/location?lat=47.151726&lng=27.587914`,
+        url: `/hospitals/location?lat=${latitude}&lng=${longitude}`,
       }),
     }),
     countiesCenterDetails: build.query({
@@ -37,6 +38,9 @@ export const drugApi = createApi({
       query: () => ({
         url: `/hospitals/counties`,
       }),
+      transformResponse: (respons: string[]) => {
+        return orderBy(respons, [], ["asc"]);
+      },
     }),
     recycleDrug: build.mutation({
       query: (product) => ({
