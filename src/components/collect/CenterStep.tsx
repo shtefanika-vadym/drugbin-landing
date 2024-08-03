@@ -1,29 +1,23 @@
 import { CenterDetails } from "@/types/drug.types";
 import { ErrorMessage } from "@hookform/error-message";
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
-import {
-  useCitiesQuery
-} from "src/api/drug";
+import { useCitiesQuery } from "src/api/drug";
 import { useCenter } from "src/hooks/useCenter";
 import { useCurrentLocation } from "src/hooks/useCurrentLocation";
 import { MultipleFormContext } from "src/hooks/useMultipleForm";
 import { Button } from "../ui/Button/Button";
 import { CenterCard } from "../ui/CenterCard/CenterCard";
 import { Dropdown } from "../ui/Dropdown";
+import { Loader } from "../ui/Loader";
 import { ToastType, notify } from "../ui/Toast/CustomToast";
 import { ValidationMessage } from "../ui/ValidationMessage/ValidationMessage";
 import { Container, DropdownWrapper } from "./CenterStep.styled";
+import { CenterStepSkeleton } from "./CenterStepSkeleton";
 import { ButtonContainer } from "./Collect.styled";
 
 export const CenterStep = () => {
-  const [city, setCity] = useState<string>();
-
   const { nextStep, prevStep } = useContext(MultipleFormContext);
-  const { verifyLocationAccess } = useCurrentLocation();
-  const { data: cities } = useCitiesQuery("");
-  const { centers } = useCenter(city);
-
   const {
     control,
     formState: { errors },
@@ -36,12 +30,36 @@ export const CenterStep = () => {
     name: "center",
   });
 
-  const handleChangeCities = useCallback((city: string) => {
-    setCity(city);
-  }, []);
+  const {
+    verifyLocationAccess,
+    location,
+    isLocationValid,
+    isLoading: isLocationLoading,
+  } = useCurrentLocation();
+  const { data: cities } = useCitiesQuery("");
+  const { centers, isLoading } = useCenter({
+    city: watchedCenter?.centerCity,
+    isLocationValid,
+    location,
+  });
+
+  const handleChangeCenter = useCallback(
+    (centerID: number | null) => {
+      setValue("center.centerID", centerID);
+    },
+    [setValue]
+  );
+
+  const handleChangeCities = useCallback(
+    (city: string) => {
+      setValue("center.centerCity", city);
+      handleChangeCenter(null);
+    },
+    [setValue, handleChangeCenter]
+  );
 
   const onSubmit = useCallback(() => {
-    if (!watchedCenter) {
+    if (!watchedCenter.centerID) {
       notify(
         "Te rugăm să selectezi un centru de colectare înainte de a continua.",
         ToastType.ERROR
@@ -49,11 +67,37 @@ export const CenterStep = () => {
     } else {
       nextStep();
     }
-  }, [nextStep, watchedCenter]);
+  }, [nextStep, watchedCenter.centerID]);
 
   const handleCurrentLocation = async () => {
     await verifyLocationAccess();
-    setCity("");
+    setValue("center.centerCity", null);
+    handleChangeCenter(null);
+  };
+
+  const renderCenterCard = () => {
+    if (isLoading || isLocationLoading) {
+      return <CenterStepSkeleton />;
+    }
+
+    return (
+      <>
+        {centers?.map((item: CenterDetails) => {
+          return (
+            <CenterCard
+              key={item?.id}
+              name={item?.name}
+              latitude={item?.lat}
+              longitude={item?.lng}
+              street={item?.fullAddress}
+              schedule={item?.schedule}
+              handleSelect={() => handleChangeCenter(item.id)}
+              isActive={watchedCenter.centerID === item?.id}
+            />
+          );
+        })}
+      </>
+    );
   };
 
   return (
@@ -63,28 +107,22 @@ export const CenterStep = () => {
           name="pack"
           placeholder="EX: Suceava"
           label="Selectează județul *"
-          selectedOptions={city}
+          selectedOptions={watchedCenter.centerCity}
           options={cities}
           callbackOnChange={handleChangeCities}
         />
       </DropdownWrapper>
-      <Button variant="secondary" type="button" onClick={handleCurrentLocation}>
-        Găsește locația cea mai apropiată
+      <Button
+        variant="secondary"
+        type="button"
+        disabled={isLocationLoading}
+        onClick={handleCurrentLocation}
+      >
+        <Loader isLoading={isLocationLoading} size={14} justify="center">
+          Găsește locația cea mai apropiată
+        </Loader>
       </Button>
-      {centers?.map((item: CenterDetails) => {
-        return (
-          <CenterCard
-            key={item?.id}
-            name={item?.name}
-            latitude={item?.lat}
-            longitude={item?.lng}
-            street={item?.fullAddress}
-            schedule={item?.schedule}
-            handleSelect={() => setValue("center", item.id)}
-            isActive={watchedCenter === item?.id}
-          />
-        );
-      })}
+      {renderCenterCard()}
       <ErrorMessage
         errors={errors}
         name={"center"}
@@ -101,48 +139,3 @@ export const CenterStep = () => {
     </Container>
   );
 };
-
-const JUDETE_ROMANIA = [
-  "Alba",
-  "Arad",
-  "Argeș",
-  "Bacău",
-  "Bihor",
-  "Bistrița-Năsăud",
-  "Botoșani",
-  "Brașov",
-  "Brăila",
-  "Buzău",
-  "Caraș-Severin",
-  "Călărași",
-  "Cluj",
-  "Constanța",
-  "Covasna",
-  "Dâmbovița",
-  "Dolj",
-  "Galați",
-  "Giurgiu",
-  "Gorj",
-  "Harghita",
-  "Hunedoara",
-  "Ialomița",
-  "Iași",
-  "Ilfov",
-  "Maramureș",
-  "Mehedinți",
-  "Mureș",
-  "Neamț",
-  "Olt",
-  "Prahova",
-  "Satu Mare",
-  "Sălaj",
-  "Sibiu",
-  "Suceava",
-  "Teleorman",
-  "Timiș",
-  "Tulcea",
-  "Vaslui",
-  "Vâlcea",
-  "Vrancea",
-  "Municipiul București",
-];

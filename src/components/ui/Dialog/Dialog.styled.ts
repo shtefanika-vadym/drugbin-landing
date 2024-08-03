@@ -3,11 +3,8 @@ import {
   BREAKPOINTS,
   WDS_COLOR_NEUTRAL_WHITE,
   WDS_SIZE_008_PX,
-  WDS_SIZE_024_PX,
-  WDS_SIZE_032_PX,
   WDS_SIZE_048_PX,
-  WDS_SIZE_400_PX,
-  WDS_Z_INDEX_THROBBER,
+  WDS_Z_INDEX_THROBBER
 } from "src/styles/tokens";
 import styled from "styled-components";
 import { Button } from "../Button/Button";
@@ -15,7 +12,7 @@ import { Button } from "../Button/Button";
 export const DIALOG_MIN_WIDTH = "560px";
 export const DIALOG_MAX_WIDTH = "90%";
 
-const DIALOG_CONTAINER_MAX_WIDTH_FOR_TABLET = `${WDS_SIZE_400_PX}`;
+// const DIALOG_CONTAINER_MAX_WIDTH_FOR_TABLET = `${WDS_SIZE_400_PX}`;
 interface DialogContainerProps {
   zIndex?: number;
 }
@@ -35,9 +32,9 @@ export const DialogContainer = styled.dialog.attrs({
 `;
 
 export const DialogContainerWithMaxWidth = styled(DialogContainer)`
-  @media ${BREAKPOINTS.TABLET} {
+  /* @media ${BREAKPOINTS.TABLET} {
     max-width: calc(DIALOG_CONTAINER_MAX_WIDTH_FOR_TABLET);
-  }
+  } */
 `;
 
 export const DialogContent = styled.div`

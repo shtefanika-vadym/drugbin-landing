@@ -57,6 +57,7 @@ export const buttonVariants = {
     }
     &:disabled {
       ${border({ inside: true, color: WDS_COLOR_NEUTRALGREY_50 })}
+      background-color: ${WDS_COLOR_BUTTON_SECONDARY_BACKGROUND} !important;
     }
   `,
   ghost: css`

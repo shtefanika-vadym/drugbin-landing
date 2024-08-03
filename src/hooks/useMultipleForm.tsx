@@ -22,7 +22,10 @@ type FromValuse = {
     address: string | null;
     email: string | null;
   };
-  center: null | number;
+  center: {
+    centerID: null | number;
+    centerCity: null | string;
+  };
 };
 
 export const initialDrugValue = {
@@ -37,6 +40,11 @@ export const initialDetailsValue = {
   cnp: null,
   address: null,
   email: null,
+};
+
+export const initialCenterValue = {
+  centerID: null,
+  centerCity: null,
 };
 
 export const MultipleFormContext = createContext<MultipleFormContextProps>({
@@ -55,7 +63,7 @@ export const useMultipleForm = (totalSteps: number) => {
     defaultValues: {
       drug: [initialDrugValue],
       details: initialDetailsValue,
-      center: null,
+      center: initialCenterValue,
     },
     mode: "onTouched",
   });
@@ -76,4 +84,3 @@ export const useMultipleForm = (totalSteps: number) => {
     prevStep,
   };
 };
-
