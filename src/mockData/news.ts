@@ -69,7 +69,7 @@ export const ARTICLE_DATA = [
   {
     title: "DrugBin: Ghidul complet pentru utilizatori",
     description:
-      "În era preocupărilor pentru mediu și sănătate publică, este important să avem grijă de modul în care gestionăm medicamentele expirate sau nefolosite. Reciclarea acestora nu numai că protejează mediul înconjurător, dar și previne riscurile legate de consumul incorect sau neadecvat al acestor produse. Cu ajutorul aplicației noastre, procesul de predare a acestor medicamente este simplificat și eficientizat. Iată un ghid pas cu pas pentru utilizarea aplicației noastre în acest sens:",
+      "În era preocupărilor pentru mediu și sănătate publică, este important să avem grijă de modul în care gestionăm medicamentele expirate sau nefolosite. Colectarea acestora nu numai că protejează mediul înconjurător, dar și previne riscurile legate de consumul incorect sau neadecvat al acestor produse. Cu ajutorul aplicației noastre, procesul de predare a acestor medicamente este simplificat și eficientizat. Iată un ghid pas cu pas pentru utilizarea aplicației noastre în acest sens:",
     content: contentTutorial,
     image: guidImage,
     path: "drugbin-ghid-complet-pentru-utilizatori",

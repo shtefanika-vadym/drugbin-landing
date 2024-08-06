@@ -15,14 +15,14 @@ const steps = [
   {
     title: "Colectează medicamente",
     description:
-      "Completează datele despre medicamentele pe care vrei sa le reciclezi, va dura doar câteva minute. Poți să adaugi mai multe medicamente spre reciclare.",
+      "Completează datele despre medicamentele pe care vrei să le colectezi, va dura doar câteva secunde. Poți adăuga și preda mai multe medicamente." ,
     infoType: InfoType.CAMERA,
     renderComponent: <DrugStep />,
   },
   {
     title: "Colectează medicamente",
     description:
-      "Acum este momentul să introduci datele tale personale. Avem nevoie de acestea pentru a asigura calitatea procesului de recilcare și siguranța tuturor, inclusiv a ta.",
+      "Acum este momentul să introduci datele tale personale. Avem nevoie de acestea pentru a asigura calitatea procesului de colectare și siguranța tuturor, inclusiv a ta.",
     infoType: InfoType.SECURE,
     renderComponent: <DetailsStep />,
   },
