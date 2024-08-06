@@ -61,6 +61,15 @@ const toDrugPack = (pack: string): string => {
   return packMapping[pack] || "entity";
 };
 
+const fromDrugPack = (pack: string): string => {
+  const packMapping: { [key: string]: string } = {
+    box: "Cutie",
+    entity: "Unitate",
+  };
+
+  return packMapping[pack] || "Unitate";
+};
+
 export const toDrugsIdentify = (
   input: DrugsIdentifyResponse
 ): DrugsIdentify => {
@@ -82,7 +91,7 @@ export const toDrugsIdentifyList = (
         value: drug.name,
       },
       amount: drug.count,
-      pack: drug.package,
+      pack: fromDrugPack(drug.package ?? ""),
       concentration: drug.concentration,
       atc: drug.atc,
     };

@@ -14,6 +14,7 @@ interface DrugIdentifierEditProps {
     field: keyof DrugsIdentifyList,
     value: ChangeEvent<HTMLInputElement>
   ) => void;
+  disable?: boolean;
 }
 
 export const DrugIdentifierEdit: React.FC<DrugIdentifierEditProps> = ({
@@ -21,6 +22,7 @@ export const DrugIdentifierEdit: React.FC<DrugIdentifierEditProps> = ({
   index,
   field,
   handleModify,
+  disable,
 }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const contentRef = useRef(null);
@@ -36,12 +38,13 @@ export const DrugIdentifierEdit: React.FC<DrugIdentifierEditProps> = ({
     }
   }, [isEditing]);
 
-
   const close = useCallback(() => {
     setIsEditing(false);
   }, []);
 
   useOnClickOutside(contentRef, close);
+
+  if (disable) return <MainText>{children}</MainText>;
 
   return (
     <Container ref={contentRef}>

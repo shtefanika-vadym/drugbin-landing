@@ -32,6 +32,7 @@ export const DrugIdentifierBox: React.FC<DrugIdentifierBoxProps> = ({
             handleModify={handleModify}
             index={index}
             field="name"
+            disable
           >
             {data?.name.value}
           </DrugIdentifierEdit>
@@ -45,6 +46,7 @@ export const DrugIdentifierBox: React.FC<DrugIdentifierBoxProps> = ({
             handleModify={handleModify}
             index={index}
             field="amount"
+            disable
           >
             {data.amount}
           </DrugIdentifierEdit>
@@ -55,6 +57,7 @@ export const DrugIdentifierBox: React.FC<DrugIdentifierBoxProps> = ({
             handleModify={handleModify}
             index={index}
             field="pack"
+            disable
           >
             Unitate
           </DrugIdentifierEdit>
