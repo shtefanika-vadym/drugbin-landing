@@ -17,7 +17,7 @@ import { Container, Delete, DrugData } from "./DrugStep.styled";
 import { SelectDrug } from "./SelectDrug";
 
 // TODO: Get from API
-export const DROPDOWN_VALUES = ["Cutie", "Blister", "Pastila"];
+export const DROPDOWN_VALUES = ["Cutie", "Unitate"];
 
 export const DrugStep = () => {
   const { nextStep } = useContext(MultipleFormContext);

@@ -30,7 +30,7 @@ type FromValuse = {
 
 export const initialDrugValue = {
   name: "",
-  pack: "Blister",
+  pack: "Cutie",
   amount: 1,
 };
 
