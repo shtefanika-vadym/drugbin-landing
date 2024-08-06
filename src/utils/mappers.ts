@@ -42,20 +42,23 @@ export const toCollectDrugs = (
 // TODO: REMOVE THIS WHEN BACKEND IS FIXED
 const toDrugList = (input: Drugs) => {
   return {
-    lot: null,
     quantity: toNumber(input.amount),
-    // pack: toDrugPack(input.pack),
-    pack: "pack",
+    pack: toDrugPack(input.pack),
+    atc: null,
+    name: input.name,
+    prescription: null,
+    concentration: null,
     expirationDate: null,
-    // drugId: input.name.id
-    drugId: input.name.id ?? 1,
   };
 };
 
-const toDrugPack = (pack: string) => {
-  if (pack === "Cutie") return "pack";
-  if (pack === "Blister") return "blister";
-  if (pack === "Pastila") return "pill";
+const toDrugPack = (pack: string): string => {
+  const packMapping: { [key: string]: string } = {
+    Cutie: "box",
+    Unitate: "entity",
+  };
+
+  return packMapping[pack] || "entity";
 };
 
 export const toDrugsIdentify = (

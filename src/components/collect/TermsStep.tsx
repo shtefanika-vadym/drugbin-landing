@@ -35,7 +35,7 @@ export const TermsStep = () => {
     trackButtonClick("final step");
 
     const response: any = await recycleDrug(
-      toCollectDrugs(watchedDetailsFields, watchedDrugFields, watchedCenter)
+      toCollectDrugs(watchedDetailsFields, watchedDrugFields, watchedCenter?.centerID)
     );
 
     if (response.error) {

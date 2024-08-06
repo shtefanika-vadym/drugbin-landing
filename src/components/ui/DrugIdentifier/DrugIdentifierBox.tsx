@@ -1,13 +1,11 @@
 import { DrugsIdentifyList } from "@/types/drugsIdentify.types";
-import {
-  ChangeEvent
-} from "react";
+import { ChangeEvent } from "react";
 import {
   Container,
   DataContainer,
   Description,
   Divider,
-  Row
+  Row,
 } from "./DrugIdentifierBox.styled";
 import { DrugIdentifierEdit } from "./DrugIdentifierEdit";
 
@@ -30,7 +28,11 @@ export const DrugIdentifierBox: React.FC<DrugIdentifierBoxProps> = ({
     <Container>
       <Row columns={1}>
         <DataContainer>
-          <DrugIdentifierEdit handleModify={handleModify} index={index} field="name">
+          <DrugIdentifierEdit
+            handleModify={handleModify}
+            index={index}
+            field="name"
+          >
             {data?.name.value}
           </DrugIdentifierEdit>
           <Description>Nume</Description>
@@ -39,14 +41,22 @@ export const DrugIdentifierBox: React.FC<DrugIdentifierBoxProps> = ({
       <Divider />
       <Row>
         <DataContainer>
-          <DrugIdentifierEdit handleModify={handleModify} index={index} field="amount">
+          <DrugIdentifierEdit
+            handleModify={handleModify}
+            index={index}
+            field="amount"
+          >
             {data.amount}
           </DrugIdentifierEdit>
           <Description>Cantitate</Description>
         </DataContainer>
         <DataContainer>
-          <DrugIdentifierEdit handleModify={handleModify} index={index} field="pack">
-            {data.pack || ""}
+          <DrugIdentifierEdit
+            handleModify={handleModify}
+            index={index}
+            field="pack"
+          >
+            Unitate
           </DrugIdentifierEdit>
           <Description>Tipul de ambalaj</Description>
         </DataContainer>
@@ -54,4 +64,3 @@ export const DrugIdentifierBox: React.FC<DrugIdentifierBoxProps> = ({
     </Container>
   );
 };
-
