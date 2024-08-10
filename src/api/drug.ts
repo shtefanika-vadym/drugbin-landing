@@ -21,7 +21,7 @@ export const drugApi = createApi({
     }),
     centerDetails: build.query({
       query: () => ({
-        url: `/hospitals?page=1&limit=10`,
+        url: `/hospitals?page=1&limit=20`,
       }),
     }),
     closestCenterDetails: build.query({

@@ -8,6 +8,7 @@ export interface DrugsIdentifyListResponse {
   package: string | null;
   concentration: string | null;
   atc: string | null;
+  prescription: string | null;
 }
 
 export interface DrugsIdentifyList {
@@ -17,10 +18,11 @@ export interface DrugsIdentifyList {
     label: string;
     value: string;
     atc: string | null;
+    prescription: string | null;
+    concentration: string | null;
   };
   amount: number;
   pack: string | null;
-  concentration: string | null;
   atc: string | null;
 }
 

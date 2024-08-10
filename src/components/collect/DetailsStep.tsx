@@ -25,7 +25,7 @@ export const DetailsStep = () => {
   });
 
   const isPsycholeptic = useMemo(
-    () => some(watchedDrugFields, (item) => item.name.isPsycholeptic === true),
+    () => some(watchedDrugFields, (item) => item.name.atc?.includes('N05')),
     [watchedDrugFields]
   );
 

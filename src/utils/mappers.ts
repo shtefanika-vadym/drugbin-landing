@@ -20,6 +20,8 @@ export const toDrugSearch = (input: SearchDrugResponse[]): SearchDrug[] => {
       isPsycholeptic: drug.isPsycholeptic,
       id: drug.id,
       atc: drug.atc,
+      prescription: drug.prescription,
+      concentration: drug.concentration,
     };
   });
 };
@@ -40,15 +42,15 @@ export const toCollectDrugs = (
   };
 };
 
-// TODO: REMOVE THIS WHEN BACKEND IS FIXED
 const toDrugList = (input: Drugs) => {
+  console.log('input', input)
   return {
     quantity: toNumber(input.amount),
     pack: toDrugPack(input.pack),
     atc: input.name.atc,
     name: input.name,
-    prescription: null,
-    concentration: null,
+    prescription: input.name.prescription,
+    concentration: input.name.concentration,
     expirationDate: null,
   };
 };
@@ -91,10 +93,11 @@ export const toDrugsIdentifyList = (
         label: drug.name,
         value: drug.name,
         atc: drug.atc,
+        prescription: drug.prescription,
+        concentration: drug.concentration,
       },
       amount: drug.count,
       pack: fromDrugPack(drug.package ?? ""),
-      concentration: drug.concentration,
       atc: drug.atc,
     };
   });
