@@ -9,7 +9,8 @@ export const Container = styled.form`
 `;
 
 export const DropdownWrapper = styled.div`
-  ${flex({ gap: WDS_SIZE_008_PX, alignItems: 'center', justifyContent: 'center' })};
+  /* ${flex({ gap: WDS_SIZE_008_PX, alignItems: 'center', justifyContent: 'center' })}; */
+  width: 100%;
 `;
 
 export const LocationButton = styled(Button)`

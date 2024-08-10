@@ -21,7 +21,7 @@ export const drugApi = createApi({
     }),
     centerDetails: build.query({
       query: () => ({
-        url: `/hospitals`,
+        url: `/hospitals?page=1&limit=10`,
       }),
     }),
     closestCenterDetails: build.query({
@@ -31,7 +31,7 @@ export const drugApi = createApi({
     }),
     countiesCenterDetails: build.query({
       query: (city) => ({
-        url: `/hospitals?county=${city}`,
+        url: `/hospitals?county=${city}&page=1&limit=20`,
       }),
     }),
     cities: build.query({

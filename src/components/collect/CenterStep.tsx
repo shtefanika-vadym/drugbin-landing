@@ -1,20 +1,21 @@
 import { CenterDetails } from "@/types/drug.types";
 import { ErrorMessage } from "@hookform/error-message";
-import { useCallback, useContext } from "react";
+import { useCallback, useContext, useMemo } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
+import Select from "react-select";
 import { useCitiesQuery } from "src/api/drug";
 import { useCenter } from "src/hooks/useCenter";
 import { useCurrentLocation } from "src/hooks/useCurrentLocation";
 import { MultipleFormContext } from "src/hooks/useMultipleForm";
 import { Button } from "../ui/Button/Button";
 import { CenterCard } from "../ui/CenterCard/CenterCard";
-import { Dropdown } from "../ui/Dropdown";
 import { Loader } from "../ui/Loader";
 import { ToastType, notify } from "../ui/Toast/CustomToast";
 import { ValidationMessage } from "../ui/ValidationMessage/ValidationMessage";
 import { Container, DropdownWrapper } from "./CenterStep.styled";
 import { CenterStepSkeleton } from "./CenterStepSkeleton";
 import { ButtonContainer } from "./Collect.styled";
+import { selectDrugStyles } from "./SelectDrug.styled";
 
 export const CenterStep = () => {
   const { nextStep, prevStep } = useContext(MultipleFormContext);
@@ -50,14 +51,6 @@ export const CenterStep = () => {
     [setValue]
   );
 
-  const handleChangeCities = useCallback(
-    (city: string) => {
-      setValue("center.centerCity", city);
-      handleChangeCenter(null);
-    },
-    [setValue, handleChangeCenter]
-  );
-
   const onSubmit = useCallback(() => {
     if (!watchedCenter.centerID) {
       notify(
@@ -74,6 +67,25 @@ export const CenterStep = () => {
     setValue("center.centerCity", null);
     handleChangeCenter(null);
   };
+
+  const handleChangeCities = (newValue: any) => {
+    setValue("center.centerCity", newValue.value);
+    handleChangeCenter(null);
+  };
+
+  const cityOptions = useMemo(() => {
+    return cities?.map((city) => ({
+      label: city,
+      value: city,
+    }));
+  }, [cities]);
+
+  const cityValue = watchedCenter?.centerCity
+    ? {
+        label: watchedCenter?.centerCity,
+        value: watchedCenter?.centerCity,
+      }
+    : null;
 
   const renderCenterCard = () => {
     if (isLoading || isLocationLoading) {
@@ -103,13 +115,14 @@ export const CenterStep = () => {
   return (
     <Container onSubmit={handleSubmit(onSubmit)}>
       <DropdownWrapper>
-        <Dropdown
-          name="pack"
-          placeholder="EX: Suceava"
-          label="Selectează județul *"
-          selectedOptions={watchedCenter.centerCity}
-          options={cities}
-          callbackOnChange={handleChangeCities}
+        <Select
+          isLoading={isLoading}
+          placeholder='Alege un judet'
+          options={cityOptions}
+          value={cityValue}
+          onChange={handleChangeCities}
+          styles={selectDrugStyles}
+          defaultValue={cityValue}
         />
       </DropdownWrapper>
       <Button

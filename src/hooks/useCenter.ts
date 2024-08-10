@@ -31,10 +31,10 @@ export const useCenter = ({
 
   // TODO: make this code easy to understand
   const centersToReturn = city
-    ? citySpecificCenters
+    ? citySpecificCenters?.data
     : isLocationValid
     ? [nearestCenter]
-    : allCenters;
+    : allCenters?.data;
   const isLoading =
     isLoadingAllCenters ||
     isLoadingNearestCenter ||
