@@ -19,6 +19,7 @@ export const toDrugSearch = (input: SearchDrugResponse[]): SearchDrug[] => {
       label: drug.name,
       isPsycholeptic: drug.isPsycholeptic,
       id: drug.id,
+      atc: drug.atc,
     };
   });
 };
@@ -44,7 +45,7 @@ const toDrugList = (input: Drugs) => {
   return {
     quantity: toNumber(input.amount),
     pack: toDrugPack(input.pack),
-    atc: null,
+    atc: input.name.atc,
     name: input.name,
     prescription: null,
     concentration: null,
@@ -89,6 +90,7 @@ export const toDrugsIdentifyList = (
         isPsycholeptic: false,
         label: drug.name,
         value: drug.name,
+        atc: drug.atc,
       },
       amount: drug.count,
       pack: fromDrugPack(drug.package ?? ""),

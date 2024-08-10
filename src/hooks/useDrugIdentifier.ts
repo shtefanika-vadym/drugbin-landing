@@ -64,6 +64,7 @@ export const useDrugIdentifier = (
           ...updatedDrug.name,
           value: value as string,
           label: value as string,
+          atc: updatedDrug.atc,
         };
       } else {
         updatedDrug[field] = value as never;
