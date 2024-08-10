@@ -7,6 +7,7 @@ export interface SearchDrugResponse {
   packaging: string;
   prescription: string;
   producer: string;
+  concentration: string;
 }
 
 export interface SearchDrug {
@@ -42,6 +43,8 @@ export interface Drugs {
     label: string;
     value: string;
     atc: string;
+    prescription: string;
+    concentration: string;
   };
   pack: string;
   amount: number;
