@@ -14,6 +14,7 @@ export interface SearchDrug {
   value: string;
   isPsycholeptic: boolean;
   id: number;
+  atc: string;
 }
 
 export interface CenterDetails {
@@ -40,12 +41,13 @@ export interface Drugs {
     isPsycholeptic: boolean;
     label: string;
     value: string;
+    atc: string;
   };
   pack: string;
   amount: number;
 }
 
 export enum DocumentType {
-  PSYCHOLEPTIC = 'psycholeptic',
-  NORMAL = 'normal'
+  PSYCHOLEPTIC = "psycholeptic",
+  NORMAL = "normal",
 }

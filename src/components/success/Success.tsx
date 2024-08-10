@@ -42,6 +42,10 @@ export const Success = () => {
     [openDialog]
   );
 
+  const handleOpenDocument = useCallback((documentURL: string | undefined) => {
+    window.open(documentURL);
+  }, []);
+
   return (
     <Container>
       <DocumentViewerDialog {...documentViewerDialogProps}>
@@ -65,14 +69,14 @@ export const Success = () => {
       </QRCodeWithBorder>
       <Button
         variant="document"
-        onClick={() => handleSelectDocument(documentPsycholeptic)}
+        onClick={() => handleOpenDocument(documentPsycholeptic)}
       >
         <AttachmentIcon />
         Declaratie PR Stupefiante
       </Button>
       <Button
         variant="document"
-        onClick={() => handleSelectDocument(documentNormal)}
+        onClick={() => handleOpenDocument(documentNormal)}
       >
         <AttachmentIcon />
         PV Predare General

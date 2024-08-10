@@ -16,6 +16,7 @@ export interface DrugsIdentifyList {
     isPsycholeptic: boolean;
     label: string;
     value: string;
+    atc: string | null;
   };
   amount: number;
   pack: string | null;
