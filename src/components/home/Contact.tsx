@@ -2,7 +2,7 @@ import { ErrorMessage } from "@hookform/error-message";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { Resolver, SubmitHandler, useForm } from "react-hook-form";
-import { useContactMutation } from "src/api/drug";
+import { useContact } from "src/hooks/contact";
 import { Layout } from "src/layout/Layout/Layout";
 import {
   WDS_COLOR_NEUTRAL_WHITE,
@@ -24,7 +24,6 @@ import {
   LeftSection,
   RightSection,
 } from "./Contact.styled";
-import { ToastType, notify } from "../ui/Toast/CustomToast";
 
 type ContactProps = {
   name: string;
@@ -50,7 +49,7 @@ const validationSchema = Yup.object().shape({
 export const Contact = () => {
   const [isChecked, setIsChecked] = useState(false);
 
-  const [contact, { isLoading, isError }] = useContactMutation();
+  const { sendMessagess } = useContact();
   const {
     register,
     handleSubmit,
@@ -63,20 +62,7 @@ export const Contact = () => {
 
   const onSubmit: SubmitHandler<ContactProps> = async (data) => {
     const { name, email, message } = data;
-    await contact({ name, email, message });
-
-    if (!isLoading && !isError) {
-      reset();
-      notify(
-        "Mulțumim pentru mesaj! Vom reveni în curând. Echipa DrugBin.",
-        ToastType.SUCCES
-      );
-    } else {
-      notify(
-        "Oops! Ceva nu a mers conform planului. Te rog să încerci din nou mai târziu.",
-        ToastType.ERROR
-      );
-    }
+    await sendMessagess({ name, email, message }, reset);
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,7 +75,9 @@ export const Contact = () => {
     <Layout fullWidth color={WDS_COLOR_NEUTRAL_WHITE}>
       <Container>
         <LeftSection>
-          <Text variant="titleL" element="h1">Contactează-ne</Text>
+          <Text variant="titleL" element="h1">
+            Contactează-ne
+          </Text>
           <Details>
             <Data>
               <EmailIcon />

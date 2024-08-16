@@ -1,4 +1,5 @@
-import { Container, Dot, Line } from './Stepper.styled';
+import React from "react";
+import { Container, Dot, Line } from "./Stepper.styled";
 
 interface StepperProps {
   steps: number;
@@ -11,10 +12,10 @@ export const Stepper: React.FC<StepperProps> = ({ steps, currentStep }) => {
   return (
     <Container>
       {stepArray.map((_, index) => (
-        <>
-          <Dot key={index} active={index < currentStep} />
+        <React.Fragment key={index}>
+          <Dot active={index < currentStep ? true : false} />
           {index < steps - 1 && <Line key={`line-${index}`} />}
-        </>
+        </React.Fragment>
       ))}
     </Container>
   );

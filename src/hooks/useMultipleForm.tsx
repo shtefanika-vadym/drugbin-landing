@@ -1,17 +1,22 @@
 import { createContext, useCallback, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, UseFormReturn } from "react-hook-form";
+import { PositionType, useCurrentLocation } from "./useCurrentLocation";
+import { DrugName } from "@/types/drug.types";
 
 export interface MultipleFormContextProps {
-  methods: any;
+  methods: UseFormReturn<FormValues>;
   step: number;
   isFirstStep: boolean;
   nextStep: () => void;
   prevStep: () => void;
+  location: PositionType;
+  isLocationLoading: boolean;
+  verifyLocationAccess: () => void;
 }
 
-type FromValuse = {
+export interface FormValues {
   drug: {
-    name: string;
+    name: DrugName;
     pack: string;
     amount: number;
   }[];
@@ -23,17 +28,17 @@ type FromValuse = {
     email: string | null;
   };
   center: {
-    centerID: null | number;
-    centerCity: null | string;
+    centerID: number | null;
+    centerCity: string | null;
   };
-};
+}
 
+// Initial values
 export const initialDrugValue = {
-  name: "",
+  name: {},
   pack: "Cutie",
   amount: 1,
 };
-
 export const initialDetailsValue = {
   name: "",
   surname: "",
@@ -41,25 +46,37 @@ export const initialDetailsValue = {
   address: null,
   email: null,
 };
-
 export const initialCenterValue = {
   centerID: null,
   centerCity: null,
 };
 
+// Create the context with default values
 export const MultipleFormContext = createContext<MultipleFormContextProps>({
-  methods: null,
+  methods: null as any, // Ideally, avoid `null as any` and handle default values more gracefully
   step: 0,
   isFirstStep: false,
   nextStep: () => {},
   prevStep: () => {},
+  location: {
+    latitude: null,
+    longitude: null,
+  },
+  isLocationLoading: false,
+  verifyLocationAccess: () => {},
 });
 
 export const useMultipleForm = (totalSteps: number) => {
   const [step, setStep] = useState<number>(0);
   const isFirstStep = step === 0;
 
-  const methods = useForm<FromValuse>({
+  const {
+    verifyLocationAccess,
+    location,
+    isLoading: isLocationLoading,
+  } = useCurrentLocation();
+
+  const methods = useForm<FormValues>({
     defaultValues: {
       drug: [initialDrugValue],
       details: initialDetailsValue,
@@ -69,17 +86,24 @@ export const useMultipleForm = (totalSteps: number) => {
   });
 
   const nextStep = useCallback(() => {
-    step < totalSteps - 1 && setStep(step + 1);
+    if (step < totalSteps - 1) {
+      setStep(step + 1);
+    }
   }, [step, totalSteps]);
 
   const prevStep = useCallback(() => {
-    !isFirstStep && setStep(step - 1);
+    if (!isFirstStep) {
+      setStep(step - 1);
+    }
   }, [isFirstStep, step]);
 
   return {
     methods,
     step,
     isFirstStep,
+    location,
+    isLocationLoading,
+    verifyLocationAccess,
     nextStep,
     prevStep,
   };

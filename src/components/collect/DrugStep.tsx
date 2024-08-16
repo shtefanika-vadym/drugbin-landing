@@ -1,3 +1,4 @@
+import { Drugs } from "@/types/drug.types";
 import { ErrorMessage } from "@hookform/error-message";
 import { every, gt } from "lodash-es";
 import { useCallback, useContext } from "react";
@@ -21,7 +22,6 @@ export const DROPDOWN_VALUES = ["Cutie", "Unitate"];
 
 export const DrugStep = () => {
   const { nextStep } = useContext(MultipleFormContext);
-
   const {
     control,
     register,
@@ -29,22 +29,21 @@ export const DrugStep = () => {
     setValue,
     watch,
   } = useFormContext();
-
   const { append, remove } = useFieldArray({
     control,
     name: "drug",
     rules: { minLength: 1 },
   });
 
-  const watchedFields = watch("drug");
+  const currentDrugList: Drugs[] = watch("drug");
 
-  const areFieldsValid = every(
-    watchedFields,
+  const isDrugListValid = every(
+    currentDrugList,
     (item) => item?.name?.value && item.amount > 0
   );
 
   const handleAddEntry = useCallback(() => {
-    if (areFieldsValid) {
+    if (isDrugListValid) {
       append(initialDrugValue);
     } else {
       notify(
@@ -52,22 +51,22 @@ export const DrugStep = () => {
         ToastType.ERROR
       );
     }
-  }, [areFieldsValid, append]);
+  }, [isDrugListValid, append]);
 
   const handleSubmit = useCallback(() => {
-    return areFieldsValid
+    return isDrugListValid
       ? nextStep()
       : notify(
           "Vă rugăm să completați detaliile medicamentelor curente.",
           ToastType.ERROR
         );
-  }, [areFieldsValid, nextStep]);
+  }, [isDrugListValid, nextStep]);
 
   return (
     <Container>
-      {watchedFields.map((field: any, index: number) => (
-        <DrugData key={field.id}>
-          {gt(watchedFields.length, 1) && (
+      {currentDrugList.map((field: any, index: number) => (
+        <DrugData key={`${field.id}-${index}`}>
+          {gt(currentDrugList.length, 1) && (
             <Delete onClick={() => remove(index)}>Șterge</Delete>
           )}
           <InputContainer>
@@ -77,7 +76,7 @@ export const DrugStep = () => {
               })}
               label="Numele *"
               placeholder="EX: Ibuprofen"
-              selectedValue={watchedFields[index]?.name}
+              selectedValue={currentDrugList[index]?.name}
               callbackOnChange={(name) => setValue(`drug.${index}.name`, name)}
             />
             <ErrorMessage
@@ -95,7 +94,7 @@ export const DrugStep = () => {
             })}
             placeholder="Cutie"
             label="Tipul de ambalaj *"
-            selectedOptions={watchedFields[index]?.pack}
+            selectedOptions={currentDrugList[index]?.pack}
             options={DROPDOWN_VALUES}
             callbackOnChange={(pack) => setValue(`drug.${index}.pack`, pack)}
           />
@@ -106,7 +105,7 @@ export const DrugStep = () => {
                 setValue(`drug.${index}.amount`, number)
               }
               label="Cantitatea *"
-              value={watchedFields[index]?.amount}
+              value={currentDrugList[index]?.amount}
               {...register(`drug.${index}.amount`, {
                 required: "Cantitatea este un câmp obligatoriu.",
                 valueAsNumber: true,

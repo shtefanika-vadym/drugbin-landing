@@ -2,7 +2,7 @@ import { isNil } from "lodash-es";
 import { useCallback, useState } from "react";
 import { ToastType, notify } from "src/components/ui/Toast/CustomToast";
 
-interface PositionType {
+export interface PositionType {
   latitude: number | null;
   longitude: number | null;
 }

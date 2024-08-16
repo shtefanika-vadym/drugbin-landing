@@ -19,14 +19,14 @@ export const DetailsStep = () => {
     handleSubmit,
   } = useFormContext();
 
-  const watchedDrugFields = useWatch({
+  const currentDrugList = useWatch({
     control,
     name: "drug",
   });
 
-  const isPsycholeptic = useMemo(
-    () => some(watchedDrugFields, (item) => item.name.atc?.includes('N05')),
-    [watchedDrugFields]
+  const hasPsycholepticDrug = useMemo(
+    () => some(currentDrugList, (item) => item.name.atc?.includes("N05")),
+    [currentDrugList]
   );
 
   const onSubmit = useCallback(() => {
@@ -38,7 +38,7 @@ export const DetailsStep = () => {
       <InputContainer>
         <Input
           label="Numele *"
-          placeholder="EX: Ion"
+          placeholder="EX: Popescu"
           {...register("details.name", {
             required: "Numele este un câmp obligatoriu.",
           })}
@@ -54,7 +54,7 @@ export const DetailsStep = () => {
       <InputContainer>
         <Input
           label="Prenume *"
-          placeholder="EX: Popescu"
+          placeholder="EX: Ion"
           {...register("details.surname", {
             required: "Prenume este un câmp obligatoriu.",
           })}
@@ -67,7 +67,7 @@ export const DetailsStep = () => {
           )}
         />
       </InputContainer>
-      {isPsycholeptic && (
+      {hasPsycholepticDrug && (
         <>
           <InputContainer>
             <Input
@@ -84,7 +84,6 @@ export const DetailsStep = () => {
                 },
               })}
             />
-            <InfoCNP />
             <ErrorMessage
               errors={errors}
               name={"details.cnp"}
@@ -92,6 +91,7 @@ export const DetailsStep = () => {
                 <ValidationMessage>{message}</ValidationMessage>
               )}
             />
+            <InfoCNP />
           </InputContainer>
           <InputContainer>
             <Input

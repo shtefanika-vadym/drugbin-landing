@@ -17,40 +17,29 @@ export interface SearchDrug {
   id: number;
   atc: string;
 }
-
-export interface CenterDetails {
-  id: number;
-  location: string;
-  name: string;
-  fullAddress: string;
-  lng: string;
-  lat: string;
-  schedule: string[];
-}
-
-export interface Details {
-  name: string;
-  surname: string;
-  cnp: number | null;
-  address: string | null;
-  email: string | null;
-}
-
 export interface Drugs {
-  name: {
-    id: number;
-    isPsycholeptic: boolean;
-    label: string;
-    value: string;
-    atc: string;
-    prescription: string;
-    concentration: string;
-  };
+  name: DrugName;
   pack: string;
   amount: number;
 }
 
-export enum DocumentType {
-  PSYCHOLEPTIC = "psycholeptic",
-  NORMAL = "normal",
+export interface DrugName {
+  id: number | null;
+  isPsycholeptic: boolean;
+  label: string;
+  value: string;
+  atc: string;
+  prescription: string;
+  concentration: string;
 }
+
+export interface DrugList {
+  quantity: number | null;
+  pack: string;
+  atc: string | null;
+  name: DrugName;
+  prescription: string | null;
+  concentration: string | null;
+  expirationDate: null;
+}
+

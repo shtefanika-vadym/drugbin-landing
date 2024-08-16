@@ -1,5 +1,6 @@
+import { CollectData } from "@/types/collect.types";
 import {
-  Details,
+  DrugList,
   Drugs,
   SearchDrug,
   SearchDrugResponse,
@@ -11,6 +12,8 @@ import {
   DrugsIdentifyResponse,
 } from "@/types/drugsIdentify.types";
 import { toNumber, toString } from "lodash-es";
+import { FormValues } from "src/hooks/useMultipleForm";
+import { fromPackagingType, toPackagingType } from "./utils";
 
 export const toDrugSearch = (input: SearchDrugResponse[]): SearchDrug[] => {
   return input.map((drug) => {
@@ -26,51 +29,30 @@ export const toDrugSearch = (input: SearchDrugResponse[]): SearchDrug[] => {
   });
 };
 
-export const toCollectDrugs = (
-  personalDetails: Details,
-  drugList: Drugs[],
-  hospitalId: number
-) => {
+export const toCollectDrugs = (data: FormValues): CollectData => {
+  const { drug, details, center } = data;
+
   return {
-    firstName: personalDetails.name,
-    hospitalId: hospitalId,
-    lastName: personalDetails?.surname,
-    email: personalDetails?.email || null,
-    drugList: drugList.map((item: Drugs) => toDrugList(item)),
-    addres: personalDetails?.address,
-    cnp: personalDetails?.cnp ? toString(personalDetails?.cnp) : null,
+    firstName: details.name,
+    lastName: details.surname,
+    hospitalId: center.centerID,
+    email: details.email || null,
+    drugList: drug.map((item) => toDrugList(item)),
+    addres: details.address,
+    cnp: details.cnp ? toString(details?.cnp) : null,
   };
 };
 
-const toDrugList = (input: Drugs) => {
-  console.log('input', input)
+const toDrugList = (input: Drugs): DrugList => {
   return {
     quantity: toNumber(input.amount),
-    pack: toDrugPack(input.pack),
+    pack: toPackagingType(input.pack),
     atc: input.name.atc,
     name: input.name,
     prescription: input.name.prescription,
     concentration: input.name.concentration,
     expirationDate: null,
   };
-};
-
-const toDrugPack = (pack: string): string => {
-  const packMapping: { [key: string]: string } = {
-    Cutie: "box",
-    Unitate: "entity",
-  };
-
-  return packMapping[pack] || "entity";
-};
-
-const fromDrugPack = (pack: string): string => {
-  const packMapping: { [key: string]: string } = {
-    box: "Cutie",
-    entity: "Unitate",
-  };
-
-  return packMapping[pack] || "Unitate";
 };
 
 export const toDrugsIdentify = (
@@ -97,7 +79,7 @@ export const toDrugsIdentifyList = (
         concentration: drug.concentration,
       },
       amount: drug.count,
-      pack: fromDrugPack(drug.package ?? ""),
+      pack: fromPackagingType(drug.package ?? ""),
       atc: drug.atc,
     };
   });

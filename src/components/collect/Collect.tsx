@@ -10,6 +10,7 @@ import { Container } from "./Collect.styled";
 import { DetailsStep } from "./DetailsStep";
 import { DrugStep } from "./DrugStep";
 import { TermsStep } from "./TermsStep";
+import { useCollectForm } from "./useCollectForm";
 
 const steps = [
   {

@@ -1,24 +1,30 @@
-import { CenterDetails } from "@/types/drug.types";
 import { ErrorMessage } from "@hookform/error-message";
+import { isEmpty } from "lodash-es";
 import { useCallback, useContext, useMemo } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import Select from "react-select";
-import { useCitiesQuery } from "src/api/drug";
+import { Button } from "src/components/ui/Button/Button";
+import { CenterCard } from "src/components/ui/CenterCard/CenterCard";
+import { Empty } from "src/components/ui/Empty";
+import { Loader } from "src/components/ui/Loader";
+import { ToastType, notify } from "src/components/ui/Toast/CustomToast";
+import { ValidationMessage } from "src/components/ui/ValidationMessage/ValidationMessage";
+import { useGetCities } from "src/hooks/center";
 import { useCenter } from "src/hooks/useCenter";
-import { useCurrentLocation } from "src/hooks/useCurrentLocation";
 import { MultipleFormContext } from "src/hooks/useMultipleForm";
-import { Button } from "../ui/Button/Button";
-import { CenterCard } from "../ui/CenterCard/CenterCard";
-import { Loader } from "../ui/Loader";
-import { ToastType, notify } from "../ui/Toast/CustomToast";
-import { ValidationMessage } from "../ui/ValidationMessage/ValidationMessage";
 import { Container, DropdownWrapper } from "./CenterStep.styled";
 import { CenterStepSkeleton } from "./CenterStepSkeleton";
 import { ButtonContainer } from "./Collect.styled";
 import { selectDrugStyles } from "./SelectDrug.styled";
 
 export const CenterStep = () => {
-  const { nextStep, prevStep } = useContext(MultipleFormContext);
+  const {
+    nextStep,
+    prevStep,
+    verifyLocationAccess,
+    location,
+    isLocationLoading,
+  } = useContext(MultipleFormContext);
   const {
     control,
     formState: { errors },
@@ -26,21 +32,14 @@ export const CenterStep = () => {
     setValue,
   } = useFormContext();
 
-  const watchedCenter = useWatch({
+  const currentCenter = useWatch({
     control,
     name: "center",
   });
 
-  const {
-    verifyLocationAccess,
-    location,
-    isLocationValid,
-    isLoading: isLocationLoading,
-  } = useCurrentLocation();
-  const { data: cities } = useCitiesQuery("");
+  const { data: cities } = useGetCities();
   const { centers, isLoading } = useCenter({
-    city: watchedCenter?.centerCity,
-    isLocationValid,
+    city: currentCenter?.centerCity,
     location,
   });
 
@@ -50,17 +49,6 @@ export const CenterStep = () => {
     },
     [setValue]
   );
-
-  const onSubmit = useCallback(() => {
-    if (!watchedCenter.centerID) {
-      notify(
-        "Te rugăm să selectezi un centru de colectare înainte de a continua.",
-        ToastType.ERROR
-      );
-    } else {
-      nextStep();
-    }
-  }, [nextStep, watchedCenter.centerID]);
 
   const handleCurrentLocation = async () => {
     await verifyLocationAccess();
@@ -73,6 +61,17 @@ export const CenterStep = () => {
     handleChangeCenter(null);
   };
 
+  const onSubmit = useCallback(() => {
+    if (!currentCenter.centerID) {
+      notify(
+        "Te rugăm să selectezi un centru de colectare înainte de a continua.",
+        ToastType.ERROR
+      );
+    } else {
+      nextStep();
+    }
+  }, [nextStep, currentCenter.centerID]);
+
   const cityOptions = useMemo(() => {
     return cities?.map((city) => ({
       label: city,
@@ -80,10 +79,10 @@ export const CenterStep = () => {
     }));
   }, [cities]);
 
-  const cityValue = watchedCenter?.centerCity
+  const cityValue = currentCenter?.centerCity
     ? {
-        label: watchedCenter?.centerCity,
-        value: watchedCenter?.centerCity,
+        label: currentCenter?.centerCity,
+        value: currentCenter?.centerCity,
       }
     : null;
 
@@ -92,19 +91,18 @@ export const CenterStep = () => {
       return <CenterStepSkeleton />;
     }
 
+    if (isEmpty(centers)) return <Empty />;
+
     return (
       <>
-        {centers?.map((item: CenterDetails) => {
+        {centers.map((item) => {
           return (
             <CenterCard
-              key={item?.id}
-              name={item?.name}
-              latitude={item?.lat}
-              longitude={item?.lng}
-              street={item?.fullAddress}
-              schedule={item?.schedule}
-              handleSelect={() => handleChangeCenter(item.id)}
-              isActive={watchedCenter.centerID === item?.id}
+              isActive={currentCenter.centerID === item?.id}
+              fullAddress={item?.fullAddress as string}
+              id={item?.id as number}
+              name={item?.name as string}
+              handleSelect={handleChangeCenter}
             />
           );
         })}
@@ -117,7 +115,7 @@ export const CenterStep = () => {
       <DropdownWrapper>
         <Select
           isLoading={isLoading}
-          placeholder='Alege un judet'
+          placeholder="Alege un judet"
           options={cityOptions}
           value={cityValue}
           onChange={handleChangeCities}

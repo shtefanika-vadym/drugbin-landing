@@ -5,18 +5,17 @@ import { ChevronDown, ChevronUp } from "../Icon";
 import { Text } from "../Text/Text";
 import { Content, Description, Title } from "./InfoCNP.styled";
 
-// TODO --> REFACTOR
 export const InfoCNP = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const topNavRef = useRef<HTMLDivElement | null>(null);
 
   const handleOpen = useCallback(() => {
     setIsOpen(!isOpen);
-  }, [isOpen]);
+  }, [isOpen, setIsOpen]);
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
-  }, []);
+  }, [setIsOpen]);
 
   useOnClickOutside(topNavRef, handleClose);
 
@@ -27,9 +26,9 @@ export const InfoCNP = () => {
           De ce avem nevoie de CNP?
         </Text>
         {isOpen ? (
-          <ChevronDown height={16} width={16} />
-        ) : (
           <ChevronUp height={16} width={16} />
+        ) : (
+          <ChevronDown height={16} width={16} />
         )}
       </Title>
       {isOpen && (

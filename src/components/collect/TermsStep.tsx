@@ -1,59 +1,25 @@
 import { useCallback, useContext } from "react";
-import { useFormContext, useWatch } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useFormContext } from "react-hook-form";
 import { useGoogleAnalytics } from "src/analytics/googleAnalyticsInstance";
-import { useRecycleDrugMutation } from "src/api/drug";
-import { MultipleFormContext } from "src/hooks/useMultipleForm";
-import { toCollectDrugs } from "src/utils/mappers";
+import { useCollectData } from "src/hooks/collect";
+import { FormValues, MultipleFormContext } from "src/hooks/useMultipleForm";
 import { Button } from "../ui/Button/Button";
 import { Text } from "../ui/Text/Text";
-import { ToastType, notify } from "../ui/Toast/CustomToast";
 import { ButtonContainer } from "./Collect.styled";
 import { Consent, Container, PrivacyPolicy } from "./TermsStep.styled";
 
 export const TermsStep = () => {
   const { prevStep } = useContext(MultipleFormContext);
-  const [recycleDrug] = useRecycleDrugMutation();
+  const { getValues } = useFormContext();
+  const { postCollectData } = useCollectData();
   const { trackButtonClick } = useGoogleAnalytics();
-  const navigate = useNavigate();
 
-  const { control } = useFormContext();
-  const watchedDrugFields = useWatch({
-    control,
-    name: "drug",
-  });
-  const watchedDetailsFields = useWatch({
-    control,
-    name: "details",
-  });
-  const watchedCenter = useWatch({
-    control,
-    name: "center",
-  });
+  const formValues = getValues();
 
   const handleNext = useCallback(async () => {
     trackButtonClick("final step");
-
-    const response: any = await recycleDrug(
-      toCollectDrugs(watchedDetailsFields, watchedDrugFields, watchedCenter?.centerID)
-    );
-
-    if (response.error) {
-      notify(
-        "Oops! Ceva nu a mers conform planului. Te rog să încerci din nou mai târziu.",
-        ToastType.ERROR
-      );
-    } else {
-      navigate(response?.data);
-    }
-  }, [
-    navigate,
-    recycleDrug,
-    trackButtonClick,
-    watchedCenter,
-    watchedDetailsFields,
-    watchedDrugFields,
-  ]);
+    await postCollectData(formValues as FormValues);
+  }, [formValues, postCollectData, trackButtonClick]);
 
   return (
     <Container>

@@ -1,21 +1,21 @@
-import { SearchDrugResponse } from "@/types/drug.types";
+import { DrugName } from "@/types/drug.types";
 import { useCallback } from "react";
 import { SingleValue } from "react-select";
 import AsyncCreatableSelect from "react-select/async-creatable";
-import { getDrugsRequest } from "src/api/drug";
+import { getDrugsRequest } from "src/hooks/drug";
 import { WDS_COLOR_NEUTRAL_RICHBLACK } from "src/styles/tokens";
-import { toDrugSearch } from "src/utils/mappers";
 import { ChevronDown, ChevronUp } from "../ui/Icon";
 import { Text } from "../ui/Text/Text";
 import { selectDrugStyles } from "./SelectDrug.styled";
 
 interface SelectDrugProps {
   callbackOnChange: (value: SingleValue<string>) => void;
-  selectedValue: string;
+  selectedValue: DrugName;
   placeholder: string;
   label: string;
 }
 
+// TODO: Resolve multiple api call
 export const SelectDrug: React.FC<SelectDrugProps> = ({
   callbackOnChange,
   selectedValue,
@@ -26,8 +26,7 @@ export const SelectDrug: React.FC<SelectDrugProps> = ({
     return new Promise<any>(async (resolve, reject) => {
       try {
         const response = await getDrugsRequest(inputValue, 10);
-        const drugSearch = toDrugSearch(response?.data as SearchDrugResponse[]);
-        resolve(drugSearch);
+        resolve(response);
       } catch (error) {
         reject(error);
       }
@@ -35,7 +34,7 @@ export const SelectDrug: React.FC<SelectDrugProps> = ({
   }, []);
 
   const handleChange = useCallback(
-    (value: SingleValue<string>) => {
+    (value: SingleValue<any>) => {
       callbackOnChange(value);
     },
     [callbackOnChange]
@@ -50,7 +49,7 @@ export const SelectDrug: React.FC<SelectDrugProps> = ({
         cacheOptions={false}
         placeholder={placeholder}
         defaultOptions
-        value={selectedValue}
+        value={selectedValue.label ? selectedValue : null}
         loadOptions={loadOptions}
         onChange={handleChange}
         allowCreateWhileLoading={false}
@@ -61,7 +60,7 @@ export const SelectDrug: React.FC<SelectDrugProps> = ({
   );
 };
 
-const customComponents = {
+export const customComponents = {
   // TODO: Find other approach
   DropdownIndicator: ({ ...props }) => {
     return props.selectProps.menuIsOpen ? (

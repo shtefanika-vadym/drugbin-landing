@@ -1,44 +1,38 @@
+import { isNil } from "lodash-es";
 import {
-  useCenterDetailsQuery,
-  useClosestCenterDetailsQuery,
-  useCountiesCenterDetailsQuery,
-} from "src/api/drug";
+  useGetAllCenter,
+  useGetCenterByCity,
+  useGetClosestCenter,
+} from "./center";
+import { PositionType } from "./useCurrentLocation";
 
-interface UseCenterProps {
-  city?: string;
-  isLocationValid: boolean;
-  location: {
-    latitude: number | null;
-    longitude: number | null;
-  };
+interface useCenterProps {
+  city: string;
+  location: PositionType;
 }
 
-export const useCenter = ({
-  city,
-  isLocationValid,
-  location,
-}: UseCenterProps) => {
-  const { data: allCenters, isLoading: isLoadingAllCenters } =
-    useCenterDetailsQuery("");
-  const { data: nearestCenter, isLoading: isLoadingNearestCenter } =
-    useClosestCenterDetailsQuery(location, {
-      skip: !isLocationValid,
-    });
-  const { data: citySpecificCenters, isLoading: isLoadingCitySpecificCenters } =
-    useCountiesCenterDetailsQuery(city, {
-      skip: !city,
-    });
+// TODO: Refactor
+export const useCenter = ({ city, location }: useCenterProps) => {
+  const shouldExecuteClosestCenter =
+    !isNil(location?.latitude) && !isNil(location?.longitude);
+  const shouldExecuteCenterByCity = !!city;
 
-  // TODO: make this code easy to understand
+  const { data: allCenter, isLoading: isLoadingAllCenters } = useGetAllCenter();
+  const { data: closestCenter, isLoading: isLoadingNearestCenter } =
+    useGetClosestCenter(location, shouldExecuteClosestCenter);
+  const { data: centerByCity, isLoading: isLoadingCitySpecificCenters } =
+    useGetCenterByCity(city, shouldExecuteCenterByCity);
+
   const centersToReturn = city
-    ? citySpecificCenters?.data
-    : isLocationValid
-    ? [nearestCenter]
-    : allCenters?.data;
+    ? centerByCity?.data
+    : shouldExecuteClosestCenter
+    ? [closestCenter]
+    : allCenter?.data;
+
   const isLoading =
     isLoadingAllCenters ||
     isLoadingNearestCenter ||
     isLoadingCitySpecificCenters;
 
-  return { centers: centersToReturn, isLoading };
+  return { centers: centersToReturn ?? [], isLoading };
 };
