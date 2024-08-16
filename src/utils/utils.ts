@@ -18,3 +18,21 @@ export function getStringWidth(text: string, font = "16px Arial") {
   console.warn("Unable to get 2D context from canvas");
   return 0;
 }
+
+export const fromPackagingType = (pack: string): string => {
+  const packMapping: { [key: string]: string } = {
+    box: "Cutie",
+    entity: "Unitate",
+  };
+
+  return packMapping[pack] || "Unitate";
+};
+
+export const toPackagingType = (pack: string): string => {
+  const packMapping: { [key: string]: string } = {
+    Cutie: "box",
+    Unitate: "entity",
+  };
+
+  return packMapping[pack] || "entity";
+};

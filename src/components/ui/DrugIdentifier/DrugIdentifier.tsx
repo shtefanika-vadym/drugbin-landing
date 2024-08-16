@@ -1,15 +1,14 @@
 import { DrugsIdentify } from "@/types/drugsIdentify.types";
 import { useCallback, useRef } from "react";
-import { useDrugsIdentifyMutation } from "src/api/drug";
+import { useDrugsIdentify } from "src/hooks/identify";
 import useDialog from "src/hooks/useDialog";
 import { LoadingScreen } from "../LoadingScreen/LoadingScreen";
 import { Container, OpenText } from "./DrugIdentifier.styled";
 import { DrugIdentifierDialog } from "./DrugIdentifierDialog";
-import { ToastType, notify } from "../Toast/CustomToast";
 
 export const DrugIdentifier = () => {
   const inputFileRef = useRef(null);
-  const [drugsIdentify, { data, isLoading }] = useDrugsIdentifyMutation();
+  const { data, isLoading, drugsIdentify } = useDrugsIdentify();
 
   const [
     ResponseViewerDialog,
@@ -29,13 +28,7 @@ export const DrugIdentifier = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const image = event?.target?.files?.[0];
-    const response = await drugsIdentify({ image });
-
-    if ("data" in response) {
-      openDialog();
-    } else {
-      notify("A apărut o eroare necunoscută.", ToastType.ERROR);
-    }
+    await drugsIdentify({ image }, openDialog);
   };
 
   if (isLoading) return <LoadingScreen />;

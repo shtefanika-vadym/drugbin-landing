@@ -8,7 +8,7 @@ export const SuccessPage = () => {
 
   return (
     <Metadata
-      title="DrugBin"
+      title="Felicitări! Cererea ta de colectare a fost înregistrată!"
       description="Eforturile tale au fost remarcabile! Ai terminat cu succes toți pașii necesari pentru a colecta medicamentele expirate și pentru a contribui la protejarea comunității și a mediului înconjurător. Explorează meniul nostru și continuă să fii parte din acest efort important pentru siguranța tuturor."
     >
       <HeaderCollect>

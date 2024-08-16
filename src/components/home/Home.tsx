@@ -1,13 +1,14 @@
+import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { Layout } from "src/layout/Layout/Layout";
 import { EventBanner } from "../ui/EventBanner/EventBanner";
 import { Contact } from "./Contact";
 import { Guid } from "./Guid";
 import { Container } from "./Home.styled";
 import { Main } from "./Main";
 import { News } from "./News";
-import { useCallback } from "react";
-import { Layout } from "src/layout/Layout/Layout";
 
+// TODO: Refactor
 export const Home = () => {
   const navigate = useNavigate();
 

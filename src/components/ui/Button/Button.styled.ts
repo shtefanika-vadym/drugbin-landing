@@ -71,6 +71,12 @@ export const buttonVariants = {
   document: css`
     color: ${WDS_COLOR_BLUE_300};
     background-color: ${WDS_COLOR_PRIMARY_100};
+
+    &:disabled {
+      cursor: not-allowed;
+      color: ${WDS_COLOR_BLUE_300};
+      background-color: ${WDS_COLOR_PRIMARY_100};
+    }
   `,
   white: css`
     color: ${WDS_COLOR_PRIMARY_50};
@@ -131,7 +137,5 @@ export const StyledButton = styled.button<StyledButtonProps>`
   ${({ size }) => buttonSizes[size]};
   &:disabled {
     cursor: not-allowed;
-    color: ${WDS_COLOR_NEUTRALGREY_50};
-    background-color: ${WDS_COLOR_NEUTRALGREY_50};
   }
 `;

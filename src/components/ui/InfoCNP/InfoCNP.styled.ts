@@ -9,6 +9,7 @@ import { Text } from "../Text/Text";
 
 export const Content = styled.div`
   margin-top: ${WDS_SIZE_004_PX};
+  cursor: pointer;
 `;
 
 export const Title = styled.div`
