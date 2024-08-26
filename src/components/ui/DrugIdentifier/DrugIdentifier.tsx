@@ -1,4 +1,3 @@
-import { DrugsIdentify } from "@/types/drugsIdentify.types";
 import { useCallback, useRef } from "react";
 import { useDrugsIdentify } from "src/hooks/identify";
 import useDialog from "src/hooks/useDialog";
@@ -37,7 +36,7 @@ export const DrugIdentifier = () => {
     <Container>
       <ResponseViewerDialog {...responseViewerDialogProps} closeButton={true}>
         <DrugIdentifierDialog
-          data={data as DrugsIdentify}
+          data={data}
           closeDialog={closeDialog}
         />
       </ResponseViewerDialog>

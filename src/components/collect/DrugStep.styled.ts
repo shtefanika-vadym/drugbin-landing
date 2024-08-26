@@ -9,7 +9,7 @@ import {
 import styled from "styled-components";
 import { Text } from "../ui/Text/Text";
 
-export const Container = styled.div`
+export const Container = styled.form`
   ${flex({ direction: "column", gap: WDS_SIZE_024_PX })};
   width: 100%;
 `;

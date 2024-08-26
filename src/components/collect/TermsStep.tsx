@@ -2,23 +2,23 @@ import { useCallback, useContext } from "react";
 import { useFormContext } from "react-hook-form";
 import { useGoogleAnalytics } from "src/analytics/googleAnalyticsInstance";
 import { useCollectData } from "src/hooks/collect";
-import { FormValues, MultipleFormContext } from "src/hooks/useMultipleForm";
 import { Button } from "../ui/Button/Button";
 import { Text } from "../ui/Text/Text";
 import { ButtonContainer } from "./Collect.styled";
+import { CollectContext } from "./CollectContext";
 import { Consent, Container, PrivacyPolicy } from "./TermsStep.styled";
+import { CollectPayload } from "@/types/collect.types";
 
 export const TermsStep = () => {
-  const { prevStep } = useContext(MultipleFormContext);
+  const { back } = useContext(CollectContext);
   const { getValues } = useFormContext();
   const { postCollectData } = useCollectData();
   const { trackButtonClick } = useGoogleAnalytics();
-
   const formValues = getValues();
 
   const handleNext = useCallback(async () => {
     trackButtonClick("final step");
-    await postCollectData(formValues as FormValues);
+    await postCollectData(formValues as CollectPayload);
   }, [formValues, postCollectData, trackButtonClick]);
 
   return (
@@ -31,7 +31,7 @@ export const TermsStep = () => {
         prevederi.
       </Consent>
       <ButtonContainer>
-        <Button variant="secondary" onClick={prevStep}>
+        <Button variant="secondary" onClick={back}>
           Refuz
         </Button>
         <Button onClick={handleNext}>Sunt de acord</Button>

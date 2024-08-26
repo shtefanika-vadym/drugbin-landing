@@ -1,4 +1,4 @@
-import { CollectData } from "@/types/collect.types";
+import { CollectData, CollectPayload } from "@/types/collect.types";
 import {
   DrugList,
   Drugs,
@@ -7,12 +7,10 @@ import {
 } from "@/types/drug.types";
 import {
   DrugsIdentify,
-  DrugsIdentifyList,
   DrugsIdentifyListResponse,
   DrugsIdentifyResponse,
 } from "@/types/drugsIdentify.types";
 import { toNumber, toString } from "lodash-es";
-import { FormValues } from "src/hooks/useMultipleForm";
 import { fromPackagingType, toPackagingType } from "./utils";
 
 export const toDrugSearch = (input: SearchDrugResponse[]): SearchDrug[] => {
@@ -29,7 +27,7 @@ export const toDrugSearch = (input: SearchDrugResponse[]): SearchDrug[] => {
   });
 };
 
-export const toCollectDrugs = (data: FormValues): CollectData => {
+export const toCollectDrugs = (data: CollectPayload): CollectData => {
   const { drug, details, center } = data;
 
   return {
@@ -37,9 +35,9 @@ export const toCollectDrugs = (data: FormValues): CollectData => {
     lastName: details.surname,
     hospitalId: center.centerID,
     email: details.email || null,
-    drugList: drug.map((item) => toDrugList(item)),
-    addres: details.address,
-    cnp: details.cnp ? toString(details?.cnp) : null,
+    drugList: drug.map((item) => toDrugList(item))!,
+    addres: details?.address!,
+    cnp: details?.cnp ? toString(details?.cnp) : null,
   };
 };
 
@@ -66,7 +64,7 @@ export const toDrugsIdentify = (
 
 export const toDrugsIdentifyList = (
   drugs: DrugsIdentifyListResponse[]
-): DrugsIdentifyList[] => {
+): Drugs[] => {
   return drugs.map((drug) => {
     return {
       name: {
@@ -85,7 +83,7 @@ export const toDrugsIdentifyList = (
   });
 };
 
-export const toDrugsIdentifyAppend = (drugs: DrugsIdentifyList[]) => {
+export const toDrugsIdentifyAppend = (drugs: Drugs[]) => {
   return drugs.map((drug) => {
     return {
       name: drug.name,

@@ -1,30 +1,29 @@
 import { ErrorMessage } from "@hookform/error-message";
 import { isEmpty } from "lodash-es";
 import { useCallback, useContext, useMemo } from "react";
-import { useFormContext, useWatch } from "react-hook-form";
-import Select from "react-select";
+import { Controller, useFormContext, useWatch } from "react-hook-form";
+import Select, { SingleValue } from "react-select";
 import { Button } from "src/components/ui/Button/Button";
 import { CenterCard } from "src/components/ui/CenterCard/CenterCard";
 import { Empty } from "src/components/ui/Empty";
 import { Loader } from "src/components/ui/Loader";
-import { ToastType, notify } from "src/components/ui/Toast/CustomToast";
 import { ValidationMessage } from "src/components/ui/ValidationMessage/ValidationMessage";
 import { useGetCities } from "src/hooks/center";
 import { useCenter } from "src/hooks/useCenter";
-import { MultipleFormContext } from "src/hooks/useMultipleForm";
 import { Container, DropdownWrapper } from "./CenterStep.styled";
 import { CenterStepSkeleton } from "./CenterStepSkeleton";
 import { ButtonContainer } from "./Collect.styled";
+import { CollectContext } from "./CollectContext";
 import { selectDrugStyles } from "./SelectDrug.styled";
 
+interface CityType {
+  label: string;
+  value: string;
+}
+
 export const CenterStep = () => {
-  const {
-    nextStep,
-    prevStep,
-    verifyLocationAccess,
-    location,
-    isLocationLoading,
-  } = useContext(MultipleFormContext);
+  const { next, back, verifyLocationAccess, location, isLocationLoading } =
+    useContext(CollectContext);
   const {
     control,
     formState: { errors },
@@ -50,27 +49,20 @@ export const CenterStep = () => {
     [setValue]
   );
 
-  const handleCurrentLocation = async () => {
+  const handleCurrentLocation = useCallback(async () => {
     await verifyLocationAccess();
     setValue("center.centerCity", null);
     handleChangeCenter(null);
-  };
+  }, [verifyLocationAccess, setValue, handleChangeCenter]);
 
-  const handleChangeCities = (newValue: any) => {
-    setValue("center.centerCity", newValue.value);
+  const handleChangeCities = (newValue: SingleValue<CityType>) => {
+    setValue("center.centerCity", newValue?.value);
     handleChangeCenter(null);
   };
 
   const onSubmit = useCallback(() => {
-    if (!currentCenter.centerID) {
-      notify(
-        "Te rugăm să selectezi un centru de colectare înainte de a continua.",
-        ToastType.ERROR
-      );
-    } else {
-      nextStep();
-    }
-  }, [nextStep, currentCenter.centerID]);
+    next();
+  }, [next]);
 
   const cityOptions = useMemo(() => {
     return cities?.map((city) => ({
@@ -79,12 +71,16 @@ export const CenterStep = () => {
     }));
   }, [cities]);
 
-  const cityValue = currentCenter?.centerCity
-    ? {
-        label: currentCenter?.centerCity,
-        value: currentCenter?.centerCity,
-      }
-    : null;
+  const cityValue: CityType | null = useMemo(
+    () =>
+      currentCenter?.centerCity
+        ? {
+            label: currentCenter?.centerCity,
+            value: currentCenter?.centerCity,
+          }
+        : null,
+    [currentCenter]
+  );
 
   const renderCenterCard = () => {
     if (isLoading || isLocationLoading) {
@@ -97,12 +93,18 @@ export const CenterStep = () => {
       <>
         {centers.map((item) => {
           return (
-            <CenterCard
-              isActive={currentCenter.centerID === item?.id}
-              fullAddress={item?.fullAddress as string}
-              id={item?.id as number}
-              name={item?.name as string}
-              handleSelect={handleChangeCenter}
+            <Controller
+              control={control}
+              name={"center.centerID"}
+              render={({ field }) => (
+                <CenterCard
+                  isActive={field.value === item?.id}
+                  fullAddress={item?.fullAddress as string}
+                  id={item?.id as number}
+                  name={item?.name as string}
+                  handleSelect={handleChangeCenter}
+                />
+              )}
             />
           );
         })}
@@ -136,13 +138,13 @@ export const CenterStep = () => {
       {renderCenterCard()}
       <ErrorMessage
         errors={errors}
-        name={"center"}
+        name={"centerID"}
         render={({ message }) => (
           <ValidationMessage>{message}</ValidationMessage>
         )}
       />
       <ButtonContainer>
-        <Button variant="secondary" onClick={prevStep}>
+        <Button type="button" variant="secondary" onClick={back}>
           Înapoi
         </Button>
         <Button type="submit">Selectează</Button>

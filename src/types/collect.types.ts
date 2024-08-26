@@ -1,4 +1,6 @@
-import { DrugList } from "./drug.types";
+import { CenterDataForm } from "./center.types";
+import { DetailsType } from "./details.types";
+import { DrugList, Drugs } from "./drug.types";
 
 export interface CollectResponse {
   recycleId: string;
@@ -14,3 +16,10 @@ export interface CollectData {
   cnp: string | null;
 }
 
+export interface CollectPayload {
+  drug: Drugs[];
+  details: DetailsType;
+  center: CenterDataForm;
+}
+
+export type PartialCollectPayload = Partial<CollectPayload>;

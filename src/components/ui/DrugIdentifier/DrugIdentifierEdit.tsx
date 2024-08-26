@@ -1,17 +1,17 @@
+import { Drugs } from "@/types/drug.types";
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
 import { getStringWidth } from "src/utils/utils";
+import { useOnClickOutside } from "usehooks-ts";
 import { CheckIcon, EditIcon } from "../Icon";
 import { Container, CustomInput, MainText } from "./DrugIdentifierEdit.styled";
-import { DrugsIdentifyList } from "@/types/drugsIdentify.types";
-import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
-import { useOnClickOutside } from "usehooks-ts";
 
 interface DrugIdentifierEditProps {
   children: string | number;
   index: number;
-  field: keyof DrugsIdentifyList;
+  field: keyof Drugs;
   handleModify: (
     index: number,
-    field: keyof DrugsIdentifyList,
+    field: keyof Drugs,
     value: ChangeEvent<HTMLInputElement>
   ) => void;
   disable?: boolean;

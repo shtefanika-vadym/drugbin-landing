@@ -1,47 +1,33 @@
 import { ErrorMessage } from "@hookform/error-message";
-import { some } from "lodash-es";
-import { useCallback, useContext, useMemo } from "react";
-import { useFormContext, useWatch } from "react-hook-form";
-import { MultipleFormContext } from "src/hooks/useMultipleForm";
+import { useCallback, useContext } from "react";
+import { useFormContext } from "react-hook-form";
 import { Button } from "../ui/Button/Button";
 import { InfoCNP } from "../ui/InfoCNP/InfoCNP";
 import { Input } from "../ui/Input/Input";
 import { ValidationMessage } from "../ui/ValidationMessage/ValidationMessage";
 import { ButtonContainer, InputContainer } from "./Collect.styled";
+import { CollectContext } from "./CollectContext";
 import { Container } from "./DetailsStep.styled";
 
 export const DetailsStep = () => {
-  const { nextStep, prevStep } = useContext(MultipleFormContext);
+  const { next, back, hasPsycholepticDrug } = useContext(CollectContext);
   const {
-    control,
     register,
     formState: { errors },
     handleSubmit,
   } = useFormContext();
 
-  const currentDrugList = useWatch({
-    control,
-    name: "drug",
-  });
-
-  const hasPsycholepticDrug = useMemo(
-    () => some(currentDrugList, (item) => item.name.atc?.includes("N05")),
-    [currentDrugList]
-  );
-
   const onSubmit = useCallback(() => {
-    nextStep();
-  }, [nextStep]);
+    next();
+  }, [next]);
 
   return (
     <Container onSubmit={handleSubmit(onSubmit)}>
       <InputContainer>
         <Input
+          {...register("details.name")}
           label="Numele *"
           placeholder="EX: Popescu"
-          {...register("details.name", {
-            required: "Numele este un câmp obligatoriu.",
-          })}
         />
         <ErrorMessage
           errors={errors}
@@ -51,13 +37,12 @@ export const DetailsStep = () => {
           )}
         />
       </InputContainer>
+
       <InputContainer>
         <Input
+          {...register("details.surname")}
           label="Prenume *"
           placeholder="EX: Ion"
-          {...register("details.surname", {
-            required: "Prenume este un câmp obligatoriu.",
-          })}
         />
         <ErrorMessage
           errors={errors}
@@ -67,23 +52,17 @@ export const DetailsStep = () => {
           )}
         />
       </InputContainer>
+
       {hasPsycholepticDrug && (
         <>
           <InputContainer>
             <Input
+              {...register("details.cnp")}
               type="number"
               label="CNP (Codul Numeric Personal) *"
-              placeholder="EX: 18903543356"
-              {...register("details.cnp", {
-                required: "CNP este un câmp obligatoriu.",
-                valueAsNumber: true,
-                validate: {
-                  validLength: (value) =>
-                    value.toString().length === 13 ||
-                    "Te rugăm să introduci un CNP valid",
-                },
-              })}
+              placeholder="EX: 2840302301499"
             />
+            <InfoCNP />
             <ErrorMessage
               errors={errors}
               name={"details.cnp"}
@@ -91,15 +70,13 @@ export const DetailsStep = () => {
                 <ValidationMessage>{message}</ValidationMessage>
               )}
             />
-            <InfoCNP />
           </InputContainer>
+
           <InputContainer>
             <Input
+              {...register("details.address")}
               label="Adresa de domiciliu *"
               placeholder="EX: Strada Victoriei Nr.4 Bloc A2 Scara B"
-              {...register("details.address", {
-                required: "Adresa este un câmp obligatoriu.",
-              })}
             />
             <ErrorMessage
               errors={errors}
@@ -111,16 +88,12 @@ export const DetailsStep = () => {
           </InputContainer>
         </>
       )}
+
       <InputContainer>
         <Input
+          {...register("details.email")}
           label="Adresa de e-mail (optional)"
           placeholder="EX: ion_popescu@gmail.com"
-          {...register("details.email", {
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Adresa de e-mail invalidă",
-            },
-          })}
         />
         <ErrorMessage
           errors={errors}
@@ -132,7 +105,7 @@ export const DetailsStep = () => {
       </InputContainer>
 
       <ButtonContainer>
-        <Button variant="secondary" onClick={prevStep}>
+        <Button type="button" variant="secondary" onClick={back}>
           Înapoi
         </Button>
         <Button type="submit">Continuă</Button>

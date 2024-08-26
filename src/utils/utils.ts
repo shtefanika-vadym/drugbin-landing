@@ -1,3 +1,5 @@
+import { reduce, size, slice, split, toString } from "lodash-es";
+
 export function getStringWidth(text: string, font = "16px Arial") {
   // Create a canvas element
   const canvas = document.createElement("canvas");
@@ -35,4 +37,24 @@ export const toPackagingType = (pack: string): string => {
   };
 
   return packMapping[pack] || "entity";
+};
+
+export const isValidCNP = (value: string): boolean => {
+  const cnp = toString(value);
+
+  if (size(cnp) !== 13) return false;
+
+  const controlConstant = [2, 7, 9, 1, 4, 6, 3, 5, 8, 2, 7, 9];
+
+  const sum = reduce(
+    slice(split(cnp, ""), 0, 12),
+    (acc, digit, index) => acc + Number(digit) * controlConstant[index],
+    0
+  );
+
+  const remainder = sum % 11;
+  const calculatedControlDigit = remainder < 10 ? remainder : 1;
+  const providedControlDigit = Number(cnp[12]);
+
+  return calculatedControlDigit === providedControlDigit;
 };

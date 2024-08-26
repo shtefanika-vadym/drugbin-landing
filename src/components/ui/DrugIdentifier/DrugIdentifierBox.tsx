@@ -1,4 +1,3 @@
-import { DrugsIdentifyList } from "@/types/drugsIdentify.types";
 import { ChangeEvent } from "react";
 import {
   Container,
@@ -8,13 +7,14 @@ import {
   Row,
 } from "./DrugIdentifierBox.styled";
 import { DrugIdentifierEdit } from "./DrugIdentifierEdit";
+import { Drugs } from "@/types/drug.types";
 
 interface DrugIdentifierBoxProps {
-  data: DrugsIdentifyList;
+  data: Drugs;
   index: number;
   handleModify: (
     index: number,
-    field: keyof DrugsIdentifyList,
+    field: keyof Drugs,
     value: ChangeEvent<HTMLInputElement>
   ) => void;
 }
