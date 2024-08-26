@@ -19,22 +19,17 @@ export const getDrugsRequest = async (
   return toDrugSearch(response?.data);
 };
 
-// const fetchDrugs = async (url: string): Promise<any> => {
-//   const response: AxiosResponse<any> = await api.get<any>(url);
+export const getSearch = async (
+  name?: string,
+  limit?: number
+): Promise<SearchDrug[]> => {
+  try {
+    const response: AxiosResponse<SearchDrugResponse[]> = await api.get<
+      SearchDrugResponse[]
+    >(`/drugs/search?limit=${limit}${name ? `&name=${name}` : ""}`);
 
-//   return toDrugSearch(response.data);
-// };
-
-// export const useGetDrugs = (name?: string) => {
-//   const queryParams = new URLSearchParams({
-//     limit: "10",
-//     ...(name && { name }),
-//   }).toString();
-
-//   const { data, isError, isLoading } = useData(
-//     `/drugs/search?${queryParams}`,
-//     fetchDrugs
-//   );
-
-//   return { data, isError, isLoading };
-// };
+    return toDrugSearch(response?.data);
+  } catch (error) {
+    throw new Error("Failed");
+  }
+};

@@ -1,22 +1,20 @@
+import { size } from "lodash-es";
 import { FormProvider } from "react-hook-form";
-import {
-  MultipleFormContext,
-  useMultipleForm,
-} from "src/hooks/useMultipleForm";
+import { useCollectForm } from "../../hooks/useCollectForm";
 import { CollectGroup } from "../ui/CollectGroup/CollectGroup";
 import { InfoType } from "../ui/InfoBox/InfoBox";
 import { CenterStep } from "./CenterStep";
 import { Container } from "./Collect.styled";
+import { CollectContext } from "./CollectContext";
 import { DetailsStep } from "./DetailsStep";
 import { DrugStep } from "./DrugStep";
 import { TermsStep } from "./TermsStep";
-import { useCollectForm } from "./useCollectForm";
 
 const steps = [
   {
     title: "Colectează medicamente",
     description:
-      "Completează datele despre medicamentele pe care vrei să le colectezi, va dura doar câteva secunde. Poți adăuga și preda mai multe medicamente." ,
+      "Completează datele despre medicamentele pe care vrei să le colectezi, va dura doar câteva secunde. Poți adăuga și preda mai multe medicamente.",
     infoType: InfoType.CAMERA,
     renderComponent: <DrugStep />,
   },
@@ -43,12 +41,12 @@ const steps = [
 ];
 
 export const Collect = () => {
-  const multipleForm = useMultipleForm(steps.length);
-  const { step } = multipleForm;
+  const collectForm = useCollectForm(size(steps));
+  const { step, methods } = collectForm;
 
   return (
-    <MultipleFormContext.Provider value={multipleForm}>
-      <FormProvider {...multipleForm.methods}>
+    <CollectContext.Provider value={collectForm}>
+      <FormProvider {...methods}>
         <Container>
           <CollectGroup
             title={steps[step].title}
@@ -62,6 +60,6 @@ export const Collect = () => {
           </CollectGroup>
         </Container>
       </FormProvider>
-    </MultipleFormContext.Provider>
+    </CollectContext.Provider>
   );
 };

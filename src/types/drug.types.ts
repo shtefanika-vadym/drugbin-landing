@@ -28,9 +28,9 @@ export interface DrugName {
   isPsycholeptic: boolean;
   label: string;
   value: string;
-  atc: string;
-  prescription: string;
-  concentration: string;
+  atc: string | null;
+  prescription: string | null;
+  concentration: string | null;
 }
 
 export interface DrugList {

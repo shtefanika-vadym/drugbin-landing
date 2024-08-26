@@ -47,7 +47,7 @@ export const useDrugsIdentify = () => {
 
   return {
     drugsIdentify,
-    data: data ?? [],
+    data: data as DrugsIdentify,
     isLoading: loading,
   };
 };

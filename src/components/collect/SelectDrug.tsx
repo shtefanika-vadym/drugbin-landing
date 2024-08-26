@@ -1,43 +1,47 @@
 import { DrugName } from "@/types/drug.types";
 import { useCallback } from "react";
-import { SingleValue } from "react-select";
+import { SelectInstance, SingleValue } from "react-select";
 import AsyncCreatableSelect from "react-select/async-creatable";
-import { getDrugsRequest } from "src/hooks/drug";
+import { getSearch } from "src/hooks/drug";
 import { WDS_COLOR_NEUTRAL_RICHBLACK } from "src/styles/tokens";
 import { ChevronDown, ChevronUp } from "../ui/Icon";
 import { Text } from "../ui/Text/Text";
 import { selectDrugStyles } from "./SelectDrug.styled";
 
 interface SelectDrugProps {
-  callbackOnChange: (value: SingleValue<string>) => void;
+  onChange: (value: SingleValue<DrugName>) => void;
   selectedValue: DrugName;
   placeholder: string;
   label: string;
+  selectRef: React.MutableRefObject<SelectInstance<DrugName> | null>;
 }
 
 // TODO: Resolve multiple api call
 export const SelectDrug: React.FC<SelectDrugProps> = ({
-  callbackOnChange,
+  onChange,
   selectedValue,
   placeholder,
   label,
+  selectRef,
 }) => {
   const loadOptions = useCallback((inputValue: string) => {
-    return new Promise<any>(async (resolve, reject) => {
-      try {
-        const response = await getDrugsRequest(inputValue, 10);
-        resolve(response);
-      } catch (error) {
-        reject(error);
+    return new Promise<any>(
+      async (resolve, reject) => {
+        try {
+          const response = await getSearch(inputValue, 10);
+          resolve(response);
+        } catch (error) {
+          reject(error);
+        }
       }
-    });
+    );
   }, []);
 
   const handleChange = useCallback(
-    (value: SingleValue<any>) => {
-      callbackOnChange(value);
+    (value: SingleValue<DrugName>) => {
+      onChange(value);
     },
-    [callbackOnChange]
+    [onChange]
   );
 
   return (
@@ -46,6 +50,7 @@ export const SelectDrug: React.FC<SelectDrugProps> = ({
         {label}
       </Text>
       <AsyncCreatableSelect
+        ref={selectRef}
         cacheOptions={false}
         placeholder={placeholder}
         defaultOptions

@@ -14,3 +14,8 @@ export interface CenterType {
   regionLongName: string;
   regionShortName: string;
 }
+
+export interface CenterDataForm {
+  centerID: number | null;
+  centerCity?: string;
+}

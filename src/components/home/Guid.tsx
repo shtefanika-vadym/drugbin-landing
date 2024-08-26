@@ -28,7 +28,7 @@ export const Guid: React.FC<{ id: string }> = ({ id }) => {
             decurgă în mod sigur și elegant. Trebuie doar să poziționezi toate
             medicamentele în fața camerei foto, cât mai vizibil. Dacă predarea
             nu se face pe bază de proces verbal, atunci trebuie să știi că
-            medicamentele se colectează în patru categorii distincte:
+            medicamentele se colectează în patru categorii distincte
             {/* <ul>
               <li>Deșeuri de medicamente citotoxice și citostatice</li>
               <li>Deșeuri de medicamente (cu excepția primei categorii)</li>

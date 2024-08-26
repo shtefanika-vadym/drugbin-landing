@@ -48,7 +48,7 @@ export const useCurrentLocation = () => {
     }
   }, [getCurrentLocation]);
 
-  const handleLocationSuccess = (position: any) => {
+  const handleLocationSuccess = (position: GeolocationPosition) => {
     setLocation({
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
@@ -56,7 +56,7 @@ export const useCurrentLocation = () => {
     setIsLoading(false);
   };
 
-  const handleLocationError = (error: any) => {
+  const handleLocationError = (error: GeolocationPositionError) => {
     setIsLoading(false);
     switch (error.code) {
       case error.PERMISSION_DENIED:

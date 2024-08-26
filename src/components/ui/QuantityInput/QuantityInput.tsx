@@ -39,13 +39,23 @@ export const QuantityInput = React.forwardRef<
         <Text variant="inputLabel" color={WDS_COLOR_NEUTRAL_RICHBLACK}>
           {label}
         </Text>
-        <Input ref={ref} type="number" {...rest} />
+        <Input ref={ref} type="number" className="hide-arrows" {...rest} />
       </InputContainer>
       <ButtonWrapper>
-        <Button variant="ghost" size="S" onClick={handleDecrement}>
+        <Button
+          type="button"
+          variant="ghost"
+          size="S"
+          onClick={handleDecrement}
+        >
           <MinusIcon />
         </Button>
-        <Button variant="ghost" size="S" onClick={handleIncrement}>
+        <Button
+          type="button"
+          variant="ghost"
+          size="S"
+          onClick={handleIncrement}
+        >
           <PlusIcon />
         </Button>
       </ButtonWrapper>

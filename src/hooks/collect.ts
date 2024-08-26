@@ -1,10 +1,9 @@
-import { CollectData, CollectResponse } from "@/types/collect.types";
+import { CollectData, CollectPayload, CollectResponse } from "@/types/collect.types";
 import { AxiosResponse } from "axios";
 import { useNavigate } from "react-router-dom";
 import { api } from "src/api";
 import { ToastType, notify } from "src/components/ui/Toast/CustomToast";
 import { toCollectDrugs } from "src/utils/mappers";
-import { FormValues } from "./useMultipleForm";
 
 export const postCollect = async (data: CollectData): Promise<string> => {
   try {
@@ -20,7 +19,7 @@ export const postCollect = async (data: CollectData): Promise<string> => {
 export const useCollectData = () => {
   const navigate = useNavigate();
 
-  const postCollectData = async (product: FormValues) => {
+  const postCollectData = async (product: CollectPayload) => {
     const data = toCollectDrugs(product);
 
     try {

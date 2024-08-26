@@ -7,6 +7,7 @@ export interface LabeledInputProps
   extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   valid?: boolean;
+  className?: string;
 }
 
 export const Input = React.forwardRef<HTMLInputElement, LabeledInputProps>(
@@ -17,6 +18,7 @@ export const Input = React.forwardRef<HTMLInputElement, LabeledInputProps>(
       type = "text",
       disabled = false,
       placeholder,
+      className,
       ...rest
     } = props;
 
@@ -33,6 +35,7 @@ export const Input = React.forwardRef<HTMLInputElement, LabeledInputProps>(
           placeholder={placeholder}
           disabled={disabled}
           valid={valid}
+          className={className}
           {...rest}
         />
       </Container>

@@ -10,7 +10,7 @@ import {
   Container,
   Count,
   DrugIdentifierWrapper,
-  Title
+  Title,
 } from "./DrugIdentifierDialog.styled";
 
 interface DrugIdentifierDialogProps {
