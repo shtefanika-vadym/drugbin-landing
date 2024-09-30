@@ -23,12 +23,13 @@ export const Guid: React.FC<{ id: string }> = ({ id }) => {
             Medicamentele expirate sau neutilizate sunt deșeuri periculoase și
             se predau la punctele de colectare special amenajate din cadrul
             spitalelor publice și private din România. Putem genera, cu o simplă
-            fotografie, un proces verbal de predare, astfel încât să nu existe
-            riscuri privind traficul cu medicamente iar predarea acestora să
-            decurgă în mod sigur și elegant. Trebuie doar să poziționezi toate
-            medicamentele în fața camerei foto, cât mai vizibil. Dacă predarea
-            nu se face pe bază de proces verbal, atunci trebuie să știi că
-            medicamentele se colectează în patru categorii distincte
+            fotografie, un proces-verbal de predare, astfel încât să nu existe
+            riscuri privind introducerea ilicită în circuitul medicamentelor,
+            iar predarea acestora să decurgă în mod sigur și elegant. Trebuie
+            doar să poziționezi toate medicamentele în fața camerei foto, cât
+            mai vizibil. Dacă predarea nu se face pe bază de proces-verbal,
+            atunci trebuie să știi că medicamentele se colectează în patru
+            categorii distincte.
             {/* <ul>
               <li>Deșeuri de medicamente citotoxice și citostatice</li>
               <li>Deșeuri de medicamente (cu excepția primei categorii)</li>
