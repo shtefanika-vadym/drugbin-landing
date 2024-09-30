@@ -31,7 +31,7 @@ export const Guid: React.FC<{ id: string }> = ({ id }) => {
             atunci trebuie să știi că medicamentele se colectează în patru
             categorii distincte.
             {/* <ul>
-              <li>Deșeuri de medicamente citotoxice și citostatice</li>
+              <li>Deșeuri  de medicamente citotoxice și citostatice</li>
               <li>Deșeuri de medicamente (cu excepția primei categorii)</li>
               <li>
                 Deșeuri de medicamente aflate în stare lichidă cu potențial
