@@ -295,7 +295,7 @@ export const Terms = () => {
           <p>Prin e-mail: drugbin.solution@gmail.com</p>
         </li>
         <li>
-          <p>Prin număr de telefon: +40 755 493 184</p>
+          <p>Prin număr de telefon: (0743) 206 175</p>
         </li>
       </ul>
     </div>

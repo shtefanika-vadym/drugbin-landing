@@ -85,7 +85,7 @@ export const Contact = () => {
             </Data>
             <Data>
               <PhoneIcon />
-              <Text element="p">+40 755 493 184</Text>
+              <Text element="p">(0743) 206 175</Text>
             </Data>
             <Data>
               <LocationIcon />

@@ -534,7 +534,7 @@ export const Privacy = () => {
       </p>
       <ul>
         <li>Prin email: drugbin@gmail.com</li>
-        <li>Prin numar de telefon: +40 755 493 184</li>
+        <li>Prin numar de telefon: (0743) 206 175</li>
       </ul>
     </Container>
   );
