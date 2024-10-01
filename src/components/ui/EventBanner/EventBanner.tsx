@@ -20,17 +20,23 @@ export const EventBanner: React.FC<EventBannerProps> = ({
     <Layout>
       <Container backgroundColor={backgroundColor}>
         <TextContainer>
-          <Text variant="titleM" element="p" color={WDS_COLOR_BUTTON_PRIMARY_BACKGROUND}>
-            Colectează Medicamentele Expirate sau Neutilizate Astăzi
+          <Text
+            variant="titleM"
+            element="p"
+            color={WDS_COLOR_BUTTON_PRIMARY_BACKGROUND}
+          >
+            Fii parte din solutie! Colecteaza, returneaza, protejeaza!
           </Text>
           <Text element="p" color={WDS_COLOR_BUTTON_PRIMARY_BACKGROUND}>
-            Ajută-ne să avem un impact pozitiv asupra lumii colectand
-            medicamentele tale neutilizate astăzi. Prin participarea la
-            programul nostru de colectare a medicamentelor, poți contribui la
-            reducerea deșeurilor de medicamente, la promovarea practicilor de
-            sănătate durabilă și la salvarea de vieți.
+            Participă activ la campania noastră de colectare a medicamentelor!
+            Du-ți medicamentele nefolosite la cele mai apropiate puncte de
+            colectare și contribuie la un viitor mai sănătos pentru tine și
+            comunitatea ta. Alege să fii responsabil! Acțiunile tale pot preveni
+            poluarea și pot salva vieți. Împreună, putem transforma deșeurile în
+            oportunități pentru un mediu mai sigur și mai curat.
           </Text>
         </TextContainer>
+
         <Button variant="white" onClick={onClick}>
           Colectează
         </Button>
