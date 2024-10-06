@@ -70,6 +70,7 @@ export const toDrugsIdentifyList = (
       name: {
         id: null,
         isPsycholeptic: false,
+        category: drug.category ?? 0,
         label: drug.name,
         value: drug.name,
         atc: drug.atc,
