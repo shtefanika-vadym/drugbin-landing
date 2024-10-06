@@ -31,6 +31,7 @@ export interface DrugName {
   atc: string | null;
   prescription: string | null;
   concentration: string | null;
+  category: number;
 }
 
 export interface DrugList {
@@ -42,4 +43,3 @@ export interface DrugList {
   concentration: string | null;
   expirationDate: null;
 }
-

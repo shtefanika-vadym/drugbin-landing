@@ -1,4 +1,4 @@
-import { DrugName, Drugs } from "./drug.types";
+import { Drugs } from "./drug.types";
 
 export interface DrugsIdentifyResponse {
   result: DrugsIdentifyListResponse[];
@@ -11,6 +11,7 @@ export interface DrugsIdentifyListResponse {
   concentration: string | null;
   atc: string | null;
   prescription: string | null;
+  category: number | null;
 }
 
 export interface DrugsIdentify {

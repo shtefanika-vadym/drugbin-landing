@@ -1,3 +1,4 @@
+import { Drugs } from "@/types/drug.types";
 import { ChangeEvent } from "react";
 import {
   Container,
@@ -7,7 +8,17 @@ import {
   Row,
 } from "./DrugIdentifierBox.styled";
 import { DrugIdentifierEdit } from "./DrugIdentifierEdit";
-import { Drugs } from "@/types/drug.types";
+
+export const categoryLabels: Record<number, string> = {
+  0: "Necunoscut",
+  1: "Medicamente citotoxice și citostatice",
+  2: "Inhalatoare",
+  3: "Medicamente tăietoare",
+  4: "Insuline",
+  5: "Medicamente uzuale",
+  6: "Suplimente",
+  7: "Psiholeptice",
+};
 
 interface DrugIdentifierBoxProps {
   data: Drugs;
@@ -26,7 +37,7 @@ export const DrugIdentifierBox: React.FC<DrugIdentifierBoxProps> = ({
 }) => {
   return (
     <Container>
-      <Row columns={1}>
+      <Row columns={2}>
         <DataContainer>
           <DrugIdentifierEdit
             handleModify={handleModify}
@@ -37,6 +48,17 @@ export const DrugIdentifierBox: React.FC<DrugIdentifierBoxProps> = ({
             {data?.name.value}
           </DrugIdentifierEdit>
           <Description>Nume</Description>
+        </DataContainer>
+        <DataContainer>
+          <DrugIdentifierEdit
+            handleModify={handleModify}
+            index={index}
+            field="name"
+            disable
+          >
+            {categoryLabels[data?.name?.category as number]}
+          </DrugIdentifierEdit>
+          <Description>Categorie</Description>
         </DataContainer>
       </Row>
       <Divider />
