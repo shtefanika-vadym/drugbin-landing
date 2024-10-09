@@ -1,9 +1,5 @@
 import { Drugs } from "./drug.types";
 
-export interface DrugsIdentifyResponse {
-  result: DrugsIdentifyListResponse[];
-}
-
 export interface DrugsIdentifyListResponse {
   name: string;
   count: number;
