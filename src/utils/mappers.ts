@@ -7,8 +7,7 @@ import {
 } from "@/types/drug.types";
 import {
   DrugsIdentify,
-  DrugsIdentifyListResponse,
-  DrugsIdentifyResponse,
+  DrugsIdentifyListResponse
 } from "@/types/drugsIdentify.types";
 import { toNumber, toString } from "lodash-es";
 import { fromPackagingType, toPackagingType } from "./utils";
@@ -54,11 +53,11 @@ const toDrugList = (input: Drugs): DrugList => {
 };
 
 export const toDrugsIdentify = (
-  input: DrugsIdentifyResponse
+  input: DrugsIdentifyListResponse[]
 ): DrugsIdentify => {
   return {
-    count: input.result.length,
-    drugs: toDrugsIdentifyList(input.result),
+    count: input.length,
+    drugs: toDrugsIdentifyList(input),
   };
 };
 
