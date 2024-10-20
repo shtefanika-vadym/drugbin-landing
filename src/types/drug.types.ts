@@ -37,8 +37,13 @@ export interface DrugName {
 export interface DrugList {
   quantity: number | null;
   pack: string;
+  name: string;
+  id: number | null;
+  isPsycholeptic: boolean;
+  label: string;
+  value: string;
   atc: string | null;
-  name: DrugName;
+  category: number;
   prescription: string | null;
   concentration: string | null;
   expirationDate: null;
