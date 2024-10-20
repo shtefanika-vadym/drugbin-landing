@@ -44,10 +44,17 @@ const toDrugList = (input: Drugs): DrugList => {
   return {
     quantity: toNumber(input.amount),
     pack: toPackagingType(input.pack),
+    // NEW
+    name: input.name.value,
+    id: input.name.id,
+    isPsycholeptic: input.name.isPsycholeptic,
+    label: input.name.label,
+    value: input.name.value,
     atc: input.name.atc,
-    name: input.name,
     prescription: input.name.prescription,
     concentration: input.name.concentration,
+    category: input.name.category,
+
     expirationDate: null,
   };
 };
