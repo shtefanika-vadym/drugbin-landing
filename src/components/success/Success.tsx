@@ -1,8 +1,10 @@
 import { useCallback } from "react";
 import QRCode from "react-qr-code";
 import { useParams } from "react-router-dom";
-import { useGetDocument } from "src/hooks/document";
-import { DocumentType } from "src/types/document.types";
+import {
+  useGetDocumentByCategories,
+  useGetSuccessDetails,
+} from "src/hooks/document";
 import { Button } from "../ui/Button/Button";
 import { AttachmentIcon, CheckCircle } from "../ui/Icon";
 import { Loader } from "../ui/Loader";
@@ -12,10 +14,14 @@ import { Container, Description, Title } from "./Success.styled";
 export const Success = () => {
   const { id } = useParams();
 
-  const { data: documentNormal, isLoading: isLoadingNormalType } =
-    useGetDocument(id as string, DocumentType.NORMAL);
-  const { data: documentPsycholeptic, isLoading: isLoadingsycholepticType } =
-    useGetDocument(id as string, DocumentType.PSYCHOLEPTIC);
+  const { data, isLoading: isSuccessDetailsLoading } = useGetSuccessDetails(
+    id as string,
+    !!id
+  );
+  const { data: documents, isLoading } = useGetDocumentByCategories(
+    id as string,
+    data?.types ?? []
+  );
 
   const handleOpenDocument = useCallback((documentURL: string | undefined) => {
     window.open(documentURL);
@@ -39,26 +45,19 @@ export const Success = () => {
           viewBox={`0 0 256 256`}
         />
       </QRCodeWithBorder>
-      <Button
-        variant="document"
-        onClick={() => handleOpenDocument(documentPsycholeptic)}
-        disabled={isLoadingsycholepticType}
-      >
-        <Loader isLoading={isLoadingsycholepticType} size={18}>
-          <AttachmentIcon />
-        </Loader>
-        Declaratie PR Stupefiante
-      </Button>
-      <Button
-        variant="document"
-        onClick={() => handleOpenDocument(documentNormal)}
-        disabled={isLoadingNormalType}
-      >
-        <Loader isLoading={isLoadingNormalType} size={18}>
-          <AttachmentIcon />
-        </Loader>
-        PV Predare General
-      </Button>
+      <Loader isLoading={isLoading || isSuccessDetailsLoading} size={42}>
+        {documents?.map((document, index) => (
+          <Button
+            key={index}
+            variant="document"
+            onClick={() => handleOpenDocument(document.pdfURL)}
+            disabled={isLoading}
+          >
+            <AttachmentIcon />
+            {document.label}
+          </Button>
+        ))}
+      </Loader>
     </Container>
   );
 };

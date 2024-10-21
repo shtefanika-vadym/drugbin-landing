@@ -7,10 +7,11 @@ import {
 } from "@/types/drug.types";
 import {
   DrugsIdentify,
-  DrugsIdentifyListResponse
+  DrugsIdentifyListResponse,
 } from "@/types/drugsIdentify.types";
-import { toNumber, toString } from "lodash-es";
+import { toNumber, toString, uniq } from "lodash-es";
 import { fromPackagingType, toPackagingType } from "./utils";
+import { SuccessDetails, SuccessResponse } from "@/types/success.types";
 
 export const toDrugSearch = (input: SearchDrugResponse[]): SearchDrug[] => {
   return input.map((drug) => {
@@ -98,4 +99,10 @@ export const toDrugsIdentifyAppend = (drugs: Drugs[]) => {
       amount: drug.amount,
     };
   });
+};
+
+export const toSuccessDetails = (input: SuccessResponse): SuccessDetails => {
+  return {
+    types: uniq(input.drugList.map((item) => item.category))
+  };
 };
