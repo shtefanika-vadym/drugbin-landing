@@ -7,6 +7,7 @@ export const Container = styled.div`
   width: 100%;
   ${flex({ direction: "column", alignItems: "center", gap: WDS_SIZE_016_PX })}
   margin-top: ${WDS_SIZE_032_PX};
+  padding-bottom: 32px;
 `;
 
 export const Title = styled(Text).attrs({
