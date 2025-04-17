@@ -1,4 +1,4 @@
-import homeImage from "src/assets/images/home_content.webp";
+import homeImage from "src/assets/images/drugbin.png";
 import { Button } from "src/components/ui/Button/Button";
 import { Text } from "src/components/ui/Text/Text";
 import { useScrollTo } from "src/hooks/useScrollTo";
@@ -19,8 +19,9 @@ export const Main = () => {
           1500 de tone de medicamente ajung anual în apele din România!
         </Text>
         <Text variant="bodyM" element="p" color={WDS_COLOR_PRIMARY_50}>
-          Nu arunca medicamentele expirate sau neutilizate! Predă-le în centrele
-          de colectare special amenajate! Noi te învățăm cum.
+          Nu le arunca. Predă-le responsabil cu ajutorul DrugBin — primul
+          dispozitiv inteligent care identifică, sortează și stochează automat
+          pastilele expirate sau nefolosite.
         </Text>
         <Button onClick={() => scrollTo("proces")}>Află cum</Button>
       </Container>
