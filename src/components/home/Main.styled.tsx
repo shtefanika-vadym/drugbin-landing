@@ -28,6 +28,7 @@ export const HomeText = styled(Text).attrs({
 export const Image = styled.img`
   width: 100%;
   padding-top: ${WDS_SIZE_024_PX};
+  height: 570px;
 
   @media ${BREAKPOINTS.MOBILE_UP_TO} {
     height: 270px;
@@ -42,4 +43,3 @@ export const Video = styled.video`
     height: 270px;
   }
 `;
-

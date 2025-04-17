@@ -3,7 +3,6 @@ import {
   WDS_COLOR_BUTTON_PRIMARY_BACKGROUND,
   WDS_COLOR_PRIMARY_50,
 } from "src/styles/tokens";
-import { Button } from "../Button/Button";
 import { Text } from "../Text/Text";
 import { Container, TextContainer } from "./EventBanner.styled";
 
@@ -37,9 +36,9 @@ export const EventBanner: React.FC<EventBannerProps> = ({
           </Text>
         </TextContainer>
 
-        <Button variant="white" onClick={onClick}>
+        {/* <Button variant="white" onClick={onClick}>
           Colectează
-        </Button>
+        </Button> */}
       </Container>
     </Layout>
   );

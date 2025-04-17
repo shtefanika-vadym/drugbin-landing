@@ -38,7 +38,7 @@ export const TopNavigation = () => {
           <NavLink onClick={() => scrollTo("main")}>Valorile noastre</NavLink>
           <NavLink onClick={() => scrollTo("proces")}>Proces</NavLink>
           <NavLink onClick={() => scrollTo("contact")}>Contact</NavLink>
-          <NavLink href="/collect">Colecteaza</NavLink>
+          {/* <NavLink href="/collect">Colecteaza</NavLink> */}
         </Navigation>
         <LogoS onClick={() => scrollTo("main")} />
       </DesktopContainer>
