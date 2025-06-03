@@ -40,9 +40,9 @@ export const Home = () => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         />
       </Layout>
-      <section id="stiri">
+      {/* <section id="stiri">
         <News />
-      </section>
+      </section> */}
       <section id="contact">
         <Contact />
       </section>
