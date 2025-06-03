@@ -9,14 +9,16 @@ import { Container, TextContainer } from "./EventBanner.styled";
 interface EventBannerProps {
   backgroundColor?: string;
   onClick: () => void;
+  id?: string;
 }
 
 export const EventBanner: React.FC<EventBannerProps> = ({
   backgroundColor = WDS_COLOR_PRIMARY_50,
+  id,
 }) => {
   return (
     <Layout>
-      <Container backgroundColor={backgroundColor}>
+      <Container id={id} backgroundColor={backgroundColor}>
         <TextContainer>
           <Text
             variant="titleM"
