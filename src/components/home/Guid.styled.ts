@@ -21,7 +21,6 @@ export const Container = styled.div`
 export const TopContent = styled.div`
   max-width: 847px;
   ${flex({ direction: "column", gap: WDS_SIZE_024_PX  })}
-  text-align: center;
   margin: 0 auto;
 `;
 

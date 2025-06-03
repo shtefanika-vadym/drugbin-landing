@@ -27,20 +27,9 @@ export const Guid: React.FC<{ id: string }> = ({ id }) => {
             exclusiv în punctele de colectare special amenajate din cadrul
             spitalelor publice și private din România. Pentru a ușura acest
             proces și a reduce impactul asupra mediului, am creat DrugBin — un
-            dispozitiv inteligent care preia medicamentele tale vechi, le
-            identifică, le sortează și le depozitează automat, în siguranță.
-            {/* <ul>
-              <li>Deșeuri de medicamente citotoxice și citostatice</li>
-              <li>Deșeuri de medicamente (cu excepția primei categorii)</li>
-              <li>
-                Deșeuri de medicamente aflate în stare lichidă cu potențial
-                înțepător
-              </li>
-              <li>
-                Deșeuri de medicamente aflate în recipiente sub presiune
-                (spray-uri)
-              </li>
-            </ul> */}
+            dispozitiv inteligent care preia medicamentele tale expirate sau pe
+            care nu le mai folosești, le identifică, le sortează și le
+            depozitează automat, în siguranță.
           </Text>
         </TopContent>
         <Content>
@@ -49,7 +38,7 @@ export const Guid: React.FC<{ id: string }> = ({ id }) => {
               Primul pas spre un mediu mai curat
             </Text>
             <Text element="p" variant="bodyS">
-              Tot ce trebuie să faci este să torni medicamentele expirate sau
+              Tot ce trebuie să faci este să depui medicamentele expirate sau
               nefolosite în compartimentul special al dispozitivului. Nu este
               nevoie să le separi sau să le sortezi — DrugBin preia întreaga
               responsabilitate, asigurând un proces curat, sigur și fără efort
@@ -65,10 +54,10 @@ export const Guid: React.FC<{ id: string }> = ({ id }) => {
               Preluare automată, fără contact
             </Text>
             <Text element="p" variant="bodyS">
-              Odată introduse în aparat, un braț robotic ultra-modern preia
-              fiecare pastilă în parte cu grijă și precizie. Acest sistem
-              automatizat elimină riscurile de contaminare și erori umane,
-              oferind o experiență de utilizare futuristă și impecabilă.
+              Odată introduse în aparat, medicamentele sunt sortate cu grijă și
+              precizie. Acest sistem automatizat elimină riscurile de
+              contaminare și erori umane, oferind o experiență de utilizare
+              futuristă și impecabilă.
             </Text>
           </Description>
           <Image src={GuidImageStep2} alt="Guid" />
@@ -83,8 +72,8 @@ export const Guid: React.FC<{ id: string }> = ({ id }) => {
               Fiecare pastilă este analizată individual de o cameră de înaltă
               rezoluție și un sistem AI avansat, care o compară instantaneu cu o
               bază de date extinsă de medicamente. Astfel, identificarea este
-              rapidă, precisă și complet automată, indiferent de forma sau
-              culoarea pastilei.
+              rapidă, precisă și complet automată, indiferent de forma
+              farmaceutică (cutie, blister, flacon, fiole).
             </Text>
           </Description>
           <Image src={GuidImageStep3} alt="Guid" />
@@ -96,8 +85,14 @@ export const Guid: React.FC<{ id: string }> = ({ id }) => {
               Sortare inteligentă, eliminare sigură
             </Text>
             <Text element="p" variant="bodyS">
-              După identificare, pastilele sunt sortate automat în compartimente
-              special concepute, în funcție de compoziție, tip sau grad de risc.
+              După identificare, medicamentele sunt sortate automat în 6
+              compartimente specife de deșeuri: Medicamente uzuale, Recipiente
+              sub presiune, Taietoare si/sau intepatoare, Citotoxice si
+              citostatice, Suplimentele alimentare , Insulinele, Psihotrope si
+              stupefiante (cele care se elibereaza pe retetă verde tab III){" "}
+              <br />E important să știi că medicamentele care se elibereaza pe
+              reteta galbena Tab II se predau la farmacia care le-a eliberat!{" "}
+              <br />
               Acest proces asigură o stocare corectă, pregătită pentru reciclare
               responsabilă sau eliminare ecologică, în conformitate cu cele mai
               stricte norme de siguranță.

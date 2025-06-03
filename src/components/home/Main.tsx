@@ -19,9 +19,10 @@ export const Main = () => {
           1500 de tone de medicamente ajung anual în apele din România!
         </Text>
         <Text variant="bodyM" element="p" color={WDS_COLOR_PRIMARY_50}>
-          Nu le arunca. Predă-le responsabil cu ajutorul DrugBin — primul
-          dispozitiv inteligent care identifică, sortează și stochează automat
-          pastilele expirate sau nefolosite.
+          Nu arunca medicamentele expirate sau neutilizate! Predă-le responsabil
+          cu ajutorul DrugBin, primul dispozitiv inteligent care identifică,
+          colectează, sortează și stochează automat medicamentele expirate sau
+          neutilizate de la populație.
         </Text>
         <Button onClick={() => scrollTo("proces")}>Află cum</Button>
       </Container>
