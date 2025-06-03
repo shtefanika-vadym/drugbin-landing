@@ -2,6 +2,7 @@ import GuidImageStep1 from "src/assets/images/S1.png";
 import GuidImageStep2 from "src/assets/images/S2.png";
 import GuidImageStep3 from "src/assets/images/S3.png";
 import GuidImageStep4 from "src/assets/images/S4.png";
+import GuidImageStep5 from "src/assets/images/S5.png";
 
 import { Layout } from "src/layout/Layout/Layout";
 import { Text } from "../ui/Text/Text";
@@ -9,29 +10,31 @@ import {
   Container,
   Content,
   Description,
-  Image,
-  TopContent,
+  Image
 } from "./Guid.styled";
 
 export const Guid: React.FC<{ id: string }> = ({ id }) => {
   return (
     <Layout>
       <Container id={id}>
-        <TopContent>
-          <Text variant="titleM" element="h2">
-            Ce trebuie să știi?
-          </Text>
-          <Text element="p" variant="bodyS">
-            Medicamentele expirate sau neutilizate nu se aruncă la gunoi sau în
-            toaletă. Ele sunt considerate deșeuri periculoase și trebuie predate
-            exclusiv în punctele de colectare special amenajate din cadrul
-            spitalelor publice și private din România. Pentru a ușura acest
-            proces și a reduce impactul asupra mediului, am creat DrugBin — un
-            dispozitiv inteligent care preia medicamentele tale expirate sau pe
-            care nu le mai folosești, le identifică, le sortează și le
-            depozitează automat, în siguranță.
-          </Text>
-        </TopContent>
+        <Content reverse>
+          <Description>
+            <Text variant="titleM" element="h2">
+              Ce trebuie să știi?
+            </Text>
+            <Text element="p" variant="bodyS">
+              Medicamentele expirate sau neutilizate nu se aruncă la gunoi sau
+              în toaletă. Ele sunt considerate deșeuri periculoase și trebuie
+              predate exclusiv în punctele de colectare special amenajate din
+              cadrul spitalelor publice și private din România. Pentru a ușura
+              acest proces și a reduce impactul asupra mediului, am creat
+              DrugBin — un dispozitiv inteligent care preia medicamentele tale
+              expirate sau pe care nu le mai folosești, le identifică, le
+              sortează și le depozitează automat, în siguranță.
+            </Text>
+          </Description>
+          <Image src={GuidImageStep5} alt="Guid" />
+        </Content>
         <Content>
           <Description>
             <Text variant="titleM" element="h2">
