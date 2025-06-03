@@ -52,11 +52,11 @@ export const Footer = () => {
             {isMobile ? <LogoFooterS /> : <LogoFooterXS />}
           </TopContent>
           <TopContent position="center" gap={WDS_SIZE_032_PX}>
-            <NavLink onClick={() => scrollTo("main")}>Valorile noastre</NavLink>
+            <NavLink onClick={() => scrollTo("main")}>Acasă</NavLink>
             <NavLink onClick={() => scrollTo("proces")}>Proces</NavLink>
+            <NavLink onClick={() => scrollTo("values")}>Caracteristici</NavLink>
+            <NavLink onClick={() => scrollTo("involve")}>Implică-te</NavLink>
             <NavLink onClick={() => scrollTo("contact")}>Contact</NavLink>
-            <NavLink onClick={() => scrollTo("stiri")}>Stiri</NavLink>
-            <NavLink href="/collect">Colecteaza</NavLink>
           </TopContent>
           <TopContent position="flex-end" gap={WDS_SIZE_012_PX}>
             <a
