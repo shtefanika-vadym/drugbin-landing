@@ -32,6 +32,7 @@ import { ReactComponent as BenefitIcon } from "src/assets/icon/benefit.svg";
 import { ReactComponent as ProcesIcon } from "src/assets/icon/proces.svg";
 import { ReactComponent as AboutIcon } from "src/assets/icon/about.svg";
 import { ReactComponent as ContactIcon } from "src/assets/icon/contact.svg";
+import { ReactComponent as StarIcon } from "src/assets/icon/star-smile-line.svg";
 
 export {
   LogoIcon,
@@ -66,4 +67,5 @@ export {
   PlusIcon,
   MinusIcon,
   EmptyIcon,
+  StarIcon,
 };

@@ -7,6 +7,7 @@ import { Guid } from "./Guid";
 import { Container } from "./Home.styled";
 import { Main } from "./Main";
 import { News } from "./News";
+import { Values } from "../ui/Values/Values";
 
 // TODO: Refactor
 export const Home = () => {
@@ -23,6 +24,9 @@ export const Home = () => {
       </section>
       <section>
         <Guid id="proces" />
+      </section>
+      <section>
+        <Values id="values" />
       </section>
       <EventBanner onClick={handleNavigateCollect} />
       <Layout>
