@@ -2,9 +2,10 @@ import { useCallback, useRef } from "react";
 import { Button } from "src/components/ui/Button/Button";
 import {
   AboutIcon,
+  BenefitIcon,
   ContactIcon,
   ProcesIcon,
-  ServiceIcon
+  ServiceIcon,
 } from "src/components/ui/Icon";
 import { Text } from "src/components/ui/Text/Text";
 import { useOnRouterEvent } from "src/hooks/useOnRouterEvent";
@@ -47,31 +48,31 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
         <NavLink onClick={() => handleNavigate("main")}>
           <ServiceIcon />
           <Text variant="bodyM" color={WDS_COLOR_NEUTRAL_RICHBLACK}>
-            Valorile noastre
+            Acasă
           </Text>
         </NavLink>
-        {/* <NavLink>
-          <BenefitIcon />
-          <Text variant="bodyM" color={WDS_COLOR_NEUTRAL_RICHBLACK}>
-            Beneficiari
-          </Text>
-        </NavLink> */}
         <NavLink onClick={() => handleNavigate("proces")}>
           <AboutIcon />
           <Text variant="bodyM" color={WDS_COLOR_NEUTRAL_RICHBLACK}>
             Proces
           </Text>
         </NavLink>
+        <NavLink onClick={() => handleNavigate("values")}>
+          <BenefitIcon />
+          <Text variant="bodyM" color={WDS_COLOR_NEUTRAL_RICHBLACK}>
+            Caracteristici
+          </Text>
+        </NavLink>
+        <NavLink onClick={() => handleNavigate("involve")}>
+          <ProcesIcon />
+          <Text variant="bodyM" color={WDS_COLOR_NEUTRAL_RICHBLACK}>
+            Implică-te
+          </Text>
+        </NavLink>
         <NavLink onClick={() => handleNavigate("contact")}>
           <ContactIcon />
           <Text variant="bodyM" color={WDS_COLOR_NEUTRAL_RICHBLACK}>
             Contact
-          </Text>
-        </NavLink>
-        <NavLink href="/collect">
-          <ProcesIcon />
-          <Text variant="bodyM" color={WDS_COLOR_NEUTRAL_RICHBLACK}>
-            Colecteaza
           </Text>
         </NavLink>
         <Border />

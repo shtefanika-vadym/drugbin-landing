@@ -28,7 +28,9 @@ export const Home = () => {
       <section>
         <Values id="values" />
       </section>
-      <EventBanner onClick={handleNavigateCollect} />
+      <section id="involve">
+        <EventBanner id="involve" onClick={handleNavigateCollect} />
+      </section>
       <Layout>
         <iframe
           width="100%"
