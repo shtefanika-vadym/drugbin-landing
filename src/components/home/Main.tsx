@@ -23,7 +23,7 @@ export const Main = () => {
           Cum facem ca aceste deșeuri să nu ajungă periculoase pentru mediu?
         </Text>
 
-        <Button onClick={() => scrollTo("proces")}>Află mai multe</Button>
+        <Button onClick={() => scrollTo("about")}>Află mai multe</Button>
         <Image src={homeImage} alt="Home Content" />
       </Container>
     </Layout>

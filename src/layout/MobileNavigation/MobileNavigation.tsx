@@ -51,22 +51,22 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
             Acasă
           </Text>
         </NavLink>
-        <NavLink onClick={() => handleNavigate("proces")}>
+        <NavLink onClick={() => handleNavigate("about")}>
           <AboutIcon />
           <Text variant="bodyM" color={WDS_COLOR_NEUTRAL_RICHBLACK}>
-            Proces
-          </Text>
-        </NavLink>
-        <NavLink onClick={() => handleNavigate("values")}>
-          <BenefitIcon />
-          <Text variant="bodyM" color={WDS_COLOR_NEUTRAL_RICHBLACK}>
-            Caracteristici
+            Despre noi
           </Text>
         </NavLink>
         <NavLink onClick={() => handleNavigate("involve")}>
           <ProcesIcon />
           <Text variant="bodyM" color={WDS_COLOR_NEUTRAL_RICHBLACK}>
             Implică-te
+          </Text>
+        </NavLink>
+        <NavLink onClick={() => handleNavigate("benefits")}>
+          <BenefitIcon />
+          <Text variant="bodyM" color={WDS_COLOR_NEUTRAL_RICHBLACK}>
+            Caracteristici
           </Text>
         </NavLink>
         <NavLink onClick={() => handleNavigate("contact")}>
