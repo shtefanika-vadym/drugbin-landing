@@ -1,5 +1,5 @@
 import { ReactComponent as LogoIcon } from "src/assets/icon/logo_s.svg";
-import { ReactComponent as Logo_XS_Icon } from "src/assets/icon/logo_xs.svg";
+import { ReactComponent as LogoXSIcon } from "src/assets/icon/logo_xs.svg";
 import { ReactComponent as LogoFooterXS } from "src/assets/icon/logo-footer-xs.svg";
 import { ReactComponent as LogoFooterS } from "src/assets/icon/logo-footer-s.svg";
 
@@ -33,10 +33,17 @@ import { ReactComponent as ProcesIcon } from "src/assets/icon/proces.svg";
 import { ReactComponent as AboutIcon } from "src/assets/icon/about.svg";
 import { ReactComponent as ContactIcon } from "src/assets/icon/contact.svg";
 import { ReactComponent as StarIcon } from "src/assets/icon/star-smile-line.svg";
+import { ReactComponent as SimpleStarIcon } from "src/assets/icon/star-line.svg";
+import { ReactComponent as ClockIcon } from "src/assets/icon/clock.svg";
+import { ReactComponent as ShieldIcon } from "src/assets/icon/shield-tick.svg";
+import { ReactComponent as LockIcon } from "src/assets/icon/lock.svg";
+import { ReactComponent as CpuIcon } from "src/assets/icon/cpu.svg";
+import { ReactComponent as MoneyIcon } from "src/assets/icon/dollar-circle.svg";
+import { ReactComponent as ReportIcon } from "src/assets/icon/document-text.svg";
 
 export {
   LogoIcon,
-  Logo_XS_Icon,
+  LogoXSIcon,
   LogoFooterXS,
   LogoFooterS,
   MenuIcon,
@@ -68,4 +75,11 @@ export {
   MinusIcon,
   EmptyIcon,
   StarIcon,
+  SimpleStarIcon,
+  ClockIcon,
+  ShieldIcon,
+  LockIcon,
+  CpuIcon,
+  MoneyIcon,
+  ReportIcon,
 };

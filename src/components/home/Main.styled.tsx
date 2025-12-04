@@ -14,7 +14,7 @@ export const Container = styled.div`
     justifyContent: "center",
     alignItems: "center",
   })}
-  max-width: 847px;
+  max-width: 1064px;
   margin: 0 auto;
   text-align: center;
 `;
@@ -27,8 +27,9 @@ export const HomeText = styled(Text).attrs({
 
 export const Image = styled.img`
   width: 100%;
-  padding-top: ${WDS_SIZE_024_PX};
+  margin-top: ${WDS_SIZE_024_PX};
   height: 570px;
+  border-radius: 8px;
 
   @media ${BREAKPOINTS.MOBILE_UP_TO} {
     height: 270px;
