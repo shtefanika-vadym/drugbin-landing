@@ -12,21 +12,20 @@ export const Main = () => {
   return (
     <Layout>
       <Container>
-        <Text variant="titleXL" element="h1">
-          Natura luptă pentru tine! Fă-o și tu!
+        <Text variant="titleL" element="h1">
+          Simplificăm responsabilitatea!
         </Text>
         <Text variant="bodyM" element="h3">
-          1500 de tone de medicamente ajung anual în apele din România!
+          ”Medicamentele expirate sau neutilizate se consideră deșeuri
+          periculoase!”
         </Text>
         <Text variant="bodyM" element="p" color={WDS_COLOR_PRIMARY_50}>
-          Nu arunca medicamentele expirate sau neutilizate! Predă-le responsabil
-          cu ajutorul DrugBin, primul dispozitiv inteligent care identifică,
-          colectează, sortează și stochează automat medicamentele expirate sau
-          neutilizate de la populație.
+          Cum facem ca aceste deșeuri să nu ajungă periculoase pentru mediu?
         </Text>
-        <Button onClick={() => scrollTo("proces")}>Află cum</Button>
+
+        <Button onClick={() => scrollTo("proces")}>Află mai multe</Button>
+        <Image src={homeImage} alt="Home Content" />
       </Container>
-      <Image src={homeImage} alt="Home Content" />
     </Layout>
   );
 };

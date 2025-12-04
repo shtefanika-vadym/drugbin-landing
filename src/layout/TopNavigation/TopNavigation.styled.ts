@@ -1,4 +1,4 @@
-import { LogoIcon, Logo_XS_Icon } from "src/components/ui/Icon";
+import { LogoIcon, LogoXSIcon } from "src/components/ui/Icon";
 import { flex } from "src/styles/mixins/flex.mixin";
 import { grid } from "src/styles/mixins/grid.mixin";
 import { textVariant } from "src/styles/mixins/typography.mixin";
@@ -78,7 +78,7 @@ export const LogoS = styled(LogoIcon)`
   margin: 0 auto;
 `;
 
-export const LogoXS = styled(Logo_XS_Icon)`
+export const LogoXS = styled(LogoXSIcon)`
   cursor: pointer;
   position: absolute;
   top: 50%;

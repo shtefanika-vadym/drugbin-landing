@@ -1,4 +1,4 @@
-import { Logo_XS_Icon } from "src/components/ui/Icon";
+import { LogoXSIcon } from "src/components/ui/Icon";
 import { flex } from "src/styles/mixins/flex.mixin";
 import {
   BREAKPOINTS,
@@ -35,6 +35,6 @@ export const Navigation = styled.div`
   }
 `;
 
-export const LogoXS = styled(Logo_XS_Icon)`
+export const LogoXS = styled(LogoXSIcon)`
   cursor: pointer;
 `;
