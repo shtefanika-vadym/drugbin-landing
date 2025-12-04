@@ -36,10 +36,10 @@ export const TopNavigation = () => {
       <DesktopContainer>
         <Navigation>
           <NavLink onClick={() => scrollTo("main")}>Acasă</NavLink>
-          <NavLink onClick={() => scrollTo("proces")}>Proces</NavLink>
-          <NavLink onClick={() => scrollTo("values")}>Caracteristici</NavLink>
+          <NavLink onClick={() => scrollTo("about")}>Despre noi</NavLink>
           <NavLink onClick={() => scrollTo("involve")}>Implică-te</NavLink>
-          <NavLink onClick={() => scrollTo("contact")}>Contact</NavLink>  
+          <NavLink onClick={() => scrollTo("benefits")}>Caracteristici</NavLink>
+          <NavLink onClick={() => scrollTo("contact")}>Contact</NavLink>
         </Navigation>
         <LogoS onClick={() => scrollTo("main")} />
       </DesktopContainer>
