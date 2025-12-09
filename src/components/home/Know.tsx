@@ -18,7 +18,7 @@ export const Know = () => {
           Anual, 1500 de medicamente ajung în apele din Romănia. Există o
           afectare gravă a biodivesității cu depășiri de peste 300 de ori față
           de limitele admise de antibiotice în ape și sol. Colectarea oficială
-          în România este de 30 de ori mai mica față de medica europeană.
+          în România este de 30 de ori mai mica față de media europeană.
           Poluarea chimică este subtilă și nu se percepe imediat.
         </Text>
       </ContentRight>
