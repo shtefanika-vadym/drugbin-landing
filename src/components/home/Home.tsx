@@ -5,6 +5,7 @@ import { Guid } from "./Guid";
 import { Container } from "./Home.styled";
 import { Know } from "./Know";
 import { Main } from "./Main";
+import { RecentArticles } from "./RecentArticles";
 import { WhatDo } from "./WhatDo";
 
 // TODO: Refactor
@@ -33,6 +34,10 @@ export const Home = () => {
 
       <section>
         <Collecting />
+      </section>
+
+      <section>
+        <RecentArticles />
       </section>
 
       <section id="contact">

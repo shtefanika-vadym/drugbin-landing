@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
   <head>
     <meta charset="utf-8" />
     <link href="%PUBLIC_URL%/logo.svg" rel="icon" />
@@ -8,16 +8,56 @@
       name="viewport"
     />
     <meta name="theme-color" content="#000000" />
-    <meta content="Powered by DrugBin.Solution" name="DrugBin" />
     <link href="%PUBLIC_URL%/logo.svg" rel="apple-touch-icon" />
     <link href="%PUBLIC_URL%/manifest.json" rel="manifest" />
+
+    <!-- Primary meta -->
+    <title>DrugBin — Colectare medicamente expirate și neutilizate</title>
+    <meta name="description" content="Ajutăm la eliminarea în siguranță a medicamentelor expirate sau neutilizate. Găsește cel mai apropiat centru de colectare și contribuie la un mediu mai sănătos." />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="DrugBin" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ro_RO" />
+    <meta property="og:url" content="https://www.drugbin.ro/" />
+    <meta property="og:title" content="DrugBin — Colectare medicamente expirate și neutilizate" />
+    <meta property="og:description" content="Ajutăm la eliminarea în siguranță a medicamentelor expirate sau neutilizate. Găsește cel mai apropiat centru de colectare și contribuie la un mediu mai sănătos." />
+    <meta property="og:image" content="https://www.drugbin.ro/logo_v2.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="DrugBin — Colectare medicamente expirate și neutilizate" />
+    <meta name="twitter:description" content="Ajutăm la eliminarea în siguranță a medicamentelor expirate sau neutilizate. Găsește cel mai apropiat centru de colectare și contribuie la un mediu mai sănătos." />
+    <meta name="twitter:image" content="https://www.drugbin.ro/logo_v2.png" />
+
+    <!-- JSON-LD: Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "DrugBin",
+      "url": "https://www.drugbin.ro",
+      "logo": "https://www.drugbin.ro/logo_v2.png",
+      "description": "Platformă pentru colectarea și eliminarea în siguranță a medicamentelor expirate sau neutilizate în România.",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Romania"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "availableLanguage": "Romanian"
+      }
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <script
       id="Cookiebot"
       src="https://consent.cookiebot.com/uc.js"
@@ -39,7 +79,6 @@
       gtag("config", "G-7GVH9HBMWJ");
     </script>
     <!-- End GA -->
-    <title>DrugBin</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

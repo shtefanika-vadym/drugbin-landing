@@ -25,6 +25,7 @@ export const Container = styled.div`
   border-bottom: 1px solid ${WDS_COLOR_PRIMARY_100};
   ${flex({ alignItems: "center", justifyContent: "center" })};
   padding: 0 auto;
+  z-index: 999;
 
   position: sticky;
   top: 0px;
@@ -71,6 +72,14 @@ export const NavLink = styled.a`
 
 export const Navigation = styled.div`
   ${flex({ gap: WDS_SIZE_032_PX, alignItems: "center" })};
+`;
+
+export const RightNavigation = styled.div`
+  ${flex({
+    gap: WDS_SIZE_032_PX,
+    alignItems: "center",
+    justifyContent: "flex-end",
+  })};
 `;
 
 export const LogoS = styled(LogoIcon)`

@@ -1,10 +1,12 @@
 import { useCallback, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "src/components/ui/Button/Button";
 import {
   AboutIcon,
   BenefitIcon,
   ContactIcon,
   ProcesIcon,
+  ReportIcon,
   ServiceIcon,
 } from "src/components/ui/Icon";
 import { Text } from "src/components/ui/Text/Text";
@@ -27,6 +29,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
   close,
 }) => {
   const { scrollTo } = useScrollTo();
+  const navigate = useNavigate();
 
   const handleNavigate = useCallback(
     (path: string) => {
@@ -34,6 +37,14 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
       close();
     },
     [close, scrollTo]
+  );
+
+  const handleNavigateTo = useCallback(
+    (route: string) => {
+      navigate(route);
+      close();
+    },
+    [close, navigate]
   );
 
   const navigationRef = useRef<HTMLElement | null>(null);
@@ -67,6 +78,12 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
           <BenefitIcon />
           <Text variant="bodyM" color={WDS_COLOR_NEUTRAL_RICHBLACK}>
             Caracteristici
+          </Text>
+        </NavLink>
+        <NavLink onClick={() => handleNavigateTo("/article")}>
+          <ReportIcon />
+          <Text variant="bodyM" color={WDS_COLOR_NEUTRAL_RICHBLACK}>
+            Articole
           </Text>
         </NavLink>
         <NavLink onClick={() => handleNavigate("contact")}>

@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { Article } from "src/types/article.types";
 import { ArticleLabel } from "../ArticleLabel/ArticleLabel";
 import { Button } from "../Button/Button";
 import { ArrowRight } from "../Icon";
@@ -13,13 +14,7 @@ import {
 } from "./ReadMore.styled";
 
 interface ReadMoreProps {
-  data?: {
-    date: string;
-    title: string;
-    description: string;
-    path: string;
-    label: string;
-  }[];
+  data?: Article[];
 }
 
 export const ReadMore: React.FC<ReadMoreProps> = ({ data }) => {

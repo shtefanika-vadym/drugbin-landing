@@ -29,8 +29,8 @@
   "theme_color": "#000000",
   "background_color": "#ffffff",
   "id": "DrugBin.Solution",
-  "description": "Nu arunca medicamentele expirate sau neutilizate!\nPredă-le în centrele de colectare special amenajate! Noi te învățăm cum.",
+  "description": "Nu arunca medicamentele expirate sau neutilizate!\nPredă-le în centrele de colectare special amenajate!",
   "orientation": "natural",
-  "lang": "rm",
+  "lang": "ro",
   "categories": ["education", "health", "medical"]
 }

@@ -2,30 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.drugbin.ro</loc>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>daily</changefreq>
+    <priority>1.0</priority>
   </url>
-   <url>
+  <url>
     <loc>https://www.drugbin.ro/collect</loc>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
-   <url>
-    <loc>https://www.drugbin.ro/terms</loc>
+  <url>
+    <loc>https://www.drugbin.ro/article</loc>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
-     <url>
+  <url>
+    <loc>https://www.drugbin.ro/article/de-ce-suedia-colecteaza-80-si-romania-5</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.drugbin.ro/article/ce-ne-spune-apa-pe-care-o-bem-despre-cum-traim</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.drugbin.ro/article/de-ce-europa-pune-nota-de-plata-pentru-poluarea-farmaceutica</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.drugbin.ro/privacy</loc>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
-    <url>
-    <loc>https://www.drugbin.ro/article/colectarea-medicamentelor-expirate-sau-neutilizate</loc>
-    <changefreq>weekly</changefreq>
-  </url>
-    <url>
-    <loc>https://www.drugbin.ro/article/rezistenta-la-antibiotice-in-romania</loc>
-    <changefreq>weekly</changefreq>
-  </url>
-    <url>
-    <loc>https://www.drugbin.ro/article/drugbin-ghid-complet-pentru-utilizatori</loc>
-    <changefreq>weekly</changefreq>
+  <url>
+    <loc>https://www.drugbin.ro/terms</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 </urlset>

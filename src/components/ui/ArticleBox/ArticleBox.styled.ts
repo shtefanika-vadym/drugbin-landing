@@ -31,6 +31,7 @@ export const Description = styled(Text).attrs({
   variant: "bodyS",
 })`
   ${ellipsis}
+  flex: 1;
 `;
 
 export const Image = styled.img`
