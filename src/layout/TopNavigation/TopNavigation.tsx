@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { MenuIcon } from "src/components/ui/Icon";
 import { useScrollTo } from "src/hooks/useScrollTo";
 import { useScrollLock } from "usehooks-ts";
@@ -10,11 +11,13 @@ import {
   LogoXS,
   NavLink,
   Navigation,
+  RightNavigation,
   TableContainer,
 } from "./TopNavigation.styled";
 
 export const TopNavigation = () => {
   const { scrollTo } = useScrollTo();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const { lock, unlock } = useScrollLock({
     autoLock: false,
@@ -39,9 +42,12 @@ export const TopNavigation = () => {
           <NavLink onClick={() => scrollTo("about")}>Despre noi</NavLink>
           <NavLink onClick={() => scrollTo("involve")}>Implică-te</NavLink>
           <NavLink onClick={() => scrollTo("benefits")}>Caracteristici</NavLink>
-          <NavLink onClick={() => scrollTo("contact")}>Contact</NavLink>
         </Navigation>
         <LogoS onClick={() => scrollTo("main")} />
+        <RightNavigation>
+          <NavLink onClick={() => navigate("/article")}>Articole</NavLink>
+          <NavLink onClick={() => scrollTo("contact")}>Contact</NavLink>
+        </RightNavigation>
       </DesktopContainer>
 
       <TableContainer>

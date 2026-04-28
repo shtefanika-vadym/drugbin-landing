@@ -5,7 +5,7 @@ import { Layout } from "src/layout/Layout/Layout";
 
 export const ArticlePage = () => {
   return (
-    <Metadata title="Articole" description="">
+    <Metadata title="Articole" description="Citește articolele DrugBin despre eliminarea responsabilă a medicamentelor expirate, impactul asupra mediului și sănătatea comunității.">
       <Header>
         <Layout>
           <Article />

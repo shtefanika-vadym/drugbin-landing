@@ -1,31 +1,87 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 
+const SITE_URL = "https://www.drugbin.ro";
+const DEFAULT_IMAGE = `${SITE_URL}/logo_v2.png`;
+
 interface MetadataProps {
   title: string;
   description: string;
+  image?: string;
+  type?: "website" | "article";
+  publishedAt?: string;
   children: React.ReactNode;
 }
 
 export const Metadata: React.FC<MetadataProps> = ({
   title,
   description,
+  image,
+  type = "website",
+  publishedAt,
   children,
 }) => {
   const metaKeywords = KEYWORDS.join(", ");
+  const pageTitle = title ? `${title} | DrugBin` : "DrugBin — Colectare medicamente expirate și neutilizate";
+  const ogImage = image
+    ? image.startsWith("http")
+      ? image
+      : `${window.location.origin}${image}`
+    : DEFAULT_IMAGE;
+  const canonical = window.location.href.split("?")[0];
+
+  const articleJsonLd =
+    type === "article" && title
+      ? JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: title,
+          description,
+          image: ogImage,
+          datePublished: publishedAt,
+          publisher: {
+            "@type": "Organization",
+            name: "DrugBin",
+            logo: {
+              "@type": "ImageObject",
+              url: DEFAULT_IMAGE,
+            },
+          },
+          mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": canonical,
+          },
+        })
+      : null;
+
   return (
     <>
       <Helmet>
-        <title>{title}</title>
+        <title>{pageTitle}</title>
         <meta name="description" content={description} />
-        <meta name="robots" content="index" />
+        <meta name="robots" content="index, follow" />
         <meta name="keywords" content={metaKeywords} />
-        <meta property="og:title" content="DrugBin" />
-        <meta property="og:description" content="DrugBin" />
-        <meta property="og:type" content="website"></meta>
-        <meta property="og:locale" content="ro" />
-        <meta property="og:url" content={window.location.href} />
-        <link rel="canonical" key="canonical" href={window.location.href} />
+        <link rel="canonical" href={canonical} />
+
+        {/* Open Graph */}
+        <meta property="og:site_name" content="DrugBin" />
+        <meta property="og:type" content={type} />
+        <meta property="og:locale" content="ro_RO" />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={ogImage} />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={ogImage} />
+
+        {/* Article JSON-LD */}
+        {articleJsonLd && (
+          <script type="application/ld+json">{articleJsonLd}</script>
+        )}
       </Helmet>
       {children}
     </>

@@ -14,19 +14,24 @@ import {
 export const Article = () => {
   const { article } = useParams();
 
-  const getCurrentArticle = useMemo(
-    () => ARTICLE_DATA.find((post) => post.path === article),
+  const currentArticle = useMemo(
+    () => ARTICLE_DATA.find((a) => a.path === article),
     [article]
   );
-  const { title, content, image, readMore, path, description } =
-    getCurrentArticle || {};
+
+  const relatedArticles = useMemo(
+    () => ARTICLE_DATA.filter((a) => a.path !== article),
+    [article]
+  );
+
+  const { title, content, image, path, description, date } = currentArticle || {};
 
   return (
-    <Metadata title={title || ""} description={description || ""}>
+    <Metadata title={title || ""} description={description || ""} image={image} type="article" publishedAt={date}>
       <Container>
-        <Image src={image} alt={path} />
+        <Image src={image} alt={title || path} />
         <RightSection>
-          <ReadMore data={readMore} />
+          <ReadMore data={relatedArticles} />
         </RightSection>
         <LeftSection>
           <Title>{title}</Title>

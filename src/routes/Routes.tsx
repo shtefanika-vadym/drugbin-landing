@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes as ReactRoutes, Route } from "react-router-dom";
 import { ArticlePage } from "src/pages/ArticlePage";
+import { ArticlesListPage } from "src/pages/ArticlesListPage";
 import { CollectPage } from "src/pages/CollectPage";
 import { HomePage } from "src/pages/HomePage";
 import { PrivacyPage } from "src/pages/PrivacyPage";
@@ -14,6 +15,7 @@ export const Routes = () => {
         <Route path="/collect" element={<CollectPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/terms" element={<TermsPage />} />
+        <Route path="/article" element={<ArticlesListPage />} />
         <Route path="/article/:article" element={<ArticlePage />} />
         <Route path="/success/collect/:id" element={<SuccessPage />} />
       </ReactRoutes>

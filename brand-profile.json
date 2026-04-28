@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "brand_name": "DrugBin",
+  "website_url": "https://www.drugbin.ro/",
+  "extracted_at": "2026-04-28T00:00:00Z",
+  "extraction_notes": "React SPA — CSS-in-JS (styled-components) prevented WebFetch extraction. Brand DNA sourced directly from design tokens, component JSX, and index.html. High confidence.",
+
+  "voice": {
+    "formal_casual": 4,
+    "rational_emotional": 3,
+    "playful_serious": 8,
+    "bold_subtle": 7,
+    "traditional_innovative": 8,
+    "expert_accessible": 4,
+    "descriptors": ["civic-minded", "data-driven", "authoritative", "forward-thinking", "responsible"]
+  },
+
+  "colors": {
+    "primary": "#2949A6",
+    "secondary": ["#1C3375", "#011640", "#464797", "#F1F5F9"],
+    "forbidden": ["warm earth tones", "bright greens", "#FF494B"],
+    "background": "#FFFFFF",
+    "text": "#01102E"
+  },
+
+  "typography": {
+    "heading_font": "Montserrat",
+    "body_font": "Montserrat",
+    "pairing_descriptor": "Single-font system using Montserrat across all weights — bold (800) for display headings, semi-bold (600) for subheadings, regular/medium (400–500) for body copy"
+  },
+
+  "imagery": {
+    "style": "professional photography",
+    "subjects": ["DrugBin collection device", "data dashboards", "automated sorting process", "pharmaceutical waste categories"],
+    "composition": "Clean/minimal, light backgrounds with generous white space; device hero shots centered with no clutter",
+    "forbidden": ["generic stock photos of loose pills", "unqualified medical-claim imagery", "overly sterile clinical settings", "human suffering or illness depictions"]
+  },
+
+  "aesthetic": {
+    "mood_keywords": ["trustworthy", "modern", "clean"],
+    "texture": "minimal",
+    "negative_space": "generous"
+  },
+
+  "brand_values": [
+    "Environmental responsibility",
+    "Safety & security",
+    "Technological innovation",
+    "Transparency",
+    "Collective civic health"
+  ],
+
+  "target_audience": {
+    "age_range": "30-55",
+    "profession": "Healthcare facility administrators, hospital managers, pharmacy owners, environmental compliance officers; secondary audience: general Romanian public responsible for home medicine disposal",
+    "pain_points": [
+      "No clear guidance or infrastructure for proper medicine disposal",
+      "Environmental contamination — 1,500 medicines per year enter Romanian waterways",
+      "Collection rates 30x below European average with no scalable solution",
+      "Manual, unsafe contact with hazardous pharmaceutical waste in collection facilities"
+    ],
+    "aspirations": [
+      "Contribute to a measurably cleaner Romania and protect biodiversity",
+      "Achieve regulatory compliance with hazardous pharmaceutical waste standards",
+      "Automate and secure the entire collection-to-reporting pipeline",
+      "Simplify individual responsibility for medicine disposal into one easy step"
+    ]
+  }
+}
