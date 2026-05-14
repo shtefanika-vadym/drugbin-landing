@@ -1,0 +1,1346 @@
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <title>DrugBin — Business Plan Executiv</title> -->
+    <style>
+      @page {
+        size: A4;
+        margin: 14mm 14mm 14mm 14mm;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Helvetica", "Arial", sans-serif;
+        color: #1a1a1a;
+        font-size: 9.5pt;
+        line-height: 1.45;
+        background: white;
+      }
+
+      .page {
+        page-break-after: always;
+        position: relative;
+        min-height: 268mm;
+        padding-bottom: 8mm;
+      }
+      .page:last-child {
+        page-break-after: auto;
+      }
+
+      /* HEADER */
+      .doc-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #2949a6;
+        padding-bottom: 6px;
+        margin-bottom: 10px;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+      .logo span {
+        color: #1f3864;
+        font-weight: 300;
+        font-size: 10pt;
+        margin-left: 8px;
+      }
+      .header-meta {
+        text-align: right;
+        font-size: 8pt;
+        color: #666;
+        line-height: 1.3;
+      }
+      .header-meta strong {
+        color: #1f3864;
+      }
+
+      /* FOOTER */
+      .doc-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-top: 1px solid #ddd;
+        padding-top: 4px;
+        font-size: 7.5pt;
+        color: #888;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      /* COVER PAGE */
+      .cover-hero {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        height: 240mm;
+        background: linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
+        border-radius: 6px;
+        padding: 30mm 20mm;
+      }
+      .cover-logo {
+        margin-bottom: 6px;
+        line-height: 0;
+      }
+      .cover-tagline {
+        font-size: 14pt;
+        font-style: italic;
+        color: #666;
+        margin-bottom: 40px;
+        letter-spacing: 1px;
+      }
+      .cover-title {
+        font-size: 22pt;
+        font-weight: 700;
+        color: #1f3864;
+        margin-bottom: 14px;
+      }
+      .cover-subtitle {
+        font-size: 12pt;
+        color: #555;
+        max-width: 130mm;
+        margin: 0 auto 50px;
+        line-height: 1.5;
+      }
+      .cover-stats {
+        display: flex;
+        justify-content: center;
+        gap: 18mm;
+        margin: 30px 0 50px;
+        flex-wrap: wrap;
+      }
+      .stat-box {
+        text-align: center;
+      }
+      .stat-num {
+        font-size: 24pt;
+        font-weight: 800;
+        color: #2949a6;
+        line-height: 1;
+      }
+      .stat-label {
+        font-size: 8.5pt;
+        color: #666;
+        margin-top: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .cover-footer {
+        font-size: 9pt;
+        color: #888;
+        margin-top: 20px;
+        font-style: italic;
+      }
+
+      /* SECTIONS */
+      h1.section-title {
+        font-size: 16pt;
+        color: #1f3864;
+        font-weight: 700;
+        margin: 0 0 4px 0;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      h1.section-title .num {
+        color: #2949a6;
+        margin-right: 8px;
+      }
+      .section-sub {
+        font-size: 9pt;
+        color: #777;
+        margin-bottom: 12px;
+        font-style: italic;
+      }
+
+      h2.subsection {
+        font-size: 11pt;
+        color: #1f3864;
+        font-weight: 700;
+        margin: 12px 0 4px 0;
+      }
+      h2.subsection .accent {
+        color: #2949a6;
+      }
+
+      /* GRID LAYOUTS */
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8mm;
+        margin: 6px 0;
+      }
+      .three-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 4mm;
+        margin: 6px 0;
+      }
+
+      /* CARDS */
+      .card {
+        background: #f5f9ff;
+        border-left: 3px solid #2949a6;
+        padding: 8px 10px;
+        border-radius: 3px;
+        margin: 6px 0;
+      }
+      .card-title {
+        font-weight: 700;
+        color: #1f3864;
+        font-size: 10pt;
+        margin-bottom: 3px;
+      }
+      .card-text {
+        font-size: 9pt;
+        color: #333;
+        line-height: 1.4;
+      }
+
+      .card-success {
+        background: #f0f8f1;
+        border-left: 3px solid #548235;
+      }
+      .card-success .card-title {
+        color: #2c5022;
+      }
+
+      .card-warning {
+        background: #fff8e8;
+        border-left: 3px solid #c89113;
+      }
+      .card-warning .card-title {
+        color: #7a5800;
+      }
+
+      /* TABLES */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 6px 0;
+        font-size: 8.5pt;
+      }
+      table th {
+        background: #1f3864;
+        color: white;
+        padding: 6px 8px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 8.5pt;
+      }
+      table td {
+        padding: 5px 8px;
+        border-bottom: 1px solid #e8e8e8;
+      }
+      table tr:nth-child(even) td {
+        background: #f9fafc;
+      }
+      table tr.total td {
+        background: #2949a6 !important;
+        color: white;
+        font-weight: 700;
+      }
+      table.financial td:not(:first-child) {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+      table.financial th:not(:first-child) {
+        text-align: right;
+      }
+
+      /* BULLETS */
+      ul {
+        margin: 4px 0 6px 0;
+        padding-left: 18px;
+      }
+      ul li {
+        margin: 2px 0;
+        font-size: 9pt;
+        line-height: 1.4;
+      }
+      ul.compact li {
+        margin: 1px 0;
+        font-size: 8.8pt;
+      }
+
+      p {
+        margin: 4px 0;
+        font-size: 9pt;
+        line-height: 1.45;
+      }
+
+      .highlight {
+        background: linear-gradient(transparent 60%, #fff8b3 60%);
+        font-weight: 600;
+      }
+
+      /* KEY METRICS BOX */
+      .metrics-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+        margin: 10px 0;
+      }
+      .metric {
+        background: white;
+        border: 1.5px solid #2949a6;
+        border-radius: 4px;
+        padding: 8px 6px;
+        text-align: center;
+      }
+      .metric-num {
+        font-size: 16pt;
+        font-weight: 800;
+        color: #2949a6;
+        line-height: 1;
+      }
+      .metric-label {
+        font-size: 7.5pt;
+        color: #555;
+        margin-top: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+      }
+
+      /* TIMELINE */
+      .timeline {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 4px;
+        margin: 8px 0;
+      }
+      .timeline-step {
+        background: #f5f9ff;
+        padding: 6px 5px;
+        border-top: 3px solid #2949a6;
+        border-radius: 0 0 3px 3px;
+        font-size: 8pt;
+      }
+      .timeline-year {
+        font-weight: 700;
+        color: #2949a6;
+        font-size: 9pt;
+        margin-bottom: 3px;
+      }
+      .timeline-text {
+        color: #333;
+        line-height: 1.3;
+      }
+
+      /* SOURCES */
+      .source {
+        font-size: 7.5pt;
+        color: #888;
+        font-style: italic;
+        margin-top: 2px;
+        margin-bottom: 6px;
+      }
+
+      /* CTA BOX */
+      .cta-box {
+        background: linear-gradient(135deg, #1f3864 0%, #2949a6 100%);
+        color: white;
+        padding: 14px 16px;
+        border-radius: 5px;
+        margin: 10px 0;
+      }
+      .cta-box h3 {
+        font-size: 13pt;
+        margin-bottom: 6px;
+        font-weight: 700;
+      }
+      .cta-box p {
+        font-size: 9.5pt;
+        line-height: 1.5;
+        color: #f0f6ff;
+      }
+      .cta-box strong {
+        color: white;
+      }
+
+      .small-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4mm;
+      }
+
+      .legend-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 8.5pt;
+        margin: 2px 0;
+      }
+      .legend-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ====================== PAGE 1: COVER ====================== -->
+    <div class="page">
+      <div class="cover-hero">
+        <div class="cover-logo">
+          <svg
+            width="400"
+            height="100"
+            viewBox="0 0 160 40"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1.83008 5.86133H13.7743C22.3762 5.86133 28.2727 11.0444 28.2727 19.0078C28.2727 26.9712 22.3762 32.1543 13.7743 32.1543H1.83008V5.86133ZM13.4733 27.1574C18.6947 27.1574 22.1118 24.0396 22.1118 19.0061C22.1118 13.9727 18.6947 10.8549 13.4733 10.8549H7.91444V27.1558H13.4733V27.1574Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M44.9856 11.6465V17.0557C44.4968 17.0175 44.121 16.9809 43.6703 16.9809C40.4394 16.9809 38.2993 18.7468 38.2993 22.6146V32.1544H32.4395V11.9458H38.0366V14.613C39.4633 12.6592 41.8678 11.6465 44.9856 11.6465Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M93.6527 11.9458V28.7722C93.6527 36.2833 89.597 39.7403 82.3104 39.7403C78.4792 39.7403 74.7611 38.8008 72.3948 36.9617L74.7228 32.7547C76.4505 34.1448 79.2674 35.0461 81.8598 35.0461C85.9919 35.0461 87.7945 33.1687 87.7945 29.5254V28.6624C86.2547 30.3519 84.0381 31.1783 81.4091 31.1783C75.812 31.1783 71.3057 27.3089 71.3057 21.4124C71.3057 15.5159 75.812 11.6465 81.4091 11.6465C84.226 11.6465 86.554 12.586 88.0954 14.5382V11.9458H93.6544H93.6527ZM87.8693 21.4107C87.8693 18.4442 85.6527 16.4521 82.5731 16.4521C79.4935 16.4521 77.2404 18.4425 77.2404 21.4107C77.2404 24.3789 79.4935 26.3693 82.5731 26.3693C85.6527 26.3693 87.8693 24.3789 87.8693 21.4107Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M123.625 24.9791C123.625 29.5237 120.02 32.1526 113.108 32.1526H99.5107V5.86133H112.356C118.929 5.86133 122.31 8.60337 122.31 12.6973C122.31 15.3263 120.958 17.3549 118.816 18.4823C121.746 19.4219 123.624 21.675 123.624 24.9808L123.625 24.9791ZM105.559 10.4441V16.6416H111.606C114.573 16.6416 116.189 15.5907 116.189 13.5237C116.189 11.4568 114.574 10.4441 111.606 10.4441H105.559ZM117.503 24.3406C117.503 22.124 115.813 21.0731 112.657 21.0731H105.559V27.5715H112.657C115.812 27.5715 117.503 26.5954 117.503 24.3406Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M127.117 5.86125C127.117 4.02047 128.582 2.59375 130.76 2.59375C132.939 2.59375 134.404 3.94565 134.404 5.74817C134.404 7.70202 132.939 9.12875 130.76 9.12875C128.582 9.12875 127.117 7.70202 127.117 5.86125ZM127.831 11.9456H133.69V32.1526H127.831V11.9456Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M159.794 20.5857V32.1541H153.934V21.4869C153.934 18.2194 152.431 16.7162 149.84 16.7162C147.023 16.7162 144.995 18.4439 144.995 22.1621V32.1524H139.135V11.9455H144.732V14.3117C146.31 12.584 148.676 11.6445 151.418 11.6445C156.189 11.6445 159.794 14.4232 159.794 20.584V20.5857Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M52.8945 14.6426L52.8945 25.6666C52.8945 28.1911 54.941 30.2376 57.4655 30.2376H59.5897C62.1142 30.2376 64.1607 28.1911 64.1607 25.6666L64.1607 14.6426"
+              stroke="#2949A6"
+              stroke-width="5.37759"
+              stroke-linecap="square"
+            />
+            <path
+              d="M50.0944 9.50459L49.6789 6.70855L53.1611 6.14586L53.1763 4.06164L61.5452 2.77725L62.4805 4.79985L66.5239 4.29531L66.9246 7.1805L50.0944 9.50459Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M53.1611 6.14586L49.6789 6.70855L50.0944 9.50459L66.9246 7.1805L66.5239 4.29531L62.4805 4.79985M53.1611 6.14586L53.1763 4.06164L61.5452 2.77725L62.4805 4.79985M53.1611 6.14586L62.4805 4.79985"
+              stroke="#2949A6"
+              stroke-width="1.3444"
+            />
+          </svg>
+        </div>
+        <div class="cover-tagline"></div>
+
+        <div class="cover-title">BUSINESS PLAN EXECUTIV</div>
+        <!-- <div class="cover-subtitle">
+      Primul sistem inteligent automatizat din UE pentru colectarea și sortarea cu AI a medicamentelor expirate de la populație
+    </div> -->
+
+        <!-- <div class="cover-stats">
+      <div class="stat-box">
+        <div class="stat-num">100K €</div>
+        <div class="stat-label">Pre-Seed runda 1</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">3,28 mld $</div>
+        <div class="stat-label">Piață globală 2025</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">558</div>
+        <div class="stat-label">Spitale RO obligate prin lege</div>
+      </div>
+    </div> -->
+
+        <!-- <div class="cover-footer">
+      Document confidențial — destinat investitorilor &nbsp;•&nbsp; Aprilie 2026
+    </div> -->
+      </div>
+    </div>
+
+    <!-- ====================== PAGE 2: PROBLEMA + SOLUȚIA + PIAȚA ====================== -->
+    <div class="page">
+      <div class="doc-header">
+        <div class="logo" style="display: flex; align-items: center">
+          <svg
+            width="106"
+            height="28"
+            viewBox="0 0 106 28"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1.06982 4.67969H8.94333C14.6136 4.67969 18.5005 8.09632 18.5005 13.3457C18.5005 18.5951 14.6136 22.0117 8.94333 22.0117H1.06982V4.67969ZM8.74493 18.7178C12.1868 18.7178 14.4393 16.6626 14.4393 13.3446C14.4393 10.0266 12.1868 7.97137 8.74493 7.97137H5.08056V18.7167H8.74493V18.7178Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M29.5174 8.49414V12.0599C29.1951 12.0346 28.9474 12.0105 28.6503 12.0105C26.5206 12.0105 25.1098 13.1746 25.1098 15.7242V22.0127H21.2471V8.69144H24.9366V10.4496C25.8771 9.16168 27.4621 8.49414 29.5174 8.49414Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M61.5986 8.69144V19.7832C61.5986 24.7344 58.9251 27.0133 54.1219 27.0133C51.5964 27.0133 49.1454 26.3939 47.5856 25.1816L49.1202 22.4084C50.2591 23.3248 52.1159 23.9189 53.8248 23.9189C56.5487 23.9189 57.7369 22.6814 57.7369 20.2797V19.7108C56.7219 20.8245 55.2607 21.3693 53.5278 21.3693C49.8382 21.3693 46.8677 18.8186 46.8677 14.9317C46.8677 11.0448 49.8382 8.49414 53.5278 8.49414C55.3846 8.49414 56.9192 9.11345 57.9353 10.4003V8.69144H61.5997H61.5986ZM57.7862 14.9306C57.7862 12.9751 56.3251 11.662 54.2951 11.662C52.265 11.662 50.7798 12.974 50.7798 14.9306C50.7798 16.8872 52.265 18.1993 54.2951 18.1993C56.3251 18.1993 57.7862 16.8872 57.7862 14.9306Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M81.3555 17.2819C81.3555 20.2776 78.9791 22.0106 74.4225 22.0106H65.4595V4.67969H73.9271C78.2601 4.67969 80.4885 6.48721 80.4885 9.18588C80.4885 10.9189 79.5974 12.2561 78.1855 12.9993C80.1169 13.6186 81.3545 15.1039 81.3545 17.283L81.3555 17.2819ZM69.4461 7.70062V11.7859H73.4327C75.3882 11.7859 76.4537 11.0931 76.4537 9.73066C76.4537 8.36817 75.3893 7.70062 73.4327 7.70062H69.4461ZM77.3196 16.861C77.3196 15.3998 76.2059 14.7071 74.1255 14.7071H69.4461V18.9908H74.1255C76.2048 18.9908 77.3196 18.3473 77.3196 16.861Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M83.6572 4.68124C83.6572 3.46782 84.6229 2.52734 86.0589 2.52734C87.4948 2.52734 88.4605 3.4185 88.4605 4.6067C88.4605 5.89466 87.4948 6.83514 86.0589 6.83514C84.6229 6.83514 83.6572 5.89466 83.6572 4.68124ZM84.1275 8.69198H87.9902V22.0122H84.1275V8.69198Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M105.197 14.3861V22.0119H101.335V14.9802C101.335 12.8263 100.344 11.8354 98.636 11.8354C96.7791 11.8354 95.4419 12.9743 95.4419 15.4252V22.0108H91.5791V8.69059H95.2687V10.2504C96.3089 9.1115 97.8687 8.49219 99.6762 8.49219C102.821 8.49219 105.197 10.3238 105.197 14.385V14.3861Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M34.7314 10.4707L34.7315 17.7376C34.7315 19.4017 36.0805 20.7507 37.7446 20.7507H39.1448C40.8089 20.7507 42.1579 19.4017 42.1579 17.7376L42.1579 10.4707"
+              stroke="#2949A6"
+              stroke-width="3.54484"
+              stroke-linecap="square"
+            />
+            <path
+              d="M32.887 7.08492L32.6131 5.24181L34.9086 4.87088L34.9186 3.49699L40.4353 2.65034L41.0518 3.98361L43.7172 3.65102L43.9813 5.5529L32.887 7.08492Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M34.9086 4.87088L32.6131 5.24181L32.887 7.08492L43.9813 5.5529L43.7172 3.65102L41.0518 3.98361M34.9086 4.87088L34.9186 3.49699L40.4353 2.65034L41.0518 3.98361M34.9086 4.87088L41.0518 3.98361"
+              stroke="#2949A6"
+              stroke-width="0.88621"
+            /></svg
+          ><span>Business Plan</span>
+        </div>
+        <div class="header-meta">
+          <strong>CONFIDENȚIAL</strong><br />
+          2026
+        </div>
+      </div>
+
+      <h1 class="section-title">
+        <span class="num">01</span>Problema, soluția și piața
+      </h1>
+      <div class="section-sub">De ce există DrugBin și cine îl cumpără</div>
+
+      <div class="two-col">
+        <div>
+          <h2 class="subsection">Problema</h2>
+          <p>
+            În România,
+            <span class="highlight">1.500 tone de medicamente</span> ajung anual
+            la groapa de gunoi sau în canalizare. Țara are cel mai ridicat nivel
+            de antibiorezistență din UE, cu
+            <span class="highlight">1.500 decese/an</span> cauzate de această
+            problemă.
+          </p>
+          <p style="margin-top: 6px">
+            Din ianuarie 2024,
+            <strong>toate cele 558 de spitale</strong> publice și private sunt
+            obligate prin lege (L. 269/2023) să primească medicamente expirate
+            de la populație. În prezent, conformarea este formală: containere
+            simple, programe de 1-2h/săptămână, personal medical expus la
+            deșeuri toxice, zero raportare digitală.
+          </p>
+          <p class="source">
+            Surse: Hartareciclarii.ro, Regina Maria, INS, MO 484/2024
+          </p>
+        </div>
+        <div>
+          <h2 class="subsection">Soluția DrugBin</h2>
+          <p>
+            Dispozitiv robotizat instalat la intrarea în spitale, farmacii sau
+            spații publice, care permite cetățenilor să depună medicamentele
+            expirate <strong>24/7, fără personal de sprijin</strong>.
+          </p>
+          <ul class="compact">
+            <li>
+              <strong>AI vision</strong> identifică automat tipul de medicament
+            </li>
+            <li>
+              <strong>Sortare robotizată</strong> în 7 compartimente conforme
+              legislativ
+            </li>
+            <li>
+              <strong>Raportare cloud în timp real</strong> către spital,
+              autorități, operatori
+            </li>
+            <li>
+              <strong>Anti-vandal IP54</strong>, oțel laminat, UPS LiFePo4
+            </li>
+            <li>
+              <strong>Zero expunere</strong> personal medical la substanțe
+              toxice
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 class="subsection">Cadrul legal, fereastră de oportunitate unică</h2>
+      <div class="card card-success">
+        <div class="card-title">
+          <!-- L. 269/2023 + Ordin MS 2684/2024 = obligație legală + bani de la stat -->
+          Instructiunea MD nr. 6226/2024 + Ordinul 2684/2024 = obligație legală + bani de la stat
+        </div>
+        <div class="card-text">
+          Spitalele NU plătesc DrugBin din buget operațional, achiziția se face
+          din fonduri de investiții (PNRR Componenta 12 Sănătate, POS 2021-2027,
+          buget propriu de investiții).
+        </div>
+      </div>
+
+      <h2 class="subsection">Piața TAM / SAM / SOM</h2>
+      <div class="three-col">
+        <div class="metric">
+          <div class="metric-num">4-5 mld €</div>
+          <div class="metric-label">TAM — UE total</div>
+        </div>
+        <div class="metric">
+          <div class="metric-num">700-800M €</div>
+          <div class="metric-label">SAM — accesibil 7-10 ani</div>
+        </div>
+        <div class="metric">
+          <div class="metric-num">10-15M €</div>
+          <div class="metric-label">SOM — primii 5 ani</div>
+        </div>
+      </div>
+      <p class="source">
+        Piața globală pharmaceutical waste mgmt: 3,28 mld $ (2025) → 4,53 mld $
+        (2030), CAGR 6,7%. Surse: Research and Markets, Mordor Intelligence,
+        OECD.
+      </p>
+
+      <h2 class="subsection">
+        Competiție, categorie nouă, fără competitor direct în UE
+      </h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 30%">Competitor</th>
+            <th style="width: 35%">Produs</th>
+            <th>Diferență vs DrugBin</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Stericycle MedDrop</strong> (SUA)</td>
+            <td>Kiosk pasiv oțel 16-gauge</td>
+            <td>Fără AI, fără sortare, fără raportare digitală</td>
+          </tr>
+          <tr>
+            <td><strong>Cyclamed / SIGRE</strong> (FR/ES)</td>
+            <td>Cutii carton standard în farmacii EPR</td>
+            <td>Pasiv complet, manual, fără date</td>
+          </tr>
+          <tr>
+            <td><strong>Veolia, Clean Harbors</strong></td>
+            <td>Servicii transport + incinerare</td>
+            <td>Operatori downstream — parteneri, nu competitori</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="doc-footer">
+        <span></span>
+        <span>Pagina 2 / 5</span>
+      </div>
+    </div>
+
+    <!-- ====================== PAGE 3: MODELUL DE BUSINESS + TRACȚIUNE ====================== -->
+    <div class="page">
+      <div class="doc-header">
+        <div class="logo" style="display: flex; align-items: center">
+          <svg
+            width="106"
+            height="28"
+            viewBox="0 0 106 28"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1.06982 4.67969H8.94333C14.6136 4.67969 18.5005 8.09632 18.5005 13.3457C18.5005 18.5951 14.6136 22.0117 8.94333 22.0117H1.06982V4.67969ZM8.74493 18.7178C12.1868 18.7178 14.4393 16.6626 14.4393 13.3446C14.4393 10.0266 12.1868 7.97137 8.74493 7.97137H5.08056V18.7167H8.74493V18.7178Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M29.5174 8.49414V12.0599C29.1951 12.0346 28.9474 12.0105 28.6503 12.0105C26.5206 12.0105 25.1098 13.1746 25.1098 15.7242V22.0127H21.2471V8.69144H24.9366V10.4496C25.8771 9.16168 27.4621 8.49414 29.5174 8.49414Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M61.5986 8.69144V19.7832C61.5986 24.7344 58.9251 27.0133 54.1219 27.0133C51.5964 27.0133 49.1454 26.3939 47.5856 25.1816L49.1202 22.4084C50.2591 23.3248 52.1159 23.9189 53.8248 23.9189C56.5487 23.9189 57.7369 22.6814 57.7369 20.2797V19.7108C56.7219 20.8245 55.2607 21.3693 53.5278 21.3693C49.8382 21.3693 46.8677 18.8186 46.8677 14.9317C46.8677 11.0448 49.8382 8.49414 53.5278 8.49414C55.3846 8.49414 56.9192 9.11345 57.9353 10.4003V8.69144H61.5997H61.5986ZM57.7862 14.9306C57.7862 12.9751 56.3251 11.662 54.2951 11.662C52.265 11.662 50.7798 12.974 50.7798 14.9306C50.7798 16.8872 52.265 18.1993 54.2951 18.1993C56.3251 18.1993 57.7862 16.8872 57.7862 14.9306Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M81.3555 17.2819C81.3555 20.2776 78.9791 22.0106 74.4225 22.0106H65.4595V4.67969H73.9271C78.2601 4.67969 80.4885 6.48721 80.4885 9.18588C80.4885 10.9189 79.5974 12.2561 78.1855 12.9993C80.1169 13.6186 81.3545 15.1039 81.3545 17.283L81.3555 17.2819ZM69.4461 7.70062V11.7859H73.4327C75.3882 11.7859 76.4537 11.0931 76.4537 9.73066C76.4537 8.36817 75.3893 7.70062 73.4327 7.70062H69.4461ZM77.3196 16.861C77.3196 15.3998 76.2059 14.7071 74.1255 14.7071H69.4461V18.9908H74.1255C76.2048 18.9908 77.3196 18.3473 77.3196 16.861Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M83.6572 4.68124C83.6572 3.46782 84.6229 2.52734 86.0589 2.52734C87.4948 2.52734 88.4605 3.4185 88.4605 4.6067C88.4605 5.89466 87.4948 6.83514 86.0589 6.83514C84.6229 6.83514 83.6572 5.89466 83.6572 4.68124ZM84.1275 8.69198H87.9902V22.0122H84.1275V8.69198Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M105.197 14.3861V22.0119H101.335V14.9802C101.335 12.8263 100.344 11.8354 98.636 11.8354C96.7791 11.8354 95.4419 12.9743 95.4419 15.4252V22.0108H91.5791V8.69059H95.2687V10.2504C96.3089 9.1115 97.8687 8.49219 99.6762 8.49219C102.821 8.49219 105.197 10.3238 105.197 14.385V14.3861Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M34.7314 10.4707L34.7315 17.7376C34.7315 19.4017 36.0805 20.7507 37.7446 20.7507H39.1448C40.8089 20.7507 42.1579 19.4017 42.1579 17.7376L42.1579 10.4707"
+              stroke="#2949A6"
+              stroke-width="3.54484"
+              stroke-linecap="square"
+            />
+            <path
+              d="M32.887 7.08492L32.6131 5.24181L34.9086 4.87088L34.9186 3.49699L40.4353 2.65034L41.0518 3.98361L43.7172 3.65102L43.9813 5.5529L32.887 7.08492Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M34.9086 4.87088L32.6131 5.24181L32.887 7.08492L43.9813 5.5529L43.7172 3.65102L41.0518 3.98361M34.9086 4.87088L34.9186 3.49699L40.4353 2.65034L41.0518 3.98361M34.9086 4.87088L41.0518 3.98361"
+              stroke="#2949A6"
+              stroke-width="0.88621"
+            /></svg
+          ><span>Business Plan</span>
+        </div>
+        <div class="header-meta">
+          <strong>CONFIDENȚIAL</strong><br />
+          2026
+        </div>
+      </div>
+
+      <h1 class="section-title">
+        <span class="num">02</span>Modelul de business și tracțiune
+      </h1>
+      <div class="section-sub">Cum facem bani și ce avem deja construit</div>
+
+      <h2 class="subsection">
+        Surse de venit
+      </h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 22%">Linie venit</th>
+            <th style="width: 18%">Tip</th>
+            <th style="width: 30%">Sursă plătitor</th>
+            <th>Preț</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Hardware RO</strong></td>
+            <td>One-off</td>
+            <td>Spitale (PNRR / POS / buget investiții)</td>
+            <td>30.000 € / unitate</td>
+          </tr>
+          <tr>
+            <td><strong>Hardware UE</strong></td>
+            <td>One-off</td>
+            <td>
+              Farmacii
+            </td>
+            <td>30.000 € / unitate</td>
+          </tr>
+          <tr>
+            <td><strong>SaaS + Mentenanță</strong></td>
+            <td>Recurring lunar</td>
+            <td>Același client (raportare, suport, OTA, mentenanță inclusă)</td>
+            <td>150 € / lună</td>
+          </tr>
+          <tr>
+            <td><strong>Servicii date</strong></td>
+            <td>Contract anual</td>
+            <td>Producători farma, autorități sănătate publică</td>
+            <td>5-50K € / an / client</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="subsection">Unit Economics (spital RO, V3.X)</h2>
+      <div class="metrics-row">
+        <div class="metric">
+          <div class="metric-num">14.800 €</div>
+          <div class="metric-label">Marjă brută an 1</div>
+        </div>
+        <div class="metric">
+          <div class="metric-num">1.800 €</div>
+          <div class="metric-label">Recurring anual (SaaS + mentenanță)</div>
+        </div>
+        <div class="metric">
+          <div class="metric-num">~43.000 €</div>
+          <div class="metric-label">LTV 8 ani</div>
+        </div>
+        <div class="metric">
+          <div class="metric-num">~10x</div>
+          <div class="metric-label">LTV / CAC</div>
+        </div>
+      </div>
+
+      <h2 class="subsection">Tracțiune actuală 2026</h2>
+      <div class="two-col">
+        <div>
+          <div class="card">
+            <div class="card-title">✓ Concept Validation finalizată (2025)</div>
+            <div class="card-text">
+              Proof of concept tehnologic funcțional pentru scanarea,
+              identificarea și sortarea automată a medicamentelor.
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">✓ Partener inginerie selectat</div>
+            <div class="card-text">
+              RFQ tehnic primit de la Alpha CAD Projects (#003/26.02.2026)
+              pentru dezvoltarea V1.X / V2.X / V3.X.
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-title">✓ Primul spital pilot identificat</div>
+            <div class="card-text">
+              Discuții directe cu management, interes verbal confirmat,
+              formalizare LOI în pregătire.
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">✓ Echipă fondatoare consolidată</div>
+            <div class="card-text">
+              3 cofondatori cu competențe complementare: 2 dezvoltatori software
+              + 1 specialist sănătate publică.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="subsection">Roadmap strategic 5 ani</h2>
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="timeline-year">2026</div>
+          <div class="timeline-text">
+            <strong>Pre-Seed 100K</strong><br />Dev V1.X, prototip funcțional,
+            1-2 LOI
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-year">2027</div>
+          <div class="timeline-text">
+            <strong>Pilot operațional</strong><br />1 unitate live, runda 2
+            (1,5-2,5M)
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-year">2028</div>
+          <div class="timeline-text">
+            <strong>Launch RO</strong><br />10-12 unități, CE marking, primii
+            clienți UE
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-year">2029</div>
+          <div class="timeline-text">
+            <strong>Scalare UE</strong><br />40+ unități, parteneriat PRO, runda
+            3
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-year">2030</div>
+          <div class="timeline-text">
+            <strong>Expansiune</strong><br />127 unități, 3-4 țări UE, opțiune
+            exit
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-footer">
+        <span></span>
+        <span>Pagina 3 / 5</span>
+      </div>
+    </div>
+
+    <!-- ====================== PAGE 4: PROIECȚII FINANCIARE ====================== -->
+    <div class="page">
+      <div class="doc-header">
+        <div class="logo" style="display: flex; align-items: center">
+          <svg
+            width="106"
+            height="28"
+            viewBox="0 0 106 28"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1.06982 4.67969H8.94333C14.6136 4.67969 18.5005 8.09632 18.5005 13.3457C18.5005 18.5951 14.6136 22.0117 8.94333 22.0117H1.06982V4.67969ZM8.74493 18.7178C12.1868 18.7178 14.4393 16.6626 14.4393 13.3446C14.4393 10.0266 12.1868 7.97137 8.74493 7.97137H5.08056V18.7167H8.74493V18.7178Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M29.5174 8.49414V12.0599C29.1951 12.0346 28.9474 12.0105 28.6503 12.0105C26.5206 12.0105 25.1098 13.1746 25.1098 15.7242V22.0127H21.2471V8.69144H24.9366V10.4496C25.8771 9.16168 27.4621 8.49414 29.5174 8.49414Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M61.5986 8.69144V19.7832C61.5986 24.7344 58.9251 27.0133 54.1219 27.0133C51.5964 27.0133 49.1454 26.3939 47.5856 25.1816L49.1202 22.4084C50.2591 23.3248 52.1159 23.9189 53.8248 23.9189C56.5487 23.9189 57.7369 22.6814 57.7369 20.2797V19.7108C56.7219 20.8245 55.2607 21.3693 53.5278 21.3693C49.8382 21.3693 46.8677 18.8186 46.8677 14.9317C46.8677 11.0448 49.8382 8.49414 53.5278 8.49414C55.3846 8.49414 56.9192 9.11345 57.9353 10.4003V8.69144H61.5997H61.5986ZM57.7862 14.9306C57.7862 12.9751 56.3251 11.662 54.2951 11.662C52.265 11.662 50.7798 12.974 50.7798 14.9306C50.7798 16.8872 52.265 18.1993 54.2951 18.1993C56.3251 18.1993 57.7862 16.8872 57.7862 14.9306Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M81.3555 17.2819C81.3555 20.2776 78.9791 22.0106 74.4225 22.0106H65.4595V4.67969H73.9271C78.2601 4.67969 80.4885 6.48721 80.4885 9.18588C80.4885 10.9189 79.5974 12.2561 78.1855 12.9993C80.1169 13.6186 81.3545 15.1039 81.3545 17.283L81.3555 17.2819ZM69.4461 7.70062V11.7859H73.4327C75.3882 11.7859 76.4537 11.0931 76.4537 9.73066C76.4537 8.36817 75.3893 7.70062 73.4327 7.70062H69.4461ZM77.3196 16.861C77.3196 15.3998 76.2059 14.7071 74.1255 14.7071H69.4461V18.9908H74.1255C76.2048 18.9908 77.3196 18.3473 77.3196 16.861Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M83.6572 4.68124C83.6572 3.46782 84.6229 2.52734 86.0589 2.52734C87.4948 2.52734 88.4605 3.4185 88.4605 4.6067C88.4605 5.89466 87.4948 6.83514 86.0589 6.83514C84.6229 6.83514 83.6572 5.89466 83.6572 4.68124ZM84.1275 8.69198H87.9902V22.0122H84.1275V8.69198Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M105.197 14.3861V22.0119H101.335V14.9802C101.335 12.8263 100.344 11.8354 98.636 11.8354C96.7791 11.8354 95.4419 12.9743 95.4419 15.4252V22.0108H91.5791V8.69059H95.2687V10.2504C96.3089 9.1115 97.8687 8.49219 99.6762 8.49219C102.821 8.49219 105.197 10.3238 105.197 14.385V14.3861Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M34.7314 10.4707L34.7315 17.7376C34.7315 19.4017 36.0805 20.7507 37.7446 20.7507H39.1448C40.8089 20.7507 42.1579 19.4017 42.1579 17.7376L42.1579 10.4707"
+              stroke="#2949A6"
+              stroke-width="3.54484"
+              stroke-linecap="square"
+            />
+            <path
+              d="M32.887 7.08492L32.6131 5.24181L34.9086 4.87088L34.9186 3.49699L40.4353 2.65034L41.0518 3.98361L43.7172 3.65102L43.9813 5.5529L32.887 7.08492Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M34.9086 4.87088L32.6131 5.24181L32.887 7.08492L43.9813 5.5529L43.7172 3.65102L41.0518 3.98361M34.9086 4.87088L34.9186 3.49699L40.4353 2.65034L41.0518 3.98361M34.9086 4.87088L41.0518 3.98361"
+              stroke="#2949A6"
+              stroke-width="0.88621"
+            /></svg
+          ><span>Business Plan</span>
+        </div>
+        <div class="header-meta">
+          <strong>CONFIDENȚIAL</strong><br />
+          2026
+        </div>
+      </div>
+
+      <h1 class="section-title">
+        <span class="num">03</span>Proiecții financiare 5 ani
+      </h1>
+      <div class="section-sub">
+        Cifre conservatoare, ipoteze validate, sursele indicate
+      </div>
+
+      <h2 class="subsection">Vânzări, unități instalate</h2>
+      <table class="financial">
+        <thead>
+          <tr>
+            <th>Indicator</th>
+            <th>An 1<br />(2026)</th>
+            <th>An 2<br />(2027)</th>
+            <th>An 3<br />(2028)</th>
+            <th>An 4<br />(2029)</th>
+            <th>An 5<br />(2030)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Unități noi RO/an</td>
+            <td>0</td>
+            <td>1 (pilot)</td>
+            <td>8</td>
+            <td>15</td>
+            <td>20</td>
+          </tr>
+          <tr>
+            <td>Unități noi UE/an</td>
+            <td>0</td>
+            <td>0</td>
+            <td>3</td>
+            <td>25</td>
+            <td>55</td>
+          </tr>
+          <tr class="total">
+            <td>Total cumulativ</td>
+            <td>0</td>
+            <td>1</td>
+            <td>12</td>
+            <td>52</td>
+            <td>127</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="subsection">P&amp;L sumarizat (€)</h2>
+      <table class="financial">
+        <thead>
+          <tr>
+            <th>€</th>
+            <th>An 1</th>
+            <th>An 2</th>
+            <th>An 3</th>
+            <th>An 4</th>
+            <th>An 5</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Hardware RO (30K/u)</td>
+            <td>—</td>
+            <td>0 (pilot)</td>
+            <td>240.000</td>
+            <td>450.000</td>
+            <td>600.000</td>
+          </tr>
+          <tr>
+            <td>Hardware UE (30K/u)</td>
+            <td>—</td>
+            <td>—</td>
+            <td>90.000</td>
+            <td>750.000</td>
+            <td>1.650.000</td>
+          </tr>
+          <tr>
+            <td>SaaS + mentenanță</td>
+            <td>—</td>
+            <td>900</td>
+            <td>17.000</td>
+            <td>83.000</td>
+            <td>237.000</td>
+          </tr>
+          <tr>
+            <td>Servicii date</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td>14.000</td>
+            <td>68.000</td>
+          </tr>
+          <tr class="total">
+            <td>VENITURI TOTALE</td>
+            <td>0</td>
+            <td>900</td>
+            <td>347.000</td>
+            <td>1.297.000</td>
+            <td>2.555.000</td>
+          </tr>
+          <tr>
+            <td>Salarii echipă</td>
+            <td>0 (sweat equity)</td>
+            <td>36.000</td>
+            <td>360.000</td>
+            <td>600.000</td>
+            <td>850.000</td>
+          </tr>
+          <tr>
+            <td>COGS hardware</td>
+            <td>—</td>
+            <td>—</td>
+            <td>180.000</td>
+            <td>550.000</td>
+            <td>1.100.000</td>
+          </tr>
+          <tr>
+            <td>Dezvoltare + cert.</td>
+            <td>76.650</td>
+            <td>60.000</td>
+            <td>150.000</td>
+            <td>30.000</td>
+            <td>30.000</td>
+          </tr>
+          <tr>
+            <td>Marketing + ops + alte</td>
+            <td>27.400</td>
+            <td>77.000</td>
+            <td>183.000</td>
+            <td>330.000</td>
+            <td>525.000</td>
+          </tr>
+          <tr class="total">
+            <td>COSTURI TOTALE</td>
+            <td>104.050</td>
+            <td>173.000</td>
+            <td>873.000</td>
+            <td>1.510.000</td>
+            <td>2.505.000</td>
+          </tr>
+          <tr style="background: #fff8b3">
+            <td><strong>EBITDA</strong></td>
+            <td><strong>(104.050)</strong></td>
+            <td><strong>(172.100)</strong></td>
+            <td><strong>(526.000)</strong></td>
+            <td><strong>(213.000)</strong></td>
+            <td><strong>+50.000</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="subsection">Ipoteze cheie</h2>
+      <div class="two-col">
+        <ul class="compact">
+          <li>
+            <strong>Salarii fondatori an 1:</strong> 0 € (sweat equity,
+            part-time)
+          </li>
+          <li>
+            <strong>Tranziție full-time:</strong> 1 fondator în an 2, toți în an
+            3
+          </li>
+          <li>
+            <strong>Ciclu vânzare B2G:</strong> 6-9 luni an 1 → 4-6 luni an 3+
+          </li>
+          <li><strong>Conversie pipeline:</strong> 15% an 1 → 22% an 3+</li>
+        </ul>
+        <ul class="compact">
+          <li>
+            <strong>Cost hardware V3.X:</strong> 16,5K (9 unit.) → 11,5K
+            (200/an)
+          </li>
+          <li><strong>Marjă brută hardware:</strong> RO 40-45%, UE 40-45%</li>
+          <li><strong>Marjă brută SaaS + mentenanță:</strong> >70% după an 2</li>
+          <li><strong>Churn SaaS:</strong> &lt;5% anual (B2G healthcare)</li>
+          <li><strong>Mentenanță:</strong> inclusă în abonamentul lunar (150 €/lună)</li>
+        </ul>
+      </div>
+
+      <h2 class="subsection">Break-even și nevoia totală de capital</h2>
+      <div class="card card-warning">
+        <div class="card-title">Break-even operațional în anul 5 (2030)</div>
+        <div class="card-text">
+          Cu prețul unificat de 30.000 €/unitate pentru ambele piețe, EBITDA An5 devine pozitiv (+50.000 €). Cash necesar cumulat
+          pe 5 ani: ~1,46M €, acoperit prin 3 runde succesive de finanțare.
+        </div>
+      </div>
+
+      <div class="doc-footer">
+        <span></span>
+        <span>Pagina 4 / 5</span>
+      </div>
+    </div>
+
+    <!-- ====================== PAGE 5: USE OF FUNDS + ECHIPA + CTA ====================== -->
+    <div class="page">
+      <div class="doc-header">
+        <div class="logo" style="display: flex; align-items: center">
+          <svg
+            width="106"
+            height="28"
+            viewBox="0 0 106 28"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1.06982 4.67969H8.94333C14.6136 4.67969 18.5005 8.09632 18.5005 13.3457C18.5005 18.5951 14.6136 22.0117 8.94333 22.0117H1.06982V4.67969ZM8.74493 18.7178C12.1868 18.7178 14.4393 16.6626 14.4393 13.3446C14.4393 10.0266 12.1868 7.97137 8.74493 7.97137H5.08056V18.7167H8.74493V18.7178Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M29.5174 8.49414V12.0599C29.1951 12.0346 28.9474 12.0105 28.6503 12.0105C26.5206 12.0105 25.1098 13.1746 25.1098 15.7242V22.0127H21.2471V8.69144H24.9366V10.4496C25.8771 9.16168 27.4621 8.49414 29.5174 8.49414Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M61.5986 8.69144V19.7832C61.5986 24.7344 58.9251 27.0133 54.1219 27.0133C51.5964 27.0133 49.1454 26.3939 47.5856 25.1816L49.1202 22.4084C50.2591 23.3248 52.1159 23.9189 53.8248 23.9189C56.5487 23.9189 57.7369 22.6814 57.7369 20.2797V19.7108C56.7219 20.8245 55.2607 21.3693 53.5278 21.3693C49.8382 21.3693 46.8677 18.8186 46.8677 14.9317C46.8677 11.0448 49.8382 8.49414 53.5278 8.49414C55.3846 8.49414 56.9192 9.11345 57.9353 10.4003V8.69144H61.5997H61.5986ZM57.7862 14.9306C57.7862 12.9751 56.3251 11.662 54.2951 11.662C52.265 11.662 50.7798 12.974 50.7798 14.9306C50.7798 16.8872 52.265 18.1993 54.2951 18.1993C56.3251 18.1993 57.7862 16.8872 57.7862 14.9306Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M81.3555 17.2819C81.3555 20.2776 78.9791 22.0106 74.4225 22.0106H65.4595V4.67969H73.9271C78.2601 4.67969 80.4885 6.48721 80.4885 9.18588C80.4885 10.9189 79.5974 12.2561 78.1855 12.9993C80.1169 13.6186 81.3545 15.1039 81.3545 17.283L81.3555 17.2819ZM69.4461 7.70062V11.7859H73.4327C75.3882 11.7859 76.4537 11.0931 76.4537 9.73066C76.4537 8.36817 75.3893 7.70062 73.4327 7.70062H69.4461ZM77.3196 16.861C77.3196 15.3998 76.2059 14.7071 74.1255 14.7071H69.4461V18.9908H74.1255C76.2048 18.9908 77.3196 18.3473 77.3196 16.861Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M83.6572 4.68124C83.6572 3.46782 84.6229 2.52734 86.0589 2.52734C87.4948 2.52734 88.4605 3.4185 88.4605 4.6067C88.4605 5.89466 87.4948 6.83514 86.0589 6.83514C84.6229 6.83514 83.6572 5.89466 83.6572 4.68124ZM84.1275 8.69198H87.9902V22.0122H84.1275V8.69198Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M105.197 14.3861V22.0119H101.335V14.9802C101.335 12.8263 100.344 11.8354 98.636 11.8354C96.7791 11.8354 95.4419 12.9743 95.4419 15.4252V22.0108H91.5791V8.69059H95.2687V10.2504C96.3089 9.1115 97.8687 8.49219 99.6762 8.49219C102.821 8.49219 105.197 10.3238 105.197 14.385V14.3861Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M34.7314 10.4707L34.7315 17.7376C34.7315 19.4017 36.0805 20.7507 37.7446 20.7507H39.1448C40.8089 20.7507 42.1579 19.4017 42.1579 17.7376L42.1579 10.4707"
+              stroke="#2949A6"
+              stroke-width="3.54484"
+              stroke-linecap="square"
+            />
+            <path
+              d="M32.887 7.08492L32.6131 5.24181L34.9086 4.87088L34.9186 3.49699L40.4353 2.65034L41.0518 3.98361L43.7172 3.65102L43.9813 5.5529L32.887 7.08492Z"
+              fill="#2949A6"
+            />
+            <path
+              d="M34.9086 4.87088L32.6131 5.24181L32.887 7.08492L43.9813 5.5529L43.7172 3.65102L41.0518 3.98361M34.9086 4.87088L34.9186 3.49699L40.4353 2.65034L41.0518 3.98361M34.9086 4.87088L41.0518 3.98361"
+              stroke="#2949A6"
+              stroke-width="0.88621"
+            /></svg
+          ><span>Business Plan</span>
+        </div>
+        <div class="header-meta">
+          <strong>CONFIDENȚIAL</strong><br />
+          2026
+        </div>
+      </div>
+
+      <h1 class="section-title">
+        <span class="num">04</span>Cererea de finanțare și echipa
+      </h1>
+      <div class="section-sub">
+        Use of funds runda 1, structura rundei și echipa fondatoare
+      </div>
+
+      <h2 class="subsection">Use of Funds Pre-Seed 100.000 €</h2>
+      <table class="financial">
+        <thead>
+          <tr>
+            <th style="width: 50%">Categorie</th>
+            <th>Sumă (€)</th>
+            <th>%</th>
+            <th>Comentariu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>V1.X Development (Alpha CAD)</td>
+            <td>67.150</td>
+            <td>67,2%</td>
+            <td>Conform RFQ</td>
+          </tr>
+          <tr>
+            <td>Hardware 1 prototip V1.X</td>
+            <td>9.500</td>
+            <td>9,5%</td>
+            <td>1 unitate funcțională</td>
+          </tr>
+          <tr>
+            <td>Software & infrastructură 12 luni</td>
+            <td>8.000</td>
+            <td>8,0%</td>
+            <td>Cloud, AI tools</td>
+          </tr>
+          <tr>
+            <td>Juridic + provisional patent</td>
+            <td>3.500</td>
+            <td>3,5%</td>
+            <td>OSIM + MDR</td>
+          </tr>
+          <tr>
+            <td>Marketing, BD, travel</td>
+            <td>5.500</td>
+            <td>5,5%</td>
+            <td>Outreach pilot</td>
+          </tr>
+          <tr>
+            <td>Contabilitate + admin</td>
+            <td>2.400</td>
+            <td>2,4%</td>
+            <td>~200 €/lună</td>
+          </tr>
+          <tr>
+            <td>Buffer / contingency</td>
+            <td>3.950</td>
+            <td>4,0%</td>
+            <td>Minim acceptabil</td>
+          </tr>
+          <tr class="total">
+            <td>TOTAL</td>
+            <td>100.000</td>
+            <td>100%</td>
+            <td>Salarii fondatori: 0 €</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="card card-success" style="margin-top: 8px">
+        <div class="card-title">
+          Sweat equity, investiție în natură a fondatorilor: ~90.000 €
+        </div>
+        <div class="card-text">
+          Cei 3 fondatori operează part-time, fără salariu, în paralel cu
+          joburile actuale. La cost de oportunitate de ~2.500 €/lună × 3
+          fondatori × 12 luni = 90K € nepretinse.
+          <strong>Investiție totală inițială: ~190K €</strong> (100K cash + 90K
+          sweat equity).
+        </div>
+      </div>
+
+      <h2 class="subsection">Strategia de finanțare în 3 runde</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Rundă</th>
+            <th>Sumă</th>
+            <th>Surse țintite</th>
+            <th>Milestones acoperite</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Pre-Seed (curent)</strong></td>
+            <td>100K €</td>
+            <td>Multipli angels, FFF, EIC Pre-Accelerator paralel</td>
+            <td>V1.X dev + 1 pilot</td>
+          </tr>
+          <tr>
+            <td><strong>Seed (2027-2028)</strong></td>
+            <td>1,5-2,5M €</td>
+            <td>EIC Accelerator, medtech VC, PNRR</td>
+            <td>V2.X + CE + producție 9 unit.</td>
+          </tr>
+          <tr>
+            <td><strong>Seria A (2029-2030)</strong></td>
+            <td>5-15M €</td>
+            <td>VC instituțional UE, corporate venture</td>
+            <td>Scalare UE prin parteneriate PRO</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="subsection">Echipa fondatoare</h2>
+      <div class="three-col">
+        <div class="card">
+          <div class="card-title">Laura Gavriloaia (CEO)</div>
+          <div class="card-text">
+            Experiență în sănătate publică, management de farmacii și rol în DSP. Focus pe reglementare, conformitate și relații instituționale.
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Costescu Adrian (Frontend &amp; Product)</div>
+          <div class="card-text">
+            Experiență în UX/UI și HMI pentru sisteme complexe. Creează interfețe intuitive pentru device și platformă.
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Vadym Shtefanika (Fullstack &amp; AI)</div>
+          <div class="card-text">
+            Experiență în dezvoltare fullstack și AI. Dezvoltă identificarea medicamentelor, infrastructura cloud și integrarea sistemului.
+          </div>
+        </div>
+      </div>
+      <!-- <p style="font-size: 8.5pt; margin-top: 6px">
+        <strong>Plan de tranziție:</strong> fondatorii operează part-time în
+        runda 1 (sweat equity). Primul fondator devine full-time după pilot
+        operațional (luna 9-12). Toți full-time după închiderea rundei 2. Plan
+        de mitigare risc: vesting 4 ani cu cliff 1 an, reverse vesting în caz de
+        plecare.
+      </p> -->
+
+      <!-- <div class="cta-box">
+        <h3>Cerere de finanțare: 100.000 € Pre-Seed</h3>
+        <p>
+          Solicităm <strong>100.000 €</strong> pentru a finanța dezvoltarea
+          MVP-ului V1.X și primul pilot operațional într-un spital din România.
+          Targetăm <strong>multipli investitori (5-25K €/ticket)</strong> —
+          angels, FFF, micro-VC — completați de aplicații paralele la grant-uri
+          nerambursabile (EIC Pre-Accelerator 300K-1M €). Runda 2 (Seed,
+          1,5-2,5M €) este planificată pentru 2027-2028, după validarea
+          pilotului.
+        </p>
+        <p
+          style="
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 9pt;
+          "
+        >
+          <strong>Contact:</strong> [contact@drugbin.com] &nbsp;•&nbsp; [+40
+          telefon] &nbsp;•&nbsp; [LinkedIn page]
+        </p>
+      </div>
+
+      <div class="doc-footer">
+        <span></span>
+        <span>Pagina 5 / 5</span>
+      </div>
+    </div> -->
+  </body>
+</html>

@@ -1,4 +1,3 @@
-import GuidImageStep1 from "src/assets/images/S1.png";
 import GuidImageStep2 from "src/assets/images/S2.png";
 import GuidImageStep3 from "src/assets/images/S3.png";
 import GuidImageStep4 from "src/assets/images/S4.png";
